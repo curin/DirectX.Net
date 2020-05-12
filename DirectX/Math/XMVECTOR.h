@@ -16,7 +16,7 @@ namespace DirectX
 
 			XMVECTOR()
 			{
-				_vect = new DirectX::XMVECTOR();
+				_vect = (DirectX::XMVECTOR*)_aligned_malloc(sizeof(DirectX::XMVECTOR), 16);
 			}
 
 			XMVECTOR(DirectX::XMVECTOR* val)
@@ -26,7 +26,7 @@ namespace DirectX
 
 			~XMVECTOR()
 			{
-				delete _vect;
+				_aligned_free(_vect);
 			}
 
 			property float x { float get() { return _vect->m128_f32[0]; }}

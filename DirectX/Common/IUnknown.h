@@ -36,12 +36,14 @@ namespace DirectX
         IUnknown() { }
     public:
         IUnknown(IntPtr^ ptr) { Unknown = (::IUnknown*)ptr->ToPointer(); }
+
         virtual Guid getGuid()
         {
             return DirectX::FromGUID(getGUID());
         }
         virtual GUID getGUID() abstract;
         property ::IUnknown* Unknown { virtual ::IUnknown* get() abstract; virtual void set(::IUnknown* value) abstract; }
+        property IntPtr^ Pointer { IntPtr^ get() { return gcnew IntPtr(Unknown); } }
         long QueryInterface(Guid riid, [Out] IntPtr^% out)
         {
             void** o;
@@ -50,7 +52,11 @@ namespace DirectX
             return ret;
         }
 
-        ~IUnknown() { delete Unknown; }
+        ~IUnknown() 
+        {
+            Release();
+            delete Unknown; 
+        }
 
         unsigned long AddRef() { return Unknown->AddRef(); }
         unsigned long Release() { return Unknown->Release(); }

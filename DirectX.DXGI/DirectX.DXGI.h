@@ -2,5 +2,3 @@
 
 using namespace System;
 
-namespace DirectX {
-}

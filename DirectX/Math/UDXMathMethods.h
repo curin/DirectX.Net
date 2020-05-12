@@ -6,39 +6,40 @@ namespace DirectX
 {
     namespace Math
     {
-#define UMVecPropConvert(Name) inline DirectX::XMVECTOR* Name() { return new DirectX::XMVECTOR(DirectX::Name); }
-        inline DirectX::XMVECTOR* XMConvertVectorIntToFloat(DirectX::XMVECTOR* VInt, unsigned int DivExponent) { return new DirectX::XMVECTOR(DirectX::XMConvertVectorIntToFloat(*VInt, DivExponent)); }
-        inline DirectX::XMVECTOR* XMConvertVectorFloatToInt(DirectX::XMVECTOR* VFloat, unsigned int MulExponent) { return new DirectX::XMVECTOR(DirectX::XMConvertVectorFloatToInt(*VFloat, MulExponent)); }
-        inline DirectX::XMVECTOR* XMConvertVectorUIntToFloat(DirectX::XMVECTOR* VUInt, unsigned int DivExponent) { return new DirectX::XMVECTOR(DirectX::XMConvertVectorUIntToFloat(*VUInt, DivExponent)); }
-        inline DirectX::XMVECTOR* XMConvertVectorFloatToUInt(DirectX::XMVECTOR* VFloat, unsigned int MulExponent) { return new DirectX::XMVECTOR(DirectX::XMConvertVectorFloatToUInt(*VFloat, MulExponent)); }
+#define UMVecPropConvert(Name) inline DirectX::XMVECTOR* Name() { UMAllocVectorReturn(DirectX::Name); }
+#define UMAllocVectorReturn(Func) DirectX::XMVECTOR* ptr = (DirectX::XMVECTOR*)_aligned_malloc(16U, 16); *ptr = DirectX::XMVECTOR(Func); return ptr;
+        inline DirectX::XMVECTOR* XMConvertVectorIntToFloat(DirectX::XMVECTOR* VInt, unsigned int DivExponent) { UMAllocVectorReturn(DirectX::XMConvertVectorIntToFloat(*VInt, DivExponent)); }
+        inline DirectX::XMVECTOR* XMConvertVectorFloatToInt(DirectX::XMVECTOR* VFloat, unsigned int MulExponent) { UMAllocVectorReturn(DirectX::XMConvertVectorFloatToInt(*VFloat, MulExponent)); }
+        inline DirectX::XMVECTOR* XMConvertVectorUIntToFloat(DirectX::XMVECTOR* VUInt, unsigned int DivExponent) { UMAllocVectorReturn(DirectX::XMConvertVectorUIntToFloat(*VUInt, DivExponent)); }
+        inline DirectX::XMVECTOR* XMConvertVectorFloatToUInt(DirectX::XMVECTOR* VFloat, unsigned int MulExponent) { UMAllocVectorReturn(DirectX::XMConvertVectorFloatToUInt(*VFloat, MulExponent)); }
 
-        inline DirectX::XMVECTOR* XMVectorSetBinaryConstant(unsigned int C0, unsigned int C1, unsigned int C2, unsigned int C3) { return new DirectX::XMVECTOR(DirectX::XMVectorSetBinaryConstant(C0, C1, C2, C3)); }
-        inline DirectX::XMVECTOR* XMVectorSplatConstant(int IntConstant, unsigned int DivExponent) { return new DirectX::XMVECTOR(DirectX::XMVectorSplatConstant(IntConstant, DivExponent)); }
-        inline DirectX::XMVECTOR* XMVectorSplatConstantInt(int IntConstant) { return new DirectX::XMVECTOR(DirectX::XMVectorSplatConstantInt(IntConstant)); }
+        inline DirectX::XMVECTOR* XMVectorSetBinaryConstant(unsigned int C0, unsigned int C1, unsigned int C2, unsigned int C3) { UMAllocVectorReturn(DirectX::XMVectorSetBinaryConstant(C0, C1, C2, C3)); }
+        inline DirectX::XMVECTOR* XMVectorSplatConstant(int IntConstant, unsigned int DivExponent) { UMAllocVectorReturn(DirectX::XMVectorSplatConstant(IntConstant, DivExponent)); }
+        inline DirectX::XMVECTOR* XMVectorSplatConstantInt(int IntConstant) { UMAllocVectorReturn(DirectX::XMVectorSplatConstantInt(IntConstant)); }
 
-        inline DirectX::XMVECTOR* XMLoadInt(const unsigned int* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadInt(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadFloat(const float* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadFloat(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadInt(const unsigned int* pSource) { UMAllocVectorReturn(DirectX::XMLoadInt(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadFloat(const float* pSource) { UMAllocVectorReturn(DirectX::XMLoadFloat(pSource)); }
 
-        inline DirectX::XMVECTOR* XMLoadInt2(unsigned int* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadInt2(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadInt2A(unsigned int* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadInt2A(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadFloat2(float x, float y) { return new DirectX::XMVECTOR(DirectX::XMLoadFloat2(new DirectX::XMFLOAT2(x, y))); }
-        inline DirectX::XMVECTOR* XMLoadFloat2A(float x, float y) { return new DirectX::XMVECTOR(DirectX::XMLoadFloat2A(new DirectX::XMFLOAT2A(x, y))); }
-        inline DirectX::XMVECTOR* XMLoadSInt2(const DirectX::XMINT2* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadSInt2(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadUInt2(const DirectX::XMUINT2* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadUInt2(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadInt2(unsigned int* pSource) { UMAllocVectorReturn(DirectX::XMLoadInt2(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadInt2A(unsigned int* pSource) { UMAllocVectorReturn(DirectX::XMLoadInt2A(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadFloat2(float x, float y) { UMAllocVectorReturn(DirectX::XMLoadFloat2(new DirectX::XMFLOAT2(x, y))); }
+        inline DirectX::XMVECTOR* XMLoadFloat2A(float x, float y) { UMAllocVectorReturn(DirectX::XMLoadFloat2A(new DirectX::XMFLOAT2A(x, y))); }
+        inline DirectX::XMVECTOR* XMLoadSInt2(const DirectX::XMINT2* pSource) { UMAllocVectorReturn(DirectX::XMLoadSInt2(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadUInt2(const DirectX::XMUINT2* pSource) { UMAllocVectorReturn(DirectX::XMLoadUInt2(pSource)); }
 
-        inline DirectX::XMVECTOR* XMLoadInt3(unsigned int* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadInt3(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadInt3A(unsigned int* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadInt3A(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadFloat3(float x, float y, float z) { return new DirectX::XMVECTOR(DirectX::XMLoadFloat3(new DirectX::XMFLOAT3(x, y, z))); }
-        inline DirectX::XMVECTOR* XMLoadFloat3A(float x, float y, float z) { return new DirectX::XMVECTOR(DirectX::XMLoadFloat3A(new DirectX::XMFLOAT3A(x, y, z))); }
-        inline DirectX::XMVECTOR* XMLoadSInt3(const DirectX::XMINT3* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadSInt3(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadUInt3(const DirectX::XMUINT3* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadUInt3(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadInt3(unsigned int* pSource) { UMAllocVectorReturn(DirectX::XMLoadInt3(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadInt3A(unsigned int* pSource) { UMAllocVectorReturn(DirectX::XMLoadInt3A(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadFloat3(float x, float y, float z) { UMAllocVectorReturn(DirectX::XMLoadFloat3(new DirectX::XMFLOAT3(x, y, z))); }
+        inline DirectX::XMVECTOR* XMLoadFloat3A(float x, float y, float z) { UMAllocVectorReturn(DirectX::XMLoadFloat3A(new DirectX::XMFLOAT3A(x, y, z))); }
+        inline DirectX::XMVECTOR* XMLoadSInt3(const DirectX::XMINT3* pSource) { UMAllocVectorReturn(DirectX::XMLoadSInt3(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadUInt3(const DirectX::XMUINT3* pSource) { UMAllocVectorReturn(DirectX::XMLoadUInt3(pSource)); }
 
-        inline DirectX::XMVECTOR* XMLoadInt4(unsigned int* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadInt4(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadInt4A(unsigned int* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadInt4A(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadFloat4(float x, float y, float z, float w) { return new DirectX::XMVECTOR(DirectX::XMLoadFloat4(new DirectX::XMFLOAT4(x, y, z, w))); }
-        inline DirectX::XMVECTOR* XMLoadFloat4A(float x, float y, float z, float w) { return new DirectX::XMVECTOR(DirectX::XMLoadFloat4A(new DirectX::XMFLOAT4A(x, y, z, w))); }
-        inline DirectX::XMVECTOR* XMLoadSInt4(const DirectX::XMINT4* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadSInt4(pSource)); }
-        inline DirectX::XMVECTOR* XMLoadUInt4(const DirectX::XMUINT4* pSource) { return new DirectX::XMVECTOR(DirectX::XMLoadUInt4(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadInt4(unsigned int* pSource) { UMAllocVectorReturn(DirectX::XMLoadInt4(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadInt4A(unsigned int* pSource) { UMAllocVectorReturn(DirectX::XMLoadInt4A(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadFloat4(float x, float y, float z, float w) { UMAllocVectorReturn(DirectX::XMLoadFloat4(new DirectX::XMFLOAT4(x, y, z, w))); }
+        inline DirectX::XMVECTOR* XMLoadFloat4A(float x, float y, float z, float w) { UMAllocVectorReturn(DirectX::XMLoadFloat4A(new DirectX::XMFLOAT4A(x, y, z, w))); }
+        inline DirectX::XMVECTOR* XMLoadSInt4(const DirectX::XMINT4* pSource) { UMAllocVectorReturn(DirectX::XMLoadSInt4(pSource)); }
+        inline DirectX::XMVECTOR* XMLoadUInt4(const DirectX::XMUINT4* pSource) { UMAllocVectorReturn(DirectX::XMLoadUInt4(pSource)); }
 
         inline DirectX::XMMATRIX* XMLoadFloat3x3(DirectX::XMFLOAT3X3* mat) { return new DirectX::XMMATRIX(DirectX::XMLoadFloat3x3(mat)); }
         inline DirectX::XMMATRIX* XMLoadFloat4x3(DirectX::XMFLOAT4X3* mat) { return new DirectX::XMMATRIX(DirectX::XMLoadFloat4x3(mat)); }
@@ -48,24 +49,24 @@ namespace DirectX
         inline DirectX::XMMATRIX* XMLoadFloat4x4(DirectX::XMFLOAT4X4* mat) { return new DirectX::XMMATRIX(DirectX::XMLoadFloat4x4(mat)); }
         inline DirectX::XMMATRIX* XMLoadFloat4x4A(DirectX::XMFLOAT4X4A* mat) { return new DirectX::XMMATRIX(DirectX::XMLoadFloat4x4A(mat)); }
 
-        inline DirectX::XMVECTOR* XMVectorZero() { return new DirectX::XMVECTOR(DirectX::XMVectorZero()); }
-        inline DirectX::XMVECTOR* XMVectorSet(float x, float y, float z, float w) { return new DirectX::XMVECTOR(DirectX::XMVectorSet(x, y, z, w)); }
-        inline DirectX::XMVECTOR* XMVectorSetInt(unsigned int x, unsigned int y, unsigned int z, unsigned int w) { return new DirectX::XMVECTOR(DirectX::XMVectorSetInt(x, y, z, w)); }
-        inline DirectX::XMVECTOR* XMVectorReplicate(float Value) { return new DirectX::XMVECTOR(DirectX::XMVectorReplicate(Value)); }
-        inline DirectX::XMVECTOR* XMVectorReplicatePtr(const float* pValue) { return new DirectX::XMVECTOR(DirectX::XMVectorReplicatePtr(pValue)); }
-        inline DirectX::XMVECTOR* XMVectorReplicateInt(unsigned int Value) { return new DirectX::XMVECTOR(DirectX::XMVectorReplicateInt(Value)); }
-        inline DirectX::XMVECTOR* XMVectorReplicateIntPtr(const unsigned int* pValue) { return new DirectX::XMVECTOR(DirectX::XMVectorReplicateIntPtr(pValue)); }
-        inline DirectX::XMVECTOR* XMVectorTrueInt() { return new DirectX::XMVECTOR(DirectX::XMVectorTrueInt()); }
-        inline DirectX::XMVECTOR* XMVectorFalseInt() { return new DirectX::XMVECTOR(DirectX::XMVectorFalseInt()); }
-        inline DirectX::XMVECTOR* XMVectorSplatX(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSplatX(*V)); }
-        inline DirectX::XMVECTOR* XMVectorSplatY(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSplatY(*V)); }
-        inline DirectX::XMVECTOR* XMVectorSplatZ(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSplatZ(*V)); }
-        inline DirectX::XMVECTOR* XMVectorSplatW(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSplatW(*V)); }
-        inline DirectX::XMVECTOR* XMVectorSplatOne() { return new DirectX::XMVECTOR(DirectX::XMVectorSplatOne()); }
-        inline DirectX::XMVECTOR* XMVectorSplatInfinity() { return new DirectX::XMVECTOR(DirectX::XMVectorSplatInfinity()); }
-        inline DirectX::XMVECTOR* XMVectorSplatQNaN() { return new DirectX::XMVECTOR(DirectX::XMVectorSplatQNaN()); }
-        inline DirectX::XMVECTOR* XMVectorSplatEpsilon() { return new DirectX::XMVECTOR(DirectX::XMVectorSplatEpsilon()); }
-        inline DirectX::XMVECTOR* XMVectorSplatSignMask() { return new DirectX::XMVECTOR(DirectX::XMVectorSplatSignMask()); }
+        inline DirectX::XMVECTOR* XMVectorZero() { UMAllocVectorReturn(DirectX::XMVectorZero()); }
+        inline DirectX::XMVECTOR* XMVectorSet(float x, float y, float z, float w) { UMAllocVectorReturn(DirectX::XMVectorSet(x, y, z, w)); }
+        inline DirectX::XMVECTOR* XMVectorSetInt(unsigned int x, unsigned int y, unsigned int z, unsigned int w) { UMAllocVectorReturn(DirectX::XMVectorSetInt(x, y, z, w)); }
+        inline DirectX::XMVECTOR* XMVectorReplicate(float Value) { UMAllocVectorReturn(DirectX::XMVectorReplicate(Value)); }
+        inline DirectX::XMVECTOR* XMVectorReplicatePtr(const float* pValue) { UMAllocVectorReturn(DirectX::XMVectorReplicatePtr(pValue)); }
+        inline DirectX::XMVECTOR* XMVectorReplicateInt(unsigned int Value) { UMAllocVectorReturn(DirectX::XMVectorReplicateInt(Value)); }
+        inline DirectX::XMVECTOR* XMVectorReplicateIntPtr(const unsigned int* pValue) { UMAllocVectorReturn(DirectX::XMVectorReplicateIntPtr(pValue)); }
+        inline DirectX::XMVECTOR* XMVectorTrueInt() { UMAllocVectorReturn(DirectX::XMVectorTrueInt()); }
+        inline DirectX::XMVECTOR* XMVectorFalseInt() { UMAllocVectorReturn(DirectX::XMVectorFalseInt()); }
+        inline DirectX::XMVECTOR* XMVectorSplatX(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSplatX(*V)); }
+        inline DirectX::XMVECTOR* XMVectorSplatY(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSplatY(*V)); }
+        inline DirectX::XMVECTOR* XMVectorSplatZ(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSplatZ(*V)); }
+        inline DirectX::XMVECTOR* XMVectorSplatW(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSplatW(*V)); }
+        inline DirectX::XMVECTOR* XMVectorSplatOne() { UMAllocVectorReturn(DirectX::XMVectorSplatOne()); }
+        inline DirectX::XMVECTOR* XMVectorSplatInfinity() { UMAllocVectorReturn(DirectX::XMVectorSplatInfinity()); }
+        inline DirectX::XMVECTOR* XMVectorSplatQNaN() { UMAllocVectorReturn(DirectX::XMVectorSplatQNaN()); }
+        inline DirectX::XMVECTOR* XMVectorSplatEpsilon() { UMAllocVectorReturn(DirectX::XMVectorSplatEpsilon()); }
+        inline DirectX::XMVECTOR* XMVectorSplatSignMask() { UMAllocVectorReturn(DirectX::XMVectorSplatSignMask()); }
 
         inline void XMStoreInt(unsigned int* pDestination, DirectX::XMVECTOR* V) { DirectX::XMStoreInt(pDestination, *V); }
         inline void XMStoreFloat(float* pDestination, DirectX::XMVECTOR* V) { DirectX::XMStoreFloat(pDestination, *V); }
@@ -123,134 +124,134 @@ namespace DirectX
         inline void XMVectorGetIntZPtr(unsigned int* z, DirectX::XMVECTOR* V) { return DirectX::XMVectorGetIntZPtr(z, *V); }
         inline void XMVectorGetIntWPtr(unsigned int* w, DirectX::XMVECTOR* V) { return DirectX::XMVectorGetIntWPtr(w, *V); }
 
-        inline DirectX::XMVECTOR* XMVectorSetByIndex(DirectX::XMVECTOR* V, float f, unsigned int i) { return new DirectX::XMVECTOR(DirectX::XMVectorSetByIndex(*V, f, i)); }
-        inline DirectX::XMVECTOR* XMVectorSetX(DirectX::XMVECTOR* V, float x) { return new DirectX::XMVECTOR(DirectX::XMVectorSetX(*V, x)); }
-        inline DirectX::XMVECTOR* XMVectorSetY(DirectX::XMVECTOR* V, float y) { return new DirectX::XMVECTOR(DirectX::XMVectorSetY(*V, y)); }
-        inline DirectX::XMVECTOR* XMVectorSetZ(DirectX::XMVECTOR* V, float z) { return new DirectX::XMVECTOR(DirectX::XMVectorSetZ(*V, z)); }
-        inline DirectX::XMVECTOR* XMVectorSetW(DirectX::XMVECTOR* V, float w) { return new DirectX::XMVECTOR(DirectX::XMVectorSetW(*V, w)); }
+        inline DirectX::XMVECTOR* XMVectorSetByIndex(DirectX::XMVECTOR* V, float f, unsigned int i) { UMAllocVectorReturn(DirectX::XMVectorSetByIndex(*V, f, i)); }
+        inline DirectX::XMVECTOR* XMVectorSetX(DirectX::XMVECTOR* V, float x) { UMAllocVectorReturn(DirectX::XMVectorSetX(*V, x)); }
+        inline DirectX::XMVECTOR* XMVectorSetY(DirectX::XMVECTOR* V, float y) { UMAllocVectorReturn(DirectX::XMVectorSetY(*V, y)); }
+        inline DirectX::XMVECTOR* XMVectorSetZ(DirectX::XMVECTOR* V, float z) { UMAllocVectorReturn(DirectX::XMVectorSetZ(*V, z)); }
+        inline DirectX::XMVECTOR* XMVectorSetW(DirectX::XMVECTOR* V, float w) { UMAllocVectorReturn(DirectX::XMVectorSetW(*V, w)); }
 
-        inline DirectX::XMVECTOR* XMVectorSetByIndexPtr(DirectX::XMVECTOR* V, float* f, unsigned int i) { return new DirectX::XMVECTOR(DirectX::XMVectorSetByIndexPtr(*V, f, i)); }
-        inline DirectX::XMVECTOR* XMVectorSetXPtr(DirectX::XMVECTOR* V, float* x) { return new DirectX::XMVECTOR(DirectX::XMVectorSetXPtr(*V, x)); }
-        inline DirectX::XMVECTOR* XMVectorSetYPtr(DirectX::XMVECTOR* V, float* y) { return new DirectX::XMVECTOR(DirectX::XMVectorSetYPtr(*V, y)); }
-        inline DirectX::XMVECTOR* XMVectorSetZPtr(DirectX::XMVECTOR* V, float* z) { return new DirectX::XMVECTOR(DirectX::XMVectorSetZPtr(*V, z)); }
-        inline DirectX::XMVECTOR* XMVectorSetWPtr(DirectX::XMVECTOR* V, float* w) { return new DirectX::XMVECTOR(DirectX::XMVectorSetWPtr(*V, w)); }
+        inline DirectX::XMVECTOR* XMVectorSetByIndexPtr(DirectX::XMVECTOR* V, float* f, unsigned int i) { UMAllocVectorReturn(DirectX::XMVectorSetByIndexPtr(*V, f, i)); }
+        inline DirectX::XMVECTOR* XMVectorSetXPtr(DirectX::XMVECTOR* V, float* x) { UMAllocVectorReturn(DirectX::XMVectorSetXPtr(*V, x)); }
+        inline DirectX::XMVECTOR* XMVectorSetYPtr(DirectX::XMVECTOR* V, float* y) { UMAllocVectorReturn(DirectX::XMVectorSetYPtr(*V, y)); }
+        inline DirectX::XMVECTOR* XMVectorSetZPtr(DirectX::XMVECTOR* V, float* z) { UMAllocVectorReturn(DirectX::XMVectorSetZPtr(*V, z)); }
+        inline DirectX::XMVECTOR* XMVectorSetWPtr(DirectX::XMVECTOR* V, float* w) { UMAllocVectorReturn(DirectX::XMVectorSetWPtr(*V, w)); }
 
-        inline DirectX::XMVECTOR* XMVectorSetIntByIndex(DirectX::XMVECTOR* V, unsigned int f, unsigned int i) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntByIndex(*V, f, i)); }
-        inline DirectX::XMVECTOR* XMVectorSetIntX(DirectX::XMVECTOR* V, unsigned int x) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntX(*V, x)); }
-        inline DirectX::XMVECTOR* XMVectorSetIntY(DirectX::XMVECTOR* V, unsigned int y) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntY(*V, y)); }
-        inline DirectX::XMVECTOR* XMVectorSetIntZ(DirectX::XMVECTOR* V, unsigned int z) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntZ(*V, z)); }
-        inline DirectX::XMVECTOR* XMVectorSetIntW(DirectX::XMVECTOR* V, unsigned int w) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntW(*V, w)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntByIndex(DirectX::XMVECTOR* V, unsigned int f, unsigned int i) { UMAllocVectorReturn(DirectX::XMVectorSetIntByIndex(*V, f, i)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntX(DirectX::XMVECTOR* V, unsigned int x) { UMAllocVectorReturn(DirectX::XMVectorSetIntX(*V, x)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntY(DirectX::XMVECTOR* V, unsigned int y) { UMAllocVectorReturn(DirectX::XMVectorSetIntY(*V, y)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntZ(DirectX::XMVECTOR* V, unsigned int z) { UMAllocVectorReturn(DirectX::XMVectorSetIntZ(*V, z)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntW(DirectX::XMVECTOR* V, unsigned int w) { UMAllocVectorReturn(DirectX::XMVectorSetIntW(*V, w)); }
 
-        inline DirectX::XMVECTOR* XMVectorSetIntByIndexPtr(DirectX::XMVECTOR* V, const unsigned int* f, unsigned int i) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntByIndexPtr(*V, f, i)); }
-        inline DirectX::XMVECTOR* XMVectorSetIntXPtr(DirectX::XMVECTOR* V, const unsigned int* x) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntXPtr(*V, x)); }
-        inline DirectX::XMVECTOR* XMVectorSetIntYPtr(DirectX::XMVECTOR* V, const unsigned int* y) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntYPtr(*V, y)); }
-        inline DirectX::XMVECTOR* XMVectorSetIntZPtr(DirectX::XMVECTOR* V, const unsigned int* z) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntZPtr(*V, z)); }
-        inline DirectX::XMVECTOR* XMVectorSetIntWPtr(DirectX::XMVECTOR* V, const unsigned int* w) { return new DirectX::XMVECTOR(DirectX::XMVectorSetIntWPtr(*V, w)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntByIndexPtr(DirectX::XMVECTOR* V, const unsigned int* f, unsigned int i) { UMAllocVectorReturn(DirectX::XMVectorSetIntByIndexPtr(*V, f, i)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntXPtr(DirectX::XMVECTOR* V, const unsigned int* x) { UMAllocVectorReturn(DirectX::XMVectorSetIntXPtr(*V, x)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntYPtr(DirectX::XMVECTOR* V, const unsigned int* y) { UMAllocVectorReturn(DirectX::XMVectorSetIntYPtr(*V, y)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntZPtr(DirectX::XMVECTOR* V, const unsigned int* z) { UMAllocVectorReturn(DirectX::XMVectorSetIntZPtr(*V, z)); }
+        inline DirectX::XMVECTOR* XMVectorSetIntWPtr(DirectX::XMVECTOR* V, const unsigned int* w) { UMAllocVectorReturn(DirectX::XMVectorSetIntWPtr(*V, w)); }
 	
-        inline DirectX::XMVECTOR* XMVectorSwizzle(DirectX::XMVECTOR* V, unsigned int E0, unsigned int E1, unsigned int E2, unsigned int E3) { return new DirectX::XMVECTOR(DirectX::XMVectorSwizzle(*V, E0, E1, E2, E3)); }
-        inline DirectX::XMVECTOR* XMVectorPermute(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, unsigned int PermuteX, unsigned int PermuteY, unsigned int PermuteZ, unsigned int PermuteW) { return new DirectX::XMVECTOR(DirectX::XMVectorPermute(*V1, *V2, PermuteX, PermuteY, PermuteZ, PermuteW)); }
-        inline DirectX::XMVECTOR* XMVectorSelectControl(unsigned int VectorIndex0, unsigned int VectorIndex1, unsigned int VectorIndex2, unsigned int VectorIndex3) { return new DirectX::XMVECTOR(DirectX::XMVectorSelectControl(VectorIndex0, VectorIndex1, VectorIndex2, VectorIndex3)); }
-        inline DirectX::XMVECTOR* XMVectorSelect(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* Control) { return new DirectX::XMVECTOR(DirectX::XMVectorSelect(*V1, *V2, *Control)); }
-        inline DirectX::XMVECTOR* XMVectorMergeXY(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorMergeXY(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorMergeZW(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorMergeZW(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorSwizzle(DirectX::XMVECTOR* V, unsigned int E0, unsigned int E1, unsigned int E2, unsigned int E3) { UMAllocVectorReturn(DirectX::XMVectorSwizzle(*V, E0, E1, E2, E3)); }
+        inline DirectX::XMVECTOR* XMVectorPermute(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, unsigned int PermuteX, unsigned int PermuteY, unsigned int PermuteZ, unsigned int PermuteW) { UMAllocVectorReturn(DirectX::XMVectorPermute(*V1, *V2, PermuteX, PermuteY, PermuteZ, PermuteW)); }
+        inline DirectX::XMVECTOR* XMVectorSelectControl(unsigned int VectorIndex0, unsigned int VectorIndex1, unsigned int VectorIndex2, unsigned int VectorIndex3) { UMAllocVectorReturn(DirectX::XMVectorSelectControl(VectorIndex0, VectorIndex1, VectorIndex2, VectorIndex3)); }
+        inline DirectX::XMVECTOR* XMVectorSelect(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* Control) { UMAllocVectorReturn(DirectX::XMVectorSelect(*V1, *V2, *Control)); }
+        inline DirectX::XMVECTOR* XMVectorMergeXY(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorMergeXY(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorMergeZW(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorMergeZW(*V1, *V2)); }
 
-        inline DirectX::XMVECTOR* XMVectorShiftLeft(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, unsigned int Elements) { return new DirectX::XMVECTOR(DirectX::XMVectorShiftLeft(*V1, *V2, Elements)); }
-        inline DirectX::XMVECTOR* XMVectorRotateLeft(DirectX::XMVECTOR* V, unsigned int Elements) { return new DirectX::XMVECTOR(DirectX::XMVectorRotateLeft(*V, Elements)); }
-        inline DirectX::XMVECTOR* XMVectorRotateRight(DirectX::XMVECTOR* V, unsigned int Elements) { return new DirectX::XMVECTOR(DirectX::XMVectorRotateRight(*V, Elements)); }
+        inline DirectX::XMVECTOR* XMVectorShiftLeft(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, unsigned int Elements) { UMAllocVectorReturn(DirectX::XMVectorShiftLeft(*V1, *V2, Elements)); }
+        inline DirectX::XMVECTOR* XMVectorRotateLeft(DirectX::XMVECTOR* V, unsigned int Elements) { UMAllocVectorReturn(DirectX::XMVectorRotateLeft(*V, Elements)); }
+        inline DirectX::XMVECTOR* XMVectorRotateRight(DirectX::XMVECTOR* V, unsigned int Elements) { UMAllocVectorReturn(DirectX::XMVectorRotateRight(*V, Elements)); }
         inline DirectX::XMVECTOR* XMVectorInsert(DirectX::XMVECTOR* VD, DirectX::XMVECTOR* VS, unsigned int VSLeftRotateElements,
             unsigned int Select0, unsigned int Select1, unsigned int Select2, unsigned int Select3)
         {
-            return new DirectX::XMVECTOR(DirectX::XMVectorInsert(*VD, *VS, VSLeftRotateElements, Select0, Select1, Select2, Select3));
+            UMAllocVectorReturn(DirectX::XMVectorInsert(*VD, *VS, VSLeftRotateElements, Select0, Select1, Select2, Select3));
         }
 
-        inline DirectX::XMVECTOR* XMVectorEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorEqual(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorEqualR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorEqualR(pCR, *V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorEqualInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorEqualInt(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorEqualIntR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorEqualIntR(pCR, *V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorNearEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* Epsilon) { return new DirectX::XMVECTOR(DirectX::XMVectorNearEqual(*V1, *V2, *Epsilon)); }
-        inline DirectX::XMVECTOR* XMVectorNotEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorNotEqual(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorNotEqualInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorNotEqualInt(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorGreater(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorGreater(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorGreaterR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorGreaterR(pCR, *V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorGreaterOrEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorGreaterOrEqual(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorGreaterOrEqualR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorGreaterOrEqualR(pCR, *V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorLess(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorLess(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorLessOrEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorLessOrEqual(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorInBounds(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorInBounds(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorInBoundsR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorInBoundsR(pCR, *V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorEqual(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorEqualR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorEqualR(pCR, *V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorEqualInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorEqualInt(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorEqualIntR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorEqualIntR(pCR, *V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorNearEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* Epsilon) { UMAllocVectorReturn(DirectX::XMVectorNearEqual(*V1, *V2, *Epsilon)); }
+        inline DirectX::XMVECTOR* XMVectorNotEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorNotEqual(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorNotEqualInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorNotEqualInt(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorGreater(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorGreater(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorGreaterR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorGreaterR(pCR, *V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorGreaterOrEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorGreaterOrEqual(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorGreaterOrEqualR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorGreaterOrEqualR(pCR, *V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorLess(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorLess(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorLessOrEqual(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorLessOrEqual(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorInBounds(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorInBounds(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorInBoundsR(unsigned int* pCR, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorInBoundsR(pCR, *V1, *V2)); }
 
-        inline DirectX::XMVECTOR* XMVectorIsNaN(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorIsNaN(*V)); }
-        inline DirectX::XMVECTOR* XMVectorIsInfinite(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorIsInfinite(*V)); }
+        inline DirectX::XMVECTOR* XMVectorIsNaN(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorIsNaN(*V)); }
+        inline DirectX::XMVECTOR* XMVectorIsInfinite(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorIsInfinite(*V)); }
 
-        inline DirectX::XMVECTOR* XMVectorMin(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorMin(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorMax(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorMax(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorRound(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorRound(*V)); }
-        inline DirectX::XMVECTOR* XMVectorTruncate(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorTruncate(*V)); }
-        inline DirectX::XMVECTOR* XMVectorFloor(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorFloor(*V)); }
-        inline DirectX::XMVECTOR* XMVectorCeiling(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorCeiling(*V)); }
-        inline DirectX::XMVECTOR* XMVectorClamp(DirectX::XMVECTOR* V, DirectX::XMVECTOR* Min, DirectX::XMVECTOR* Max) { return new DirectX::XMVECTOR(DirectX::XMVectorClamp(*V, *Min, *Max)); }
-        inline DirectX::XMVECTOR* XMVectorSaturate(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSaturate(*V)); }
+        inline DirectX::XMVECTOR* XMVectorMin(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorMin(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorMax(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorMax(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorRound(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorRound(*V)); }
+        inline DirectX::XMVECTOR* XMVectorTruncate(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorTruncate(*V)); }
+        inline DirectX::XMVECTOR* XMVectorFloor(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorFloor(*V)); }
+        inline DirectX::XMVECTOR* XMVectorCeiling(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorCeiling(*V)); }
+        inline DirectX::XMVECTOR* XMVectorClamp(DirectX::XMVECTOR* V, DirectX::XMVECTOR* Min, DirectX::XMVECTOR* Max) { UMAllocVectorReturn(DirectX::XMVectorClamp(*V, *Min, *Max)); }
+        inline DirectX::XMVECTOR* XMVectorSaturate(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSaturate(*V)); }
 
-        inline DirectX::XMVECTOR* XMVectorAndInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorAndInt(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorAndCInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorAndCInt(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorOrInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorOrInt(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorNorInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorNorInt(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorXorInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorXorInt(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorAndInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorAndInt(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorAndCInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorAndCInt(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorOrInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorOrInt(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorNorInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorNorInt(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorXorInt(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorXorInt(*V1, *V2)); }
 
-        inline DirectX::XMVECTOR* XMVectorNegate(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorNegate(*V)); }
-        inline DirectX::XMVECTOR* XMVectorAdd(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorAdd(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorSum(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSum(*V)); }
-        inline DirectX::XMVECTOR* XMVectorAddAngles(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorAddAngles(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorSubtract(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorSubtract(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorSubtractAngles(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorSubtractAngles(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorMultiply(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorMultiply(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorMultiplyAdd(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* V3) { return new DirectX::XMVECTOR(DirectX::XMVectorMultiplyAdd(*V1, *V2, *V3)); }
-        inline DirectX::XMVECTOR* XMVectorDivide(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorDivide(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorNegativeMultiplySubtract(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* V3) { return new DirectX::XMVECTOR(DirectX::XMVectorNegativeMultiplySubtract(*V1, *V2, *V3)); }
-        inline DirectX::XMVECTOR* XMVectorScale(DirectX::XMVECTOR* V, float ScaleFactor) { return new DirectX::XMVECTOR(DirectX::XMVectorScale(*V, ScaleFactor)); }
-        inline DirectX::XMVECTOR* XMVectorReciprocalEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorReciprocalEst(*V)); }
-        inline DirectX::XMVECTOR* XMVectorReciprocal(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorReciprocal(*V)); }
-        inline DirectX::XMVECTOR* XMVectorSqrtEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSqrtEst(*V)); }
-        inline DirectX::XMVECTOR* XMVectorSqrt(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSqrt(*V)); }
-        inline DirectX::XMVECTOR* XMVectorReciprocalSqrtEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorReciprocalSqrtEst(*V)); }
-        inline DirectX::XMVECTOR* XMVectorReciprocalSqrt(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorReciprocalSqrt(*V)); }
-        inline DirectX::XMVECTOR* XMVectorExp2(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorExp2(*V)); }
-        inline DirectX::XMVECTOR* XMVectorExpE(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorExpE(*V)); }
-        inline DirectX::XMVECTOR* XMVectorExp(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorExp(*V)); }
-        inline DirectX::XMVECTOR* XMVectorLog2(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorLog2(*V)); }
-        inline DirectX::XMVECTOR* XMVectorLogE(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorLogE(*V)); }
-        inline DirectX::XMVECTOR* XMVectorLog(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorLog(*V)); }
-        inline DirectX::XMVECTOR* XMVectorPow(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorPow(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorAbs(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorAbs(*V)); }
-        inline DirectX::XMVECTOR* XMVectorMod(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVectorMod(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVectorModAngles(DirectX::XMVECTOR* Angles) { return new DirectX::XMVECTOR(DirectX::XMVectorModAngles(*Angles)); }
-        inline DirectX::XMVECTOR* XMVectorSin(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSin(*V)); }
-        inline DirectX::XMVECTOR* XMVectorSinEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSinEst(*V)); }
-        inline DirectX::XMVECTOR* XMVectorCos(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorCos(*V)); }
-        inline DirectX::XMVECTOR* XMVectorCosEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorCosEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorNegate(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorNegate(*V)); }
+        inline DirectX::XMVECTOR* XMVectorAdd(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorAdd(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorSum(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSum(*V)); }
+        inline DirectX::XMVECTOR* XMVectorAddAngles(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorAddAngles(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorSubtract(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorSubtract(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorSubtractAngles(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorSubtractAngles(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorMultiply(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorMultiply(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorMultiplyAdd(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* V3) { UMAllocVectorReturn(DirectX::XMVectorMultiplyAdd(*V1, *V2, *V3)); }
+        inline DirectX::XMVECTOR* XMVectorDivide(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorDivide(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorNegativeMultiplySubtract(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* V3) { UMAllocVectorReturn(DirectX::XMVectorNegativeMultiplySubtract(*V1, *V2, *V3)); }
+        inline DirectX::XMVECTOR* XMVectorScale(DirectX::XMVECTOR* V, float ScaleFactor) { UMAllocVectorReturn(DirectX::XMVectorScale(*V, ScaleFactor)); }
+        inline DirectX::XMVECTOR* XMVectorReciprocalEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorReciprocalEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorReciprocal(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorReciprocal(*V)); }
+        inline DirectX::XMVECTOR* XMVectorSqrtEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSqrtEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorSqrt(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSqrt(*V)); }
+        inline DirectX::XMVECTOR* XMVectorReciprocalSqrtEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorReciprocalSqrtEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorReciprocalSqrt(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorReciprocalSqrt(*V)); }
+        inline DirectX::XMVECTOR* XMVectorExp2(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorExp2(*V)); }
+        inline DirectX::XMVECTOR* XMVectorExpE(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorExpE(*V)); }
+        inline DirectX::XMVECTOR* XMVectorExp(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorExp(*V)); }
+        inline DirectX::XMVECTOR* XMVectorLog2(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorLog2(*V)); }
+        inline DirectX::XMVECTOR* XMVectorLogE(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorLogE(*V)); }
+        inline DirectX::XMVECTOR* XMVectorLog(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorLog(*V)); }
+        inline DirectX::XMVECTOR* XMVectorPow(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorPow(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorAbs(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorAbs(*V)); }
+        inline DirectX::XMVECTOR* XMVectorMod(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVectorMod(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVectorModAngles(DirectX::XMVECTOR* Angles) { UMAllocVectorReturn(DirectX::XMVectorModAngles(*Angles)); }
+        inline DirectX::XMVECTOR* XMVectorSin(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSin(*V)); }
+        inline DirectX::XMVECTOR* XMVectorSinEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSinEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorCos(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorCos(*V)); }
+        inline DirectX::XMVECTOR* XMVectorCosEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorCosEst(*V)); }
         inline void XMVectorSinCos(DirectX::XMVECTOR* pSin, DirectX::XMVECTOR* pCos, DirectX::XMVECTOR* V) { DirectX::XMVectorSinCos(pSin, pCos, *V); }
         inline void XMVectorSinCosEst(DirectX::XMVECTOR* pSin, DirectX::XMVECTOR* pCos, DirectX::XMVECTOR* V) { DirectX::XMVectorSinCosEst(pSin, pCos, *V); }
-        inline DirectX::XMVECTOR* XMVectorTan(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorTan(*V)); }
-        inline DirectX::XMVECTOR* XMVectorTanEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorTanEst(*V)); }
-        inline DirectX::XMVECTOR* XMVectorSinH(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorSinH(*V)); }
-        inline DirectX::XMVECTOR* XMVectorCosH(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorCosH(*V)); }
-        inline DirectX::XMVECTOR* XMVectorTanH(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorTanH(*V)); }
-        inline DirectX::XMVECTOR* XMVectorASin(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorASin(*V)); }
-        inline DirectX::XMVECTOR* XMVectorASinEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorASinEst(*V)); }
-        inline DirectX::XMVECTOR* XMVectorACos(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorACos(*V)); }
-        inline DirectX::XMVECTOR* XMVectorACosEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorACosEst(*V)); }
-        inline DirectX::XMVECTOR* XMVectorATan(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorATan(*V)); }
-        inline DirectX::XMVECTOR* XMVectorATanEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVectorATanEst(*V)); }
-        inline DirectX::XMVECTOR* XMVectorATan2(DirectX::XMVECTOR* Y, DirectX::XMVECTOR* X) { return new DirectX::XMVECTOR(DirectX::XMVectorATan2(*Y, *X)); }
-        inline DirectX::XMVECTOR* XMVectorATan2Est(DirectX::XMVECTOR* Y, DirectX::XMVECTOR* X) { return new DirectX::XMVECTOR(DirectX::XMVectorATan2Est(*Y, *X)); }
-        inline DirectX::XMVECTOR* XMVectorLerp(DirectX::XMVECTOR* V0, DirectX::XMVECTOR* V1, float t) { return new DirectX::XMVECTOR(DirectX::XMVectorLerp(*V0, *V1, t)); }
-        inline DirectX::XMVECTOR* XMVectorLerpV(DirectX::XMVECTOR* V0, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* T) { return new DirectX::XMVECTOR(DirectX::XMVectorLerpV(*V0, *V1, *T)); }
-        inline DirectX::XMVECTOR* XMVectorHermite(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Tangent0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Tangent1, float t) { return new DirectX::XMVECTOR(DirectX::XMVectorHermite(*Position0, *Tangent0, *Position1, *Tangent1, t)); }
-        inline DirectX::XMVECTOR* XMVectorHermiteV(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Tangent0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Tangent1, DirectX::XMVECTOR* T) { return new DirectX::XMVECTOR(DirectX::XMVectorHermiteV(*Position0, *Tangent0, *Position1, *Tangent1, *T)); }
-        inline DirectX::XMVECTOR* XMVectorCatmullRom(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Position2, DirectX::XMVECTOR* Position3, float t) { return new DirectX::XMVECTOR(DirectX::XMVectorCatmullRom(*Position0, *Position1, *Position2, *Position3, t)); }
-        inline DirectX::XMVECTOR* XMVectorCatmullRomV(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Position2, DirectX::XMVECTOR* Position3, DirectX::XMVECTOR* T) { return new DirectX::XMVECTOR(DirectX::XMVectorCatmullRomV(*Position0, *Position1, *Position2, *Position3, *T)); }
-        inline DirectX::XMVECTOR* XMVectorBaryCentric(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Position2, float f, float g) { return new DirectX::XMVECTOR(DirectX::XMVectorBaryCentric(*Position0, *Position1, *Position2, f, g)); }
-        inline DirectX::XMVECTOR* XMVectorBaryCentricV(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Position2, DirectX::XMVECTOR* F, DirectX::XMVECTOR* G) { return new DirectX::XMVECTOR(DirectX::XMVectorBaryCentricV(*Position0, *Position1, *Position2, *F, *G)); }
+        inline DirectX::XMVECTOR* XMVectorTan(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorTan(*V)); }
+        inline DirectX::XMVECTOR* XMVectorTanEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorTanEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorSinH(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorSinH(*V)); }
+        inline DirectX::XMVECTOR* XMVectorCosH(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorCosH(*V)); }
+        inline DirectX::XMVECTOR* XMVectorTanH(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorTanH(*V)); }
+        inline DirectX::XMVECTOR* XMVectorASin(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorASin(*V)); }
+        inline DirectX::XMVECTOR* XMVectorASinEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorASinEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorACos(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorACos(*V)); }
+        inline DirectX::XMVECTOR* XMVectorACosEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorACosEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorATan(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorATan(*V)); }
+        inline DirectX::XMVECTOR* XMVectorATanEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVectorATanEst(*V)); }
+        inline DirectX::XMVECTOR* XMVectorATan2(DirectX::XMVECTOR* Y, DirectX::XMVECTOR* X) { UMAllocVectorReturn(DirectX::XMVectorATan2(*Y, *X)); }
+        inline DirectX::XMVECTOR* XMVectorATan2Est(DirectX::XMVECTOR* Y, DirectX::XMVECTOR* X) { UMAllocVectorReturn(DirectX::XMVectorATan2Est(*Y, *X)); }
+        inline DirectX::XMVECTOR* XMVectorLerp(DirectX::XMVECTOR* V0, DirectX::XMVECTOR* V1, float t) { UMAllocVectorReturn(DirectX::XMVectorLerp(*V0, *V1, t)); }
+        inline DirectX::XMVECTOR* XMVectorLerpV(DirectX::XMVECTOR* V0, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* T) { UMAllocVectorReturn(DirectX::XMVectorLerpV(*V0, *V1, *T)); }
+        inline DirectX::XMVECTOR* XMVectorHermite(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Tangent0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Tangent1, float t) { UMAllocVectorReturn(DirectX::XMVectorHermite(*Position0, *Tangent0, *Position1, *Tangent1, t)); }
+        inline DirectX::XMVECTOR* XMVectorHermiteV(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Tangent0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Tangent1, DirectX::XMVECTOR* T) { UMAllocVectorReturn(DirectX::XMVectorHermiteV(*Position0, *Tangent0, *Position1, *Tangent1, *T)); }
+        inline DirectX::XMVECTOR* XMVectorCatmullRom(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Position2, DirectX::XMVECTOR* Position3, float t) { UMAllocVectorReturn(DirectX::XMVectorCatmullRom(*Position0, *Position1, *Position2, *Position3, t)); }
+        inline DirectX::XMVECTOR* XMVectorCatmullRomV(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Position2, DirectX::XMVECTOR* Position3, DirectX::XMVECTOR* T) { UMAllocVectorReturn(DirectX::XMVectorCatmullRomV(*Position0, *Position1, *Position2, *Position3, *T)); }
+        inline DirectX::XMVECTOR* XMVectorBaryCentric(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Position2, float f, float g) { UMAllocVectorReturn(DirectX::XMVectorBaryCentric(*Position0, *Position1, *Position2, f, g)); }
+        inline DirectX::XMVECTOR* XMVectorBaryCentricV(DirectX::XMVECTOR* Position0, DirectX::XMVECTOR* Position1, DirectX::XMVECTOR* Position2, DirectX::XMVECTOR* F, DirectX::XMVECTOR* G) { UMAllocVectorReturn(DirectX::XMVectorBaryCentricV(*Position0, *Position1, *Position2, *F, *G)); }
         
         inline bool XMVector2Equal(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return DirectX::XMVector2Equal(*V1, *V2); }
         inline unsigned int XMVector2EqualR(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return DirectX::XMVector2EqualR(*V1, *V2); }
@@ -270,31 +271,31 @@ namespace DirectX
         inline bool XMVector2IsNaN(DirectX::XMVECTOR* V) { return DirectX::XMVector2IsNaN(*V); }
         inline bool XMVector2IsInfinite(DirectX::XMVECTOR* V) { return DirectX::XMVector2IsInfinite(*V); }
 
-        inline DirectX::XMVECTOR* XMVector2Dot(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVector2Dot(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVector2Cross(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVector2Cross(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVector2LengthSq(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector2LengthSq(*V)); }
-        inline DirectX::XMVECTOR* XMVector2ReciprocalLengthEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector2ReciprocalLengthEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector2ReciprocalLength(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector2ReciprocalLength(*V)); }
-        inline DirectX::XMVECTOR* XMVector2LengthEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector2LengthEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector2Length(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector2Length(*V)); }
-        inline DirectX::XMVECTOR* XMVector2NormalizeEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector2NormalizeEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector2Normalize(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector2Normalize(*V)); }
-        inline DirectX::XMVECTOR* XMVector2ClampLength(DirectX::XMVECTOR* V, float LengthMin, float LengthMax) { return new DirectX::XMVECTOR(DirectX::XMVector2ClampLength(*V, LengthMin, LengthMax)); }
-        inline DirectX::XMVECTOR* XMVector2ClampLengthV(DirectX::XMVECTOR* V, DirectX::XMVECTOR* LengthMin, DirectX::XMVECTOR* LengthMax) { return new DirectX::XMVECTOR(DirectX::XMVector2ClampLengthV(*V, *LengthMin, *LengthMax)); }
-        inline DirectX::XMVECTOR* XMVector2Reflect(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal) { return new DirectX::XMVECTOR(DirectX::XMVector2Reflect(*Incident, *Normal)); }
-        inline DirectX::XMVECTOR* XMVector2Refract(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, float RefractionIndex) { return new DirectX::XMVECTOR(DirectX::XMVector2Refract(*Incident, *Normal, RefractionIndex)); }
-        inline DirectX::XMVECTOR* XMVector2RefractV(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, DirectX::XMVECTOR* RefractionIndex) { return new DirectX::XMVECTOR(DirectX::XMVector2RefractV(*Incident, *Normal, *RefractionIndex)); }
-        inline DirectX::XMVECTOR* XMVector2Orthogonal(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector2Orthogonal(*V)); }
-        inline DirectX::XMVECTOR* XMVector2AngleBetweenNormalsEst(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { return new DirectX::XMVECTOR(DirectX::XMVector2AngleBetweenNormalsEst(*N1, *N2)); }
-        inline DirectX::XMVECTOR* XMVector2AngleBetweenNormals(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { return new DirectX::XMVECTOR(DirectX::XMVector2AngleBetweenNormals(*N1, *N2)); }
-        inline DirectX::XMVECTOR* XMVector2AngleBetweenVectors(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVector2AngleBetweenVectors(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVector2LinePointDistance(DirectX::XMVECTOR* LinePoint1, DirectX::XMVECTOR* LinePoint2, DirectX::XMVECTOR* Point) { return new DirectX::XMVECTOR(DirectX::XMVector2LinePointDistance(*LinePoint1, *LinePoint2, *Point)); }
-        inline DirectX::XMVECTOR* XMVector2IntersectLine(DirectX::XMVECTOR* Line1Point1, DirectX::XMVECTOR* Line1Point2, DirectX::XMVECTOR* Line2Point1, DirectX::XMVECTOR* Line2Point2) { return new DirectX::XMVECTOR(DirectX::XMVector2IntersectLine(*Line1Point1, *Line1Point2, *Line2Point1, *Line2Point2)); }
-        inline DirectX::XMVECTOR* XMVector2Transform(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMVector2Transform(*V, *M)); }
+        inline DirectX::XMVECTOR* XMVector2Dot(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVector2Dot(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVector2Cross(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVector2Cross(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVector2LengthSq(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector2LengthSq(*V)); }
+        inline DirectX::XMVECTOR* XMVector2ReciprocalLengthEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector2ReciprocalLengthEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector2ReciprocalLength(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector2ReciprocalLength(*V)); }
+        inline DirectX::XMVECTOR* XMVector2LengthEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector2LengthEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector2Length(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector2Length(*V)); }
+        inline DirectX::XMVECTOR* XMVector2NormalizeEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector2NormalizeEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector2Normalize(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector2Normalize(*V)); }
+        inline DirectX::XMVECTOR* XMVector2ClampLength(DirectX::XMVECTOR* V, float LengthMin, float LengthMax) { UMAllocVectorReturn(DirectX::XMVector2ClampLength(*V, LengthMin, LengthMax)); }
+        inline DirectX::XMVECTOR* XMVector2ClampLengthV(DirectX::XMVECTOR* V, DirectX::XMVECTOR* LengthMin, DirectX::XMVECTOR* LengthMax) { UMAllocVectorReturn(DirectX::XMVector2ClampLengthV(*V, *LengthMin, *LengthMax)); }
+        inline DirectX::XMVECTOR* XMVector2Reflect(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal) { UMAllocVectorReturn(DirectX::XMVector2Reflect(*Incident, *Normal)); }
+        inline DirectX::XMVECTOR* XMVector2Refract(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, float RefractionIndex) { UMAllocVectorReturn(DirectX::XMVector2Refract(*Incident, *Normal, RefractionIndex)); }
+        inline DirectX::XMVECTOR* XMVector2RefractV(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, DirectX::XMVECTOR* RefractionIndex) { UMAllocVectorReturn(DirectX::XMVector2RefractV(*Incident, *Normal, *RefractionIndex)); }
+        inline DirectX::XMVECTOR* XMVector2Orthogonal(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector2Orthogonal(*V)); }
+        inline DirectX::XMVECTOR* XMVector2AngleBetweenNormalsEst(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { UMAllocVectorReturn(DirectX::XMVector2AngleBetweenNormalsEst(*N1, *N2)); }
+        inline DirectX::XMVECTOR* XMVector2AngleBetweenNormals(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { UMAllocVectorReturn(DirectX::XMVector2AngleBetweenNormals(*N1, *N2)); }
+        inline DirectX::XMVECTOR* XMVector2AngleBetweenVectors(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVector2AngleBetweenVectors(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVector2LinePointDistance(DirectX::XMVECTOR* LinePoint1, DirectX::XMVECTOR* LinePoint2, DirectX::XMVECTOR* Point) { UMAllocVectorReturn(DirectX::XMVector2LinePointDistance(*LinePoint1, *LinePoint2, *Point)); }
+        inline DirectX::XMVECTOR* XMVector2IntersectLine(DirectX::XMVECTOR* Line1Point1, DirectX::XMVECTOR* Line1Point2, DirectX::XMVECTOR* Line2Point1, DirectX::XMVECTOR* Line2Point2) { UMAllocVectorReturn(DirectX::XMVector2IntersectLine(*Line1Point1, *Line1Point2, *Line2Point1, *Line2Point2)); }
+        inline DirectX::XMVECTOR* XMVector2Transform(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMVector2Transform(*V, *M)); }
         inline DirectX::XMFLOAT4* XMVector2TransformStream(DirectX::XMFLOAT4* pOutputStream, unsigned int OutputStride, const XMFLOAT2* pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::XMMATRIX* M) { return DirectX::XMVector2TransformStream(pOutputStream, OutputStride, pInputStream, InputStride, VectorCount, *M); }
-        inline DirectX::XMVECTOR* XMVector2TransformCoord(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMVector2TransformCoord(*V, *M)); }
+        inline DirectX::XMVECTOR* XMVector2TransformCoord(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMVector2TransformCoord(*V, *M)); }
         inline DirectX::XMFLOAT2* XMVector2TransformCoordStream(DirectX::XMFLOAT2* pOutputStream, unsigned int OutputStride, const XMFLOAT2* pInputStream, unsigned int InputStride,  unsigned int VectorCount, DirectX::XMMATRIX* M) { return DirectX::XMVector2TransformCoordStream(pOutputStream, OutputStride, pInputStream, InputStride, VectorCount, *M); }
-        inline DirectX::XMVECTOR* XMVector2TransformNormal(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMVector2TransformNormal(*V, *M)); }
+        inline DirectX::XMVECTOR* XMVector2TransformNormal(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMVector2TransformNormal(*V, *M)); }
         inline DirectX::XMFLOAT2* XMVector2TransformNormalStream(DirectX::XMFLOAT2* pOutputStream, unsigned int OutputStride, const XMFLOAT2* pInputStream, unsigned int InputStride,  unsigned int VectorCount, DirectX::XMMATRIX* M) { return DirectX::XMVector2TransformNormalStream(pOutputStream, OutputStride, pInputStream, InputStride, VectorCount, *M); }
 
         inline bool XMVector3Equal(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return DirectX::XMVector3Equal(*V1, *V2); }
@@ -315,37 +316,37 @@ namespace DirectX
         inline bool XMVector3IsNaN(DirectX::XMVECTOR* V) { return DirectX::XMVector3IsNaN(*V); }
         inline bool XMVector3IsInfinite(DirectX::XMVECTOR* V) { return DirectX::XMVector3IsInfinite(*V); }
 
-        inline DirectX::XMVECTOR* XMVector3Dot(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVector3Dot(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVector3Cross(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVector3Cross(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVector3LengthSq(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector3LengthSq(*V)); }
-        inline DirectX::XMVECTOR* XMVector3ReciprocalLengthEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector3ReciprocalLengthEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector3ReciprocalLength(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector3ReciprocalLength(*V)); }
-        inline DirectX::XMVECTOR* XMVector3LengthEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector3LengthEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector3Length(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector3Length(*V)); }
-        inline DirectX::XMVECTOR* XMVector3NormalizeEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector3NormalizeEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector3Normalize(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector3Normalize(*V)); }
-        inline DirectX::XMVECTOR* XMVector3ClampLength(DirectX::XMVECTOR* V, float LengthMin, float LengthMax) { return new DirectX::XMVECTOR(DirectX::XMVector3ClampLength(*V, LengthMin, LengthMax)); }
-        inline DirectX::XMVECTOR* XMVector3ClampLengthV(DirectX::XMVECTOR* V, DirectX::XMVECTOR* LengthMin, DirectX::XMVECTOR* LengthMax) { return new DirectX::XMVECTOR(DirectX::XMVector3ClampLengthV(*V, *LengthMin, *LengthMax)); }
-        inline DirectX::XMVECTOR* XMVector3Reflect(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal) { return new DirectX::XMVECTOR(DirectX::XMVector3Reflect(*Incident, *Normal)); }
-        inline DirectX::XMVECTOR* XMVector3Refract(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, float RefractionIndex) { return new DirectX::XMVECTOR(DirectX::XMVector3Refract(*Incident, *Normal, RefractionIndex)); }
-        inline DirectX::XMVECTOR* XMVector3RefractV(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, DirectX::XMVECTOR* RefractionIndex) { return new DirectX::XMVECTOR(DirectX::XMVector3RefractV(*Incident, *Normal, *RefractionIndex)); }
-        inline DirectX::XMVECTOR* XMVector3Orthogonal(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector3Orthogonal(*V)); }
-        inline DirectX::XMVECTOR* XMVector3AngleBetweenNormalsEst(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { return new DirectX::XMVECTOR(DirectX::XMVector3AngleBetweenNormalsEst(*N1, *N2)); }
-        inline DirectX::XMVECTOR* XMVector3AngleBetweenNormals(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { return new DirectX::XMVECTOR(DirectX::XMVector3AngleBetweenNormals(*N1, *N2)); }
-        inline DirectX::XMVECTOR* XMVector3AngleBetweenVectors(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVector3AngleBetweenVectors(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVector3LinePointDistance(DirectX::XMVECTOR* LinePoint1, DirectX::XMVECTOR* LinePoint2, DirectX::XMVECTOR* Point) { return new DirectX::XMVECTOR(DirectX::XMVector3LinePointDistance(*LinePoint1, *LinePoint2, *Point)); }
+        inline DirectX::XMVECTOR* XMVector3Dot(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVector3Dot(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVector3Cross(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVector3Cross(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVector3LengthSq(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector3LengthSq(*V)); }
+        inline DirectX::XMVECTOR* XMVector3ReciprocalLengthEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector3ReciprocalLengthEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector3ReciprocalLength(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector3ReciprocalLength(*V)); }
+        inline DirectX::XMVECTOR* XMVector3LengthEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector3LengthEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector3Length(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector3Length(*V)); }
+        inline DirectX::XMVECTOR* XMVector3NormalizeEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector3NormalizeEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector3Normalize(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector3Normalize(*V)); }
+        inline DirectX::XMVECTOR* XMVector3ClampLength(DirectX::XMVECTOR* V, float LengthMin, float LengthMax) { UMAllocVectorReturn(DirectX::XMVector3ClampLength(*V, LengthMin, LengthMax)); }
+        inline DirectX::XMVECTOR* XMVector3ClampLengthV(DirectX::XMVECTOR* V, DirectX::XMVECTOR* LengthMin, DirectX::XMVECTOR* LengthMax) { UMAllocVectorReturn(DirectX::XMVector3ClampLengthV(*V, *LengthMin, *LengthMax)); }
+        inline DirectX::XMVECTOR* XMVector3Reflect(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal) { UMAllocVectorReturn(DirectX::XMVector3Reflect(*Incident, *Normal)); }
+        inline DirectX::XMVECTOR* XMVector3Refract(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, float RefractionIndex) { UMAllocVectorReturn(DirectX::XMVector3Refract(*Incident, *Normal, RefractionIndex)); }
+        inline DirectX::XMVECTOR* XMVector3RefractV(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, DirectX::XMVECTOR* RefractionIndex) { UMAllocVectorReturn(DirectX::XMVector3RefractV(*Incident, *Normal, *RefractionIndex)); }
+        inline DirectX::XMVECTOR* XMVector3Orthogonal(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector3Orthogonal(*V)); }
+        inline DirectX::XMVECTOR* XMVector3AngleBetweenNormalsEst(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { UMAllocVectorReturn(DirectX::XMVector3AngleBetweenNormalsEst(*N1, *N2)); }
+        inline DirectX::XMVECTOR* XMVector3AngleBetweenNormals(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { UMAllocVectorReturn(DirectX::XMVector3AngleBetweenNormals(*N1, *N2)); }
+        inline DirectX::XMVECTOR* XMVector3AngleBetweenVectors(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVector3AngleBetweenVectors(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVector3LinePointDistance(DirectX::XMVECTOR* LinePoint1, DirectX::XMVECTOR* LinePoint2, DirectX::XMVECTOR* Point) { UMAllocVectorReturn(DirectX::XMVector3LinePointDistance(*LinePoint1, *LinePoint2, *Point)); }
         inline void XMVector3ComponentsFromNormal(DirectX::XMVECTOR* pParallel, DirectX::XMVECTOR* pPerpendicular, DirectX::XMVECTOR* V, DirectX::XMVECTOR* Normal) { DirectX::XMVector3ComponentsFromNormal(pParallel, pPerpendicular, *V, *Normal); }
-        inline DirectX::XMVECTOR* XMVector3Rotate(DirectX::XMVECTOR* V, DirectX::XMVECTOR* RotationQuaternion) { return new DirectX::XMVECTOR(DirectX::XMVector3Rotate(*V, *RotationQuaternion)); }
-        inline DirectX::XMVECTOR* XMVector3InverseRotate(DirectX::XMVECTOR* V, DirectX::XMVECTOR* RotationQuaternion) { return new DirectX::XMVECTOR(DirectX::XMVector3InverseRotate(*V, *RotationQuaternion)); }
-        inline DirectX::XMVECTOR* XMVector3Transform(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMVector3Transform(*V, *M)); }
+        inline DirectX::XMVECTOR* XMVector3Rotate(DirectX::XMVECTOR* V, DirectX::XMVECTOR* RotationQuaternion) { UMAllocVectorReturn(DirectX::XMVector3Rotate(*V, *RotationQuaternion)); }
+        inline DirectX::XMVECTOR* XMVector3InverseRotate(DirectX::XMVECTOR* V, DirectX::XMVECTOR* RotationQuaternion) { UMAllocVectorReturn(DirectX::XMVector3InverseRotate(*V, *RotationQuaternion)); }
+        inline DirectX::XMVECTOR* XMVector3Transform(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMVector3Transform(*V, *M)); }
         inline DirectX::XMFLOAT4* XMVector3TransformStream(DirectX::XMFLOAT4* pOutputStream, unsigned int OutputStride, const XMFLOAT3* pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::XMMATRIX* M) { return DirectX::XMVector3TransformStream(pOutputStream, OutputStride, pInputStream, InputStride, VectorCount, *M); }
-        inline DirectX::XMVECTOR* XMVector3TransformCoord(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMVector3TransformCoord(*V, *M)); }
+        inline DirectX::XMVECTOR* XMVector3TransformCoord(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMVector3TransformCoord(*V, *M)); }
         inline DirectX::XMFLOAT3* XMVector3TransformCoordStream(DirectX::XMFLOAT3* pOutputStream, unsigned int OutputStride, const XMFLOAT3* pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::XMMATRIX* M) { return DirectX::XMVector3TransformCoordStream(pOutputStream, OutputStride, pInputStream, InputStride, VectorCount, *M); }
-        inline DirectX::XMVECTOR* XMVector3TransformNormal(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMVector3TransformNormal(*V, *M)); }
+        inline DirectX::XMVECTOR* XMVector3TransformNormal(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMVector3TransformNormal(*V, *M)); }
         inline DirectX::XMFLOAT3* XMVector3TransformNormalStream(DirectX::XMFLOAT3* pOutputStream, unsigned int OutputStride, const XMFLOAT3* pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::XMMATRIX* M) { return DirectX::XMVector3TransformNormalStream(pOutputStream, OutputStride, pInputStream, InputStride, VectorCount, *M); }
         inline DirectX::XMVECTOR* XMVector3Project(DirectX::XMVECTOR* V, float ViewportX, float ViewportY, float ViewportWidth, float ViewportHeight,
             float ViewportMinZ, float ViewportMaxZ, DirectX::XMMATRIX* Projection, DirectX::XMMATRIX* View, DirectX::XMMATRIX* World) {
-            return new DirectX::XMVECTOR(DirectX::XMVector3Project(*V, ViewportX, ViewportY, ViewportWidth, ViewportHeight, ViewportMinZ, ViewportMaxZ, *Projection, *View, *World));
+            UMAllocVectorReturn(DirectX::XMVector3Project(*V, ViewportX, ViewportY, ViewportWidth, ViewportHeight, ViewportMinZ, ViewportMaxZ, *Projection, *View, *World));
         }
         inline DirectX::XMFLOAT3* XMVector3ProjectStream(DirectX::XMFLOAT3* pOutputStream, unsigned int OutputStride, const DirectX::XMFLOAT3* pInputStream,
             unsigned int InputStride, unsigned int VectorCount, float ViewportX, float ViewportY, float ViewportWidth, float ViewportHeight,
@@ -354,7 +355,7 @@ namespace DirectX
         }
         inline DirectX::XMVECTOR* XMVector3Unproject(DirectX::XMVECTOR* V, float ViewportX, float ViewportY, float ViewportWidth, float ViewportHeight,
             float ViewportMinZ, float ViewportMaxZ, DirectX::XMMATRIX* Projection, DirectX::XMMATRIX* View, DirectX::XMMATRIX* World) {
-            return new DirectX::XMVECTOR(DirectX::XMVector3Unproject(*V, ViewportX, ViewportY, ViewportWidth, ViewportHeight, ViewportMinZ, ViewportMaxZ, *Projection, *View, *World));
+            UMAllocVectorReturn(DirectX::XMVector3Unproject(*V, ViewportX, ViewportY, ViewportWidth, ViewportHeight, ViewportMinZ, ViewportMaxZ, *Projection, *View, *World));
         }
         inline DirectX::XMFLOAT3* XMVector3UnprojectStream(DirectX::XMFLOAT3* pOutputStream, unsigned int OutputStride, const DirectX::XMFLOAT3* pInputStream,
             unsigned int InputStride, unsigned int VectorCount, float ViewportX, float ViewportY, float ViewportWidth, float ViewportHeight,
@@ -381,25 +382,25 @@ namespace DirectX
         inline bool XMVector4IsNaN(DirectX::XMVECTOR* V) { return DirectX::XMVector4IsNaN(*V); }
         inline bool XMVector4IsInfinite(DirectX::XMVECTOR* V) { return DirectX::XMVector4IsInfinite(*V); }
 
-        inline DirectX::XMVECTOR* XMVector4Dot(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVector4Dot(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVector4Cross(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* V3) { return new DirectX::XMVECTOR(DirectX::XMVector4Cross(*V1, *V2, *V3)); }
-        inline DirectX::XMVECTOR* XMVector4LengthSq(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector4LengthSq(*V)); }
-        inline DirectX::XMVECTOR* XMVector4ReciprocalLengthEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector4ReciprocalLengthEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector4ReciprocalLength(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector4ReciprocalLength(*V)); }
-        inline DirectX::XMVECTOR* XMVector4LengthEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector4LengthEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector4Length(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector4Length(*V)); }
-        inline DirectX::XMVECTOR* XMVector4NormalizeEst(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector4NormalizeEst(*V)); }
-        inline DirectX::XMVECTOR* XMVector4Normalize(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector4Normalize(*V)); }
-        inline DirectX::XMVECTOR* XMVector4ClampLength(DirectX::XMVECTOR* V, float LengthMin, float LengthMax) { return new DirectX::XMVECTOR(DirectX::XMVector4ClampLength(*V, LengthMin, LengthMax)); }
-        inline DirectX::XMVECTOR* XMVector4ClampLengthV(DirectX::XMVECTOR* V, DirectX::XMVECTOR* LengthMin, DirectX::XMVECTOR* LengthMax) { return new DirectX::XMVECTOR(DirectX::XMVector4ClampLengthV(*V, *LengthMin, *LengthMax)); }
-        inline DirectX::XMVECTOR* XMVector4Reflect(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal) { return new DirectX::XMVECTOR(DirectX::XMVector4Reflect(*Incident, *Normal)); }
-        inline DirectX::XMVECTOR* XMVector4Refract(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, float RefractionIndex) { return new DirectX::XMVECTOR(DirectX::XMVector4Refract(*Incident, *Normal, RefractionIndex)); }
-        inline DirectX::XMVECTOR* XMVector4RefractV(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, DirectX::XMVECTOR* RefractionIndex) { return new DirectX::XMVECTOR(DirectX::XMVector4RefractV(*Incident, *Normal, *RefractionIndex)); }
-        inline DirectX::XMVECTOR* XMVector4Orthogonal(DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMVector4Orthogonal(*V)); }
-        inline DirectX::XMVECTOR* XMVector4AngleBetweenNormalsEst(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { return new DirectX::XMVECTOR(DirectX::XMVector4AngleBetweenNormalsEst(*N1, *N2)); }
-        inline DirectX::XMVECTOR* XMVector4AngleBetweenNormals(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { return new DirectX::XMVECTOR(DirectX::XMVector4AngleBetweenNormals(*N1, *N2)); }
-        inline DirectX::XMVECTOR* XMVector4AngleBetweenVectors(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return new DirectX::XMVECTOR(DirectX::XMVector4AngleBetweenVectors(*V1, *V2)); }
-        inline DirectX::XMVECTOR* XMVector4Transform(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMVector4Transform(*V, *M)); }
+        inline DirectX::XMVECTOR* XMVector4Dot(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVector4Dot(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVector4Cross(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2, DirectX::XMVECTOR* V3) { UMAllocVectorReturn(DirectX::XMVector4Cross(*V1, *V2, *V3)); }
+        inline DirectX::XMVECTOR* XMVector4LengthSq(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector4LengthSq(*V)); }
+        inline DirectX::XMVECTOR* XMVector4ReciprocalLengthEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector4ReciprocalLengthEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector4ReciprocalLength(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector4ReciprocalLength(*V)); }
+        inline DirectX::XMVECTOR* XMVector4LengthEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector4LengthEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector4Length(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector4Length(*V)); }
+        inline DirectX::XMVECTOR* XMVector4NormalizeEst(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector4NormalizeEst(*V)); }
+        inline DirectX::XMVECTOR* XMVector4Normalize(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector4Normalize(*V)); }
+        inline DirectX::XMVECTOR* XMVector4ClampLength(DirectX::XMVECTOR* V, float LengthMin, float LengthMax) { UMAllocVectorReturn(DirectX::XMVector4ClampLength(*V, LengthMin, LengthMax)); }
+        inline DirectX::XMVECTOR* XMVector4ClampLengthV(DirectX::XMVECTOR* V, DirectX::XMVECTOR* LengthMin, DirectX::XMVECTOR* LengthMax) { UMAllocVectorReturn(DirectX::XMVector4ClampLengthV(*V, *LengthMin, *LengthMax)); }
+        inline DirectX::XMVECTOR* XMVector4Reflect(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal) { UMAllocVectorReturn(DirectX::XMVector4Reflect(*Incident, *Normal)); }
+        inline DirectX::XMVECTOR* XMVector4Refract(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, float RefractionIndex) { UMAllocVectorReturn(DirectX::XMVector4Refract(*Incident, *Normal, RefractionIndex)); }
+        inline DirectX::XMVECTOR* XMVector4RefractV(DirectX::XMVECTOR* Incident, DirectX::XMVECTOR* Normal, DirectX::XMVECTOR* RefractionIndex) { UMAllocVectorReturn(DirectX::XMVector4RefractV(*Incident, *Normal, *RefractionIndex)); }
+        inline DirectX::XMVECTOR* XMVector4Orthogonal(DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMVector4Orthogonal(*V)); }
+        inline DirectX::XMVECTOR* XMVector4AngleBetweenNormalsEst(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { UMAllocVectorReturn(DirectX::XMVector4AngleBetweenNormalsEst(*N1, *N2)); }
+        inline DirectX::XMVECTOR* XMVector4AngleBetweenNormals(DirectX::XMVECTOR* N1, DirectX::XMVECTOR* N2) { UMAllocVectorReturn(DirectX::XMVector4AngleBetweenNormals(*N1, *N2)); }
+        inline DirectX::XMVECTOR* XMVector4AngleBetweenVectors(DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { UMAllocVectorReturn(DirectX::XMVector4AngleBetweenVectors(*V1, *V2)); }
+        inline DirectX::XMVECTOR* XMVector4Transform(DirectX::XMVECTOR* V, DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMVector4Transform(*V, *M)); }
         inline DirectX::XMFLOAT4* XMVector4TransformStream(DirectX::XMFLOAT4* pOutputStream, unsigned int OutputStride, const DirectX::XMFLOAT4* pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::XMMATRIX* M) { return DirectX::XMVector4TransformStream(pOutputStream, OutputStride, pInputStream, InputStride, VectorCount, *M); }
 
         inline bool XMMatrixIsNaN(DirectX::XMMATRIX* M) { return DirectX::XMMatrixIsNaN(*M); }
@@ -410,7 +411,7 @@ namespace DirectX
         inline DirectX::XMMATRIX* XMMatrixMultiplyTranspose(DirectX::XMMATRIX* M1, DirectX::XMMATRIX* M2) { return new DirectX::XMMATRIX(DirectX::XMMatrixMultiplyTranspose(*M1, *M2)); }
         inline DirectX::XMMATRIX* XMMatrixTranspose(DirectX::XMMATRIX* M) { return new DirectX::XMMATRIX(DirectX::XMMatrixTranspose(*M)); }
         inline DirectX::XMMATRIX* XMMatrixInverse(DirectX::XMVECTOR*  pDeterminant, DirectX::XMMATRIX* M) { return new DirectX::XMMATRIX(DirectX::XMMatrixInverse(pDeterminant, *M)); }
-        inline DirectX::XMVECTOR*  XMMatrixDeterminant(DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMMatrixDeterminant(*M)); }
+        inline DirectX::XMVECTOR*  XMMatrixDeterminant(DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMMatrixDeterminant(*M)); }
         inline bool XMMatrixDecompose(DirectX::XMVECTOR* outScale, DirectX::XMVECTOR* outRotQuat, DirectX::XMVECTOR* outTrans, DirectX::XMMATRIX* M) { return DirectX::XMMatrixDecompose(outScale, outRotQuat, outTrans, *M); }
 
         inline DirectX::XMMATRIX* XMMatrixIdentity() { return new DirectX::XMMATRIX(DirectX::XMMatrixIdentity()); }
@@ -461,31 +462,31 @@ namespace DirectX
         inline bool XMQuaternionIsInfinite(DirectX::XMVECTOR* Q) { return DirectX::XMQuaternionIsInfinite(*Q); }
         inline bool XMQuaternionIsIdentity(DirectX::XMVECTOR* Q) { return DirectX::XMQuaternionIsIdentity(*Q); }
 
-        inline DirectX::XMVECTOR* XMQuaternionDot(DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2) { return new DirectX::XMVECTOR(DirectX::XMQuaternionDot(*Q1, *Q2)); }
-        inline DirectX::XMVECTOR* XMQuaternionMultiply(DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2) { return new DirectX::XMVECTOR(DirectX::XMQuaternionMultiply(*Q1, *Q2)); }
-        inline DirectX::XMVECTOR* XMQuaternionLengthSq(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionLengthSq(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionReciprocalLength(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionReciprocalLength(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionLength(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionLength(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionNormalizeEst(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionNormalizeEst(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionNormalize(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionNormalize(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionConjugate(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionConjugate(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionInverse(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionInverse(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionLn(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionLn(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionExp(DirectX::XMVECTOR* Q) { return new DirectX::XMVECTOR(DirectX::XMQuaternionExp(*Q)); }
-        inline DirectX::XMVECTOR* XMQuaternionSlerp(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, float t) { return new DirectX::XMVECTOR(DirectX::XMQuaternionSlerp(*Q0, *Q1, t)); }
-        inline DirectX::XMVECTOR* XMQuaternionSlerpV(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* T) { return new DirectX::XMVECTOR(DirectX::XMQuaternionSlerpV(*Q0, *Q1, *T)); }
-        inline DirectX::XMVECTOR* XMQuaternionSquad(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, DirectX::XMVECTOR* Q3, float t) { return new DirectX::XMVECTOR(DirectX::XMQuaternionSquad(*Q0, *Q1, *Q2, *Q3, t)); }
-        inline DirectX::XMVECTOR* XMQuaternionSquadV(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, DirectX::XMVECTOR* Q3, DirectX::XMVECTOR* T) { return new DirectX::XMVECTOR(DirectX::XMQuaternionSquadV(*Q0, *Q1, *Q2, *Q3, *T)); }
+        inline DirectX::XMVECTOR* XMQuaternionDot(DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2) { UMAllocVectorReturn(DirectX::XMQuaternionDot(*Q1, *Q2)); }
+        inline DirectX::XMVECTOR* XMQuaternionMultiply(DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2) { UMAllocVectorReturn(DirectX::XMQuaternionMultiply(*Q1, *Q2)); }
+        inline DirectX::XMVECTOR* XMQuaternionLengthSq(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionLengthSq(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionReciprocalLength(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionReciprocalLength(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionLength(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionLength(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionNormalizeEst(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionNormalizeEst(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionNormalize(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionNormalize(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionConjugate(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionConjugate(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionInverse(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionInverse(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionLn(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionLn(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionExp(DirectX::XMVECTOR* Q) { UMAllocVectorReturn(DirectX::XMQuaternionExp(*Q)); }
+        inline DirectX::XMVECTOR* XMQuaternionSlerp(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, float t) { UMAllocVectorReturn(DirectX::XMQuaternionSlerp(*Q0, *Q1, t)); }
+        inline DirectX::XMVECTOR* XMQuaternionSlerpV(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* T) { UMAllocVectorReturn(DirectX::XMQuaternionSlerpV(*Q0, *Q1, *T)); }
+        inline DirectX::XMVECTOR* XMQuaternionSquad(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, DirectX::XMVECTOR* Q3, float t) { UMAllocVectorReturn(DirectX::XMQuaternionSquad(*Q0, *Q1, *Q2, *Q3, t)); }
+        inline DirectX::XMVECTOR* XMQuaternionSquadV(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, DirectX::XMVECTOR* Q3, DirectX::XMVECTOR* T) { UMAllocVectorReturn(DirectX::XMQuaternionSquadV(*Q0, *Q1, *Q2, *Q3, *T)); }
         inline void XMQuaternionSquadSetup(DirectX::XMVECTOR* pA, DirectX::XMVECTOR* pB, DirectX::XMVECTOR* pC, DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, DirectX::XMVECTOR* Q3) { DirectX::XMQuaternionSquadSetup(pA, pB, pC, *Q0, *Q1, *Q2, *Q3); }
-        inline DirectX::XMVECTOR* XMQuaternionBaryCentric(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, float f, float g) { return new DirectX::XMVECTOR(DirectX::XMQuaternionBaryCentric(*Q0, *Q1, *Q2, f, g)); }
-        inline DirectX::XMVECTOR* XMQuaternionBaryCentricV(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, DirectX::XMVECTOR* F, DirectX::XMVECTOR* G) { return new DirectX::XMVECTOR(DirectX::XMQuaternionBaryCentricV(*Q0, *Q1, *Q2, *F, *G)); }
+        inline DirectX::XMVECTOR* XMQuaternionBaryCentric(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, float f, float g) { UMAllocVectorReturn(DirectX::XMQuaternionBaryCentric(*Q0, *Q1, *Q2, f, g)); }
+        inline DirectX::XMVECTOR* XMQuaternionBaryCentricV(DirectX::XMVECTOR* Q0, DirectX::XMVECTOR* Q1, DirectX::XMVECTOR* Q2, DirectX::XMVECTOR* F, DirectX::XMVECTOR* G) { UMAllocVectorReturn(DirectX::XMQuaternionBaryCentricV(*Q0, *Q1, *Q2, *F, *G)); }
 
-        inline DirectX::XMVECTOR* XMQuaternionIdentity() { return new DirectX::XMVECTOR(DirectX::XMQuaternionIdentity()); }
-        inline DirectX::XMVECTOR* XMQuaternionRotationRollPitchYaw(float Pitch, float Yaw, float Roll) { return new DirectX::XMVECTOR(DirectX::XMQuaternionRotationRollPitchYaw(Pitch, Yaw, Roll)); }
-        inline DirectX::XMVECTOR* XMQuaternionRotationRollPitchYawFromVector(DirectX::XMVECTOR* Angles) { return new DirectX::XMVECTOR(DirectX::XMQuaternionRotationRollPitchYawFromVector(*Angles)); }
-        inline DirectX::XMVECTOR* XMQuaternionRotationNormal(DirectX::XMVECTOR* NormalAxis, float Angle) { return new DirectX::XMVECTOR(DirectX::XMQuaternionRotationNormal(*NormalAxis, Angle)); }
-        inline DirectX::XMVECTOR* XMQuaternionRotationAxis(DirectX::XMVECTOR* Axis, float Angle) { return new DirectX::XMVECTOR(DirectX::XMQuaternionRotationAxis(*Axis, Angle)); }
-        inline DirectX::XMVECTOR* XMQuaternionRotationMatrix(DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMQuaternionRotationMatrix(*M)); }
+        inline DirectX::XMVECTOR* XMQuaternionIdentity() { UMAllocVectorReturn(DirectX::XMQuaternionIdentity()); }
+        inline DirectX::XMVECTOR* XMQuaternionRotationRollPitchYaw(float Pitch, float Yaw, float Roll) { UMAllocVectorReturn(DirectX::XMQuaternionRotationRollPitchYaw(Pitch, Yaw, Roll)); }
+        inline DirectX::XMVECTOR* XMQuaternionRotationRollPitchYawFromVector(DirectX::XMVECTOR* Angles) { UMAllocVectorReturn(DirectX::XMQuaternionRotationRollPitchYawFromVector(*Angles)); }
+        inline DirectX::XMVECTOR* XMQuaternionRotationNormal(DirectX::XMVECTOR* NormalAxis, float Angle) { UMAllocVectorReturn(DirectX::XMQuaternionRotationNormal(*NormalAxis, Angle)); }
+        inline DirectX::XMVECTOR* XMQuaternionRotationAxis(DirectX::XMVECTOR* Axis, float Angle) { UMAllocVectorReturn(DirectX::XMQuaternionRotationAxis(*Axis, Angle)); }
+        inline DirectX::XMVECTOR* XMQuaternionRotationMatrix(DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMQuaternionRotationMatrix(*M)); }
 
         inline void XMQuaternionToAxisAngle(DirectX::XMVECTOR* pAxis, float* pAngle, DirectX::XMVECTOR* Q) { DirectX::XMQuaternionToAxisAngle(pAxis, pAngle, *Q); }
 
@@ -496,18 +497,18 @@ namespace DirectX
         inline bool XMPlaneIsNaN(DirectX::XMVECTOR* P) { return DirectX::XMPlaneIsNaN(*P); }
         inline bool XMPlaneIsInfinite(DirectX::XMVECTOR* P) { return DirectX::XMPlaneIsInfinite(*P); }
 
-        inline DirectX::XMVECTOR* XMPlaneDot(DirectX::XMVECTOR* P, DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMPlaneDot(*P, *V)); }
-        inline DirectX::XMVECTOR* XMPlaneDotCoord(DirectX::XMVECTOR* P, DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMPlaneDotCoord(*P, *V)); }
-        inline DirectX::XMVECTOR* XMPlaneDotNormal(DirectX::XMVECTOR* P, DirectX::XMVECTOR* V) { return new DirectX::XMVECTOR(DirectX::XMPlaneDotNormal(*P, *V)); }
-        inline DirectX::XMVECTOR* XMPlaneNormalizeEst(DirectX::XMVECTOR* P) { return new DirectX::XMVECTOR(DirectX::XMPlaneNormalizeEst(*P)); }
-        inline DirectX::XMVECTOR* XMPlaneNormalize(DirectX::XMVECTOR* P) { return new DirectX::XMVECTOR(DirectX::XMPlaneNormalize(*P)); }
-        inline DirectX::XMVECTOR* XMPlaneIntersectLine(DirectX::XMVECTOR* P, DirectX::XMVECTOR* LinePoint1, DirectX::XMVECTOR* LinePoint2) { return new DirectX::XMVECTOR(DirectX::XMPlaneIntersectLine(*P, *LinePoint1, *LinePoint2)); }
+        inline DirectX::XMVECTOR* XMPlaneDot(DirectX::XMVECTOR* P, DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMPlaneDot(*P, *V)); }
+        inline DirectX::XMVECTOR* XMPlaneDotCoord(DirectX::XMVECTOR* P, DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMPlaneDotCoord(*P, *V)); }
+        inline DirectX::XMVECTOR* XMPlaneDotNormal(DirectX::XMVECTOR* P, DirectX::XMVECTOR* V) { UMAllocVectorReturn(DirectX::XMPlaneDotNormal(*P, *V)); }
+        inline DirectX::XMVECTOR* XMPlaneNormalizeEst(DirectX::XMVECTOR* P) { UMAllocVectorReturn(DirectX::XMPlaneNormalizeEst(*P)); }
+        inline DirectX::XMVECTOR* XMPlaneNormalize(DirectX::XMVECTOR* P) { UMAllocVectorReturn(DirectX::XMPlaneNormalize(*P)); }
+        inline DirectX::XMVECTOR* XMPlaneIntersectLine(DirectX::XMVECTOR* P, DirectX::XMVECTOR* LinePoint1, DirectX::XMVECTOR* LinePoint2) { UMAllocVectorReturn(DirectX::XMPlaneIntersectLine(*P, *LinePoint1, *LinePoint2)); }
         inline void XMPlaneIntersectPlane(DirectX::XMVECTOR* pLinePoint1, DirectX::XMVECTOR* pLinePoint2, DirectX::XMVECTOR* P1, DirectX::XMVECTOR* P2) { DirectX::XMPlaneIntersectPlane(pLinePoint1, pLinePoint2, *P1, *P2); }
-        inline DirectX::XMVECTOR* XMPlaneTransform(DirectX::XMVECTOR* P, DirectX::XMMATRIX* M) { return new DirectX::XMVECTOR(DirectX::XMPlaneTransform(*P, *M)); }
+        inline DirectX::XMVECTOR* XMPlaneTransform(DirectX::XMVECTOR* P, DirectX::XMMATRIX* M) { UMAllocVectorReturn(DirectX::XMPlaneTransform(*P, *M)); }
         inline DirectX::XMFLOAT4* XMPlaneTransformStream(DirectX::XMFLOAT4* pOutputStream, unsigned int OutputStride, const DirectX::XMFLOAT4* pInputStream, unsigned int InputStride, unsigned int PlaneCount, DirectX::XMMATRIX* M) { return DirectX::XMPlaneTransformStream(pOutputStream, OutputStride, pInputStream, InputStride, PlaneCount, *M); }
 
-        inline DirectX::XMVECTOR* XMPlaneFromPointNormal(DirectX::XMVECTOR* Point, DirectX::XMVECTOR* Normal) { return new DirectX::XMVECTOR(DirectX::XMPlaneFromPointNormal(*Point, *Normal)); }
-        inline DirectX::XMVECTOR* XMPlaneFromPoints(DirectX::XMVECTOR* Point1, DirectX::XMVECTOR* Point2, DirectX::XMVECTOR* Point3) { return new DirectX::XMVECTOR(DirectX::XMPlaneFromPoints(*Point1, *Point2, *Point3)); }
+        inline DirectX::XMVECTOR* XMPlaneFromPointNormal(DirectX::XMVECTOR* Point, DirectX::XMVECTOR* Normal) { UMAllocVectorReturn(DirectX::XMPlaneFromPointNormal(*Point, *Normal)); }
+        inline DirectX::XMVECTOR* XMPlaneFromPoints(DirectX::XMVECTOR* Point1, DirectX::XMVECTOR* Point2, DirectX::XMVECTOR* Point3) { UMAllocVectorReturn(DirectX::XMPlaneFromPoints(*Point1, *Point2, *Point3)); }
 
         inline bool XMColorEqual(DirectX::XMVECTOR* C1, DirectX::XMVECTOR* C2) { return DirectX::XMColorEqual(*C1, *C2); }
         inline bool XMColorNotEqual(DirectX::XMVECTOR* C1, DirectX::XMVECTOR* C2) { return DirectX::XMColorNotEqual(*C1, *C2); }
@@ -519,35 +520,35 @@ namespace DirectX
         inline bool XMColorIsNaN(DirectX::XMVECTOR* C) { return DirectX::XMColorIsNaN(*C); }
         inline bool XMColorIsInfinite(DirectX::XMVECTOR* C) { return DirectX::XMColorIsInfinite(*C); }
 
-        inline DirectX::XMVECTOR* XMColorNegative(DirectX::XMVECTOR* C) { return new DirectX::XMVECTOR(DirectX::XMColorNegative(*C)); }
-        inline DirectX::XMVECTOR* XMColorModulate(DirectX::XMVECTOR* C1, DirectX::XMVECTOR* C2) { return new DirectX::XMVECTOR(DirectX::XMColorModulate(*C1, *C2)); }
-        inline DirectX::XMVECTOR* XMColorAdjustSaturation(DirectX::XMVECTOR* C, float Saturation) { return new DirectX::XMVECTOR(DirectX::XMColorAdjustSaturation(*C, Saturation)); }
-        inline DirectX::XMVECTOR* XMColorAdjustContrast(DirectX::XMVECTOR* C, float Contrast) { return new DirectX::XMVECTOR(DirectX::XMColorAdjustContrast(*C, Contrast)); }
+        inline DirectX::XMVECTOR* XMColorNegative(DirectX::XMVECTOR* C) { UMAllocVectorReturn(DirectX::XMColorNegative(*C)); }
+        inline DirectX::XMVECTOR* XMColorModulate(DirectX::XMVECTOR* C1, DirectX::XMVECTOR* C2) { UMAllocVectorReturn(DirectX::XMColorModulate(*C1, *C2)); }
+        inline DirectX::XMVECTOR* XMColorAdjustSaturation(DirectX::XMVECTOR* C, float Saturation) { UMAllocVectorReturn(DirectX::XMColorAdjustSaturation(*C, Saturation)); }
+        inline DirectX::XMVECTOR* XMColorAdjustContrast(DirectX::XMVECTOR* C, float Contrast) { UMAllocVectorReturn(DirectX::XMColorAdjustContrast(*C, Contrast)); }
 
-        inline DirectX::XMVECTOR* XMColorRGBToHSL(DirectX::XMVECTOR* rgb) { return new DirectX::XMVECTOR(DirectX::XMColorRGBToHSL(*rgb)); }
-        inline DirectX::XMVECTOR* XMColorHSLToRGB(DirectX::XMVECTOR* hsl) { return new DirectX::XMVECTOR(DirectX::XMColorHSLToRGB(*hsl)); }
+        inline DirectX::XMVECTOR* XMColorRGBToHSL(DirectX::XMVECTOR* rgb) { UMAllocVectorReturn(DirectX::XMColorRGBToHSL(*rgb)); }
+        inline DirectX::XMVECTOR* XMColorHSLToRGB(DirectX::XMVECTOR* hsl) { UMAllocVectorReturn(DirectX::XMColorHSLToRGB(*hsl)); }
 
-        inline DirectX::XMVECTOR* XMColorRGBToHSV(DirectX::XMVECTOR* rgb) { return new DirectX::XMVECTOR(DirectX::XMColorRGBToHSV(*rgb)); }
-        inline DirectX::XMVECTOR* XMColorHSVToRGB(DirectX::XMVECTOR* hsv) { return new DirectX::XMVECTOR(DirectX::XMColorHSVToRGB(*hsv)); }
+        inline DirectX::XMVECTOR* XMColorRGBToHSV(DirectX::XMVECTOR* rgb) { UMAllocVectorReturn(DirectX::XMColorRGBToHSV(*rgb)); }
+        inline DirectX::XMVECTOR* XMColorHSVToRGB(DirectX::XMVECTOR* hsv) { UMAllocVectorReturn(DirectX::XMColorHSVToRGB(*hsv)); }
 
-        inline DirectX::XMVECTOR* XMColorRGBToYUV(DirectX::XMVECTOR* rgb) { return new DirectX::XMVECTOR(DirectX::XMColorRGBToYUV(*rgb)); }
-        inline DirectX::XMVECTOR* XMColorYUVToRGB(DirectX::XMVECTOR* yuv) { return new DirectX::XMVECTOR(DirectX::XMColorYUVToRGB(*yuv)); }
+        inline DirectX::XMVECTOR* XMColorRGBToYUV(DirectX::XMVECTOR* rgb) { UMAllocVectorReturn(DirectX::XMColorRGBToYUV(*rgb)); }
+        inline DirectX::XMVECTOR* XMColorYUVToRGB(DirectX::XMVECTOR* yuv) { UMAllocVectorReturn(DirectX::XMColorYUVToRGB(*yuv)); }
 
-        inline DirectX::XMVECTOR* XMColorRGBToYUV_HD(DirectX::XMVECTOR* rgb) { return new DirectX::XMVECTOR(DirectX::XMColorRGBToYUV_HD(*rgb)); }
-        inline DirectX::XMVECTOR* XMColorYUVToRGB_HD(DirectX::XMVECTOR* yuv) { return new DirectX::XMVECTOR(DirectX::XMColorYUVToRGB_HD(*yuv)); }
+        inline DirectX::XMVECTOR* XMColorRGBToYUV_HD(DirectX::XMVECTOR* rgb) { UMAllocVectorReturn(DirectX::XMColorRGBToYUV_HD(*rgb)); }
+        inline DirectX::XMVECTOR* XMColorYUVToRGB_HD(DirectX::XMVECTOR* yuv) { UMAllocVectorReturn(DirectX::XMColorYUVToRGB_HD(*yuv)); }
 
-        inline DirectX::XMVECTOR* XMColorRGBToXYZ(DirectX::XMVECTOR* rgb) { return new DirectX::XMVECTOR(DirectX::XMColorRGBToXYZ(*rgb)); }
-        inline DirectX::XMVECTOR* XMColorXYZToRGB(DirectX::XMVECTOR* xyz) { return new DirectX::XMVECTOR(DirectX::XMColorXYZToRGB(*xyz)); }
+        inline DirectX::XMVECTOR* XMColorRGBToXYZ(DirectX::XMVECTOR* rgb) { UMAllocVectorReturn(DirectX::XMColorRGBToXYZ(*rgb)); }
+        inline DirectX::XMVECTOR* XMColorXYZToRGB(DirectX::XMVECTOR* xyz) { UMAllocVectorReturn(DirectX::XMColorXYZToRGB(*xyz)); }
 
-        inline DirectX::XMVECTOR* XMColorXYZToSRGB(DirectX::XMVECTOR* xyz) { return new DirectX::XMVECTOR(DirectX::XMColorXYZToSRGB(*xyz)); }
-        inline DirectX::XMVECTOR* XMColorSRGBToXYZ(DirectX::XMVECTOR* srgb) { return new DirectX::XMVECTOR(DirectX::XMColorSRGBToXYZ(*srgb)); }
+        inline DirectX::XMVECTOR* XMColorXYZToSRGB(DirectX::XMVECTOR* xyz) { UMAllocVectorReturn(DirectX::XMColorXYZToSRGB(*xyz)); }
+        inline DirectX::XMVECTOR* XMColorSRGBToXYZ(DirectX::XMVECTOR* srgb) { UMAllocVectorReturn(DirectX::XMColorSRGBToXYZ(*srgb)); }
 
-        inline DirectX::XMVECTOR* XMColorRGBToSRGB(DirectX::XMVECTOR* rgb) { return new DirectX::XMVECTOR(DirectX::XMColorRGBToSRGB(*rgb)); }
-        inline DirectX::XMVECTOR* XMColorSRGBToRGB(DirectX::XMVECTOR* srgb) { return new DirectX::XMVECTOR(DirectX::XMColorSRGBToRGB(*srgb)); }
+        inline DirectX::XMVECTOR* XMColorRGBToSRGB(DirectX::XMVECTOR* rgb) { UMAllocVectorReturn(DirectX::XMColorRGBToSRGB(*rgb)); }
+        inline DirectX::XMVECTOR* XMColorSRGBToRGB(DirectX::XMVECTOR* srgb) { UMAllocVectorReturn(DirectX::XMColorSRGBToRGB(*srgb)); }
 
         inline bool XMVerifyCPUSupport() { return DirectX::XMVerifyCPUSupport(); }
 
-        inline DirectX::XMVECTOR* XMFresnelTerm(DirectX::XMVECTOR* CosIncidentAngle, DirectX::XMVECTOR* RefractionIndex) { return new DirectX::XMVECTOR(DirectX::XMFresnelTerm(*CosIncidentAngle, *RefractionIndex)); }
+        inline DirectX::XMVECTOR* XMFresnelTerm(DirectX::XMVECTOR* CosIncidentAngle, DirectX::XMVECTOR* RefractionIndex) { UMAllocVectorReturn(DirectX::XMFresnelTerm(*CosIncidentAngle, *RefractionIndex)); }
 
         inline bool XMScalarNearEqual(float S1, float S2, float Epsilon) { return DirectX::XMScalarNearEqual(S1, S2, Epsilon); }
         inline float XMScalarModAngle(float Value) { return DirectX::XMScalarModAngle(Value); }
