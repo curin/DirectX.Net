@@ -1,59 +1,52 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMFLOAT3PK UMFLOAT3PK;
-
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMFLOAT3PK
+        [StructLayout(LayoutKind::Sequential)]
+        public value struct XMFLOAT3PK
         {
-        public:
-            UMFLOAT3PK* _vec;
-            XMFLOAT3PK()
+            value struct Components
             {
-                _vec = new UMFLOAT3PK();
-            }
-
-            XMFLOAT3PK(UMFLOAT3PK* Vec)
-            {
-                _vec = Vec;
-            }
+                unsigned int xm : 6; // x-mantissa
+                unsigned int xe : 5; // x-exponent
+                unsigned int ym : 6; // y-mantissa
+                unsigned int ye : 5; // y-exponent
+                unsigned int zm : 5; // z-mantissa
+                unsigned int ze : 5; // z-exponent
+            };
+            [FieldOffset(0)]Components components;
+            [FieldOffset(0)] unsigned int v;
 
             XMFLOAT3PK(float x, float y, float z)
             {
-                _vec = new UMFLOAT3PK(x, y, z);
+                int exponent;
+                components.xm = frexpf(x, &exponent);
+                components.xe = exponent;
+                components.ym = frexpf(y, &exponent);
+                components.ye = exponent;
+                components.zm = frexpf(z, &exponent);
+                components.ze = exponent;
             }
 
             XMFLOAT3PK(unsigned int packed)
             {
-                _vec = new UMFLOAT3PK(packed);
+                v = packed;
             }
 
             XMFLOAT3PK(array<float>^ pArray)
             {
-                pin_ptr<float> arr = &pArray[0];
-                _vec = new UMFLOAT3PK(arr);
+                int exponent;
+                components.xm = frexpf(pArray[0], &exponent);
+                components.xe = exponent;
+                components.ym = frexpf(pArray[1], &exponent);
+                components.ye = exponent;
+                components.zm = frexpf(pArray[2], &exponent);
+                components.ze = exponent;
             }
-
-            ~XMFLOAT3PK()
-            {
-                delete _vec;
-            }
-
-            XMFLOAT3PK^ operator= (const unsigned int vector) { _vec->v = vector; return this; }
-            property unsigned int xm { unsigned int get() { return _vec->xm; } void set(unsigned int value) { _vec->xm = value; }}
-            property unsigned int ym { unsigned int get() { return _vec->ym; } void set(unsigned int value) { _vec->ym = value; }}
-            property unsigned int zm { unsigned int get() { return _vec->zm; } void set(unsigned int value) { _vec->zm = value; }}
-            property unsigned int xe { unsigned int get() { return _vec->xe; } void set(unsigned int value) { _vec->xe = value; }}
-            property unsigned int ye { unsigned int get() { return _vec->ye; } void set(unsigned int value) { _vec->ye = value; }}
-            property unsigned int ze { unsigned int get() { return _vec->ze; } void set(unsigned int value) { _vec->ze = value; }}
-
-            property unsigned int v { unsigned int get() { return _vec->v; } void set(unsigned int value) { _vec->v = value; }}
-            operator unsigned short() { return _vec->v; }
         };
-		typedef XMFLOAT3PK ^MXMFLOAT3PK;
     }
 }

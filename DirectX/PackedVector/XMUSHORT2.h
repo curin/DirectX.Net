@@ -1,65 +1,52 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMUSHORT2 UMUSHORT2;
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMUSHORT2
+        [StructLayout(LayoutKind::Explicit)]
+        public value struct XMUSHORT2
         {
         public:
-            UMUSHORT2* _vec;
-            XMUSHORT2()
+            [FieldOffset(0)] unsigned short x;
+            [FieldOffset(2)] unsigned short y;
+            [FieldOffset(0)] unsigned int v;
+
+            XMUSHORT2(unsigned short _x, unsigned short _y)
             {
-                _vec = new UMUSHORT2();
+                x = _x;
+                y = _y;
             }
 
-            XMUSHORT2(UMUSHORT2* Packed)
+            XMUSHORT2(float _x, float _y)
             {
-                _vec = Packed;
-            }
-
-            XMUSHORT2(unsigned short x, unsigned short y)
-            {
-                _vec = new UMUSHORT2(x, y);
-            }
-
-            XMUSHORT2(float x, float y)
-            {
-                _vec = new UMUSHORT2(x, y);
+                x = (unsigned short)_x;
+                y = (unsigned short)_y;
             }
 
             XMUSHORT2(unsigned int c)
             {
-                _vec = new UMUSHORT2(c);
+                v = c;
+            }
+
+            XMUSHORT2(unsigned short c)
+            {
+                v = c;
             }
 
             XMUSHORT2(array<float>^ pArray)
             {
-                pin_ptr<float> arr = &pArray[0];
-                _vec = new UMUSHORT2(arr);
+                x = (unsigned short)pArray[0];
+                y = (unsigned short)pArray[1];
             }
 
             XMUSHORT2(array<unsigned short>^ pArray)
             {
-                pin_ptr<unsigned short> arr = &pArray[0];
-                _vec = new UMUSHORT2(arr);
+                x = pArray[0];
+                y = pArray[1];
             }
-
-            ~XMUSHORT2()
-            {
-                delete _vec;
-            }
-
-            XMUSHORT2^ operator= (const unsigned int vector) { _vec->v = vector; return this; }
-            property unsigned short x { unsigned short get() { return _vec->x; } void set(unsigned short value) { _vec->x = value; }}
-            property unsigned short y { unsigned short get() { return _vec->y; } void set(unsigned short value) { _vec->y = value; }}
-
-            property unsigned int v { unsigned int get() { return _vec->v; } void set(unsigned int value) { _vec->v = value; }}
-            operator unsigned int() { return _vec->v; }
         };
-		typedef XMUSHORT2 ^MXMUSHORT2;
     }
 }

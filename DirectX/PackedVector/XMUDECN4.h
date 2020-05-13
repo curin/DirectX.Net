@@ -1,56 +1,60 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMUDECN4 UMUDECN4;
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMUDECN4
+        [StructLayout(LayoutKind::Sequential)]
+        public value struct XMUDECN4
         {
-        public:
-            UMUDECN4* _vec;
-            XMUDECN4()
+            value struct Components
             {
-                _vec = new UMUDECN4();
-            }
+                unsigned int x : 10;    // 0 to 1023
+                unsigned int y : 10;    // 0 to 1023
+                unsigned int z : 10;    // 0 to 1023
+                unsigned int w : 2;     // 0 to    3
+            };
+            [FieldOffset(0)] Components components;
+            [FieldOffset(0)] unsigned int v;
 
-            XMUDECN4(UMUDECN4* Packed)
+            XMUDECN4(unsigned char x, unsigned char y, unsigned char z, bool w)
             {
-                _vec = Packed;
+                components.x = x;
+                components.y = y;
+                components.z = z;
+                components.w = w;
             }
 
             XMUDECN4(float x, float y, float z, float w)
             {
-                _vec = new UMUDECN4(x, y, z, w);
+                components.x = (unsigned int)x;
+                components.y = (unsigned int)y;
+                components.z = (unsigned int)z;
+                components.w = (unsigned int)w;
             }
 
             XMUDECN4(unsigned int c)
             {
-                _vec = new UMUDECN4(c);
+                v = c;
             }
 
             XMUDECN4(array<float>^ pArray)
             {
-                pin_ptr<float> arr = &pArray[0];
-                _vec = new UMUDECN4(arr);
+                components.x = (unsigned int)pArray[0];
+                components.y = (unsigned int)pArray[1];
+                components.z = (unsigned int)pArray[2];
+                components.w = (unsigned int)pArray[3];
             }
 
-            ~XMUDECN4()
+            XMUDECN4(array<unsigned int>^ pArray)
             {
-                delete _vec;
+                components.x = pArray[0];
+                components.y = pArray[1];
+                components.z = pArray[2];
+                components.w = pArray[3];
             }
-
-            XMUDECN4^ operator= (const unsigned int vector) { _vec->v = vector; return this; }
-            property unsigned int x { unsigned int get() { return _vec->x; } void set(unsigned int value) { _vec->x = value; }}
-            property unsigned int y { unsigned int get() { return _vec->y; } void set(unsigned int value) { _vec->y = value; }}
-            property unsigned int z { unsigned int get() { return _vec->z; } void set(unsigned int value) { _vec->z = value; }}
-            property unsigned int w { unsigned int get() { return _vec->w; } void set(unsigned int value) { _vec->w = value; }}
-
-            property unsigned int v { unsigned int get() { return _vec->v; } void set(unsigned int value) { _vec->v = value; }}
-            operator unsigned int() { return _vec->v; }
         };
-		typedef XMUDECN4 ^MXMUDECN4;
     }
 }

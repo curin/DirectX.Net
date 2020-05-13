@@ -1,62 +1,67 @@
 #pragma once
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMHALF4 UMHALF4;
 
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
-	namespace PackedVectors
-	{
-		public ref class XMHALF4
-		{
-		public:
-			UMHALF4* _vec;
-			XMHALF4()
-			{
-				_vec = new UMHALF4();
-			}
+    namespace PackedVectors
+    {
+        [StructLayout(LayoutKind::Explicit)]
+        public value struct XMHALF4
+        {
+        public:
+            [FieldOffset(0)] unsigned short x;
+            [FieldOffset(2)] unsigned short y;
+            [FieldOffset(4)] unsigned short z;
+            [FieldOffset(6)] unsigned short w;
+            [FieldOffset(0)] unsigned long long v;
 
-			XMHALF4(UMHALF4* vec)
-			{
-				_vec = vec;
-			}
-
-			XMHALF4(unsigned short x, unsigned short y, unsigned short z, unsigned short w)
-			{
-				_vec = new UMHALF4(x, y, z, w);
-			}
-
-            XMHALF4(float x, float y, float z, float w)
+            XMHALF4(unsigned short _x, unsigned short _y, unsigned short _z, unsigned short _w)
             {
-                _vec = new UMHALF4(x, y, z, w);
+                x = _x;
+                y = _y;
+                z = _z;
+                w = _w;
             }
 
-			XMHALF4(unsigned long long c)
-			{
-				_vec = new UMHALF4(c);
-			}
+            XMHALF4(float _x, float _y, float _z, float _w)
+            {
+                x = (unsigned short)_x;
+                y = (unsigned short)_y;
+                z = (unsigned short)_z;
+                w = (unsigned short)_w;
+            }
 
-			XMHALF4(array<float>^ pArray)
-			{
-				pin_ptr<float> arr = &pArray[0];
-				_vec = new UMHALF4(arr);
-			}
+            XMHALF4(unsigned long long c)
+            {
+                v = c;
+            }
 
-			~XMHALF4()
-			{
-				delete _vec;
-			}
+            XMHALF4(unsigned int c)
+            {
+                v = c;
+            }
 
-			XMHALF4^ operator= (const unsigned long long vector) { _vec->v = vector; return this; }
-			property unsigned short x { unsigned short get() { return _vec->x; } void set(unsigned short value) { _vec->x = value; }}
-			property unsigned short y { unsigned short get() { return _vec->y; } void set(unsigned short value) { _vec->y = value; }}
-            property unsigned short z { unsigned short get() { return _vec->z; } void set(unsigned short value) { _vec->z = value; }}
-            property unsigned short w { unsigned short get() { return _vec->w; } void set(unsigned short value) { _vec->w = value; }}
+            XMHALF4(unsigned short c)
+            {
+                v = c;
+            }
 
-            property unsigned long long v { unsigned long long get() { return _vec->v; } void set(unsigned long long value) { _vec->v = value; }}
-			operator unsigned long long() { return _vec->v; }
-		};
-		typedef XMHALF4 ^MXMHALF4;
-	}
+            XMHALF4(array<float>^ pArray)
+            {
+                x = (unsigned short)pArray[0];
+                y = (unsigned short)pArray[1];
+                z = (unsigned short)pArray[2];
+                w = (unsigned short)pArray[3];
+            }
+
+            XMHALF4(array<unsigned short>^ pArray)
+            {
+                x = pArray[0];
+                y = pArray[1];
+                z = pArray[2];
+                w = pArray[3];
+            }
+        };
+    }
 }
-

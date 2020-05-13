@@ -125,7 +125,11 @@
     <ClInclude Include="DXGI_FORMAT.h" />
     <ClInclude Include="DXGI_GAMMA_CONTROL.h" />
     <ClInclude Include="DXGI_GAMMA_CONTROL_CAPABILITIES.h" />
+    <ClInclude Include="DXGI_JPEG_AC_HUFFMAN_TABLE.h" />
+    <ClInclude Include="DXGI_JPEG_DC_HUFFMAN_TABLE.h" />
+    <ClInclude Include="DXGI_JPEG_QUANTIZATION_TABLE.h" />
     <ClInclude Include="DXGI_Message_Id.h" />
+    <ClInclude Include="DXGI_MODE_DESC.h" />
     <ClInclude Include="DXGI_MODE_ROTATION.h" />
     <ClInclude Include="DXGI_MODE_SCALING.h" />
     <ClInclude Include="DXGI_MODE_SCANLINE_ORDER.h" />

@@ -1,67 +1,60 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMU555 UMU555;
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMU555
+        [StructLayout(LayoutKind::Sequential)]
+        public value struct XMU555
         {
-        public:
-            UMU555* _vec;
-            XMU555()
+            value struct Components
             {
-                _vec = new UMU555();
-            }
-
-            XMU555(UMU555* Packed)
-            {
-                _vec = Packed;
-            }
+                unsigned short x : 5;    // 0 to 31
+                unsigned short y : 5;    // 0 to 31
+                unsigned short z : 5;    // 0 to 31
+                unsigned short w : 1;    // 0 or 1
+            };
+            [FieldOffset(0)] Components components;
+            [FieldOffset(0)] unsigned short v;
 
             XMU555(unsigned char x, unsigned char y, unsigned char z, bool w)
             {
-                _vec = new UMU555(x, y, z, w);
+                components.x = x;
+                components.y = y;
+                components.z = z;
+                components.w = w;
             }
 
             XMU555(float x, float y, float z, bool w)
             {
-                _vec = new UMU555(x, y, z, w);
+                components.x = (unsigned char)x;
+                components.y = (unsigned char)y;
+                components.z = (unsigned char)z;
+                components.w = w;
             }
 
             XMU555(unsigned short c)
             {
-                _vec = new UMU555(c);
+                v = c;
             }
 
             XMU555(array<float>^ pArray, bool w)
             {
-                pin_ptr<float> arr = &pArray[0];
-                _vec = new UMU555(arr, w);
+                components.x = (unsigned char)pArray[0];
+                components.y = (unsigned char)pArray[1];
+                components.z = (unsigned char)pArray[2];
+                components.w = w;
             }
 
             XMU555(array<unsigned char>^ pArray, bool w)
             {
-                pin_ptr<unsigned char> arr = &pArray[0];
-                _vec = new UMU555(arr, w);
+                components.x = pArray[0];
+                components.y = pArray[1];
+                components.z = pArray[2];
+                components.w = w;
             }
-
-            ~XMU555()
-            {
-                delete _vec;
-            }
-
-            XMU555^ operator= (const unsigned short vector) { _vec->v = vector; return this; }
-            property unsigned short x { unsigned short get() { return _vec->x; } void set(unsigned short value) { _vec->x = value; }}
-            property unsigned short y { unsigned short get() { return _vec->y; } void set(unsigned short value) { _vec->y = value; }}
-            property unsigned short z { unsigned short get() { return _vec->z; } void set(unsigned short value) { _vec->z = value; }}
-            property unsigned short w { unsigned short get() { return _vec->w; } void set(unsigned short value) { _vec->w = value; }}
-
-            property unsigned short v { unsigned short get() { return _vec->v; } void set(unsigned short value) { _vec->v = value; }}
-            operator unsigned short() { return _vec->v; }
         };
-		typedef XMU555 ^MXMU555;
     }
 }

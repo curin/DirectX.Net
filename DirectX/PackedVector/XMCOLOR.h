@@ -1,58 +1,62 @@
 #pragma once
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMCOLOR UMCOLOR;
 
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMCOLOR
+        [StructLayout(LayoutKind::Explicit)]
+        public value struct XMCOLOR
         {
-		public:
-            UMCOLOR* _color;
+        public:
+            [FieldOffset(0)] unsigned char x;
+            [FieldOffset(1)] unsigned char y;
+            [FieldOffset(2)] unsigned char z;
+            [FieldOffset(3)] unsigned char w;
+            [FieldOffset(0)] unsigned int v;
 
-            XMCOLOR()
+            XMCOLOR(unsigned char _x, unsigned char _y, unsigned char _z, unsigned char _w)
             {
-                _color = new UMCOLOR();
+                x = _x;
+                y = _y;
+                z = _z;
+                w = _w;
             }
 
-            XMCOLOR(UMCOLOR* color)
+            XMCOLOR(float _x, float _y, float _z, float _w)
             {
-                _color = color;
-            }
-
-            XMCOLOR(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-            {
-                _color = new UMCOLOR(r, g, b, a);
+                x = (unsigned char)(_x * 255);
+                y = (unsigned char)(_y * 255);
+                z = (unsigned char)(_z * 255);
+                w = (unsigned char)(_w * 255);
             }
 
             XMCOLOR(unsigned int c)
             {
-                _color = new UMCOLOR(c);
+                v = c;
             }
 
-			XMCOLOR(array<float>^ pArray)
-			{
-				pin_ptr<float> arr = &pArray[0];
-				_color = new UMCOLOR(arr);
-			}
+            XMCOLOR(unsigned short c)
+            {
+                v = c;
+            }
 
-			~XMCOLOR()
-			{
-				delete _color;
-			}
+            XMCOLOR(array<float>^ pArray)
+            {
+                x = (unsigned char)(pArray[0] * 255);
+                y = (unsigned char)(pArray[1] * 255);
+                z = (unsigned char)(pArray[2] * 255);
+                w = (unsigned char)(pArray[3] * 255);
+            }
 
-            XMCOLOR^ operator= (const uint32_t Color) { _color->c = Color; return this; }
-            property unsigned char r { unsigned char get() { return _color->r; } void set(unsigned char value) { _color->r = value; }}
-            property unsigned char g { unsigned char get() { return _color->g; } void set(unsigned char value) { _color->g = value; }}
-            property unsigned char b { unsigned char get() { return _color->b; } void set(unsigned char value) { _color->b = value; }}
-            property unsigned char a { unsigned char get() { return _color->a; } void set(unsigned char value) { _color->a = value; }}
-
-            property unsigned int c { unsigned int get() { return _color->c; } void set(unsigned int value) { _color->c = value; }}
-			operator unsigned int () { return _color->c; }
+            XMCOLOR(array<unsigned char>^ pArray)
+            {
+                x = pArray[0];
+                y = pArray[1];
+                z = pArray[2];
+                w = pArray[3];
+            }
         };
-		typedef XMCOLOR ^MXMCOLOR;
     }
-} 
-
+}

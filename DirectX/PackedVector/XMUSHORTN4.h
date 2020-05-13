@@ -1,67 +1,67 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMUSHORTN4 UMUSHORTN4;
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMUSHORTN4
+        [StructLayout(LayoutKind::Explicit)]
+        public value struct XMUSHORTN4
         {
         public:
-            UMUSHORTN4* _vec;
-            XMUSHORTN4()
+            [FieldOffset(0)] unsigned short x;
+            [FieldOffset(2)] unsigned short y;
+            [FieldOffset(4)] unsigned short z;
+            [FieldOffset(6)] unsigned short w;
+            [FieldOffset(0)] unsigned long long v;
+
+            XMUSHORTN4(unsigned short _x, unsigned short _y, unsigned short _z, unsigned short _w)
             {
-                _vec = new UMUSHORTN4();
+                x = _x;
+                y = _y;
+                z = _z;
+                w = _w;
             }
 
-            XMUSHORTN4(UMUSHORTN4* Packed)
+            XMUSHORTN4(float _x, float _y, float _z, float _w)
             {
-                _vec = Packed;
+                x = (unsigned short)_x;
+                y = (unsigned short)_y;
+                z = (unsigned short)_z;
+                w = (unsigned short)_w;
             }
 
-            XMUSHORTN4(unsigned short x, unsigned short y, unsigned short z, unsigned short w)
+            XMUSHORTN4(unsigned long long c)
             {
-                _vec = new UMUSHORTN4(x, y, z, w);
-            }
-
-            XMUSHORTN4(float x, float y, float z, float w)
-            {
-                _vec = new UMUSHORTN4(x, y, z, w);
+                v = c;
             }
 
             XMUSHORTN4(unsigned int c)
             {
-                _vec = new UMUSHORTN4(c);
+                v = c;
             }
 
-            XMUSHORTN4(array<unsigned short>^ pArray)
+            XMUSHORTN4(unsigned short c)
             {
-                pin_ptr<unsigned short> arr = &pArray[0];
-                _vec = new UMUSHORTN4(arr);
+                v = c;
             }
 
             XMUSHORTN4(array<float>^ pArray)
             {
-                pin_ptr<float> arr = &pArray[0];
-                _vec = new UMUSHORTN4(arr);
+                x = (unsigned short)pArray[0];
+                y = (unsigned short)pArray[1];
+                z = (unsigned short)pArray[2];
+                w = (unsigned short)pArray[3];
             }
 
-            ~XMUSHORTN4()
+            XMUSHORTN4(array<unsigned short>^ pArray)
             {
-                delete _vec;
+                x = pArray[0];
+                y = pArray[1];
+                z = pArray[2];
+                w = pArray[3];
             }
-
-            XMUSHORTN4^ operator= (const unsigned long long vector) { _vec->v = vector; return this; }
-            property unsigned short x { unsigned short get() { return _vec->x; } void set(unsigned short value) { _vec->x = value; }}
-            property unsigned short y { unsigned short get() { return _vec->y; } void set(unsigned short value) { _vec->y = value; }}
-            property unsigned short z { unsigned short get() { return _vec->z; } void set(unsigned short value) { _vec->z = value; }}
-            property unsigned short w { unsigned short get() { return _vec->w; } void set(unsigned short value) { _vec->w = value; }}
-
-            property unsigned long long v { unsigned long long get() { return _vec->v; } void set(unsigned long long value) { _vec->v = value; }}
-            operator unsigned long long() { return _vec->v; }
         };
-		typedef XMUSHORTN4 ^MXMUSHORTN4;
     }
 }

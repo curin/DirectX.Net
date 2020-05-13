@@ -60,6 +60,18 @@
     <ClInclude Include="DXGI_COLOR_SPACE_TYPE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DXGI_MODE_DESC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_JPEG_DC_HUFFMAN_TABLE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_JPEG_AC_HUFFMAN_TABLE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_JPEG_QUANTIZATION_TABLE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.DXGI.cpp">

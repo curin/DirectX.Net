@@ -1,65 +1,52 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMBYTEN2 UMXBYTEN2;
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
-	namespace PackedVectors
-	{
-		public ref class XMBYTEN2
-		{
-		public:
-			UMXBYTEN2* _vec;
-			XMBYTEN2()
-			{
-				_vec = new UMXBYTEN2();
-			}
+    namespace PackedVectors
+    {
+        [StructLayout(LayoutKind::Explicit)]
+        public value struct XMBYTEN2
+        {
+        public:
+            [FieldOffset(0)] signed char x;
+            [FieldOffset(1)] signed char y;
+            [FieldOffset(0)] unsigned short v;
 
-			XMBYTEN2(UMXBYTEN2* Packed)
-			{
-				_vec = Packed;
-			}
-
-			XMBYTEN2(signed char x, signed char y)
-			{
-				_vec = new UMXBYTEN2(x, y);
-			}
-
-            XMBYTEN2(float x, float y)
+            XMBYTEN2(signed char _x, signed char _y)
             {
-                _vec = new UMXBYTEN2(x, y);
+                x = _x;
+                y = _y;
             }
 
-			XMBYTEN2(unsigned int c)
-			{
-				_vec = new UMXBYTEN2(c);
-			}
+            XMBYTEN2(float _x, float _y)
+            {
+                x = (signed char)_x;
+                y = (signed char)_y;
+            }
 
-			XMBYTEN2(array<float>^ pArray)
-			{
-				pin_ptr<float> arr = &pArray[0];
-				_vec = new UMXBYTEN2(arr);
-			}
+            XMBYTEN2(unsigned int c)
+            {
+                v = (unsigned short)c;
+            }
+
+            XMBYTEN2(unsigned short c)
+            {
+                v = c;
+            }
+
+            XMBYTEN2(array<float>^ pArray)
+            {
+                x = (signed char)pArray[0];
+                y = (signed char)pArray[1];
+            }
 
             XMBYTEN2(array<signed char>^ pArray)
             {
-                pin_ptr<signed char> arr = &pArray[0];
-                _vec = new UMXBYTEN2(arr);
+                x = pArray[0];
+                y = pArray[1];
             }
-
-			~XMBYTEN2()
-			{
-				delete _vec;
-			}
-
-			XMBYTEN2^ operator= (const unsigned short vector) { _vec->v = vector; return this; }
-			property signed char x { signed char get() { return _vec->x; } void set(signed char value) { _vec->x = value; }}
-			property signed char y { signed char get() { return _vec->y; } void set(signed char value) { _vec->y = value; }}
-
-			property unsigned short v { unsigned short get() { return _vec->v; } void set(unsigned short value) { _vec->v = value; }}
-			operator unsigned short() { return _vec->v; }
-		};
-		typedef XMBYTEN2 ^MXMBYTEN2;
-	}
+        };
+    }
 }

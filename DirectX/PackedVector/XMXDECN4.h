@@ -1,56 +1,60 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMXDECN4 UMXDECN4;
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMXDECN4
+        [StructLayout(LayoutKind::Sequential)]
+        public value struct XMUDEC4
         {
-        public:
-            UMXDECN4* _vec;
-            XMXDECN4()
+            value struct Components
             {
-                _vec = new UMXDECN4();
+                int x : 10;    // 0 to 1023
+                int y : 10;    // 0 to 1023
+                int z : 10;    // 0 to 1023
+                int w : 2;     // 0 to    3
+            };
+            [FieldOffset(0)] Components components;
+            [FieldOffset(0)] unsigned int v;
+
+            XMUDEC4(int x, int y, int z, int w)
+            {
+                components.x = x;
+                components.y = y;
+                components.z = z;
+                components.w = w;
             }
 
-            XMXDECN4(UMXDECN4* Packed)
+            XMUDEC4(float x, float y, float z, float w)
             {
-                _vec = Packed;
+                components.x = (int)x;
+                components.y = (int)y;
+                components.z = (int)z;
+                components.w = (int)w;
             }
 
-            XMXDECN4(float x, float y, float z, float w)
+            XMUDEC4(unsigned int c)
             {
-                _vec = new UMXDECN4(x, y, z, w);
+                v = c;
             }
 
-            XMXDECN4(unsigned int c)
+            XMUDEC4(array<float>^ pArray)
             {
-                _vec = new UMXDECN4(c);
+                components.x = (int)pArray[0];
+                components.y = (int)pArray[1];
+                components.z = (int)pArray[2];
+                components.w = (int)pArray[3];
             }
 
-            XMXDECN4(array<float>^ pArray)
+            XMUDEC4(array<int>^ pArray)
             {
-                pin_ptr<float> arr = &pArray[0];
-                _vec = new UMXDECN4(arr);
+                components.x = pArray[0];
+                components.y = pArray[1];
+                components.z = pArray[2];
+                components.w = pArray[3];
             }
-
-            ~XMXDECN4()
-            {
-                delete _vec;
-            }
-
-            XMXDECN4^ operator= (const unsigned int vector) { _vec->v = vector; return this; }
-            property int x { int get() { return _vec->x; } void set(int value) { _vec->x = value; }}
-            property int y { int get() { return _vec->y; } void set(int value) { _vec->y = value; }}
-            property int z { int get() { return _vec->z; } void set(int value) { _vec->z = value; }}
-            property int w { int get() { return _vec->w; } void set(int value) { _vec->w = value; }}
-
-            property unsigned int v { unsigned int get() { return _vec->v; } void set(unsigned int value) { _vec->v = value; }}
-            operator unsigned int() { return _vec->v; }
         };
-		typedef XMXDECN4 ^MXMXDECN4;
     }
 }

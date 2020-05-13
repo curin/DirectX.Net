@@ -1,66 +1,55 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMU565 UMU565;
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMU565
+        [StructLayout(LayoutKind::Sequential)]
+        public value struct XMU565
         {
-        public:
-            UMU565* _vec;
-            XMU565()
+            value struct Components
             {
-                _vec = new UMU565();
-            }
-
-            XMU565(UMU565* Packed)
-            {
-                _vec = Packed;
-            }
+                unsigned short x : 5;    // 0 to 31
+                unsigned short y : 6;    // 0 to 31
+                unsigned short z : 5;    // 0 to 31
+            };
+            [FieldOffset(0)] Components components;
+            [FieldOffset(0)] unsigned short v;
 
             XMU565(unsigned char x, unsigned char y, unsigned char z)
             {
-                _vec = new UMU565(x, y, z);
+                components.x = x;
+                components.y = y;
+                components.z = z;
             }
 
             XMU565(float x, float y, float z)
             {
-                _vec = new UMU565(x, y, z);
+                components.x = (unsigned char)x;
+                components.y = (unsigned char)y;
+                components.z = (unsigned char)z;
             }
 
-            XMU565(unsigned int c)
+            XMU565(unsigned short c)
             {
-                _vec = new UMU565(c);
+                v = c;
             }
 
             XMU565(array<float>^ pArray)
             {
-                pin_ptr<float> arr = &pArray[0];
-                _vec = new UMU565(arr);
+                components.x = (unsigned char)pArray[0];
+                components.y = (unsigned char)pArray[1];
+                components.z = (unsigned char)pArray[2];
             }
 
             XMU565(array<unsigned char>^ pArray)
             {
-                pin_ptr<unsigned char> arr = &pArray[0];
-                _vec = new UMU565(arr);
+                components.x = pArray[0];
+                components.y = pArray[1];
+                components.z = pArray[2];
             }
-
-            ~XMU565()
-            {
-                delete _vec;
-            }
-
-            XMU565^ operator= (const unsigned int vector) { _vec->v = vector; return this; }
-            property unsigned short x { unsigned short get() { return _vec->x; } void set(unsigned short value) { _vec->x = value; }}
-            property unsigned short y { unsigned short get() { return _vec->y; } void set(unsigned short value) { _vec->y = value; }}
-            property unsigned short z { unsigned short get() { return _vec->z; } void set(unsigned short value) { _vec->z = value; }}
-
-            property unsigned short v { unsigned short get() { return _vec->v; } void set(unsigned short value) { _vec->v = value; }}
-            operator unsigned short() { return _vec->v; }
         };
-		typedef XMU565 ^MXMU565;
     }
 }

@@ -1,67 +1,62 @@
 #pragma once
 
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMUBYTEN4 UMUBYTEN4;
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        public ref class XMUBYTEN4
+        [StructLayout(LayoutKind::Explicit)]
+        public value struct XMUBYTEN4
         {
         public:
-            UMUBYTEN4* _vec;
-            XMUBYTEN4()
+            [FieldOffset(0)] unsigned char x;
+            [FieldOffset(1)] unsigned char y;
+            [FieldOffset(2)] unsigned char z;
+            [FieldOffset(3)] unsigned char w;
+            [FieldOffset(0)] unsigned int v;
+
+            XMUBYTEN4(unsigned char _x, unsigned char _y, unsigned char _z, unsigned char _w)
             {
-                _vec = new UMUBYTEN4();
+                x = _x;
+                y = _y;
+                z = _z;
+                w = _w;
             }
 
-            XMUBYTEN4(UMUBYTEN4* Packed)
+            XMUBYTEN4(float _x, float _y, float _z, float _w)
             {
-                _vec = Packed;
-            }
-
-            XMUBYTEN4(unsigned char x, unsigned char y, unsigned char z, unsigned char w)
-            {
-                _vec = new UMUBYTEN4(x, y, z, w);
-            }
-
-            XMUBYTEN4(float x, float y, float z, float w)
-            {
-                _vec = new UMUBYTEN4(x, y, z, w);
+                x = (unsigned char)_x;
+                y = (unsigned char)_y;
+                z = (unsigned char)_z;
+                w = (unsigned char)_w;
             }
 
             XMUBYTEN4(unsigned int c)
             {
-                _vec = new UMUBYTEN4(c);
+                v = c;
+            }
+
+            XMUBYTEN4(unsigned short c)
+            {
+                v = c;
             }
 
             XMUBYTEN4(array<float>^ pArray)
             {
-                pin_ptr<float> arr = &pArray[0];
-                _vec = new UMUBYTEN4(arr);
+                x = (unsigned char)pArray[0];
+                y = (unsigned char)pArray[1];
+                z = (unsigned char)pArray[2];
+                w = (unsigned char)pArray[3];
             }
 
             XMUBYTEN4(array<unsigned char>^ pArray)
             {
-                pin_ptr<unsigned char> arr = &pArray[0];
-                _vec = new UMUBYTEN4(arr);
+                x = pArray[0];
+                y = pArray[1];
+                z = pArray[2];
+                w = pArray[3];
             }
-
-            ~XMUBYTEN4()
-            {
-                delete _vec;
-            }
-
-            XMUBYTEN4^ operator= (const unsigned int vector) { _vec->v = vector; return this; }
-            property unsigned char x { unsigned char get() { return _vec->x; } void set(unsigned char value) { _vec->x = value; }}
-            property unsigned char y { unsigned char get() { return _vec->y; } void set(unsigned char value) { _vec->y = value; }}
-            property unsigned char z { unsigned char get() { return _vec->z; } void set(unsigned char value) { _vec->z = value; }}
-            property unsigned char w { unsigned char get() { return _vec->w; } void set(unsigned char value) { _vec->w = value; }}
-
-            property unsigned int v { unsigned int get() { return _vec->v; } void set(unsigned int value) { _vec->v = value; }}
-            operator unsigned int() { return _vec->v; }
         };
-		typedef XMUBYTEN4 ^MXMUBYTEN4;
     }
 }

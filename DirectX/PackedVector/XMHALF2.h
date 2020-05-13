@@ -1,59 +1,53 @@
 #pragma once
-#include <DirectXPackedVector.h>
-typedef DirectX::PackedVector::XMHALF2 UMHALF2;
+
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
-	namespace PackedVectors
-	{
-		public ref class XMHALF2
-		{
-		public:
-			UMHALF2* _vec;
-			XMHALF2()
-			{
-				_vec = new UMHALF2();
-			}
+    namespace PackedVectors
+    {
+        [StructLayout(LayoutKind::Explicit)]
+        public value struct XMHALF2
+        {
+        public:
+            [FieldOffset(0)] unsigned short x;
+            [FieldOffset(2)] unsigned short y;
+            [FieldOffset(0)] unsigned int v;
 
-			XMHALF2(UMHALF2* vec)
-			{
-				_vec = vec;
-			}
-
-			XMHALF2(unsigned short x, unsigned short y)
-			{
-				_vec = new UMHALF2(x, y);
-			}
-
-            XMHALF2(float x, float y)
+            XMHALF2(unsigned short _x, unsigned short _y)
             {
-                _vec = new UMHALF2(x, y);
+                x = _x;
+                y = _y;
             }
 
-			XMHALF2(unsigned int c)
-			{
-				_vec = new UMHALF2(c);
-			}
+            XMHALF2(float _x, float _y)
+            {
+                x = (unsigned short)_x;
+                y = (unsigned short)_y;
+            }
 
-			XMHALF2(array<float>^ pArray)
-			{
-				pin_ptr<float> arr = &pArray[0];
-				_vec = new UMHALF2(arr);
-			}
+            XMHALF2(unsigned int c)
+            {
+                v = c;
+            }
 
-			~XMHALF2()
-			{
-				delete _vec;
-			}
+            XMHALF2(unsigned short c)
+            {
+                v = c;
+            }
 
-			XMHALF2^ operator= (const unsigned int vector) { _vec->v = vector; return this; }
-			property unsigned short x { unsigned short get() { return _vec->x; } void set(unsigned short value) { _vec->x = value; }}
-			property unsigned short y { unsigned short get() { return _vec->y; } void set(unsigned short value) { _vec->y = value; }}
+            XMHALF2(array<float>^ pArray)
+            {
+                x = (unsigned short)pArray[0];
+                y = (unsigned short)pArray[1];
+            }
 
-			property unsigned int v { unsigned int get() { return _vec->v; } void set(unsigned int value) { _vec->v = value; }}
-			operator unsigned int() { return _vec->v; }
-		};
-		typedef XMHALF2 ^MXMHALF2;
-	}
+            XMHALF2(array<unsigned short>^ pArray)
+            {
+                x = pArray[0];
+                y = pArray[1];
+            }
+        };
+    }
 }
 
