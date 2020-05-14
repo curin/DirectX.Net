@@ -1,18 +1,28 @@
 #pragma once
 
 #include <DirectXCollision.h>
+#include "../Math/XMFLOAT.h"
+#include "../Math/XMVECTOR.h"
+#include "../Math/XMMATRIX.h"
+#include "ContainmentType.h"
+#include "PlaneIntersectionType.h"
+
+#include "BoundingBox.h"
+#include "BoundingOrientedBox.h"
+#include "BoundingSphere.h"
+
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
 	namespace Math
 	{
-		inline DirectX::BoundingOrientedBox* OBoxNew(XMFLOAT3* center, XMFLOAT3* extents, XMFLOAT4* orientation) { return new DirectX::BoundingOrientedBox(*center, *extents, *orientation); }
 		inline void OBoxTransform(DirectX::BoundingOrientedBox* OBox, DirectX::BoundingOrientedBox* Out, DirectX::XMMATRIX* M) { OBox->Transform(*Out, *M); }
 		inline void OBoxTransform(DirectX::BoundingOrientedBox* OBox, DirectX::BoundingOrientedBox* Out, float Scale, DirectX::XMVECTOR* Rotation, DirectX::XMVECTOR* Translation) { OBox->Transform(*Out, Scale, *Rotation, *Translation); }
 		inline DirectX::ContainmentType OBoxContains(DirectX::BoundingOrientedBox* OBox, DirectX::XMVECTOR* Point) { return OBox->Contains(*Point); }
 		inline DirectX::ContainmentType OBoxContains(DirectX::BoundingOrientedBox* OBox, DirectX::XMVECTOR* V0, DirectX::XMVECTOR* V1, DirectX::XMVECTOR* V2) { return OBox->Contains(*V0, *V1, *V2); }
 		inline DirectX::ContainmentType OBoxContains(DirectX::BoundingOrientedBox* OBox, DirectX::BoundingSphere* sh) { return OBox->Contains(*sh); }
-		inline DirectX::ContainmentType OBoxContains(DirectX::BoundingOrientedBox* OBox, DirectX::BoundingOrientedBox* box) { return OBox->Contains(*box); }
+		inline DirectX::ContainmentType OBoxContains(DirectX::BoundingOrientedBox* OBox, DirectX::BoundingBox* box) { return OBox->Contains(*box); }
 		inline DirectX::ContainmentType OBoxContains(DirectX::BoundingOrientedBox* OBox, DirectX::BoundingOrientedBox* box) { return OBox->Contains(*box); }
 		inline DirectX::ContainmentType OBoxContains(DirectX::BoundingOrientedBox* OBox, DirectX::BoundingFrustum* fr) { return OBox->Contains(*fr); }
 		inline bool OBoxIntersects(DirectX::BoundingOrientedBox* OBox, DirectX::BoundingSphere* sh) { return OBox->Intersects(*sh); }
@@ -25,87 +35,187 @@ namespace DirectX
 		inline DirectX::ContainmentType OBoxContainedBy(DirectX::BoundingOrientedBox* OBox, DirectX::XMVECTOR* Plane0, DirectX::XMVECTOR* Plane1, DirectX::XMVECTOR* Plane2, DirectX::XMVECTOR* Plane3, DirectX::XMVECTOR* Plane4, DirectX::XMVECTOR* Plane5) { return OBox->ContainedBy(*Plane0, *Plane1, *Plane2, *Plane3, *Plane4, *Plane5); }
 		inline void OBoxCreateFromBoundingBox(DirectX::BoundingOrientedBox* Out, DirectX::BoundingBox* box) { DirectX::BoundingOrientedBox::CreateFromBoundingBox(*Out, *box); }
 		inline void OBoxCreateFromPoints(DirectX::BoundingOrientedBox* Out, unsigned int Count, DirectX::XMFLOAT3* pPoints, unsigned int Stride) { DirectX::BoundingOrientedBox::CreateFromPoints(*Out, Count, pPoints, Stride); }
-		public ref class BoundingOrientedBox
+		inline void OBoxGetCorners(DirectX::BoundingOrientedBox* OBox, DirectX::XMFLOAT3* Corners) { OBox->GetCorners(Corners); }
+
+		public value struct BoundingOrientedBox
 		{
-			
-		public:
 			static const size_t CORNER_COUNT = 8;
 
-			DirectX::BoundingOrientedBox* _box;
+			XMFLOAT3 Center;            // Center of the box.
+			XMFLOAT3 Extents;           // Distance from the center to each side.
+			XMFLOAT4 Orientation;       // Unit quaternion representing rotation (box -> world).
 
-			// Creators
-			BoundingOrientedBox() { _box = new DirectX::BoundingOrientedBox(); }
-			~BoundingOrientedBox() { delete _box; }
-
-			BoundingOrientedBox(DirectX::BoundingOrientedBox* box) { _box = box; }
-
-			BoundingOrientedBox(Vector3^ center, Vector3^ extents, Vector4^ orientation)
-			{
-				XMFLOAT3* Center = new XMFLOAT3(center->X, center->Y, center->Z);
-				XMFLOAT3* Extents = new XMFLOAT3(extents->X, extents->Y, extents->Z);
-				XMFLOAT4* Orient = new XMFLOAT4(orientation->X, orientation->Y, orientation->Z, orientation->W);
-				_box = OBoxNew(Center, Extents, Orient);
-				delete Center;
-				delete Extents;
-			}
+			BoundingOrientedBox(XMFLOAT3% _Center, XMFLOAT3% _Extents, XMFLOAT4% _Orientation)
+				: Center(_Center), Extents(_Extents), Orientation(_Orientation) {}
 
 			// Methods
-			void Transform(BoundingOrientedBox^ Out, DirectX::Math::XMMATRIX^ M) { OBoxTransform(_box, Out->_box, M->_mat); }
-			void Transform(BoundingOrientedBox^ Out, float Scale, DirectX::Math::XMVECTOR^ Rotation, DirectX::Math::XMVECTOR^ Translation) { OBoxTransform(_box, Out->_box, Scale, Rotation->_vect, Translation->_vect); }
-
-			void GetCorners([Out] array<Vector3>^% Corners)
+			void Transform([Out] BoundingOrientedBox% Out, XMMATRIX^ M)
 			{
-				XMFLOAT3* corners;
-				Corners = gcnew array<Vector3>(CORNER_COUNT);
-				_box->GetCorners(corners);
-				for (int i = 0; i < CORNER_COUNT; i++)
-					Corners[i] = Vector3(corners[i].x, corners[i].y, corners[i].z);
-				delete corners;
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingOrientedBox> pO = &Out;
+				DirectX::BoundingOrientedBox* pOut = (DirectX::BoundingOrientedBox*)pO;
+				OBoxTransform(pBox, pOut, (DirectX::XMMATRIX*)M);
+			}
+			void Transform([Out] BoundingOrientedBox% Out, float Scale, XMVECTOR^ Rotation, XMVECTOR^ Translation)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingOrientedBox> pO = &Out;
+				DirectX::BoundingOrientedBox* pOut = (DirectX::BoundingOrientedBox*)pO;
+				OBoxTransform(pBox, pOut, Scale, (DirectX::XMVECTOR*)Rotation, (DirectX::XMVECTOR*)Translation);
+			}
+
+			void GetCorners(array<XMFLOAT3>^ Corners)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<XMFLOAT3> pC = &Corners[0];
+				DirectX::XMFLOAT3* pCorn = (DirectX::XMFLOAT3*)pC;
+				OBoxGetCorners(pBox, pCorn);
 			}
 			// Gets the 8 corners of the box
 
-			DirectX::Math::ContainmentType Contains(DirectX::Math::XMVECTOR^ Point) { return (DirectX::Math::ContainmentType)OBoxContains(_box, Point->_vect); }
-			DirectX::Math::ContainmentType Contains(DirectX::Math::XMVECTOR^ V0, DirectX::Math::XMVECTOR^ V1, DirectX::Math::XMVECTOR^ V2) { return (DirectX::Math::ContainmentType)OBoxContains(_box, V0->_vect, V1->_vect, V2->_vect); }
-			DirectX::Math::ContainmentType Contains(DirectX::Math::BoundingSphere^ sh) { return (DirectX::Math::ContainmentType)OBoxContains(_box, sh->_sphere); }
-			DirectX::Math::ContainmentType Contains(DirectX::Math::BoundingOrientedBox^ box) { return (DirectX::Math::ContainmentType)OBoxContains(_box, box->_box); }
-			DirectX::Math::ContainmentType Contains(DirectX::Math::BoundingOrientedBox^ box) { return (DirectX::Math::ContainmentType)OBoxContains(_box, box->_box); }
-			DirectX::Math::ContainmentType Contains(DirectX::Math::BoundingFrustum^ fr) { return (DirectX::Math::ContainmentType)OBoxContains(_box, fr->_frustum); }
-
-			bool Intersects(DirectX::Math::BoundingSphere^ sh) { return OBoxIntersects(_box, sh->_sphere); }
-			bool Intersects(DirectX::Math::BoundingOrientedBox^ box) { return OBoxIntersects(_box, box->_box); }
-			bool Intersects(DirectX::Math::BoundingOrientedBox^ box) { return OBoxIntersects(_box, box->_box); }
-			bool Intersects(DirectX::Math::BoundingFrustum^ fr) { return OBoxIntersects(_box, fr->_frustum); }
-
-			bool Intersects(DirectX::Math::XMVECTOR^ V0, DirectX::Math::XMVECTOR^ V1, DirectX::Math::XMVECTOR^ V2) { return OBoxIntersects(_box, V0->_vect, V1->_vect, V2->_vect); }
-			// Triangle-Box test
-
-			DirectX::Math::PlaneIntersectionType Intersects(DirectX::Math::XMVECTOR^ Plane) { return (DirectX::Math::PlaneIntersectionType)OBoxIntersects(_box, Plane->_vect); }
-			// Plane-box test
-
-			bool Intersects(DirectX::Math::XMVECTOR^ Origin, DirectX::Math::XMVECTOR^ Direction, float% Dist) { pin_ptr<float> dist = &Dist; return OBoxIntersects(_box, Origin->_vect, Direction->_vect, dist); }
-			// Ray-Box test
-
-			DirectX::Math::ContainmentType ContainedBy(DirectX::Math::XMVECTOR^ Plane0, DirectX::Math::XMVECTOR^ Plane1, DirectX::Math::XMVECTOR^ Plane2,
-				DirectX::Math::XMVECTOR^ Plane3, DirectX::Math::XMVECTOR^ Plane4, DirectX::Math::XMVECTOR^ Plane5) {
-				return (DirectX::Math::ContainmentType)OBoxContainedBy(_box, Plane0->_vect, Plane1->_vect, Plane2->_vect, Plane3->_vect, Plane4->_vect, Plane5->_vect);
-			}
-			// Test box against six planes (see BoundingFrustum::GetPlanes)
-
-		// Static methods
-			static void CreateFromSphere(BoundingOrientedBox^ Out, BoundingBox^ box) { OBoxCreateFromBoundingBox(Out->_box, box->_box); }
-
-			static void CreateFromPoints(BoundingOrientedBox^ Out, unsigned int Count, array<Vector3>^ pPoints, unsigned int Stride)
+			ContainmentType Contains(XMVECTOR^ Point)
 			{
-				XMFLOAT3* points = new XMFLOAT3[Count];
-				Vector3 temp;
-				for (int i = 0; i < Count; i++)
-				{
-					temp = pPoints[i];
-					points[i] = XMFLOAT3(temp.X, temp.Y, temp.Z);
-				}
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				return (ContainmentType)OBoxContains(pBox, (DirectX::XMVECTOR*)Point);
+			}
+			ContainmentType Contains(XMVECTOR^ V0, XMVECTOR^ V1, XMVECTOR^ V2)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				return (ContainmentType)OBoxContains(pBox, (DirectX::XMVECTOR*)V0, (DirectX::XMVECTOR*)V1, (DirectX::XMVECTOR*)V2);
+			}
+			ContainmentType Contains(BoundingSphere% sh)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingSphere> pS = &sh;
+				DirectX::BoundingSphere* pSh = (DirectX::BoundingSphere*)pS;
+				return (ContainmentType)OBoxContains(pBox, pSh);
+			}
 
-				OBoxCreateFromPoints(Out->_box, Count, points, Stride);
-				delete points;
+			ContainmentType Contains(BoundingBox% box)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingBox> pB2 = &box;
+				DirectX::BoundingBox* pBox2 = (DirectX::BoundingBox*)pB2;
+				return (ContainmentType)OBoxContains(pBox, pBox2);
+			}
+			ContainmentType Contains(BoundingOrientedBox% box)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingOrientedBox> pB2 = &box;
+				DirectX::BoundingOrientedBox* pBox2 = (DirectX::BoundingOrientedBox*)pB2;
+				return (ContainmentType)OBoxContains(pBox, pBox2);
+			}
+			ContainmentType Contains(BoundingFrustum% fr)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingFrustum> pF = &fr;
+				DirectX::BoundingFrustum* pFr = (DirectX::BoundingFrustum*)pF;
+				return (ContainmentType)OBoxContains(pBox, pFr);
+			}
+
+			bool Intersects(BoundingSphere% sh)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingSphere> pS = &sh;
+				DirectX::BoundingSphere* pSh = (DirectX::BoundingSphere*)pS;
+				return OBoxIntersects(pBox, pSh);
+			}
+
+			bool Intersects(BoundingBox% box)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingBox> pB2 = &box;
+				DirectX::BoundingBox* pBox2 = (DirectX::BoundingBox*)pB2;
+				return OBoxIntersects(pBox, pBox2);
+			}
+
+			bool Intersects(BoundingOrientedBox% box)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingOrientedBox> pB2 = &box;
+				DirectX::BoundingOrientedBox* pBox2 = (DirectX::BoundingOrientedBox*)pB2;
+				return OBoxIntersects(pBox, pBox2);
+			}
+
+			bool Intersects(BoundingFrustum% fr)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<BoundingFrustum> pF = &fr;
+				DirectX::BoundingFrustum* pFr = (DirectX::BoundingFrustum*)pF;
+				return OBoxIntersects(pBox, pFr);
+			}
+
+			bool Intersects(XMVECTOR^ V0, XMVECTOR^ V1, XMVECTOR^ V2)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				return OBoxIntersects(pBox, (DirectX::XMVECTOR*)V0, (DirectX::XMVECTOR*)V1, (DirectX::XMVECTOR*)V2);
+			}
+			// Triangle-OrientedBox test
+
+			PlaneIntersectionType Intersects(XMVECTOR^ Plane)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				return (PlaneIntersectionType)OBoxIntersects(pBox, (DirectX::XMVECTOR*)Plane);
+			}
+			// Plane-OrientedBox test
+
+			bool Intersects(XMVECTOR^ Origin, XMVECTOR^ Direction, [Out] float% Dist)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				pin_ptr<float> pDist = &Dist;
+				return OBoxIntersects(pBox, (DirectX::XMVECTOR*)Origin, (DirectX::XMVECTOR*)Direction, pDist);
+			}
+			// Ray-OrientedBox test
+
+			ContainmentType ContainedBy(XMVECTOR^ Plane0, XMVECTOR^ Plane1, XMVECTOR^ Plane2,
+				XMVECTOR^ Plane3, XMVECTOR^ Plane4, XMVECTOR^ Plane5)
+			{
+				pin_ptr<BoundingOrientedBox> pB = this;
+				DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+				return (ContainmentType)OBoxContainedBy(pBox, (DirectX::XMVECTOR*)Plane0, (DirectX::XMVECTOR*)Plane1, (DirectX::XMVECTOR*)Plane2,
+					(DirectX::XMVECTOR*)Plane3, (DirectX::XMVECTOR*)Plane4, (DirectX::XMVECTOR*)Plane5);
+			}
+			// Test OrientedBox against six planes (see BoundingFrustum::GetPlanes)
+
+			// Static methods
+			static void CreateFromBoundingBox([Out] BoundingOrientedBox% Out, BoundingBox% box)
+			{
+				pin_ptr<BoundingOrientedBox> pO = &Out;
+				DirectX::BoundingOrientedBox* pOut = (DirectX::BoundingOrientedBox*)pO;
+				pin_ptr<BoundingBox> pB2 = &box;
+				DirectX::BoundingBox* pBox2 = (DirectX::BoundingBox*)pB2;
+				OBoxCreateFromBoundingBox(pOut, pBox2);
+			}
+
+			static void CreateFromPoints([Out] BoundingOrientedBox% Out, unsigned int Count,
+				array<XMFLOAT3>^ pPoints, unsigned int Stride)
+			{
+				pin_ptr<BoundingOrientedBox> pO = &Out;
+				DirectX::BoundingOrientedBox* pOut = (DirectX::BoundingOrientedBox*)pO;
+				pin_ptr<XMFLOAT3> pA = &pPoints[0];
+				DirectX::XMFLOAT3* pArray = (DirectX::XMFLOAT3*)pA;
+				OBoxCreateFromPoints(pOut, Count, pArray, Stride);
+			}
+
+			static BoundingOrientedBox Default()
+			{
+				return BoundingOrientedBox(XMFLOAT3(0, 0, 0), XMFLOAT3(1, 1, 1), XMFLOAT4(0, 0, 0, 1));
 			}
 		};
 	}

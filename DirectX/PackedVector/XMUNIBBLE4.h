@@ -1,59 +1,59 @@
 #pragma once
 
-using namespace System::Runtime::InteropServices;
+#include <DirectXPackedVector.h>
+#include "../Common/IUnmanagedReference.h"
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        [StructLayout(LayoutKind::Sequential)]
-        public value struct XMUNIBBLE4
+        void XMUNIBBLE4_CONSTRUCTOR(DirectX::PackedVector::XMUNIBBLE4* location, DirectX::PackedVector::XMUNIBBLE4* value) { *location = DirectX::PackedVector::XMUNIBBLE4(*value); }
+        public ref class XMUNIBBLE4 : IUnmanagedReference<DirectX::PackedVector::XMUNIBBLE4>
         {
-            value struct Components
-            {
-                unsigned short x : 4;    // 0 to 15
-                unsigned short y : 4;    // 0 to 15
-                unsigned short z : 4;    // 0 to 15
-                unsigned short w : 4;    // 0 to 15
-            };
-            [FieldOffset(0)] Components components;
-            [FieldOffset(0)] unsigned short v;
+        public:
+            UnmanagedReferenceProperty(unsigned short, x)
+            UnmanagedReferenceProperty(unsigned short, y)
+            UnmanagedReferenceProperty(unsigned short, z)
+            UnmanagedReferenceProperty(unsigned short, w)
+            UnmanagedReferenceProperty(unsigned int, v)
+            UnmanagedOperator(DirectX::PackedVector::XMUNIBBLE4)
 
             XMUNIBBLE4(unsigned char x, unsigned char y, unsigned char z, unsigned char w)
             {
-                components.x = x;
-                components.y = y;
-                components.z = z;
-                components.w = w;
+                _value = new DirectX::PackedVector::XMUNIBBLE4(x, y, z, w);
             }
 
             XMUNIBBLE4(float x, float y, float z, bool w)
             {
-                components.x = (unsigned char)x;
-                components.y = (unsigned char)y;
-                components.z = (unsigned char)z;
-                components.w = (unsigned char)w;
+                _value = new DirectX::PackedVector::XMUNIBBLE4(x, y, z, w);
+            }
+
+            XMUNIBBLE4(DirectX::PackedVector::XMUNIBBLE4* value)
+            {
+                _value = value;
+            }
+
+            XMUNIBBLE4(IntPtr location, DirectX::PackedVector::XMUNIBBLE4* val)
+            {
+                _value = (DirectX::PackedVector::XMUNIBBLE4*)location.ToPointer();
+                XMUNIBBLE4_CONSTRUCTOR(_value, val);
             }
 
             XMUNIBBLE4(unsigned short c)
             {
-                v = c;
+                _value = new DirectX::PackedVector::XMUNIBBLE4(c);
             }
 
             XMUNIBBLE4(array<float>^ pArray)
             {
-                components.x = (unsigned char)pArray[0];
-                components.y = (unsigned char)pArray[1];
-                components.z = (unsigned char)pArray[2];
-                components.w = (unsigned char)pArray[3];
+                pin_ptr<float> p = &pArray[0];
+                _value = new DirectX::PackedVector::XMUNIBBLE4(p);
             }
 
             XMUNIBBLE4(array<unsigned char>^ pArray)
             {
-                components.x = pArray[0];
-                components.y = pArray[1];
-                components.z = pArray[2];
-                components.w = pArray[3];
+                pin_ptr<unsigned char> p = &pArray[0];
+                _value = new DirectX::PackedVector::XMUNIBBLE4(p);
             }
         };
     }

@@ -8,5 +8,8 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
+#include "Math/XMVECTOR.h"
+#include "Math/XMMATRIX.h"
+#include "Collision/BoundingBox.h"
 
 #endif //PCH_H

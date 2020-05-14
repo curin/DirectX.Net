@@ -1,59 +1,48 @@
 #pragma once
 
-using namespace System::Runtime::InteropServices;
+#include <DirectXPackedVector.h>
+#include "../Common/IUnmanagedReference.h"
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        [StructLayout(LayoutKind::Sequential)]
-        public value struct XMUDEC4
+        void XMXDECN4_CONSTRUCTOR(DirectX::PackedVector::XMXDECN4* location, DirectX::PackedVector::XMXDECN4* value) { *location = DirectX::PackedVector::XMXDECN4(*value); }
+        public ref class XMXDECN4 : IUnmanagedReference<DirectX::PackedVector::XMXDECN4>
         {
-            value struct Components
-            {
-                int x : 10;    // 0 to 1023
-                int y : 10;    // 0 to 1023
-                int z : 10;    // 0 to 1023
-                int w : 2;     // 0 to    3
-            };
-            [FieldOffset(0)] Components components;
-            [FieldOffset(0)] unsigned int v;
+        public:
+            UnmanagedReferenceProperty(int, x)
+            UnmanagedReferenceProperty(int, y)
+            UnmanagedReferenceProperty(int, z)
+            UnmanagedReferenceProperty(int, w)
+            UnmanagedReferenceProperty(unsigned int, v)
+            UnmanagedOperator(DirectX::PackedVector::XMXDECN4)
 
-            XMUDEC4(int x, int y, int z, int w)
+            XMXDECN4(float x, float y, float z, float w)
             {
-                components.x = x;
-                components.y = y;
-                components.z = z;
-                components.w = w;
+                _value = new DirectX::PackedVector::XMXDECN4(x, y, z, w);
             }
 
-            XMUDEC4(float x, float y, float z, float w)
+            XMXDECN4(DirectX::PackedVector::XMXDECN4* value)
             {
-                components.x = (int)x;
-                components.y = (int)y;
-                components.z = (int)z;
-                components.w = (int)w;
+                _value = value;
             }
 
-            XMUDEC4(unsigned int c)
+            XMXDECN4(IntPtr location, DirectX::PackedVector::XMXDECN4* val)
             {
-                v = c;
+                _value = (DirectX::PackedVector::XMXDECN4*)location.ToPointer();
+                XMXDECN4_CONSTRUCTOR(_value, val);
             }
 
-            XMUDEC4(array<float>^ pArray)
+            XMXDECN4(unsigned int c)
             {
-                components.x = (int)pArray[0];
-                components.y = (int)pArray[1];
-                components.z = (int)pArray[2];
-                components.w = (int)pArray[3];
+                _value = new DirectX::PackedVector::XMXDECN4(c);
             }
 
-            XMUDEC4(array<int>^ pArray)
+            XMXDECN4(array<float>^ pArray)
             {
-                components.x = pArray[0];
-                components.y = pArray[1];
-                components.z = pArray[2];
-                components.w = pArray[3];
+                pin_ptr<float> p = &pArray[0];
+                _value = new DirectX::PackedVector::XMXDECN4(p);
             }
         };
     }

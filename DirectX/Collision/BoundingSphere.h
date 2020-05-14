@@ -1,19 +1,22 @@
 #pragma once
 
 #include <DirectXCollision.h>
+#include "../Math/XMFLOAT.h"
+#include "../Math/XMVECTOR.h"
 #include "../Math/XMMATRIX.h"
 #include "ContainmentType.h"
-#include "BoundingBox.h"
-#include "BoundingFrustum.h"
-#include "BoundingOrientedBox.h"
 #include "PlaneIntersectionType.h"
 
-using namespace System::Numerics;
+#include "BoundingBox.h"
+#include "BoundingOrientedBox.h"
+#include "BoundingFrustum.h"
+
+using namespace System::Runtime::InteropServices;
+
 namespace DirectX
 {
-	namespace Math
-	{
-		inline DirectX::BoundingSphere* SphereNew(XMFLOAT3* center, float radius) { return new DirectX::BoundingSphere(*center, radius); }
+    namespace Math
+    {
         inline void SphereTransform(DirectX::BoundingSphere* sphere, DirectX::BoundingSphere* Out, DirectX::XMMATRIX* M) { sphere->Transform(*Out, *M); }
         inline void SphereTransform(DirectX::BoundingSphere* sphere, DirectX::BoundingSphere* Out, float Scale, DirectX::XMVECTOR* Rotation, DirectX::XMVECTOR* Translation) { sphere->Transform(*Out, Scale, *Rotation, *Translation); }
         inline DirectX::ContainmentType SphereContains(DirectX::BoundingSphere* sphere, DirectX::XMVECTOR* Point) { return sphere->Contains(*Point); }
@@ -36,76 +39,205 @@ namespace DirectX
         inline void SphereCreateFromPoints(DirectX::BoundingSphere* Out, unsigned int Count, DirectX::XMFLOAT3* pPoints, unsigned int Stride) { DirectX::BoundingSphere::CreateFromPoints(*Out, Count, pPoints, Stride); }
         inline void SphereCreateFromFrustum(DirectX::BoundingSphere* Out, DirectX::BoundingFrustum* fr) { DirectX::BoundingSphere::CreateFromFrustum(*Out, *fr); }
 
-        public ref class BoundingSphere
-		{
-		public:
-			DirectX::BoundingSphere* _sphere;
+        public value struct BoundingSphere
+        {
+            XMFLOAT3 Center;            // Center of the sphere.
+            float Radius;               // Radius of the sphere.
 
-			// Creators
-			BoundingSphere() { _sphere = new DirectX::BoundingSphere(); }
-			~BoundingSphere() { delete _sphere; }
+            BoundingSphere(XMFLOAT3% center, float radius)
+                : Center(center), Radius(radius) {}
 
-			BoundingSphere(DirectX::BoundingSphere* sphere) { _sphere = sphere; }
-
-			BoundingSphere(Vector3 center,  float radius)
-			{
-				XMFLOAT3* _center = new XMFLOAT3(center.X, center.Y, center.Z);
-				_sphere = SphereNew(_center, radius);
-				delete _center;
-			}
-
-			// Methods
-			void Transform(BoundingSphere^ Out, XMMATRIX^ M) { SphereTransform(_sphere, Out->_sphere, M->_mat); }
-			void Transform(BoundingSphere^ Out, float Scale, XMVECTOR^ Rotation, XMVECTOR^ Translation) { SphereTransform(_sphere, Out->_sphere, Scale, Rotation->_vect, Translation->_vect); }
-			// Transform the sphere
-
-			DirectX::Math::ContainmentType Contains(XMVECTOR^ Point) { return (DirectX::Math::ContainmentType)SphereContains(_sphere, Point->_vect); }
-            DirectX::Math::ContainmentType Contains(XMVECTOR^ V0, XMVECTOR^ V1, XMVECTOR^ V2) { return (DirectX::Math::ContainmentType)SphereContains(_sphere, V0->_vect, V1->_vect, V2->_vect); }
-            DirectX::Math::ContainmentType Contains(DirectX::Math::BoundingSphere^ sh) { return (DirectX::Math::ContainmentType)SphereContains(_sphere, sh->_sphere); }
-            DirectX::Math::ContainmentType Contains(DirectX::Math::BoundingBox^ box) { return (DirectX::Math::ContainmentType)SphereContains(_sphere, box->_box); }
-            DirectX::Math::ContainmentType Contains(DirectX::Math::BoundingOrientedBox^ box) { return (DirectX::Math::ContainmentType)SphereContains(_sphere, box->_box); }
-            DirectX::Math::ContainmentType Contains(DirectX::Math::BoundingFrustum^ fr) { return (DirectX::Math::ContainmentType)SphereContains(_sphere, fr->_frustum); }
-
-			bool Intersects(DirectX::Math::BoundingSphere^ sh) { return SphereIntersects(_sphere, sh->_sphere); }
-			bool Intersects(DirectX::Math::BoundingBox^ box) { return SphereIntersects(_sphere, box->_box); }
-			bool Intersects(DirectX::Math::BoundingOrientedBox^ box) { return SphereIntersects(_sphere, box->_box); }
-			bool Intersects(DirectX::Math::BoundingFrustum^ fr) { return SphereIntersects(_sphere, fr->_frustum); }
-
-            bool Intersects(DirectX::Math::XMVECTOR^ V0, DirectX::Math::XMVECTOR^ V1, DirectX::Math::XMVECTOR^ V2) { return SphereIntersects(_sphere, V0->_vect, V1->_vect, V2->_vect); }
-			// Triangle-sphere test
-
-            DirectX::Math::PlaneIntersectionType Intersects(DirectX::Math::XMVECTOR^ Plane) { return (DirectX::Math::PlaneIntersectionType)SphereIntersects(_sphere, Plane->_vect); }
-			// Plane-sphere test
-
-            bool Intersects(DirectX::Math::XMVECTOR^ Origin, DirectX::Math::XMVECTOR^ Direction, float% Dist) { pin_ptr<float> dist = &Dist; return SphereIntersects(_sphere, Origin->_vect, Direction->_vect, dist); }
-			// Ray-sphere test
-
-            DirectX::Math::ContainmentType ContainedBy(DirectX::Math::XMVECTOR^ Plane0, DirectX::Math::XMVECTOR^ Plane1, DirectX::Math::XMVECTOR^ Plane2,
-                DirectX::Math::XMVECTOR^ Plane3, DirectX::Math::XMVECTOR^ Plane4, DirectX::Math::XMVECTOR^ Plane5) {
-                return (DirectX::Math::ContainmentType)SphereContainedBy(_sphere, Plane0->_vect, Plane1->_vect, Plane2->_vect, Plane3->_vect, Plane4->_vect, Plane5->_vect);
-            }
-			// Test sphere against six planes (see BoundingFrustum::GetPlanes)
-
-		    // Static methods
-            inline static void CreateMerged(BoundingSphere^ Out, BoundingSphere^ S1, BoundingSphere^ S2) { SphereCreateMerged(Out->_sphere, S1->_sphere, S2->_sphere); }
-
-            inline static void CreateFromBoundingBox(BoundingSphere^ Out, BoundingBox^ box) { SphereCreateFromBoundingBox(Out->_sphere, box->_box); }
-            inline static void CreateFromBoundingBox(BoundingSphere^ Out, BoundingOrientedBox^ box) { SphereCreateFromBoundingBox(Out->_sphere, box->_box); }
-
-            inline static void CreateFromPoints(BoundingSphere^ Out, unsigned int Count, array<Vector3>^ pPoints, unsigned int Stride)
+            // Methods
+            void Transform([Out] BoundingSphere% Out, XMMATRIX^ M)
             {
-                XMFLOAT3* points = new XMFLOAT3[Count];
-                Vector3 temp;
-                for (int i = 0; i < Count; i++)
-                {
-                    temp = pPoints[i];
-                    points[i] = XMFLOAT3(temp.X, temp.Y, temp.Z);
-                }
-
-                SphereCreateFromPoints(Out->_sphere, Count, points, Stride);
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingSphere> pO = &Out;
+                DirectX::BoundingSphere* pOut = (DirectX::BoundingSphere*)pO;
+                SphereTransform(pThis, pOut, (DirectX::XMMATRIX*)M);
             }
 
-            inline static void CreateFromFrustum(BoundingSphere^ Out, BoundingFrustum^ fr) { SphereCreateFromFrustum(Out->_sphere, fr->_frustum); }
-		};
-	}
+            void Transform([Out] BoundingSphere% Out, float Scale, XMVECTOR^ Rotation, XMVECTOR^ Translation)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingSphere> pO = &Out;
+                DirectX::BoundingSphere* pOut = (DirectX::BoundingSphere*)pO;
+                SphereTransform(pThis, pOut, Scale, (DirectX::XMVECTOR*)Rotation, (DirectX::XMVECTOR*)Translation);
+            }
+            // Transform the sphere
+
+            ContainmentType Contains(XMVECTOR^ Point)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                return (ContainmentType)SphereContains(pThis, (DirectX::XMVECTOR*)Point);
+            }
+
+            ContainmentType Contains(XMVECTOR^ V0, XMVECTOR^ V1, XMVECTOR^ V2)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                return (ContainmentType)SphereContains(pThis, (DirectX::XMVECTOR*)V0, (DirectX::XMVECTOR*)V1, (DirectX::XMVECTOR*)V2);
+            }
+
+            ContainmentType Contains(BoundingSphere% sh)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingSphere> pS = &sh;
+                DirectX::BoundingSphere* pSh = (DirectX::BoundingSphere*)pS;
+                return (ContainmentType)SphereContains(pThis, pSh);
+            }
+
+            ContainmentType Contains(BoundingBox% box)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingBox> pB = &box;
+                DirectX::BoundingBox* pBox = (DirectX::BoundingBox*)pB;
+                return (ContainmentType)SphereContains(pThis, pBox);
+            }
+
+            ContainmentType Contains(BoundingOrientedBox% box)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingOrientedBox> pB = &box;
+                DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+                return (ContainmentType)SphereContains(pThis, pBox);
+            }
+
+            ContainmentType Contains(BoundingFrustum% fr)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingFrustum> pF = &fr;
+                DirectX::BoundingFrustum* pFr = (DirectX::BoundingFrustum*)pF;
+                return (ContainmentType)SphereContains(pThis, pFr);
+            }
+
+            bool Intersects(BoundingSphere% sh)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingSphere> pS = &sh;
+                DirectX::BoundingSphere* pSh = (DirectX::BoundingSphere*)pS;
+                return SphereIntersects(pThis, pSh);
+            }
+
+            bool Intersects(BoundingBox% box)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingBox> pB = &box;
+                DirectX::BoundingBox* pBox = (DirectX::BoundingBox*)pB;
+                return SphereIntersects(pThis, pBox);
+            }
+
+            bool Intersects(BoundingOrientedBox% box)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingOrientedBox> pB = &box;
+                DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+                return SphereIntersects(pThis, pBox);
+            }
+
+            bool Intersects(BoundingFrustum% fr)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<BoundingFrustum> pF = &fr;
+                DirectX::BoundingFrustum* pFr = (DirectX::BoundingFrustum*)pF;
+                return SphereIntersects(pThis, pFr);
+            }
+
+            bool Intersects(XMVECTOR^ V0, XMVECTOR^ V1, XMVECTOR^ V2)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                return SphereIntersects(pThis, (DirectX::XMVECTOR*)V0, (DirectX::XMVECTOR*)V1, (DirectX::XMVECTOR*)V2);
+            }
+            // Triangle-sphere test
+
+            PlaneIntersectionType Intersects(XMVECTOR^ Plane)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                return (PlaneIntersectionType)SphereIntersects(pThis, (DirectX::XMVECTOR*)Plane);
+            }
+            // Plane-sphere test
+
+            bool Intersects(XMVECTOR^ Origin, XMVECTOR^ Direction, [Out] float% Dist)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                pin_ptr<float> pDist = &Dist;
+                return SphereIntersects(pThis, (DirectX::XMVECTOR*)Origin, (DirectX::XMVECTOR*)Direction, pDist);
+            }
+            // Ray-sphere test
+
+            ContainmentType ContainedBy(XMVECTOR^ Plane0, XMVECTOR^ Plane1, XMVECTOR^ Plane2,
+                XMVECTOR^ Plane3, XMVECTOR^ Plane4, XMVECTOR^ Plane5)
+            {
+                pin_ptr<BoundingSphere> pT = this;
+                DirectX::BoundingSphere* pThis = (DirectX::BoundingSphere*)pT;
+                return (ContainmentType)SphereContainedBy(pThis, (DirectX::XMVECTOR*)Plane0, (DirectX::XMVECTOR*)Plane1,
+                    (DirectX::XMVECTOR*)Plane2, (DirectX::XMVECTOR*)Plane3, (DirectX::XMVECTOR*)Plane4, (DirectX::XMVECTOR*)Plane5);
+            }
+            // Test sphere against six planes (see BoundingFrustum::GetPlanes)
+
+            // Static methods
+            static void CreateMerged([Out] BoundingSphere% Out, BoundingSphere% S1, BoundingSphere% S2)
+            {
+                pin_ptr<BoundingSphere> pO = &Out;
+                DirectX::BoundingSphere* pOut = (DirectX::BoundingSphere*)pO;
+                pin_ptr<BoundingSphere> pS1 = &S1;
+                DirectX::BoundingSphere* pSh1 = (DirectX::BoundingSphere*)pS1;
+                pin_ptr<BoundingSphere> pS2 = &S2;
+                DirectX::BoundingSphere* pSh2 = (DirectX::BoundingSphere*)pS2;
+                SphereCreateMerged(pOut, pSh1, pSh2);
+            }
+
+            static void CreateFromBoundingBox([Out] BoundingSphere% Out, BoundingBox% box)
+            {
+                pin_ptr<BoundingSphere> pO = &Out;
+                DirectX::BoundingSphere* pOut = (DirectX::BoundingSphere*)pO;
+                pin_ptr<BoundingBox> pB = &box;
+                DirectX::BoundingBox* pBox = (DirectX::BoundingBox*)pB;
+                SphereCreateFromBoundingBox(pOut, pBox);
+            }
+
+            static void CreateFromBoundingBox([Out] BoundingSphere% Out, BoundingOrientedBox% box)
+            {
+                pin_ptr<BoundingSphere> pO = &Out;
+                DirectX::BoundingSphere* pOut = (DirectX::BoundingSphere*)pO;
+                pin_ptr<BoundingOrientedBox> pB = &box;
+                DirectX::BoundingOrientedBox* pBox = (DirectX::BoundingOrientedBox*)pB;
+                SphereCreateFromBoundingBox(pOut, pBox);
+            }
+
+            static void CreateFromPoints([Out]BoundingSphere% Out, size_t Count,
+                array<XMFLOAT3>^ pPoints, size_t Stride)
+            {
+                pin_ptr<BoundingSphere> pO = &Out;
+                DirectX::BoundingSphere* pOut = (DirectX::BoundingSphere*)pO;
+                pin_ptr<XMFLOAT3> pA = &pPoints[0];
+                DirectX::XMFLOAT3* pArray = (DirectX::XMFLOAT3*)pA;
+                SphereCreateFromPoints(pOut, Count, pArray, Stride);
+            }
+
+            static void CreateFromFrustum([Out] BoundingSphere% Out, BoundingFrustum% fr)
+            {
+                pin_ptr<BoundingSphere> pO = &Out;
+                DirectX::BoundingSphere* pOut = (DirectX::BoundingSphere*)pO;
+                pin_ptr<BoundingFrustum> pF = &fr;
+                DirectX::BoundingFrustum* pFr = (DirectX::BoundingFrustum*)pF;
+                SphereCreateFromFrustum(pOut, pFr);
+            }
+
+            static BoundingSphere Default() { return BoundingSphere(XMFLOAT3(0, 0, 0), 1); }
+        };
+    }
 }

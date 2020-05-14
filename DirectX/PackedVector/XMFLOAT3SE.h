@@ -1,84 +1,49 @@
 #pragma once
 
-using namespace System::Runtime::InteropServices;
+#include <DirectXPackedVector.h>
+#include "../Common/IUnmanagedReference.h"
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        [StructLayout(LayoutKind::Sequential)]
-        public value struct XMFLOAT3SE
+        void XMFLOAT3SE_CONSTRUCTOR(DirectX::PackedVector::XMFLOAT3SE* location, DirectX::PackedVector::XMFLOAT3SE* value) { *location = DirectX::PackedVector::XMFLOAT3SE(*value); }
+        public ref class XMFLOAT3SE : IUnmanagedReference<DirectX::PackedVector::XMFLOAT3SE>
         {
-            value struct Components
-            {
-                unsigned int xm : 9; // x-mantissa
-                unsigned int ym : 9; // y-mantissa
-                unsigned int zm : 9; // z-mantissa
-                unsigned int e : 5; // shared exponent
-            };
-            [FieldOffset(0)] Components components;
-            [FieldOffset(0)] unsigned int v;
-
+        public:
             XMFLOAT3SE(float x, float y, float z)
             {
-                int exponent1;
-                int exponent2;
-                components.xm = frexpf(x, &exponent1);
-                components.ym = frexpf(y, &exponent2);
-                if (exponent1 > exponent2)
-                    components.ym >>= exponent1 - exponent2;
-                else
-                {
-                    components.xm >>= exponent2 - exponent1;
-                    exponent1 = exponent2;
-                }
+                _value = new DirectX::PackedVector::XMFLOAT3SE(x, y, z);
+            }
 
-                components.zm = frexpf(z, &exponent2);
+            XMFLOAT3SE(DirectX::PackedVector::XMFLOAT3SE* pVal)
+            {
+                _value = pVal;
+            }
 
-                if (exponent1 > exponent2)
-                    components.zm >>= exponent1 - exponent2;
-                else
-                {
-                    components.ym >>= exponent2 - exponent1;
-                    components.xm >>= exponent2 - exponent1;
-                    exponent1 = exponent2;
-                }
-
-                components.e = exponent1;
+            XMFLOAT3SE(IntPtr location, DirectX::PackedVector::XMFLOAT3SE* val)
+            {
+                _value = (DirectX::PackedVector::XMFLOAT3SE*)location.ToPointer();
+                XMFLOAT3SE_CONSTRUCTOR(_value, val);
             }
 
             XMFLOAT3SE(unsigned int packed)
             {
-                v = packed;
+                _value = new DirectX::PackedVector::XMFLOAT3SE(packed);
             }
 
             XMFLOAT3SE(array<float>^ pArray)
             {
-                int exponent1;
-                int exponent2;
-                components.xm = frexpf(pArray[0], &exponent1);
-                components.ym = frexpf(pArray[1], &exponent2);
-                if (exponent1 > exponent2)
-                    components.ym >>= exponent1 - exponent2;
-                else
-                {
-                    components.xm >>= exponent2 - exponent1;
-                    exponent1 = exponent2;
-                }
-
-                components.zm = frexpf(pArray[2], &exponent2);
-
-                if (exponent1 > exponent2)
-                    components.zm >>= exponent1 - exponent2;
-                else
-                {
-                    components.ym >>= exponent2 - exponent1;
-                    components.xm >>= exponent2 - exponent1;
-                    exponent1 = exponent2;
-                }
-
-                components.e = exponent1;
+                pin_ptr<float> p = &pArray[0];
+                _value = new DirectX::PackedVector::XMFLOAT3SE(p);
             }
+
+            UnmanagedReferenceProperty(unsigned int, xm)
+            UnmanagedReferenceProperty(unsigned int, ym)
+            UnmanagedReferenceProperty(unsigned int, zm)
+            UnmanagedReferenceProperty(unsigned int, e)
+            UnmanagedReferenceProperty(unsigned int, v)
+            UnmanagedOperator(DirectX::PackedVector::XMFLOAT3SE)
         };
     }
 }

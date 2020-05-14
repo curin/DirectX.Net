@@ -1,6 +1,6 @@
 #pragma once
 
-#include <DirectXMath.h>
+#include "UDXMath.h"
 #include "Math/XMINT.h"
 #include "Math/XMUINT.h"
 #include "Math/XMFLOAT.h"
@@ -8,15 +8,23 @@
 #include "Math/XMVECTOR.h"
 
 #define PropertyConvert(type, Name, Namespace) static property type Name { type get() { return Namespace::Name; }}
+#define MathProperty(Name) static property DirectX::Math::XMVECTOR^ Name { DirectX::Math::XMVECTOR^ get() { return gcnew DirectX::Math::XMVECTOR(DirectX::ManagedFunction::Name()); }}
 
 using namespace System;
 using namespace System::Numerics;
 using namespace System::Runtime::InteropServices;
 using namespace DirectX::Math;
 
+
+
 #pragma managed
 namespace DirectX 
 {
+    namespace Math
+    {
+        ref class XMMATRIX;
+    }
+
 	public ref class DirectXMath
 	{
     public:
@@ -76,64 +84,64 @@ namespace DirectX
 
 		static inline DirectX::Math::XMVECTOR^ XMLoadInt2(array<unsigned int>^ pSource);
 		static inline DirectX::Math::XMVECTOR^ XMLoadInt2A(array<unsigned int>^ pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadFloat2(Vector2 pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadFloat2A(Vector2 pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadSInt2(const DirectX::Math::XMINT2^ pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadUInt2(const DirectX::Math::XMUINT2^ pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadFloat2(DirectX::Math::XMFLOAT2* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadFloat2A(DirectX::Math::XMFLOAT2A* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadSInt2(const DirectX::Math::XMINT2* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadUInt2(const DirectX::Math::XMUINT2* pSource);
 
 		static inline DirectX::Math::XMVECTOR^ XMLoadInt3(array<unsigned int>^ pSource);
 		static inline DirectX::Math::XMVECTOR^ XMLoadInt3A(array<unsigned int>^ pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadFloat3(Vector3 pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadFloat3A(Vector3 pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadSInt3(const DirectX::Math::XMINT3^ pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadUInt3(const DirectX::Math::XMUINT3^ pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadFloat3(DirectX::Math::XMFLOAT3* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadFloat3A(DirectX::Math::XMFLOAT3A* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadSInt3(const DirectX::Math::XMINT3* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadUInt3(const DirectX::Math::XMUINT3* pSource);
 
 		static inline DirectX::Math::XMVECTOR^ XMLoadInt4(array<unsigned int>^ pSource);
 		static inline DirectX::Math::XMVECTOR^ XMLoadInt4A(array<unsigned int>^ pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadFloat4(Vector4 pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadFloat4A(Vector4 pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadSInt4(const DirectX::Math::XMINT4^ pSource);
-		static inline DirectX::Math::XMVECTOR^ XMLoadUInt4(const DirectX::Math::XMUINT4^ pSource);
-
-        static inline Matrix4x4^ XMLoadFloat3x3(DirectX::Math::XMFLOAT3X3^ pSource);
-        static inline Matrix4x4^ XMLoadFloat4x3(DirectX::Math::XMFLOAT4X3^ pSource);
-        static inline Matrix4x4^ XMLoadFloat4x3A(DirectX::Math::XMFLOAT4X3A^ pSource);
-        static inline Matrix4x4^ XMLoadFloat3x4(DirectX::Math::XMFLOAT3X4^ pSource);
-        static inline Matrix4x4^ XMLoadFloat3x4A(DirectX::Math::XMFLOAT3X4A^ pSource);
-        static inline Matrix4x4^ XMLoadFloat4x4(DirectX::Math::XMFLOAT4X4^ pSource);
-        static inline Matrix4x4^ XMLoadFloat4x4A(DirectX::Math::XMFLOAT4X4A^ pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadFloat4(DirectX::Math::XMFLOAT4* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadFloat4A(DirectX::Math::XMFLOAT4A* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadSInt4(const DirectX::Math::XMINT4* pSource);
+		static inline DirectX::Math::XMVECTOR^ XMLoadUInt4(const DirectX::Math::XMUINT4* pSource);
+        
+        static inline DirectX::Math::XMMATRIX^ XMLoadFloat3x3(DirectX::Math::XMFLOAT3X3* pSource);
+        static inline DirectX::Math::XMMATRIX^ XMLoadFloat4x3(DirectX::Math::XMFLOAT4X3* pSource);
+        static inline DirectX::Math::XMMATRIX^ XMLoadFloat4x3A(DirectX::Math::XMFLOAT4X3A* pSource);
+        static inline DirectX::Math::XMMATRIX^ XMLoadFloat3x4(DirectX::Math::XMFLOAT3X4* pSource);
+        static inline DirectX::Math::XMMATRIX^ XMLoadFloat3x4A(DirectX::Math::XMFLOAT3X4A* pSource);
+        static inline DirectX::Math::XMMATRIX^ XMLoadFloat4x4(DirectX::Math::XMFLOAT4X4* pSource);
+        static inline DirectX::Math::XMMATRIX^ XMLoadFloat4x4A(DirectX::Math::XMFLOAT4X4A* pSource);
         
         static inline void XMStoreInt(array<unsigned int>^ pDestination, DirectX::Math::XMVECTOR^ V);
         static inline void XMStoreFloat(array<float>^ pDestination, DirectX::Math::XMVECTOR^ V);
 
         static inline void XMStoreInt2(array<unsigned int>^ pDestination, DirectX::Math::XMVECTOR^ V);
         static inline void XMStoreInt2A(array<unsigned int>^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreFloat2(Vector2^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreFloat2A(Vector2^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreSInt2(DirectX::Math::XMINT2^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreUInt2(DirectX::Math::XMUINT2^ pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreFloat2(DirectX::Math::XMFLOAT2* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreFloat2A(DirectX::Math::XMFLOAT2A* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreSInt2(DirectX::Math::XMINT2* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreUInt2(DirectX::Math::XMUINT2* pDestination, DirectX::Math::XMVECTOR^ V);
 
         static inline void XMStoreInt3(array<unsigned int>^ pDestination, DirectX::Math::XMVECTOR^ V);
         static inline void XMStoreInt3A(array<unsigned int>^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreFloat3(Vector3^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreFloat3A(Vector3^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreSInt3(DirectX::Math::XMINT3^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreUInt3(DirectX::Math::XMUINT3^ pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreFloat3(DirectX::Math::XMFLOAT3* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreFloat3A(DirectX::Math::XMFLOAT3A* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreSInt3(DirectX::Math::XMINT3* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreUInt3(DirectX::Math::XMUINT3* pDestination, DirectX::Math::XMVECTOR^ V);
 
         static inline void XMStoreInt4(array<unsigned int>^ pDestination, DirectX::Math::XMVECTOR^ V);
         static inline void XMStoreInt4A(array<unsigned int>^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreFloat4(Vector4^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreFloat4A(Vector4^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreSInt4(DirectX::Math::XMINT4^ pDestination, DirectX::Math::XMVECTOR^ V);
-        static inline void XMStoreUInt4(DirectX::Math::XMUINT4^ pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreFloat4(DirectX::Math::XMFLOAT4* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreFloat4A(DirectX::Math::XMFLOAT4A* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreSInt4(DirectX::Math::XMINT4* pDestination, DirectX::Math::XMVECTOR^ V);
+        static inline void XMStoreUInt4(DirectX::Math::XMUINT4* pDestination, DirectX::Math::XMVECTOR^ V);
 
-        static inline void XMStoreFloat3x3(DirectX::Math::XMFLOAT3X3^ pDestination, DirectX::Math::XMMATRIX^ M);
-        static inline void XMStoreFloat4x3(DirectX::Math::XMFLOAT4X3^ pDestination, DirectX::Math::XMMATRIX^ M);
-        static inline void XMStoreFloat4x3A(DirectX::Math::XMFLOAT4X3A^ pDestination, DirectX::Math::XMMATRIX^ M);
-        static inline void XMStoreFloat3x4(DirectX::Math::XMFLOAT3X4^ pDestination, DirectX::Math::XMMATRIX^ M);
-        static inline void XMStoreFloat3x4A(DirectX::Math::XMFLOAT3X4A^ pDestination, DirectX::Math::XMMATRIX^ M);
-        static inline void XMStoreFloat4x4(DirectX::Math::XMFLOAT4X4^ pDestination, DirectX::Math::XMMATRIX^ M);
-        static inline void XMStoreFloat4x4A(DirectX::Math::XMFLOAT4X4A^ pDestination, DirectX::Math::XMMATRIX^ M);
+        static inline void XMStoreFloat3x3(DirectX::Math::XMFLOAT3X3* pDestination, DirectX::Math::XMMATRIX^ M);
+        static inline void XMStoreFloat4x3(DirectX::Math::XMFLOAT4X3* pDestination, DirectX::Math::XMMATRIX^ M);
+        static inline void XMStoreFloat4x3A(DirectX::Math::XMFLOAT4X3A* pDestination, DirectX::Math::XMMATRIX^ M);
+        static inline void XMStoreFloat3x4(DirectX::Math::XMFLOAT3X4* pDestination, DirectX::Math::XMMATRIX^ M);
+        static inline void XMStoreFloat3x4A(DirectX::Math::XMFLOAT3X4A* pDestination, DirectX::Math::XMMATRIX^ M);
+        static inline void XMStoreFloat4x4(DirectX::Math::XMFLOAT4X4* pDestination, DirectX::Math::XMMATRIX^ M);
+        static inline void XMStoreFloat4x4A(DirectX::Math::XMFLOAT4X4A* pDestination, DirectX::Math::XMMATRIX^ M);
 
         static inline DirectX::Math::XMVECTOR^ XMVectorZero();
         static inline DirectX::Math::XMVECTOR^ XMVectorSet(float x, float y, float z, float w);
@@ -343,11 +351,11 @@ namespace DirectX
         static inline DirectX::Math::XMVECTOR^ XMVector2LinePointDistance(DirectX::Math::XMVECTOR^ LinePoint1, DirectX::Math::XMVECTOR^ LinePoint2, DirectX::Math::XMVECTOR^ Point);
         static inline DirectX::Math::XMVECTOR^ XMVector2IntersectLine(DirectX::Math::XMVECTOR^ Line1Point1, DirectX::Math::XMVECTOR^ Line1Point2, DirectX::Math::XMVECTOR^ Line2Point1, DirectX::Math::XMVECTOR^ Line2Point2);
         static inline DirectX::Math::XMVECTOR^ XMVector2Transform(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMMATRIX^ M);
-        static inline array<Vector4>^ XMVector2TransformStream(array<Vector4>^ pOutputStream, unsigned int OutputStride, array<Vector2>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
+        static inline array<DirectX::Math::XMFLOAT4>^ XMVector2TransformStream(array<DirectX::Math::XMFLOAT4>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT2>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
         static inline DirectX::Math::XMVECTOR^ XMVector2TransformCoord(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMMATRIX^ M);
-        static inline array<Vector2>^ XMVector2TransformCoordStream(array<Vector2>^ pOutputStream, unsigned int OutputStride, array<Vector2>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
+        static inline array<DirectX::Math::XMFLOAT2>^ XMVector2TransformCoordStream(array<DirectX::Math::XMFLOAT2>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT2>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
         static inline DirectX::Math::XMVECTOR^ XMVector2TransformNormal(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMMATRIX^ M);
-        static inline array<Vector2>^ XMVector2TransformNormalStream(array<Vector2>^ pOutputStream, unsigned int OutputStride, array<Vector2>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
+        static inline array<DirectX::Math::XMFLOAT2>^ XMVector2TransformNormalStream(array<DirectX::Math::XMFLOAT2>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT2>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
 	    
         static inline bool XMVector3Equal(DirectX::Math::XMVECTOR^ V1, DirectX::Math::XMVECTOR^ V2);
         static inline unsigned int XMVector3EqualR(DirectX::Math::XMVECTOR^ V1, DirectX::Math::XMVECTOR^ V2);
@@ -390,19 +398,19 @@ namespace DirectX
         static inline DirectX::Math::XMVECTOR^ XMVector3Rotate(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMVECTOR^ RotationQuaternion);
         static inline DirectX::Math::XMVECTOR^ XMVector3InverseRotate(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMVECTOR^ RotationQuaternion);
         static inline DirectX::Math::XMVECTOR^ XMVector3Transform(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMMATRIX^ M);
-        static inline array<Vector4>^ XMVector3TransformStream(array<Vector4>^ pOutputStream, unsigned int OutputStride, array<Vector3>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
+        static inline array<DirectX::Math::XMFLOAT4>^ XMVector3TransformStream(array<DirectX::Math::XMFLOAT4>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT3>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
         static inline DirectX::Math::XMVECTOR^ XMVector3TransformCoord(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMMATRIX^ M);
-        static inline array<Vector3>^ XMVector3TransformCoordStream(array<Vector3>^ pOutputStream, unsigned int OutputStride, array<Vector3>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
+        static inline array<DirectX::Math::XMFLOAT3>^ XMVector3TransformCoordStream(array<DirectX::Math::XMFLOAT3>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT3>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
         static inline DirectX::Math::XMVECTOR^ XMVector3TransformNormal(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMMATRIX^ M);
-        static inline array<Vector3>^ XMVector3TransformNormalStream(array<Vector3>^ pOutputStream, unsigned int OutputStride, array<Vector3>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
+        static inline array<DirectX::Math::XMFLOAT3>^ XMVector3TransformNormalStream(array<DirectX::Math::XMFLOAT3>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT3>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
         static inline DirectX::Math::XMVECTOR^ XMVector3Project(DirectX::Math::XMVECTOR^ V, float ViewportX, float ViewportY, float ViewportWidth, float ViewportHeight,
             float ViewportMinZ, float ViewportMaxZ, DirectX::Math::XMMATRIX^ Projection, DirectX::Math::XMMATRIX^ View, DirectX::Math::XMMATRIX^ World);
-        static inline array<Vector3>^ XMVector3ProjectStream(array<Vector3>^ pOutputStream, unsigned int OutputStride, array<Vector3>^ pInputStream,
+        static inline array<DirectX::Math::XMFLOAT3>^ XMVector3ProjectStream(array<DirectX::Math::XMFLOAT3>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT3>^ pInputStream,
             unsigned int InputStride, unsigned int VectorCount, float ViewportX, float ViewportY, float ViewportWidth, float ViewportHeight,
             float ViewportMinZ, float ViewportMaxZ, DirectX::Math::XMMATRIX^ Projection, DirectX::Math::XMMATRIX^ View, DirectX::Math::XMMATRIX^ World);
         static inline DirectX::Math::XMVECTOR^ XMVector3Unproject(DirectX::Math::XMVECTOR^ V, float ViewportX, float ViewportY, float ViewportWidth, float ViewportHeight,
             float ViewportMinZ, float ViewportMaxZ, DirectX::Math::XMMATRIX^ Projection, DirectX::Math::XMMATRIX^ View, DirectX::Math::XMMATRIX^ World);
-        static inline array<Vector3>^ XMVector3UnprojectStream(array<Vector3>^ pOutputStream, unsigned int OutputStride, array<Vector3>^ pInputStream,
+        static inline array<DirectX::Math::XMFLOAT3>^ XMVector3UnprojectStream(array<DirectX::Math::XMFLOAT3>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT3>^ pInputStream,
             unsigned int InputStride, unsigned int VectorCount, float ViewportX, float ViewportY, float ViewportWidth, float ViewportHeight,
             float ViewportMinZ, float ViewportMaxZ, DirectX::Math::XMMATRIX^ Projection, DirectX::Math::XMMATRIX^ View, DirectX::Math::XMMATRIX^ World);
 
@@ -443,7 +451,7 @@ namespace DirectX
         static inline DirectX::Math::XMVECTOR^ XMVector4AngleBetweenNormals(DirectX::Math::XMVECTOR^ N1, DirectX::Math::XMVECTOR^ N2);
         static inline DirectX::Math::XMVECTOR^ XMVector4AngleBetweenVectors(DirectX::Math::XMVECTOR^ V1, DirectX::Math::XMVECTOR^ V2);
         static inline DirectX::Math::XMVECTOR^ XMVector4Transform(DirectX::Math::XMVECTOR^ V, DirectX::Math::XMMATRIX^ M);
-        static inline array<Vector4>^ XMVector4TransformStream(array<Vector4>^ pOutputStream, unsigned int OutputStride, array<Vector4>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
+        static inline array<DirectX::Math::XMFLOAT4>^ XMVector4TransformStream(array<DirectX::Math::XMFLOAT4>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT4>^ pInputStream, unsigned int InputStride, unsigned int VectorCount, DirectX::Math::XMMATRIX^ M);
 
         static inline bool XMMatrixIsNaN(DirectX::Math::XMMATRIX^ M);
         static inline bool XMMatrixIsInfinite(DirectX::Math::XMMATRIX^ M);
@@ -547,7 +555,7 @@ namespace DirectX
         static inline DirectX::Math::XMVECTOR^ XMPlaneIntersectLine(DirectX::Math::XMVECTOR^ P, DirectX::Math::XMVECTOR^ LinePoint1, DirectX::Math::XMVECTOR^ LinePoint2);
         static inline void XMPlaneIntersectPlane(DirectX::Math::XMVECTOR^ pLinePoint1, DirectX::Math::XMVECTOR^ pLinePoint2, DirectX::Math::XMVECTOR^ P1, DirectX::Math::XMVECTOR^ P2);
         static inline DirectX::Math::XMVECTOR^ XMPlaneTransform(DirectX::Math::XMVECTOR^ P, DirectX::Math::XMMATRIX^ M);
-        static inline array<Vector4>^ XMPlaneTransformStream(array<Vector4>^ pOutputStream, unsigned int OutputStride, array<Vector4>^ pInputStream, unsigned int InputStride, unsigned int PlaneCount, DirectX::Math::XMMATRIX^ M);
+        static inline array<DirectX::Math::XMFLOAT4>^ XMPlaneTransformStream(array<DirectX::Math::XMFLOAT4>^ pOutputStream, unsigned int OutputStride, array<DirectX::Math::XMFLOAT4>^ pInputStream, unsigned int InputStride, unsigned int PlaneCount, DirectX::Math::XMMATRIX^ M);
 
         static inline DirectX::Math::XMVECTOR^ XMPlaneFromPointNormal(DirectX::Math::XMVECTOR^ Point, DirectX::Math::XMVECTOR^ Normal);
         static inline DirectX::Math::XMVECTOR^ XMPlaneFromPoints(DirectX::Math::XMVECTOR^ Point1, DirectX::Math::XMVECTOR^ Point2, DirectX::Math::XMVECTOR^ Point3);
@@ -610,146 +618,146 @@ namespace DirectX
         static inline float XMScalarACos(float Value);
         static inline float XMScalarACosEst(float Value);
 
-        VecPropertyConvert(g_XMSinCoefficients0)
-        VecPropertyConvert(g_XMSinCoefficients1)
-        VecPropertyConvert(g_XMCosCoefficients0)
-        VecPropertyConvert(g_XMCosCoefficients1)
-        VecPropertyConvert(g_XMTanCoefficients0)
-        VecPropertyConvert(g_XMTanCoefficients1)
-        VecPropertyConvert(g_XMTanCoefficients2)
-        VecPropertyConvert(g_XMArcCoefficients0)
-        VecPropertyConvert(g_XMArcCoefficients1)
-        VecPropertyConvert(g_XMATanCoefficients0)
-        VecPropertyConvert(g_XMATanCoefficients1)
-        VecPropertyConvert(g_XMATanEstCoefficients0)
-        VecPropertyConvert(g_XMATanEstCoefficients1)
-        VecPropertyConvert(g_XMTanEstCoefficients)
-        VecPropertyConvert(g_XMArcEstCoefficients)
-        VecPropertyConvert(g_XMPiConstants0)
-        VecPropertyConvert(g_XMIdentityR0)
-        VecPropertyConvert(g_XMIdentityR1)
-        VecPropertyConvert(g_XMIdentityR2)
-        VecPropertyConvert(g_XMIdentityR3)
-        VecPropertyConvert(g_XMNegIdentityR0)
-        VecPropertyConvert(g_XMNegIdentityR1)
-        VecPropertyConvert(g_XMNegIdentityR2)
-        VecPropertyConvert(g_XMNegIdentityR3)
-        VecPropertyConvert(g_XMNegativeZero)
-        VecPropertyConvert(g_XMNegate3)
-        VecPropertyConvert(g_XMMaskXY)
-        VecPropertyConvert(g_XMMask3)
-        VecPropertyConvert(g_XMMaskX)
-        VecPropertyConvert(g_XMMaskY)
-        VecPropertyConvert(g_XMMaskZ)
-        VecPropertyConvert(g_XMMaskW)
-        VecPropertyConvert(g_XMOne)
-        VecPropertyConvert(g_XMOne3)
-        VecPropertyConvert(g_XMZero)
-        VecPropertyConvert(g_XMTwo)
-        VecPropertyConvert(g_XMFour)
-        VecPropertyConvert(g_XMSix)
-        VecPropertyConvert(g_XMNegativeOne)
-        VecPropertyConvert(g_XMOneHalf)
-        VecPropertyConvert(g_XMNegativeOneHalf)
-        VecPropertyConvert(g_XMNegativeTwoPi)
-        VecPropertyConvert(g_XMNegativePi)
-        VecPropertyConvert(g_XMHalfPi)
-        VecPropertyConvert(g_XMPi)
-        VecPropertyConvert(g_XMReciprocalPi)
-        VecPropertyConvert(g_XMTwoPi)
-        VecPropertyConvert(g_XMReciprocalTwoPi)
-        VecPropertyConvert(g_XMEpsilon)
-        VecPropertyConvert(g_XMInfinity)
-        VecPropertyConvert(g_XMQNaN)
-        VecPropertyConvert(g_XMQNaNTest)
-        VecPropertyConvert(g_XMAbsMask)
-        VecPropertyConvert(g_XMFltMin)
-        VecPropertyConvert(g_XMFltMax)
-        VecPropertyConvert(g_XMNegOneMask)
-        VecPropertyConvert(g_XMMaskA8R8G8B8)
-        VecPropertyConvert(g_XMFlipA8R8G8B8)
-        VecPropertyConvert(g_XMFixAA8R8G8B8)
-        VecPropertyConvert(g_XMNormalizeA8R8G8B8)
-        VecPropertyConvert(g_XMMaskA2B10G10R10)
-        VecPropertyConvert(g_XMFlipA2B10G10R10)
-        VecPropertyConvert(g_XMFixAA2B10G10R10)
-        VecPropertyConvert(g_XMNormalizeA2B10G10R10)
-        VecPropertyConvert(g_XMMaskX16Y16)
-        VecPropertyConvert(g_XMFlipX16Y16)
-        VecPropertyConvert(g_XMFixX16Y16)
-        VecPropertyConvert(g_XMNormalizeX16Y16)
-        VecPropertyConvert(g_XMMaskX16Y16Z16W16)
-        VecPropertyConvert(g_XMFlipX16Y16Z16W16)
-        VecPropertyConvert(g_XMFixX16Y16Z16W16)
-        VecPropertyConvert(g_XMNormalizeX16Y16Z16W16)
-        VecPropertyConvert(g_XMNoFraction)
-        VecPropertyConvert(g_XMMaskByte)
-        VecPropertyConvert(g_XMNegateX)
-        VecPropertyConvert(g_XMNegateY)
-        VecPropertyConvert(g_XMNegateZ)
-        VecPropertyConvert(g_XMNegateW)
-        VecPropertyConvert(g_XMSelect0101)
-        VecPropertyConvert(g_XMSelect1010)
-        VecPropertyConvert(g_XMOneHalfMinusEpsilon)
-        VecPropertyConvert(g_XMSelect1000)
-        VecPropertyConvert(g_XMSelect1100)
-        VecPropertyConvert(g_XMSelect1110)
-        VecPropertyConvert(g_XMSelect1011)
-        VecPropertyConvert(g_XMFixupY16)
-        VecPropertyConvert(g_XMFixupY16W16)
-        VecPropertyConvert(g_XMFlipY)
-        VecPropertyConvert(g_XMFlipZ)
-        VecPropertyConvert(g_XMFlipW)
-        VecPropertyConvert(g_XMFlipYZ)
-        VecPropertyConvert(g_XMFlipZW)
-        VecPropertyConvert(g_XMFlipYW)
-        VecPropertyConvert(g_XMMaskDec4)
-        VecPropertyConvert(g_XMXorDec4)
-        VecPropertyConvert(g_XMAddUDec4)
-        VecPropertyConvert(g_XMAddDec4)
-        VecPropertyConvert(g_XMMulDec4)
-        VecPropertyConvert(g_XMMaskByte4)
-        VecPropertyConvert(g_XMXorByte4)
-        VecPropertyConvert(g_XMAddByte4)
-        VecPropertyConvert(g_XMFixUnsigned)
-        VecPropertyConvert(g_XMMaxInt)
-        VecPropertyConvert(g_XMMaxUInt)
-        VecPropertyConvert(g_XMUnsignedFix)
-        VecPropertyConvert(g_XMsrgbScale)
-        VecPropertyConvert(g_XMsrgbA)
-        VecPropertyConvert(g_XMsrgbA1)
-        VecPropertyConvert(g_XMExponentBias)
-        VecPropertyConvert(g_XMSubnormalExponent)
-        VecPropertyConvert(g_XMNumTrailing)
-        VecPropertyConvert(g_XMMinNormal)
-        VecPropertyConvert(g_XMNegInfinity)
-        VecPropertyConvert(g_XMNegQNaN)
-        VecPropertyConvert(g_XMBin128)
-        VecPropertyConvert(g_XMBinNeg150)
-        VecPropertyConvert(g_XM253)
-        VecPropertyConvert(g_XMExpEst1)
-        VecPropertyConvert(g_XMExpEst2)
-        VecPropertyConvert(g_XMExpEst3)
-        VecPropertyConvert(g_XMExpEst4)
-        VecPropertyConvert(g_XMExpEst5)
-        VecPropertyConvert(g_XMExpEst6)
-        VecPropertyConvert(g_XMExpEst7)
-        VecPropertyConvert(g_XMLogEst0)
-        VecPropertyConvert(g_XMLogEst1)
-        VecPropertyConvert(g_XMLogEst2)
-        VecPropertyConvert(g_XMLogEst3)
-        VecPropertyConvert(g_XMLogEst4)
-        VecPropertyConvert(g_XMLogEst5)
-        VecPropertyConvert(g_XMLogEst6)
-        VecPropertyConvert(g_XMLogEst7)
-        VecPropertyConvert(g_XMLgE)
-        VecPropertyConvert(g_XMInvLgE)
-        VecPropertyConvert(g_UByteMax)
-        VecPropertyConvert(g_ByteMin)
-        VecPropertyConvert(g_ByteMax)
-        VecPropertyConvert(g_ShortMin)
-        VecPropertyConvert(g_ShortMax)
-        VecPropertyConvert(g_UShortMax)
+        MathProperty(g_XMSinCoefficients0)
+        MathProperty(g_XMSinCoefficients1)
+        MathProperty(g_XMCosCoefficients0)
+        MathProperty(g_XMCosCoefficients1)
+        MathProperty(g_XMTanCoefficients0)
+        MathProperty(g_XMTanCoefficients1)
+        MathProperty(g_XMTanCoefficients2)
+        MathProperty(g_XMArcCoefficients0)
+        MathProperty(g_XMArcCoefficients1)
+        MathProperty(g_XMATanCoefficients0)
+        MathProperty(g_XMATanCoefficients1)
+        MathProperty(g_XMATanEstCoefficients0)
+        MathProperty(g_XMATanEstCoefficients1)
+        MathProperty(g_XMTanEstCoefficients)
+        MathProperty(g_XMArcEstCoefficients)
+        MathProperty(g_XMPiConstants0)
+        MathProperty(g_XMIdentityR0)
+        MathProperty(g_XMIdentityR1)
+        MathProperty(g_XMIdentityR2)
+        MathProperty(g_XMIdentityR3)
+        MathProperty(g_XMNegIdentityR0)
+        MathProperty(g_XMNegIdentityR1)
+        MathProperty(g_XMNegIdentityR2)
+        MathProperty(g_XMNegIdentityR3)
+        MathProperty(g_XMNegativeZero)
+        MathProperty(g_XMNegate3)
+        MathProperty(g_XMMaskXY)
+        MathProperty(g_XMMask3)
+        MathProperty(g_XMMaskX)
+        MathProperty(g_XMMaskY)
+        MathProperty(g_XMMaskZ)
+        MathProperty(g_XMMaskW)
+        MathProperty(g_XMOne)
+        MathProperty(g_XMOne3)
+        MathProperty(g_XMZero)
+        MathProperty(g_XMTwo)
+        MathProperty(g_XMFour)
+        MathProperty(g_XMSix)
+        MathProperty(g_XMNegativeOne)
+        MathProperty(g_XMOneHalf)
+        MathProperty(g_XMNegativeOneHalf)
+        MathProperty(g_XMNegativeTwoPi)
+        MathProperty(g_XMNegativePi)
+        MathProperty(g_XMHalfPi)
+        MathProperty(g_XMPi)
+        MathProperty(g_XMReciprocalPi)
+        MathProperty(g_XMTwoPi)
+        MathProperty(g_XMReciprocalTwoPi)
+        MathProperty(g_XMEpsilon)
+        MathProperty(g_XMInfinity)
+        MathProperty(g_XMQNaN)
+        MathProperty(g_XMQNaNTest)
+        MathProperty(g_XMAbsMask)
+        MathProperty(g_XMFltMin)
+        MathProperty(g_XMFltMax)
+        MathProperty(g_XMNegOneMask)
+        MathProperty(g_XMMaskA8R8G8B8)
+        MathProperty(g_XMFlipA8R8G8B8)
+        MathProperty(g_XMFixAA8R8G8B8)
+        MathProperty(g_XMNormalizeA8R8G8B8)
+        MathProperty(g_XMMaskA2B10G10R10)
+        MathProperty(g_XMFlipA2B10G10R10)
+        MathProperty(g_XMFixAA2B10G10R10)
+        MathProperty(g_XMNormalizeA2B10G10R10)
+        MathProperty(g_XMMaskX16Y16)
+        MathProperty(g_XMFlipX16Y16)
+        MathProperty(g_XMFixX16Y16)
+        MathProperty(g_XMNormalizeX16Y16)
+        MathProperty(g_XMMaskX16Y16Z16W16)
+        MathProperty(g_XMFlipX16Y16Z16W16)
+        MathProperty(g_XMFixX16Y16Z16W16)
+        MathProperty(g_XMNormalizeX16Y16Z16W16)
+        MathProperty(g_XMNoFraction)
+        MathProperty(g_XMMaskByte)
+        MathProperty(g_XMNegateX)
+        MathProperty(g_XMNegateY)
+        MathProperty(g_XMNegateZ)
+        MathProperty(g_XMNegateW)
+        MathProperty(g_XMSelect0101)
+        MathProperty(g_XMSelect1010)
+        MathProperty(g_XMOneHalfMinusEpsilon)
+        MathProperty(g_XMSelect1000)
+        MathProperty(g_XMSelect1100)
+        MathProperty(g_XMSelect1110)
+        MathProperty(g_XMSelect1011)
+        MathProperty(g_XMFixupY16)
+        MathProperty(g_XMFixupY16W16)
+        MathProperty(g_XMFlipY)
+        MathProperty(g_XMFlipZ)
+        MathProperty(g_XMFlipW)
+        MathProperty(g_XMFlipYZ)
+        MathProperty(g_XMFlipZW)
+        MathProperty(g_XMFlipYW)
+        MathProperty(g_XMMaskDec4)
+        MathProperty(g_XMXorDec4)
+        MathProperty(g_XMAddUDec4)
+        MathProperty(g_XMAddDec4)
+        MathProperty(g_XMMulDec4)
+        MathProperty(g_XMMaskByte4)
+        MathProperty(g_XMXorByte4)
+        MathProperty(g_XMAddByte4)
+        MathProperty(g_XMFixUnsigned)
+        MathProperty(g_XMMaxInt)
+        MathProperty(g_XMMaxUInt)
+        MathProperty(g_XMUnsignedFix)
+        MathProperty(g_XMsrgbScale)
+        MathProperty(g_XMsrgbA)
+        MathProperty(g_XMsrgbA1)
+        MathProperty(g_XMExponentBias)
+        MathProperty(g_XMSubnormalExponent)
+        MathProperty(g_XMNumTrailing)
+        MathProperty(g_XMMinNormal)
+        MathProperty(g_XMNegInfinity)
+        MathProperty(g_XMNegQNaN)
+        MathProperty(g_XMBin128)
+        MathProperty(g_XMBinNeg150)
+        MathProperty(g_XM253)
+        MathProperty(g_XMExpEst1)
+        MathProperty(g_XMExpEst2)
+        MathProperty(g_XMExpEst3)
+        MathProperty(g_XMExpEst4)
+        MathProperty(g_XMExpEst5)
+        MathProperty(g_XMExpEst6)
+        MathProperty(g_XMExpEst7)
+        MathProperty(g_XMLogEst0)
+        MathProperty(g_XMLogEst1)
+        MathProperty(g_XMLogEst2)
+        MathProperty(g_XMLogEst3)
+        MathProperty(g_XMLogEst4)
+        MathProperty(g_XMLogEst5)
+        MathProperty(g_XMLogEst6)
+        MathProperty(g_XMLogEst7)
+        MathProperty(g_XMLgE)
+        MathProperty(g_XMInvLgE)
+        MathProperty(g_UByteMax)
+        MathProperty(g_ByteMin)
+        MathProperty(g_ByteMax)
+        MathProperty(g_ShortMin)
+        MathProperty(g_ShortMax)
+        MathProperty(g_UShortMax)
     };
 }
 

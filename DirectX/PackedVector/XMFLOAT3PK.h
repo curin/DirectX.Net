@@ -1,52 +1,51 @@
 #pragma once
 
-using namespace System::Runtime::InteropServices;
+#include <DirectXPackedVector.h>
+#include "../Common/IUnmanagedReference.h"
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        [StructLayout(LayoutKind::Sequential)]
-        public value struct XMFLOAT3PK
+        void XMFLOAT3PK_CONSTRUCTOR(DirectX::PackedVector::XMFLOAT3PK* location, DirectX::PackedVector::XMFLOAT3PK* value) { *location = DirectX::PackedVector::XMFLOAT3PK(*value); }
+        public ref class XMFLOAT3PK : IUnmanagedReference<DirectX::PackedVector::XMFLOAT3PK>
         {
-            value struct Components
-            {
-                unsigned int xm : 6; // x-mantissa
-                unsigned int xe : 5; // x-exponent
-                unsigned int ym : 6; // y-mantissa
-                unsigned int ye : 5; // y-exponent
-                unsigned int zm : 5; // z-mantissa
-                unsigned int ze : 5; // z-exponent
-            };
-            [FieldOffset(0)]Components components;
-            [FieldOffset(0)] unsigned int v;
-
+        public:
             XMFLOAT3PK(float x, float y, float z)
             {
-                int exponent;
-                components.xm = frexpf(x, &exponent);
-                components.xe = exponent;
-                components.ym = frexpf(y, &exponent);
-                components.ye = exponent;
-                components.zm = frexpf(z, &exponent);
-                components.ze = exponent;
+                _value = new DirectX::PackedVector::XMFLOAT3PK(x, y, z);
+            }
+
+            XMFLOAT3PK(DirectX::PackedVector::XMFLOAT3PK* pVal)
+            {
+                _value = pVal;
+            }
+
+            XMFLOAT3PK(IntPtr location, DirectX::PackedVector::XMFLOAT3PK* val)
+            {
+                _value = (DirectX::PackedVector::XMFLOAT3PK*)location.ToPointer();
+                XMFLOAT3PK_CONSTRUCTOR(_value, val);
             }
 
             XMFLOAT3PK(unsigned int packed)
             {
-                v = packed;
+                _value = new DirectX::PackedVector::XMFLOAT3PK(packed);
             }
 
             XMFLOAT3PK(array<float>^ pArray)
             {
-                int exponent;
-                components.xm = frexpf(pArray[0], &exponent);
-                components.xe = exponent;
-                components.ym = frexpf(pArray[1], &exponent);
-                components.ye = exponent;
-                components.zm = frexpf(pArray[2], &exponent);
-                components.ze = exponent;
+                pin_ptr<float> p = &pArray[0];
+                _value = new DirectX::PackedVector::XMFLOAT3PK(p);
             }
+
+            UnmanagedReferenceProperty(unsigned int, xm)
+            UnmanagedReferenceProperty(unsigned int, xe)
+            UnmanagedReferenceProperty(unsigned int, ym)
+            UnmanagedReferenceProperty(unsigned int, ye)
+            UnmanagedReferenceProperty(unsigned int, zm)
+            UnmanagedReferenceProperty(unsigned int, ze)
+            UnmanagedReferenceProperty(unsigned int, v)
+            UnmanagedOperator(DirectX::PackedVector::XMFLOAT3PK)
         };
     }
 }

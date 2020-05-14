@@ -1,44 +1,51 @@
 #pragma once
 #include <DirectXMath.h>
+#include "../Common/IUnmanagedReference.h"
 
 using namespace System::Numerics;
 
-#define VecPropertyConvert(Name) static property DirectX::Math::XMVECTOR^ Name { DirectX::Math::XMVECTOR^ get() { return gcnew DirectX::Math::XMVECTOR(DirectX::Math::Name()); }}
+#define VecPropertyConvert(Name) static property DirectX::Math::XMVECTOR^ Name { DirectX::Math::XMVECTOR^ get() { return gcnew DirectX::Math::XMVECTOR(&(DirectX::XMVECTOR)DirectX::Name); }}
 
 namespace DirectX
 {
 	namespace Math
 	{
-		public ref class XMVECTOR
+		void XMVECTOR_CONSTRUCTOR(DirectX::XMVECTOR* location, DirectX::XMVECTOR* value) { *location = DirectX::XMVECTOR(*value); }
+		public ref class XMVECTOR : IUnmanagedReference<DirectX::XMVECTOR>
 		{
 		public:
-			DirectX::XMVECTOR* _vect;
 
 			XMVECTOR()
 			{
-				_vect = (DirectX::XMVECTOR*)_aligned_malloc(sizeof(DirectX::XMVECTOR), 16);
+				_value = (DirectX::XMVECTOR*)_aligned_malloc(sizeof(DirectX::XMVECTOR), 16);
+			}
+
+			XMVECTOR(IntPtr location, DirectX::XMVECTOR* val)
+			{
+				_value = (DirectX::XMVECTOR*)location.ToPointer();
+				XMVECTOR_CONSTRUCTOR(_value, val);
 			}
 
 			XMVECTOR(DirectX::XMVECTOR* val)
 			{
-				_vect = val;
+				_value = val;
 			}
 
 			~XMVECTOR()
 			{
-				_aligned_free(_vect);
+				_aligned_free(_value);
 			}
 
-			property float x { float get() { return _vect->m128_f32[0]; }}
-			property float y { float get() { return _vect->m128_f32[1]; }}
-			property float z { float get() { return _vect->m128_f32[2]; }}
-			property float w { float get() { return _vect->m128_f32[3]; }}
+			property float x { float get() { return _value->m128_f32[0]; }}
+			property float y { float get() { return _value->m128_f32[1]; }}
+			property float z { float get() { return _value->m128_f32[2]; }}
+			property float w { float get() { return _value->m128_f32[3]; }}
 
 			property array<long long>^ LongVector
 			{
 				array<long long>^ get()
 				{
-					long long* arr = _vect->m128_i64;
+					long long* arr = _value->m128_i64;
 					array<long long>^ out = gcnew array<long long>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -52,7 +59,7 @@ namespace DirectX
 			{
 				array<unsigned long long> ^ get()
 				{
-					unsigned long long* arr = _vect->m128_u64;
+					unsigned long long* arr = _value->m128_u64;
 					array<unsigned long long>^ out = gcnew array<unsigned long long>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -66,7 +73,7 @@ namespace DirectX
 			{ 
 				array<float>^ get() 
 				{ 
-					float* arr = _vect->m128_f32;
+					float* arr = _value->m128_f32;
 					array<float>^ out = gcnew array<float>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -80,7 +87,7 @@ namespace DirectX
 			{
 				array<int>^ get()
 				{
-					int* arr = _vect->m128_i32;
+					int* arr = _value->m128_i32;
 					array<int>^ out = gcnew array<int>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -94,7 +101,7 @@ namespace DirectX
 			{
 				array<unsigned int>^ get()
 				{
-					unsigned int* arr = _vect->m128_u32;
+					unsigned int* arr = _value->m128_u32;
 					array<unsigned int>^ out = gcnew array<unsigned int>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -108,7 +115,7 @@ namespace DirectX
 			{
 				array<short>^ get()
 				{
-					short* arr = _vect->m128_i16;
+					short* arr = _value->m128_i16;
 					array<short>^ out = gcnew array<short>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -122,7 +129,7 @@ namespace DirectX
 			{
 				array<unsigned short>^ get()
 				{
-					unsigned short* arr = _vect->m128_u16;
+					unsigned short* arr = _value->m128_u16;
 					array<unsigned short>^ out = gcnew array<unsigned short>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -136,7 +143,7 @@ namespace DirectX
 			{
 				array<char>^ get()
 				{
-					char* arr = _vect->m128_i8;
+					char* arr = _value->m128_i8;
 					array<char>^ out = gcnew array<char>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -150,7 +157,7 @@ namespace DirectX
 			{
 				array<unsigned char>^ get()
 				{
-					unsigned char* arr = _vect->m128_u8;
+					unsigned char* arr = _value->m128_u8;
 					array<unsigned char>^ out = gcnew array<unsigned char>(4);
 					out[0] = arr[0];
 					out[1] = arr[1];
@@ -187,6 +194,8 @@ namespace DirectX
 				ret = ret->Concat(z);
 				return ret;
 			}
+
+			operator DirectX::XMVECTOR* () { return _value; }
 		};
 	}
 }

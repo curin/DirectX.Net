@@ -1,59 +1,53 @@
 #pragma once
 
-using namespace System::Runtime::InteropServices;
+#include <DirectXPackedVector.h>
+#include "../Common/IUnmanagedReference.h"
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        [StructLayout(LayoutKind::Sequential)]
-        public value struct XMU555
+        void XMU555_CONSTRUCTOR(DirectX::PackedVector::XMU555* location, DirectX::PackedVector::XMU555* value) { *location = DirectX::PackedVector::XMU555(*value); }
+        public ref class XMU555 : IUnmanagedReference<DirectX::PackedVector::XMU555>
         {
-            value struct Components
-            {
-                unsigned short x : 5;    // 0 to 31
-                unsigned short y : 5;    // 0 to 31
-                unsigned short z : 5;    // 0 to 31
-                unsigned short w : 1;    // 0 or 1
-            };
-            [FieldOffset(0)] Components components;
-            [FieldOffset(0)] unsigned short v;
+        public:
+            UnmanagedReferenceProperty(unsigned short, x)
+            UnmanagedReferenceProperty(unsigned short, y)
+            UnmanagedReferenceProperty(unsigned short, z)
+            UnmanagedReferenceProperty(unsigned short, w)
+            UnmanagedReferenceProperty(unsigned short, v)
+            UnmanagedOperator(DirectX::PackedVector::XMU555)
 
             XMU555(unsigned char x, unsigned char y, unsigned char z, bool w)
             {
-                components.x = x;
-                components.y = y;
-                components.z = z;
-                components.w = w;
+                _value = new DirectX::PackedVector::XMU555(x, y, z, w);
             }
 
             XMU555(float x, float y, float z, bool w)
             {
-                components.x = (unsigned char)x;
-                components.y = (unsigned char)y;
-                components.z = (unsigned char)z;
-                components.w = w;
+                _value = new DirectX::PackedVector::XMU555(x, y, z, w);
+            }
+
+            XMU555(DirectX::PackedVector::XMU555* value)
+            {
+                _value = value;
+            }
+
+            XMU555(IntPtr location, DirectX::PackedVector::XMU555* val)
+            {
+                _value = (DirectX::PackedVector::XMU555*)location.ToPointer();
+                XMU555_CONSTRUCTOR(_value, val);
             }
 
             XMU555(unsigned short c)
             {
-                v = c;
+                _value = new DirectX::PackedVector::XMU555(c);
             }
 
             XMU555(array<float>^ pArray, bool w)
             {
-                components.x = (unsigned char)pArray[0];
-                components.y = (unsigned char)pArray[1];
-                components.z = (unsigned char)pArray[2];
-                components.w = w;
-            }
-
-            XMU555(array<unsigned char>^ pArray, bool w)
-            {
-                components.x = pArray[0];
-                components.y = pArray[1];
-                components.z = pArray[2];
-                components.w = w;
+                pin_ptr<float> p = &pArray[0];
+                _value = new DirectX::PackedVector::XMU555(p, w);
             }
         };
     }

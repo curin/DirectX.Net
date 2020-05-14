@@ -1,300 +1,576 @@
 #pragma once
-#include <DirectXMath.h>
+
+using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
 	namespace Math
 	{
-		public ref class XMFLOAT3X3
+		[StructLayout(LayoutKind::Sequential)]
+		public value struct XMFLOAT3X3
 		{
 		public:
-			DirectX::XMFLOAT3X3* _val;
-
-            XMFLOAT3X3(DirectX::XMFLOAT3X3* val)
-            {
-                _val = val;
-            }
-
-			XMFLOAT3X3()
-			{
-				_val = new DirectX::XMFLOAT3X3();
-			}
-
-			XMFLOAT3X3(const XMFLOAT3X3^ val)
-			{
-				_val = new DirectX::XMFLOAT3X3(*val->_val);
-			}
-
-			XMFLOAT3X3^ operator=(const XMFLOAT3X3^ val)
-			{
-				return gcnew XMFLOAT3X3(val);
-			}
+			float _11, _12, _13;
+			float _21, _22, _23;
+			float _31, _32, _33;
 
 			XMFLOAT3X3(float m00, float m01, float m02,
 				float m10, float m11, float m12,
 				float m20, float m21, float m22)
 			{
-				_val = new DirectX::XMFLOAT3X3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+				_11 = m00;
+				_12 = m01;
+				_13 = m02;
+				_21 = m10;
+				_22 = m11;
+				_23 = m12;
+				_31 = m20;
+				_32 = m21;
+				_33 = m22;
 			}
 
 			explicit XMFLOAT3X3(array<float>^ pArray)
 			{
-				cli::pin_ptr<float> arr = &pArray[0];
-				_val = new DirectX::XMFLOAT3X3(arr);
+				_11 = pArray[0];
+				_12 = pArray[1];
+				_13 = pArray[2];
+				_21 = pArray[3];
+				_22 = pArray[4];
+				_23 = pArray[5];
+				_31 = pArray[6];
+				_32 = pArray[7];
+				_33 = pArray[8];
 			}
 
-			float& operator() (unsigned int Row, unsigned int Column) { return _val->operator()(Row, Column); }
+			float& operator() (int Row, int Column) 
+			{ 
+				assert(Row < 3); 
+				assert(Column < 3);
+				pin_ptr<float> p = &_11;
+				return p[Row * 3 + Column];
+			}
 
-			~XMFLOAT3X3()
+			property float default[int, int]
 			{
-				delete _val;
+				float get(int Row, int Column)
+				{
+					assert(Row < 3);
+					assert(Column < 3);
+					pin_ptr<float> p = &_11;
+					return p[Row * 3 + Column];
+				}
+				void set(int Row, int Column, float value)
+				{
+					assert(Row < 3);
+					assert(Column < 3);
+					pin_ptr<float> p = &_11;
+					p[Row * 3 + Column] = value;
+				}
 			}
 		};
 
-		public ref class XMFLOAT4X3
+		[StructLayout(LayoutKind::Sequential)]
+		public value struct XMFLOAT4X3
 		{
 		public:
-			DirectX::XMFLOAT4X3* _val;
-
-            XMFLOAT4X3(DirectX::XMFLOAT4X3* val)
-            {
-                _val = val;
-            }
-
-			XMFLOAT4X3()
-			{
-				_val = new DirectX::XMFLOAT4X3();
-			}
-
-			XMFLOAT4X3(const XMFLOAT4X3^ val)
-			{
-				_val = new DirectX::XMFLOAT4X3(*val->_val);
-			}
-
-			XMFLOAT4X3^ operator=(const XMFLOAT4X3^ val)
-			{
-				return gcnew XMFLOAT4X3(val);
-			}
+			float _11, _12, _13;
+			float _21, _22, _23;
+			float _31, _32, _33;
+			float _41, _42, _43;
 
 			XMFLOAT4X3(float m00, float m01, float m02,
 				float m10, float m11, float m12,
 				float m20, float m21, float m22,
 				float m30, float m31, float m32)
 			{
-				_val = new DirectX::XMFLOAT4X3(m00, m01, m02, m10, m11, m12, m20, m21, m22, m30, m31, m32);
+				_11 = m00;
+				_12 = m01;
+				_13 = m02;
+				_21 = m10;
+				_22 = m11;
+				_23 = m12;
+				_31 = m20;
+				_32 = m21;
+				_33 = m22;
+				_41 = m30;
+				_42 = m31;
+				_43 = m32;
 			}
 
 			explicit XMFLOAT4X3(array<float>^ pArray)
 			{
-				cli::pin_ptr<float> arr = &pArray[0];
-				_val = new DirectX::XMFLOAT4X3(arr);
+				_11 = pArray[0];
+				_12 = pArray[1];
+				_13 = pArray[2];
+				_21 = pArray[3];
+				_22 = pArray[4];
+				_23 = pArray[5];
+				_31 = pArray[6];
+				_32 = pArray[7];
+				_33 = pArray[8];
+				_41 = pArray[9];
+				_42 = pArray[10];
+				_43 = pArray[11];
 			}
 
-			float& operator() (unsigned int Row, unsigned int Column) { return _val->operator()(Row, Column); }
-
-			~XMFLOAT4X3()
+			float& operator() (int Row, int Column)
 			{
-				delete _val;
+				assert(Row < 4);
+				assert(Column < 3);
+				pin_ptr<float> p = &_11;
+				return p[Row * 3 + Column];
+			}
+
+			property float default[int, int]
+			{
+				float get(int Row, int Column)
+				{
+					assert(Row < 4);
+					assert(Column < 3);
+					pin_ptr<float> p = &_11;
+					return p[Row * 3 + Column];
+				}
+				void set(int Row, int Column, float value)
+				{
+					assert(Row < 4);
+					assert(Column < 3);
+					pin_ptr<float> p = &_11;
+					p[Row * 3 + Column] = value;
+				}
 			}
 		};
 
-		public ref class XMFLOAT3X4
+		[StructLayout(LayoutKind::Sequential)]
+		public value struct XMFLOAT3X4
 		{
 		public:
-			DirectX::XMFLOAT3X4* _val;
-
-            XMFLOAT3X4(DirectX::XMFLOAT3X4* val)
-            {
-                _val = val;
-            }
-
-			XMFLOAT3X4()
-			{
-				_val = new DirectX::XMFLOAT3X4();
-			}
-
-			XMFLOAT3X4(const XMFLOAT3X4^ val)
-			{
-				_val = new DirectX::XMFLOAT3X4(*val->_val);
-			}
-
-			XMFLOAT3X4^ operator=(const XMFLOAT3X4^ val)
-			{
-				return gcnew XMFLOAT3X4(val);
-			}
+			float _11, _12, _13, _14;
+			float _21, _22, _23, _24;
+			float _31, _32, _33, _34;
 
 			XMFLOAT3X4(float m00, float m01, float m02, float m03,
 				float m10, float m11, float m12, float m13,
 				float m20, float m21, float m22, float m23)
 			{
-				_val = new DirectX::XMFLOAT3X4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23);
+				_11 = m00;
+				_12 = m01;
+				_13 = m02;
+				_14 = m03;
+				_21 = m10;
+				_22 = m11;
+				_23 = m12;
+				_24 = m23;
+				_31 = m20;
+				_32 = m21;
+				_33 = m22;
+				_34 = m23;
 			}
 
 			explicit XMFLOAT3X4(array<float>^ pArray)
 			{
-				cli::pin_ptr<float> arr = &pArray[0];
-				_val = new DirectX::XMFLOAT3X4(arr);
+				_11 = pArray[0];
+				_12 = pArray[1];
+				_13 = pArray[2];
+				_14 = pArray[3];
+				_21 = pArray[4];
+				_22 = pArray[5];
+				_23 = pArray[6];
+				_24 = pArray[7];
+				_31 = pArray[8];
+				_32 = pArray[9];
+				_33 = pArray[10];
+				_34 = pArray[11];
 			}
 
-			float& operator() (unsigned int Row, unsigned int Column) { return _val->operator()(Row, Column); }
-
-			~XMFLOAT3X4()
+			float& operator() (int Row, int Column)
 			{
-				delete _val;
+				assert(Row < 3);
+				assert(Column < 4);
+				pin_ptr<float> p = &_11;
+				return p[Row * 3 + Column];
+			}
+
+			property float default[int, int]
+			{
+				float get(int Row, int Column)
+				{
+					assert(Row < 3);
+					assert(Column < 4);
+					pin_ptr<float> p = &_11;
+					return p[Row * 3 + Column];
+				}
+				void set(int Row, int Column, float value)
+				{
+					assert(Row < 3);
+					assert(Column < 4);
+					pin_ptr<float> p = &_11;
+					p[Row * 3 + Column] = value;
+				}
 			}
 		};
 
-		public ref class XMFLOAT4X3A
+		[StructLayout(LayoutKind::Sequential, Pack = 16)]
+		public value struct XMFLOAT4X3A
 		{
 		public:
-			DirectX::XMFLOAT4X3A* _val;
-
-            XMFLOAT4X3A(DirectX::XMFLOAT4X3A* val)
-            {
-                _val = val;
-            }
-
-            XMFLOAT4X3A()
-            {
-                _val = new DirectX::XMFLOAT4X3A();
-            }
+			float _11, _12, _13;
+			float _21, _22, _23;
+			float _31, _32, _33;
+			float _41, _42, _43;
 
 			XMFLOAT4X3A(float m00, float m01, float m02,
 				float m10, float m11, float m12,
 				float m20, float m21, float m22,
 				float m30, float m31, float m32)
 			{
-				_val = new DirectX::XMFLOAT4X3A(m00, m01, m02, m10, m11, m12, m20, m21, m22, m30, m31, m32);
+				_11 = m00;
+				_12 = m01;
+				_13 = m02;
+				_21 = m10;
+				_22 = m11;
+				_23 = m12;
+				_31 = m20;
+				_32 = m21;
+				_33 = m22;
+				_41 = m30;
+				_42 = m31;
+				_43 = m32;
 			}
 
 			explicit XMFLOAT4X3A(array<float>^ pArray)
 			{
-				cli::pin_ptr<float> arr = &pArray[0];
-				_val = new DirectX::XMFLOAT4X3A(arr);
+				_11 = pArray[0];
+				_12 = pArray[1];
+				_13 = pArray[2];
+				_21 = pArray[3];
+				_22 = pArray[4];
+				_23 = pArray[5];
+				_31 = pArray[6];
+				_32 = pArray[7];
+				_33 = pArray[8];
+				_41 = pArray[9];
+				_42 = pArray[10];
+				_43 = pArray[11];
 			}
 
-			~XMFLOAT4X3A()
+			float& operator() (int Row, int Column)
 			{
-				delete _val;
+				assert(Row < 4);
+				assert(Column < 3);
+				pin_ptr<float> p = &_11;
+				return p[Row * 3 + Column];
+			}
+
+			property float default[int, int]
+			{
+				float get(int Row, int Column)
+				{
+					assert(Row < 4);
+					assert(Column < 3);
+					pin_ptr<float> p = &_11;
+					return p[Row * 3 + Column];
+				}
+				void set(int Row, int Column, float value)
+				{
+					assert(Row < 4);
+					assert(Column < 3);
+					pin_ptr<float> p = &_11;
+					p[Row * 3 + Column] = value;
+				}
 			}
 		};
 
-		public ref class XMFLOAT3X4A
+		[StructLayout(LayoutKind::Sequential, Pack = 16)]
+		public value struct XMFLOAT3X4A
 		{
 		public:
-			DirectX::XMFLOAT3X4A* _val;
-
-            XMFLOAT3X4A(DirectX::XMFLOAT3X4A* val)
-            {
-                _val = val;
-            }
-
-            XMFLOAT3X4A()
-            {
-                _val = new DirectX::XMFLOAT3X4A();
-            }
+			float _11, _12, _13, _14;
+			float _21, _22, _23, _24;
+			float _31, _32, _33, _34;
 
 			XMFLOAT3X4A(float m00, float m01, float m02, float m03,
 				float m10, float m11, float m12, float m13,
 				float m20, float m21, float m22, float m23)
 			{
-				_val = new DirectX::XMFLOAT3X4A(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23);
+				_11 = m00;
+				_12 = m01;
+				_13 = m02;
+				_14 = m03;
+				_21 = m10;
+				_22 = m11;
+				_23 = m12;
+				_24 = m23;
+				_31 = m20;
+				_32 = m21;
+				_33 = m22;
+				_34 = m23;
 			}
 
 			explicit XMFLOAT3X4A(array<float>^ pArray)
 			{
-				cli::pin_ptr<float> arr = &pArray[0];
-				_val = new DirectX::XMFLOAT3X4A(arr);
+				_11 = pArray[0];
+				_12 = pArray[1];
+				_13 = pArray[2];
+				_14 = pArray[3];
+				_21 = pArray[4];
+				_22 = pArray[5];
+				_23 = pArray[6];
+				_24 = pArray[7];
+				_31 = pArray[8];
+				_32 = pArray[9];
+				_33 = pArray[10];
+				_34 = pArray[11];
 			}
 
-			~XMFLOAT3X4A()
+			float& operator() (int Row, int Column)
 			{
-				delete _val;
+				assert(Row < 3);
+				assert(Column < 4);
+				pin_ptr<float> p = &_11;
+				return p[Row * 3 + Column];
+			}
+
+			property float default[int, int]
+			{
+				float get(int Row, int Column)
+				{
+					assert(Row < 3);
+					assert(Column < 4);
+					pin_ptr<float> p = &_11;
+					return p[Row * 3 + Column];
+				}
+				void set(int Row, int Column, float value)
+				{
+					assert(Row < 3);
+					assert(Column < 4);
+					pin_ptr<float> p = &_11;
+					p[Row * 3 + Column] = value;
+				}
 			}
 		};
 
-		public ref class XMFLOAT4X4
+		[StructLayout(LayoutKind::Sequential)]
+		public value struct XMFLOAT4X4
 		{
 		public:
-			DirectX::XMFLOAT4X4* _val;
-            
-            XMFLOAT4X4(DirectX::XMFLOAT4X4* val)
-            {
-                _val = val;
-            }
-
-			XMFLOAT4X4()
-			{
-				_val = new DirectX::XMFLOAT4X4();
-			}
-
-			XMFLOAT4X4(const XMFLOAT4X4^ val)
-			{
-				_val = new DirectX::XMFLOAT4X4(*val->_val);
-			}
-
-			XMFLOAT4X4^ operator=(const XMFLOAT4X4^ val)
-			{
-				return gcnew XMFLOAT4X4(val);
-			}
+			float _11, _12, _13, _14;
+			float _21, _22, _23, _24;
+			float _31, _32, _33, _34;
+			float _41, _42, _43, _44;
 
 			XMFLOAT4X4(float m00, float m01, float m02, float m03,
 				float m10, float m11, float m12, float m13,
 				float m20, float m21, float m22, float m23,
 				float m30, float m31, float m32, float m33)
 			{
-				_val = new DirectX::XMFLOAT4X4(m00, m01, m02, m03,
-					m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+				_11 = m00;
+				_12 = m01;
+				_13 = m02;
+				_14 = m03;
+				_21 = m10;
+				_22 = m11;
+				_23 = m12;
+				_24 = m23;
+				_31 = m20;
+				_32 = m21;
+				_33 = m22;
+				_34 = m23;
+				_41 = m30;
+				_42 = m31;
+				_43 = m32;
+				_44 = m33;
 			}
 
 			explicit XMFLOAT4X4(array<float>^ pArray)
 			{
-				cli::pin_ptr<float> arr = &pArray[0];
-				_val = new DirectX::XMFLOAT4X4(arr);
+				_11 = pArray[0];
+				_12 = pArray[1];
+				_13 = pArray[2];
+				_14 = pArray[3];
+				_21 = pArray[4];
+				_22 = pArray[5];
+				_23 = pArray[6];
+				_24 = pArray[7];
+				_31 = pArray[8];
+				_32 = pArray[9];
+				_33 = pArray[10];
+				_34 = pArray[11];
+				_41 = pArray[12];
+				_42 = pArray[13];
+				_43 = pArray[14];
+				_44 = pArray[15];
 			}
 
-			float& operator() (unsigned int Row, unsigned int Column) { return _val->operator()(Row, Column); }
-
-			~XMFLOAT4X4()
+			float& operator() (int Row, int Column)
 			{
-				delete _val;
+				assert(Row < 4);
+				assert(Column < 4);
+				pin_ptr<float> p = &_11;
+				return p[Row * 3 + Column];
+			}
+
+			property float default[int, int]
+			{
+				float get(int Row, int Column)
+				{
+					assert(Row < 4);
+					assert(Column < 4);
+					pin_ptr<float> p = &_11;
+					return p[Row * 3 + Column];
+				}
+				void set(int Row, int Column, float value)
+				{
+					assert(Row < 4);
+					assert(Column < 4);
+					pin_ptr<float> p = &_11;
+					p[Row * 3 + Column] = value;
+				}
 			}
 		};
 
-		public ref class XMFLOAT4X4A
+		[StructLayout(LayoutKind::Sequential, Pack=16)]
+		public value struct XMFLOAT4X4A
 		{
 		public:
-			DirectX::XMFLOAT4X4A* _val;
-
-            XMFLOAT4X4A()
-            {
-                _val = new DirectX::XMFLOAT4X4A();
-            }
-
-            XMFLOAT4X4A(DirectX::XMFLOAT4X4A* val)
-            {
-                _val = val;
-            }
+			float _11, _12, _13, _14;
+			float _21, _22, _23, _24;
+			float _31, _32, _33, _34;
+			float _41, _42, _43, _44;
 
 			XMFLOAT4X4A(float m00, float m01, float m02, float m03,
 				float m10, float m11, float m12, float m13,
 				float m20, float m21, float m22, float m23,
 				float m30, float m31, float m32, float m33)
 			{
-				_val = new DirectX::XMFLOAT4X4A(m00, m01, m02, m03,
-					m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+				_11 = m00;
+				_12 = m01;
+				_13 = m02;
+				_14 = m03;
+				_21 = m10;
+				_22 = m11;
+				_23 = m12;
+				_24 = m23;
+				_31 = m20;
+				_32 = m21;
+				_33 = m22;
+				_34 = m23;
+				_41 = m30;
+				_42 = m31;
+				_43 = m32;
+				_44 = m33;
 			}
 
 			explicit XMFLOAT4X4A(array<float>^ pArray)
 			{
-				cli::pin_ptr<float> arr = &pArray[0];
-				_val = new DirectX::XMFLOAT4X4A(arr);
+				_11 = pArray[0];
+				_12 = pArray[1];
+				_13 = pArray[2];
+				_14 = pArray[3];
+				_21 = pArray[4];
+				_22 = pArray[5];
+				_23 = pArray[6];
+				_24 = pArray[7];
+				_31 = pArray[8];
+				_32 = pArray[9];
+				_33 = pArray[10];
+				_34 = pArray[11];
+				_41 = pArray[12];
+				_42 = pArray[13];
+				_43 = pArray[14];
+				_44 = pArray[15];
 			}
 
-			~XMFLOAT4X4A()
+			float& operator() (int Row, int Column)
 			{
-				delete _val;
+				assert(Row < 4);
+				assert(Column < 4);
+				pin_ptr<float> p = &_11;
+				return p[Row * 3 + Column];
 			}
+
+			property float default[int, int]
+			{
+				float get(int Row, int Column)
+				{
+					assert(Row < 4);
+					assert(Column < 4);
+					pin_ptr<float> p = &_11;
+					return p[Row * 3 + Column];
+				}
+				void set(int Row, int Column, float value)
+				{
+					assert(Row < 4);
+					assert(Column < 4);
+					pin_ptr<float> p = &_11;
+					p[Row * 3 + Column] = value;
+				}
+			}
+		};
+
+		[StructLayout(LayoutKind::Sequential)]
+		public value struct XMFLOAT2
+		{
+			float x;
+			float y;
+
+			XMFLOAT2(float _x, float _y) { x = _x; y = _y; }
+			XMFLOAT2(array<float>^ pArray) { x = pArray[0]; y = pArray[1]; }
+		};
+
+		[StructLayout(LayoutKind::Sequential)]
+		public value struct XMFLOAT3
+		{
+			float x;
+			float y;
+			float z;
+
+			XMFLOAT3(float _x, float _y, float _z) { x = _x; y = _y; z = _z; }
+			XMFLOAT3(array<float>^ pArray) { x = pArray[0]; y = pArray[1]; z = pArray[2]; }
+		};
+
+		[StructLayout(LayoutKind::Sequential)]
+		public value struct XMFLOAT4
+		{
+			float x;
+			float y;
+			float z;
+			float w;
+
+			XMFLOAT4(float _x, float _y, float _z, float _w) { x = _x; y = _y; z = _z; w = _w; }
+			XMFLOAT4(array<float>^ pArray) { x = pArray[0]; y = pArray[1]; z = pArray[2]; w = pArray[3]; }
+		};
+
+		[StructLayout(LayoutKind::Sequential, Pack = 16)]
+		public value struct XMFLOAT2A
+		{
+			float x;
+			float y;
+
+			XMFLOAT2A(float _x, float _y) { x = _x; y = _y; }
+			XMFLOAT2A(array<float>^ pArray) { x = pArray[0]; y = pArray[1]; }
+		};
+
+		[StructLayout(LayoutKind::Sequential, Pack = 16)]
+		public value struct XMFLOAT3A
+		{
+			float x;
+			float y;
+			float z;
+
+			XMFLOAT3A(float _x, float _y, float _z) { x = _x; y = _y; z = _z; }
+			XMFLOAT3A(array<float>^ pArray) { x = pArray[0]; y = pArray[1]; z = pArray[2]; }
+		};
+
+		[StructLayout(LayoutKind::Sequential, Pack = 16)]
+		public value struct XMFLOAT4A
+		{
+			float x;
+			float y;
+			float z;
+			float w;
+
+			XMFLOAT4A(float _x, float _y, float _z, float _w) { x = _x; y = _y; z = _z; w = _w; }
+			XMFLOAT4A(array<float>^ pArray) { x = pArray[0]; y = pArray[1]; z = pArray[2]; w = pArray[3]; }
 		};
 	}
 }

@@ -224,6 +224,8 @@
     <ClInclude Include="Common\IUnknown.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Common\IUnmanagedReference.h" />
+    <ClInclude Include="UDXMath.h" />
     <ClInclude Include="DirectX.h" />
     <ClInclude Include="DXCollision.h">
       <DeploymentContent>true</DeploymentContent>
@@ -232,9 +234,6 @@
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
     <ClInclude Include="DXMath.h">
-      <DeploymentContent>true</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Math\UDXMathMethods.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Math\XMFLOAT.h">
