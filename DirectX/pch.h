@@ -8,8 +8,11 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
+#include "Common/ID3DBlob.h"
+#include "Common/ID3DDestructionNotifier.h"
+#include "Common/ID3DInclude.h"
+#include "Common/D3D_SHADER_MACRO.h"
+#include "Windows/IUnknown.h"
 #include "Math/XMVECTOR.h"
-#include "Math/XMMATRIX.h"
-#include "Collision/BoundingBox.h"
 
 #endif //PCH_H

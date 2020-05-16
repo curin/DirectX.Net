@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DXColors.h"
 #include "UDXMath.h"
 #include "Math/XMINT.h"
 #include "Math/XMUINT.h"

@@ -149,7 +149,7 @@ namespace DirectX
 	inline XMVECTOR* YellowGreen() { return new DirectX::XMVECTOR(DirectX::Colors::YellowGreen); }
 
 #define COLORVECPROP(Name) static property DirectX::Math::XMVECTOR^ Name { DirectX::Math::XMVECTOR^ get() { return gcnew DirectX::Math::XMVECTOR(DirectX::Name()); }}
-	public ref class Colors
+	public ref class DirectXColors
 	{
 	public:
 		COLORVECPROP(AliceBlue)

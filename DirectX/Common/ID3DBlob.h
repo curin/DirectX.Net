@@ -1,42 +1,42 @@
 #pragma once
 #include <d3dcommon.h>
 
-#include "IUnknown.h"
+#include "../Windows/IUnknown.h"
 
 namespace DirectX
 {
     public ref class ID3DBlob : IUnknown
 	{
     public:
+        ID3DBlob(IntPtr pointer) : IUnknown(pointer) { }
+        ID3DBlob(void* pointer) : IUnknown(pointer) { }
 
-		LPD3DBLOB _blob;
         IntPtr GetBufferPointer()
         {
-            return IntPtr(_blob->GetBufferPointer());
+            return IntPtr(((LPD3DBLOB)_ref)->GetBufferPointer());
         }
 
         unsigned long long GetBufferSize()
         {
-            return _blob->GetBufferSize();
+            return ((LPD3DBLOB)_ref)->GetBufferSize();
         }
 
         GUID getGUID() override
         {
-            return DirectX::GetGUID<::ID3DBlob>(_blob);
+            return DirectX::GetGUID<::ID3DBlob>(((LPD3DBLOB)_ref));
         }
 
-        property ::IUnknown* Unknown
+        static GUID GetGUID()
         {
-            ::IUnknown* get() override
-            {
-                return _blob;
-            }
-
-            void set(::IUnknown* value) override
-            {
-                _blob = (LPD3DBLOB)value;
-            }
+            return __uuidof(::ID3DBlob);
         }
+
+        static Guid GetGuid()
+        {
+            return FromGUID(GetGUID());
+        }
+
+        explicit operator LPD3DBLOB() { return ((LPD3DBLOB)_ref); }
 	};
 
     

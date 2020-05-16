@@ -1,7 +1,7 @@
 #pragma once
 
 #include <DirectXPackedVector.h>
-#include "../Common/IUnmanagedReference.h"
+#include "../Windows/IUnmanagedReference.h"
 
 namespace DirectX
 {

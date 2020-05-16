@@ -72,6 +72,96 @@
     <ClInclude Include="DXGI_JPEG_QUANTIZATION_TABLE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Debug_classes\DXGI_DEBUG_RLO_FLAGS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_FILTER.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_FILTER_DESC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_MESSAGE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_MESSAGE_CATEGORY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_MESSAGE_SEVERITY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\DXGIDebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\IDXGIDebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\IDXGIDebug1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug_classes\IDXGIInfoQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_MAPPED_RECT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_FRAME_STATISTICS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_ADAPTER_DESC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OUTPUT_DESC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_SHARED_RESOURCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_RESIDENCY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_SURFACE_DESC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_SWAP_EFFECT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_SWAP_CHAIN_FLAG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_SWAP_CHAIN_DESC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIDeviceSubObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIKeyedMutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGISurface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGISurface1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IUnmanagedReference.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.DXGI.cpp">

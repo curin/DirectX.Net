@@ -151,6 +151,8 @@
     </ClInclude>
     <ClInclude Include="Common\D3D_FEATURE_LEVEL.h">
       <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Common\D3D_INCLUDE_TYPE.h">
       <DeploymentContent>true</DeploymentContent>
@@ -169,6 +171,7 @@
     </ClInclude>
     <ClInclude Include="Common\D3D_PRIMITIVE.h">
       <DeploymentContent>true</DeploymentContent>
+      <FileType>CppHeader</FileType>
     </ClInclude>
     <ClInclude Include="Common\D3D_PRIMITIVE_TOPOLOGY.h">
       <DeploymentContent>true</DeploymentContent>
@@ -221,10 +224,12 @@
     <ClInclude Include="Common\ID3DInclude.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Common\IUnknown.h">
+    <ClInclude Include="Windows\IUnknown.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Common\IUnmanagedReference.h" />
+    <ClInclude Include="Windows\IUnmanagedReference.h" />
+    <ClInclude Include="Windows\LARGE_INTEGER.h" />
+    <ClInclude Include="Windows\LUID.h" />
     <ClInclude Include="UDXMath.h" />
     <ClInclude Include="DirectX.h" />
     <ClInclude Include="DXCollision.h">
@@ -232,6 +237,7 @@
     </ClInclude>
     <ClInclude Include="DXColors.h">
       <DeploymentContent>true</DeploymentContent>
+      <FileType>CppCode</FileType>
     </ClInclude>
     <ClInclude Include="DXMath.h">
       <DeploymentContent>true</DeploymentContent>
@@ -340,6 +346,7 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Windows\RECT.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />

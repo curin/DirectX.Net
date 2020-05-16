@@ -30,20 +30,22 @@ namespace DirectX
 
     long QueryUnknown(::IUnknown* unknown, GUID riid, void* out) { return unknown->QueryInterface(riid, &out); }
 
-    public ref class IUnknown abstract
+    public ref class IUnknown
     {
     protected:
         IUnknown() { }
+        ::IUnknown* _ref;
     public:
-        IUnknown(IntPtr^ ptr) { Unknown = (::IUnknown*)ptr->ToPointer(); }
+        IUnknown(IntPtr^ ptr) { _ref = (::IUnknown*)ptr->ToPointer(); }
+        IUnknown(void* ptr) { _ref = (::IUnknown*)ptr; }
 
         virtual Guid getGuid()
         {
             return DirectX::FromGUID(getGUID());
         }
-        virtual GUID getGUID() abstract;
-        property ::IUnknown* Unknown { virtual ::IUnknown* get() abstract; virtual void set(::IUnknown* value) abstract; }
-        property IntPtr^ Pointer { IntPtr^ get() { return gcnew IntPtr(Unknown); } }
+        virtual GUID getGUID() { return DirectX::GetGUID<::IUnknown>(_ref); }
+        property ::IUnknown* Unknown { ::IUnknown* get() { return _ref; } }
+        property IntPtr Pointer { IntPtr get() { return IntPtr(Unknown); } }
         long QueryInterface(Guid riid, [Out] IntPtr^% out)
         {
             void** o;
@@ -52,21 +54,32 @@ namespace DirectX
             return ret;
         }
 
-        ~IUnknown() 
+        ~IUnknown()
         {
             Release();
-            delete Unknown; 
+            delete _ref;
         }
 
         unsigned long AddRef() { return Unknown->AddRef(); }
         unsigned long Release() { return Unknown->Release(); }
 
-        generic<typename type>
-            where type : IUnknown
-            long QueryInterface([Out] type% out)
-            {
-                void* o = (void*)out->Unknown;
-                return QueryUnknown(Unknown, getGUID(), o);
-            }
+        long QueryInterface(Guid riid, [Out]IntPtr% out)
+        {
+            void** pPointer;
+            long ret = QueryUnknown(_ref, ToGUID(riid), pPointer);
+            out = IntPtr(*pPointer);
+            return ret;
+        }
+
+
+        static long QueryInterface(IUnknown^ Unknown, Guid riid, [Out]IntPtr% out)
+        {
+            void** pPointer;
+            long ret = QueryUnknown(Unknown->_ref, ToGUID(riid), pPointer);
+            out = IntPtr(*pPointer);
+            return ret;
+        }
+
+        explicit operator ::IUnknown* () { return _ref; }
     };
 }

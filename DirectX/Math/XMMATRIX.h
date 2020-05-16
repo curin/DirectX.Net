@@ -2,7 +2,7 @@
 
 #include <DirectXMath.h>
 #include "XMVECTOR.h"
-#include "../Common/IUnmanagedReference.h"
+#include "../Windows/IUnmanagedReference.h"
 #include "../DXMath.h"
 
 using namespace System::Numerics;

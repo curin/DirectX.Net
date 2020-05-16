@@ -1,5 +1,6 @@
 #pragma once
 
+#include <d3dcommon.h>
 namespace DirectX
 {
     public enum D3D_FEATURE_LEVEL

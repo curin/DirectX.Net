@@ -25,7 +25,7 @@
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>DirectX</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>DirectX.dxgi</ProjectName>
+    <ProjectName>DirectX.DXGI</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -74,7 +74,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -120,6 +122,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DXGI.h" />
+    <ClInclude Include="DXGI_ADAPTER_DESC.h" />
+    <ClInclude Include="DXGI_FRAME_STATISTICS.h" />
+    <ClInclude Include="DXGI_MAPPED_RECT.h" />
+    <ClInclude Include="Debug_classes\DXGIDebug.h" />
+    <ClInclude Include="Debug_classes\DXGI_DEBUG_RLO_FLAGS.h" />
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_FILTER.h" />
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_FILTER_DESC.h" />
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_MESSAGE.h" />
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_MESSAGE_CATEGORY.h" />
+    <ClInclude Include="Debug_classes\DXGI_INFO_QUEUE_MESSAGE_SEVERITY.h" />
+    <ClInclude Include="Debug_classes\IDXGIDebug.h" />
+    <ClInclude Include="Debug_classes\IDXGIDebug1.h" />
+    <ClInclude Include="Debug_classes\IDXGIInfoQueue.h" />
     <ClInclude Include="DirectX.DXGI.h" />
     <ClInclude Include="DXGI_COLOR_SPACE_TYPE.h" />
     <ClInclude Include="DXGI_FORMAT.h" />
@@ -133,10 +149,29 @@
     <ClInclude Include="DXGI_MODE_ROTATION.h" />
     <ClInclude Include="DXGI_MODE_SCALING.h" />
     <ClInclude Include="DXGI_MODE_SCANLINE_ORDER.h" />
+    <ClInclude Include="DXGI_OUTPUT_DESC.h" />
     <ClInclude Include="DXGI_RATIONAL.h" />
+    <ClInclude Include="DXGI_RESIDENCY.h" />
     <ClInclude Include="DXGI_RGB.h" />
     <ClInclude Include="DXGI_RGBA.h" />
     <ClInclude Include="DXGI_SAMPLE_DESC.h" />
+    <ClInclude Include="DXGI_SHARED_RESOURCE.h" />
+    <ClInclude Include="DXGI_SURFACE_DESC.h" />
+    <ClInclude Include="DXGI_SWAP_CHAIN_DESC.h" />
+    <ClInclude Include="DXGI_SWAP_CHAIN_FLAG.h" />
+    <ClInclude Include="DXGI_SWAP_EFFECT.h" />
+    <ClInclude Include="IDXGIAdapter.h" />
+    <ClInclude Include="IDXGIDeviceSubObject.h" />
+    <ClInclude Include="IDXGIKeyedMutex.h" />
+    <ClInclude Include="IDXGIObject.h" />
+    <ClInclude Include="IDXGIOutput.h" />
+    <ClInclude Include="IDXGIResource.h" />
+    <ClInclude Include="IDXGISurface.h" />
+    <ClInclude Include="IDXGISurface1.h">
+      <DeploymentContent>true</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="IUnmanagedReference.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
@@ -162,6 +197,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DirectX\DirectX.vcxproj">
+      <Project>{3596591d-09cc-4af3-a380-ec0d24af62cd}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Native\DirectX.Net\DirectX\DirectX.vcxproj">
       <Project>{3596591d-09cc-4af3-a380-ec0d24af62cd}</Project>
     </ProjectReference>

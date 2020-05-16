@@ -1,6 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
-#include "../Common/IUnmanagedReference.h"
+#include "../Windows/IUnmanagedReference.h"
 
 using namespace System::Numerics;
 

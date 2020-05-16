@@ -7,7 +7,23 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include "DXGI_GAMMA_CONTROL.h"
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
+#include <dxgi.h>
+#include <dxgidebug.h>
+
+#include "Debug_classes/DXGIDebug.h"
+
+#include "IDXGISurface1.h"
+#include "IDXGIKeyedMutex.h"
+#include "IDXGIResource.h"
+
+#include "Debug_classes/IDXGIDebug1.h"
+#include "Debug_classes/IDXGIInfoQueue.h"
+#include "Debug_classes/DXGI_INFO_QUEUE_FILTER.h"
+
 // add headers that you want to pre-compile here
 
 #endif //PCH_H
