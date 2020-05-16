@@ -45,7 +45,9 @@ namespace DirectX
 
             long SetPrivateDataInterface(Guid Name, IUnknown^ pUnknown)
             {
-                void* ppUn = pUnknown->Pointer.ToPointer();
+                void* ppUn = nullptr;
+                if (pUnknown != nullptr)
+                    ppUn = pUnknown->Pointer.ToPointer();
                 return (_ref)->SetPrivateDataInterface(ToGUID(Name), (::IUnknown*)ppUn);
             }
 

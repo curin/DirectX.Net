@@ -11,14 +11,22 @@
 #define WIN32_LEAN_AND_MEAN
 #endif
 
-#include <dxgi.h>
 #include <dxgidebug.h>
+#include <dxgi.h>
+#include <dxgi1_2.h>
+#include <dxgi1_3.h>
+#include <dxgi1_4.h>
+#include <dxgi1_5.h>
+#include <dxgi1_6.h>
 
 #include "Debug_classes/DXGIDebug.h"
 
 #include "IDXGISurface1.h"
 #include "IDXGIKeyedMutex.h"
 #include "IDXGIResource.h"
+#include "IDXGIAdapter.h"
+#include "IDXGIOutput.h"
+#include "IDXGISwapChain.h"
 
 #include "Debug_classes/IDXGIDebug1.h"
 #include "Debug_classes/IDXGIInfoQueue.h"

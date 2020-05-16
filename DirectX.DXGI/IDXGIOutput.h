@@ -1,6 +1,13 @@
 #pragma once
 
 #include "IDXGIObject.h"
+#include "IDXGISurface.h"
+#include "DXGI_MODE_DESC.h"
+#include "DXGI_FORMAT.h"
+#include "DXGI_OUTPUT_DESC.h"
+#include "DXGI_GAMMA_CONTROL_CAPABILITIES.h"
+#include "DXGI_GAMMA_CONTROL.h"
+#include "DXGI_FRAME_STATISTICS.h"
 
 namespace DirectX
 {
@@ -13,58 +20,83 @@ namespace DirectX
             IDXGIOutput(IntPtr pointer) : IDXGIObject(pointer) { _ref = (::IDXGIOutput*)pointer.ToPointer(); }
             IDXGIOutput(void* pointer) : IDXGIObject(pointer) { _ref = (::IDXGIOutput*)pointer; }
 
-            virtual HRESULT STDMETHODCALLTYPE GetDesc(
-                /* [annotation][out] */
-                _Out_  DXGI_OUTPUT_DESC* pDesc) = 0;
+            long GetDesc([Out] DXGI_OUTPUT_DESC% pDesc)
+            {
+                pin_ptr<DXGI_OUTPUT_DESC> pDes = &pDesc;
+                return _ref->GetDesc((::DXGI_OUTPUT_DESC*)pDes);
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE GetDisplayModeList(
-                /* [in] */ DXGI_FORMAT EnumFormat,
-                /* [in] */ UINT Flags,
-                /* [annotation][out][in] */
-                _Inout_  UINT* pNumModes,
-                /* [annotation][out] */
-                _Out_writes_to_opt_(*pNumModes, *pNumModes)  DXGI_MODE_DESC* pDesc) = 0;
+            long GetDisplayModeList(DXGI_FORMAT EnumFormat, unsigned int Flags, unsigned int% pNumModes, [Out] array<DXGI_MODE_DESC>^ pDesc)
+            {
+                pin_ptr<unsigned int> pNum = &pNumModes;
+                ::DXGI_MODE_DESC* pArray;
+                long ret = _ref->GetDisplayModeList((::DXGI_FORMAT)EnumFormat, Flags, pNum, pArray);
+                pDesc = gcnew array<DXGI_MODE_DESC>(pNumModes);
+                for (int i = 0; i < pNumModes; i++)
+                    pDesc[i] = *(DXGI_MODE_DESC*)(pArray + i);
+                delete pArray;
+                return ret;
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE FindClosestMatchingMode(
-                /* [annotation][in] */
-                _In_  const DXGI_MODE_DESC* pModeToMatch,
-                /* [annotation][out] */
-                _Out_  DXGI_MODE_DESC* pClosestMatch,
-                /* [annotation][in] */
-                _In_opt_  IUnknown* pConcernedDevice) = 0;
+            long GetMatchingDisplayModeCount(DXGI_FORMAT EnumFormat, unsigned int Flags, unsigned int% pNumModes)
+            {
+                pin_ptr<unsigned int> pNum = &pNumModes;
+                return _ref->GetDisplayModeList((::DXGI_FORMAT)EnumFormat, Flags, pNum, NULL);
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE WaitForVBlank(void) = 0;
+            long FindClosestMatchingMode(DXGI_MODE_DESC% pModeToMatch, [Out] DXGI_MODE_DESC% pClosestMatch, IUnknown^ pConcernedDevice)
+            {
+                pin_ptr<DXGI_MODE_DESC> pMatch = &pModeToMatch;
+                pin_ptr<DXGI_MODE_DESC> pClose = &pClosestMatch;
+                void* ppUn = nullptr;
+                if (pConcernedDevice != nullptr)
+                    ppUn = pConcernedDevice->Pointer.ToPointer();
+                return _ref->FindClosestMatchingMode((::DXGI_MODE_DESC*)pMatch, (::DXGI_MODE_DESC*)pClose, (::IUnknown*)ppUn);
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE TakeOwnership(
-                /* [annotation][in] */
-                _In_  IUnknown* pDevice,
-                BOOL Exclusive) = 0;
+            long WaitForVBlank() { return _ref->WaitForVBlank(); }
 
-            virtual void STDMETHODCALLTYPE ReleaseOwnership(void) = 0;
+            long TakeOwnership(IUnknown^ pDevice, bool Exclusive) 
+            { 
+                void* ppUn = pDevice->Pointer.ToPointer();
+                return _ref->TakeOwnership((::IUnknown*)ppUn, Exclusive); 
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE GetGammaControlCapabilities(
-                /* [annotation][out] */
-                _Out_  DXGI_GAMMA_CONTROL_CAPABILITIES* pGammaCaps) = 0;
+            void ReleaseOwnership() { _ref->ReleaseOwnership(); }
 
-            virtual HRESULT STDMETHODCALLTYPE SetGammaControl(
-                /* [annotation][in] */
-                _In_  const DXGI_GAMMA_CONTROL* pArray) = 0;
+            long GetGammaControlCapabilities([Out] DXGI_GAMMA_CONTROL_CAPABILITIES% pGammaCaps)
+            {
+                pin_ptr<DXGI_GAMMA_CONTROL_CAPABILITIES> pCaps = &pGammaCaps;
+                return _ref->GetGammaControlCapabilities((::DXGI_GAMMA_CONTROL_CAPABILITIES*)pCaps);
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE GetGammaControl(
-                /* [annotation][out] */
-                _Out_  DXGI_GAMMA_CONTROL* pArray) = 0;
+            long SetGammaControl(DXGI_GAMMA_CONTROL% pArray)
+            {
+                pin_ptr<DXGI_GAMMA_CONTROL> pNotArray = &pArray;
+                return _ref->SetGammaControl((::DXGI_GAMMA_CONTROL*)pNotArray);
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE SetDisplaySurface(
-                /* [annotation][in] */
-                _In_  IDXGISurface* pScanoutSurface) = 0;
+            long GetGammaControl([Out] DXGI_GAMMA_CONTROL% pArray)
+            {
+                pin_ptr<DXGI_GAMMA_CONTROL> pNotArray = &pArray;
+                return _ref->GetGammaControl((::DXGI_GAMMA_CONTROL*)pNotArray);
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE GetDisplaySurfaceData(
-                /* [annotation][in] */
-                _In_  IDXGISurface* pDestination) = 0;
+            long SetDisplaySurface(IDXGISurface^ pScanoutSurface)
+            {
+                return _ref->SetDisplaySurface((::IDXGISurface*)pScanoutSurface);
+            }
 
-            virtual HRESULT STDMETHODCALLTYPE GetFrameStatistics(
-                /* [annotation][out] */
-                _Out_  DXGI_FRAME_STATISTICS* pStats) = 0;
+            long GetDisplaySurfaceData(IDXGISurface^ pDestination)
+            {
+                return _ref->GetDisplaySurfaceData((::IDXGISurface*)pDestination);
+            }
+
+            long GetFrameStatistics([Out] DXGI_FRAME_STATISTICS% pStats)
+            {
+                pin_ptr<DXGI_FRAME_STATISTICS> pStat = &pStats;
+                return _ref->GetFrameStatistics((::DXGI_FRAME_STATISTICS*)pStat);
+            }
 
             GUID getGUID() override
             {

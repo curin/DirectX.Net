@@ -162,6 +162,9 @@
     <ClInclude Include="IDXGIOutput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IDXGISwapChain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.DXGI.cpp">

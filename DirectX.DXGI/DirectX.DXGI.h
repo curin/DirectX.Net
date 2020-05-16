@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "DXGI.h"
 #include "DXGI_ADAPTER_DESC.h"
 #include "DXGI_COLOR_SPACE_TYPE.h"

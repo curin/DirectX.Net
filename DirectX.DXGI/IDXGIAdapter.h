@@ -20,6 +20,7 @@ namespace DirectX
                 ::IDXGIOutput** ppOut;
                 long ret = _ref->EnumOutputs(Output, ppOut);
                 ppOutput = gcnew IDXGIOutput(*ppOut);
+                return ret;
             }
 
             long GetDesc([Out] DXGI_ADAPTER_DESC% pDesc)
