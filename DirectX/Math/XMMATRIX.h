@@ -12,6 +12,11 @@ namespace DirectX
 	namespace Math
 	{
 		void XMMATRIX_CONSTRUCTOR(DirectX::XMMATRIX* location, DirectX::XMMATRIX* value) { *location = DirectX::XMMATRIX(*value); }
+		DirectX::XMMATRIX* XMMATRIX_ADD(DirectX::XMMATRIX* lh, DirectX::XMMATRIX* rh) { return new DirectX::XMMATRIX(*lh + *rh); }
+		DirectX::XMMATRIX* XMMATRIX_SUBTRACT(DirectX::XMMATRIX* lh, DirectX::XMMATRIX* rh) { return new DirectX::XMMATRIX(*lh - *rh); }
+		DirectX::XMMATRIX* XMMATRIX_MULTIPLY(DirectX::XMMATRIX* lh, DirectX::XMMATRIX* rh) { return new DirectX::XMMATRIX(*lh * *rh); }
+		DirectX::XMMATRIX* XMMATRIX_MULTIPLY(DirectX::XMMATRIX* lh, float rh) { return new DirectX::XMMATRIX(*lh * rh); }
+		DirectX::XMMATRIX* XMMATRIX_DIVIDE(DirectX::XMMATRIX* lh, float rh) { return new DirectX::XMMATRIX(*lh / rh); }
 		public ref class XMMATRIX : IUnmanagedReference<DirectX::XMMATRIX>
 		{
 		public:
@@ -97,6 +102,12 @@ namespace DirectX
 					mat.M31, mat.M32, mat.M33, mat.M34, mat.M41, mat.M42, mat.M43, mat.M44);
             }
 
+			XMMATRIX^ operator+(XMMATRIX^ rh) { return gcnew XMMATRIX(XMMATRIX_ADD(_value, rh->_value)); }
+			XMMATRIX^ operator-(XMMATRIX^ rh) { return gcnew XMMATRIX(XMMATRIX_SUBTRACT(_value, rh->_value)); }
+			XMMATRIX^ operator*(XMMATRIX^ rh) { return gcnew XMMATRIX(XMMATRIX_MULTIPLY(_value, rh->_value)); }
+			XMMATRIX^ operator*(float rh) { return gcnew XMMATRIX(XMMATRIX_MULTIPLY(_value, rh)); }
+			XMMATRIX^ operator/(float rh) { return gcnew XMMATRIX(XMMATRIX_DIVIDE(_value, rh)); }
+			static XMMATRIX^ operator*(float lh, XMMATRIX^ rh) { return gcnew XMMATRIX(XMMATRIX_MULTIPLY(rh->_value, lh)); }
 			explicit operator DirectX::XMMATRIX* () { return _value; }
 		};
 	}
