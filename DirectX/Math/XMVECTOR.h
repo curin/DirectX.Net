@@ -11,6 +11,9 @@ namespace DirectX
 	namespace Math
 	{
 		void XMVECTOR_CONSTRUCTOR(DirectX::XMVECTOR* location, DirectX::XMVECTOR* value) { *location = DirectX::XMVECTOR(*value); }
+		DirectX::XMVECTOR* XMVECTOR_ADD(DirectX::XMVECTOR* lh, DirectX::XMVECTOR* rh) { DirectX::XMVECTOR* ret = new DirectX::XMVECTOR(*lh + *rh); return ret;  }
+		DirectX::XMVECTOR* XMVECTOR_SUBTRACT(DirectX::XMVECTOR* lh, DirectX::XMVECTOR* rh) { DirectX::XMVECTOR* ret = new DirectX::XMVECTOR(*lh - *rh);return ret; }
+		DirectX::XMVECTOR* XMVECTOR_MULTIPLY(DirectX::XMVECTOR* lh, float rh) { DirectX::XMVECTOR* ret = new DirectX::XMVECTOR(*lh * rh); return ret; }
 		public ref class XMVECTOR : IUnmanagedReference<DirectX::XMVECTOR>
 		{
 		public:
@@ -196,6 +199,10 @@ namespace DirectX
 			}
 
 			operator DirectX::XMVECTOR* () { return _value; }
+			XMVECTOR^ operator+(XMVECTOR^ rh) { return gcnew XMVECTOR(XMVECTOR_ADD(_value, rh->_value)); }
+			XMVECTOR^ operator-(XMVECTOR^ rh) { return gcnew XMVECTOR(XMVECTOR_SUBTRACT(_value, rh->_value)); }
+			XMVECTOR^ operator*(float rh) { return gcnew XMVECTOR(XMVECTOR_MULTIPLY(_value, rh)); }
+			static XMVECTOR^ operator*(float lh, XMVECTOR^ rh) { return gcnew XMVECTOR(XMVECTOR_MULTIPLY(rh->_value, lh)); }
 		};
 	}
 }
