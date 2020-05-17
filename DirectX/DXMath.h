@@ -8,7 +8,7 @@
 #include "Math/XMMATRIX.h"
 #include "Math/XMVECTOR.h"
 
-#define PropertyConvert(type, Name, Namespace) static property type Name { type get() { return Namespace::Name; }}
+#define PropertyConvert(type, Name, Namespace) const type Name = Namespace::Name;
 #define MathProperty(Name) static property DirectX::Math::XMVECTOR^ Name { DirectX::Math::XMVECTOR^ get() { return gcnew DirectX::Math::XMVECTOR(DirectX::ManagedFunction::Name()); }}
 
 using namespace System;

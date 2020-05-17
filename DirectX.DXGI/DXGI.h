@@ -42,41 +42,42 @@ namespace DirectX
     {
         public ref class DXGI
         {
-            property unsigned int DXGI_FORMAT_DEFINED { unsigned int get() { return  1; } }
-            property unsigned int DXGI_STANDARD_MULTISAMPLE_QUALITY_PATTERN { unsigned int get() { return  0xffffffff; } }
-            property unsigned int DXGI_CENTER_MULTISAMPLE_QUALITY_PATTERN { unsigned int get() { return  0xfffffffe; } }
-            property unsigned int DXGI_CPU_ACCESS_NONE { unsigned int get() { return 0; } }
-            property unsigned int DXGI_CPU_ACCESS_DYNAMIC { unsigned int get() { return 1; } }
-            property unsigned int DXGI_CPU_ACCESS_READ_WRITE { unsigned int get() { return 2; } }
-            property unsigned int DXGI_CPU_ACCESS_SCRATCH { unsigned int get() { return 3; } }
-            property unsigned int DXGI_CPU_ACCESS_FIELD { unsigned int get() { return 15; } }
-            property unsigned int DXGI_USAGE_SHADER_INPUT { unsigned int get() { return 0x00000010UL; } }
-            property unsigned int DXGI_USAGE_RENDER_TARGET_OUTPUT { unsigned int get() { return 0x00000020UL; } }
-            property unsigned int DXGI_USAGE_BACK_BUFFER { unsigned int get() { return 0x00000040UL; } }
-            property unsigned int DXGI_USAGE_SHARED { unsigned int get() { return 0x00000080UL; } }
-            property unsigned int DXGI_USAGE_READ_ONLY { unsigned int get() { return 0x00000100UL; } }
-            property unsigned int DXGI_USAGE_DISCARD_ON_PRESENT { unsigned int get() { return 0x00000200UL; } }
-            property unsigned int DXGI_USAGE_UNORDERED_ACCESS { unsigned int get() { return 0x00000400UL; } }
-            property unsigned int DXGI_RESOURCE_PRIORITY_MINIMUM{ unsigned int get() { return 0x28000000; } }
-            property unsigned int DXGI_RESOURCE_PRIORITY_LOW{ unsigned int get() { return 0x50000000; } }
-            property unsigned int DXGI_RESOURCE_PRIORITY_NORMAL { unsigned int get() { return 0x78000000; } }
-            property unsigned int DXGI_RESOURCE_PRIORITY_HIGH { unsigned int get() { return  0xa0000000; } }
-            property unsigned int DXGI_RESOURCE_PRIORITY_MAXIMUM { unsigned int get() { return  0xc8000000; } }
-            property unsigned long DXGI_MAP_READ { unsigned long get() { return  1UL; } }
-            property unsigned long DXGI_MAP_WRITE { unsigned long get() { return  2UL; } }
-            property unsigned long DXGI_MAP_DISCARD { unsigned long get() { return  4UL; } }
-            property unsigned long DXGI_ENUM_MODES_INTERLACED { unsigned long get() { return  1UL; } }
-            property unsigned long DXGI_ENUM_MODES_SCALING { unsigned long get() { return  2UL; } }
-            property unsigned int DXGI_MAX_SWAP_CHAIN_BUFFERS { unsigned int get() { return  16; } }
-            property unsigned long DXGI_PRESENT_TEST { unsigned long get() { return  0x00000001UL; } }
-            property unsigned long DXGI_PRESENT_DO_NOT_SEQUENCE { unsigned long get() { return  0x00000002UL; } }
-            property unsigned long DXGI_PRESENT_RESTART { unsigned long get() { return  0x00000004UL; } }
-            property unsigned long DXGI_PRESENT_DO_NOT_WAIT { unsigned long get() { return  0x00000008UL; } }
-            property unsigned long DXGI_PRESENT_STEREO_PREFER_RIGHT { unsigned long get() { return  0x00000010UL; } }
-            property unsigned long DXGI_PRESENT_STEREO_TEMPORARY_MONO { unsigned long get() { return  0x00000020UL; } }
-            property unsigned long DXGI_PRESENT_RESTRICT_TO_OUTPUT { unsigned long get() { return  0x00000040UL; } }
-            property unsigned long DXGI_PRESENT_USE_DURATION { unsigned long get() { return  0x00000100UL; } }
-            property unsigned long DXGI_PRESENT_ALLOW_TEARING { unsigned long get() { return  0x00000200UL; } }
+        public:
+            static const unsigned int DXGI_FORMAT_DEFINED = 1; 
+            static const unsigned int DXGI_STANDARD_MULTISAMPLE_QUALITY_PATTERN = 0xffffffff; 
+            static const unsigned int DXGI_CENTER_MULTISAMPLE_QUALITY_PATTERN = 0xfffffffe; 
+            static const unsigned int DXGI_CPU_ACCESS_NONE =0; 
+            static const unsigned int DXGI_CPU_ACCESS_DYNAMIC =1; 
+            static const unsigned int DXGI_CPU_ACCESS_READ_WRITE =2; 
+            static const unsigned int DXGI_CPU_ACCESS_SCRATCH =3; 
+            static const unsigned int DXGI_CPU_ACCESS_FIELD =15; 
+            static const unsigned int DXGI_USAGE_SHADER_INPUT =0x00000010UL; 
+            static const unsigned int DXGI_USAGE_RENDER_TARGET_OUTPUT =0x00000020UL; 
+            static const unsigned int DXGI_USAGE_BACK_BUFFER =0x00000040UL; 
+            static const unsigned int DXGI_USAGE_SHARED =0x00000080UL; 
+            static const unsigned int DXGI_USAGE_READ_ONLY =0x00000100UL; 
+            static const unsigned int DXGI_USAGE_DISCARD_ON_PRESENT =0x00000200UL; 
+            static const unsigned int DXGI_USAGE_UNORDERED_ACCESS =0x00000400UL; 
+            static const unsigned int DXGI_RESOURCE_PRIORITY_MINIMUM=0x28000000; 
+            static const unsigned int DXGI_RESOURCE_PRIORITY_LOW=0x50000000; 
+            static const unsigned int DXGI_RESOURCE_PRIORITY_NORMAL =0x78000000; 
+            static const unsigned int DXGI_RESOURCE_PRIORITY_HIGH = 0xa0000000; 
+            static const unsigned int DXGI_RESOURCE_PRIORITY_MAXIMUM = 0xc8000000; 
+            static const unsigned long DXGI_MAP_READ = 1UL; 
+            static const unsigned long DXGI_MAP_WRITE = 2UL; 
+            static const unsigned long DXGI_MAP_DISCARD = 4UL; 
+            static const unsigned long DXGI_ENUM_MODES_INTERLACED = 1UL; 
+            static const unsigned long DXGI_ENUM_MODES_SCALING = 2UL; 
+            static const unsigned int DXGI_MAX_SWAP_CHAIN_BUFFERS = 16; 
+            static const unsigned long DXGI_PRESENT_TEST = 0x00000001UL; 
+            static const unsigned long DXGI_PRESENT_DO_NOT_SEQUENCE = 0x00000002UL; 
+            static const unsigned long DXGI_PRESENT_RESTART = 0x00000004UL; 
+            static const unsigned long DXGI_PRESENT_DO_NOT_WAIT = 0x00000008UL; 
+            static const unsigned long DXGI_PRESENT_STEREO_PREFER_RIGHT = 0x00000010UL; 
+            static const unsigned long DXGI_PRESENT_STEREO_TEMPORARY_MONO = 0x00000020UL; 
+            static const unsigned long DXGI_PRESENT_RESTRICT_TO_OUTPUT = 0x00000040UL; 
+            static const unsigned long DXGI_PRESENT_USE_DURATION = 0x00000100UL; 
+            static const unsigned long DXGI_PRESENT_ALLOW_TEARING = 0x00000200UL; 
         };
     }
 }
