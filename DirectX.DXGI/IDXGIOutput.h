@@ -1,7 +1,5 @@
 #pragma once
 
-#include "IDXGIObject.h"
-#include "IDXGISurface.h"
 #include "DXGI_MODE_DESC.h"
 #include "DXGI_FORMAT.h"
 #include "DXGI_OUTPUT_DESC.h"

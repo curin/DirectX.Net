@@ -255,6 +255,12 @@
     <ClInclude Include="DXMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Windows\POINT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\SECURITY_ATTRIBUTES.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.cpp">

@@ -30,6 +30,8 @@
 #include "Windows/LARGE_INTEGER.h"
 #include "Windows/LUID.h"
 #include "Windows/RECT.h"
+#include "Windows/POINT.h"
+#include "Windows/SECURITY_ATTRIBUTES.h"
 
 
 using namespace System;

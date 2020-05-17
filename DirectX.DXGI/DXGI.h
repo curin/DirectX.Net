@@ -77,7 +77,44 @@ namespace DirectX
             static const unsigned long DXGI_PRESENT_STEREO_TEMPORARY_MONO = 0x00000020UL; 
             static const unsigned long DXGI_PRESENT_RESTRICT_TO_OUTPUT = 0x00000040UL; 
             static const unsigned long DXGI_PRESENT_USE_DURATION = 0x00000100UL; 
-            static const unsigned long DXGI_PRESENT_ALLOW_TEARING = 0x00000200UL; 
+            static const unsigned long DXGI_PRESENT_ALLOW_TEARING = 0x00000200UL;
+
+            [DllImport("DXGI.dll")]
+            static long CreateDXGIFactory(GUID riid, void** ppFactory);
+            [DllImport("DXGI.dll")]
+            static long CreateDXGIFactory1(GUID riid, void** ppFactory);
+
+            static long CreateDXGIFactory(Guid riid, [Out]IntPtr% ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory(ToGUID(riid), ppOut);
+                ppFactory = IntPtr(*ppOut);
+                return ret;
+            }
+
+            static long CreateDXGIFactory([Out]IDXGIFactory^ ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory(IDXGIFactory::GetGUID(), ppOut);
+                ppFactory = gcnew IDXGIFactory(ppOut);
+                return ret;
+            }
+
+            static long CreateDXGIFactory(Guid riid, [Out]IDXGIFactory^ ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory(ToGUID(riid), ppOut);
+                ppFactory = gcnew IDXGIFactory(ppOut);
+                return ret;
+            }
+
+            static long CreateDXGIFactory1(Guid riid, [Out]IntPtr% ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory1(ToGUID(riid), ppOut);
+                ppFactory = IntPtr(*ppOut);
+                return ret;
+            }
         };
     }
 }

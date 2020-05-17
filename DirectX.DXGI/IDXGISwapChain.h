@@ -1,7 +1,5 @@
 #pragma once
 
-#include "IDXGIDeviceSubObject.h"
-#include "IDXGIOutput.h"
 #include "DXGI_SWAP_CHAIN_DESC.h"
 #include "DXGI_MODE_DESC.h"
 #include "DXGI_FORMAT.h"

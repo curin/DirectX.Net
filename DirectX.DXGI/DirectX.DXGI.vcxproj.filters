@@ -165,6 +165,66 @@
     <ClInclude Include="IDXGISwapChain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IDXGIFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_ADAPTER_FLAG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_ADAPTER_DESC1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_DISPLAY_COLOR_SPACE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIFactory1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIAdapter1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIDevice1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIDisplayControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OUTDUPL_MOVE_RECT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OUTDUPL_DESC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OUTDUPL_POINTER_POSITION.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_TYPE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_INFO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OUTDUPL_FRAME_INFO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIOutputDuplication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_ALPHA_MODE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGISurface2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIResource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_DXGI_OFFER_RESOURCE_PRIORITY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.DXGI.cpp">

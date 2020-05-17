@@ -1,6 +1,5 @@
 #pragma once
 
-#include "DXGI.h"
 #include "DXGI_ADAPTER_DESC.h"
 #include "DXGI_COLOR_SPACE_TYPE.h"
 #include "DXGI_FORMAT.h"
@@ -27,6 +26,15 @@
 #include "DXGI_SWAP_CHAIN_DESC.h"
 #include "DXGI_SWAP_CHAIN_FLAG.h"
 #include "DXGI_SWAP_EFFECT.h"
+#include "DXGI_ADAPTER_FLAG.h"
+#include "DXGI_ADAPTER_DESC1.h"
+#include "DXGI_DISPLAY_COLOR_SPACE.h"
+#include "DXGI_OUTDUPL_MOVE_RECT.h"
+#include "DXGI_OUTDUPL_DESC.h"
+#include "DXGI_OUTDUPL_POINTER_POSITION.h"
+#include "DXGI_OUTDUPL_POINTER_SHAPE_TYPE.h"
+#include "DXGI_OUTDUPL_POINTER_SHAPE_INFO.h"
+#include "DXGI_ALPHA_MODE.h"
 
 #include "Debug_classes/DXGI_DEBUG_RLO_FLAGS.h"
 

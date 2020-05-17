@@ -1,8 +1,8 @@
 #pragma once
 
 #include "IDXGIObject.h"
-#include "DXGI_ADAPTER_DESC.h"
 #include "IDXGIOutput.h"
+#include "DXGI_ADAPTER_DESC.h"
 
 namespace DirectX
 {

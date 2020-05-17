@@ -124,6 +124,10 @@
   <ItemGroup>
     <ClInclude Include="DXGI.h" />
     <ClInclude Include="DXGI_ADAPTER_DESC.h" />
+    <ClInclude Include="DXGI_ADAPTER_DESC1.h" />
+    <ClInclude Include="DXGI_ADAPTER_FLAG.h" />
+    <ClInclude Include="DXGI_ALPHA_MODE.h" />
+    <ClInclude Include="DXGI_DISPLAY_COLOR_SPACE.h" />
     <ClInclude Include="DXGI_FRAME_STATISTICS.h" />
     <ClInclude Include="DXGI_MAPPED_RECT.h" />
     <ClInclude Include="Debug_classes\DXGIDebug.h" />
@@ -149,6 +153,12 @@
     <ClInclude Include="DXGI_MODE_ROTATION.h" />
     <ClInclude Include="DXGI_MODE_SCALING.h" />
     <ClInclude Include="DXGI_MODE_SCANLINE_ORDER.h" />
+    <ClInclude Include="DXGI_OUTDUPL_DESC.h" />
+    <ClInclude Include="DXGI_OUTDUPL_FRAME_INFO.h" />
+    <ClInclude Include="DXGI_OUTDUPL_MOVE_RECT.h" />
+    <ClInclude Include="DXGI_OUTDUPL_POINTER_POSITION.h" />
+    <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_INFO.h" />
+    <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_TYPE.h" />
     <ClInclude Include="DXGI_OUTPUT_DESC.h" />
     <ClInclude Include="DXGI_RATIONAL.h" />
     <ClInclude Include="DXGI_RESIDENCY.h" />
@@ -161,20 +171,30 @@
     <ClInclude Include="DXGI_SWAP_CHAIN_FLAG.h" />
     <ClInclude Include="DXGI_SWAP_EFFECT.h" />
     <ClInclude Include="IDXGIAdapter.h" />
+    <ClInclude Include="IDXGIAdapter1.h" />
+    <ClInclude Include="IDXGIDevice.h" />
+    <ClInclude Include="IDXGIDevice1.h" />
     <ClInclude Include="IDXGIDeviceSubObject.h" />
+    <ClInclude Include="IDXGIDisplayControl.h" />
+    <ClInclude Include="IDXGIFactory.h" />
+    <ClInclude Include="IDXGIFactory1.h" />
     <ClInclude Include="IDXGIKeyedMutex.h" />
     <ClInclude Include="IDXGIObject.h" />
     <ClInclude Include="IDXGIOutput.h" />
+    <ClInclude Include="IDXGIOutputDuplication.h" />
     <ClInclude Include="IDXGIResource.h" />
+    <ClInclude Include="IDXGIResource1.h" />
     <ClInclude Include="IDXGISurface.h" />
     <ClInclude Include="IDXGISurface1.h">
       <DeploymentContent>true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="IDXGISurface2.h" />
     <ClInclude Include="IDXGISwapChain.h" />
     <ClInclude Include="IUnmanagedReference.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="_DXGI_OFFER_RESOURCE_PRIORITY.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />

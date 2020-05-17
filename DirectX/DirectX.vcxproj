@@ -346,7 +346,9 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Windows\POINT.h" />
     <ClInclude Include="Windows\RECT.h" />
+    <ClInclude Include="Windows\SECURITY_ATTRIBUTES.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
