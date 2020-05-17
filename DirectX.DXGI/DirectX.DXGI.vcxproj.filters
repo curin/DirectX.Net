@@ -225,6 +225,9 @@
     <ClInclude Include="_DXGI_OFFER_RESOURCE_PRIORITY.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IDXGIDevice2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.DXGI.cpp">

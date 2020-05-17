@@ -35,6 +35,10 @@
 #undef DXGI_STANDARD_MULTISAMPLE_QUALITY_PATTERN
 #undef DXGI_CENTER_MULTISAMPLE_QUALITY_PATTERN
 #undef DXGI_FORMAT_DEFINED
+#undef	DXGI_ENUM_MODES_STEREO
+#undef	DXGI_ENUM_MODES_DISABLED_STEREO
+#undef	DXGI_SHARED_RESOURCE_READ
+#undef	DXGI_SHARED_RESOURCE_WRITE
 
 namespace DirectX
 {
@@ -46,21 +50,21 @@ namespace DirectX
             static const unsigned int DXGI_FORMAT_DEFINED = 1; 
             static const unsigned int DXGI_STANDARD_MULTISAMPLE_QUALITY_PATTERN = 0xffffffff; 
             static const unsigned int DXGI_CENTER_MULTISAMPLE_QUALITY_PATTERN = 0xfffffffe; 
-            static const unsigned int DXGI_CPU_ACCESS_NONE =0; 
-            static const unsigned int DXGI_CPU_ACCESS_DYNAMIC =1; 
-            static const unsigned int DXGI_CPU_ACCESS_READ_WRITE =2; 
-            static const unsigned int DXGI_CPU_ACCESS_SCRATCH =3; 
-            static const unsigned int DXGI_CPU_ACCESS_FIELD =15; 
-            static const unsigned int DXGI_USAGE_SHADER_INPUT =0x00000010UL; 
-            static const unsigned int DXGI_USAGE_RENDER_TARGET_OUTPUT =0x00000020UL; 
-            static const unsigned int DXGI_USAGE_BACK_BUFFER =0x00000040UL; 
-            static const unsigned int DXGI_USAGE_SHARED =0x00000080UL; 
-            static const unsigned int DXGI_USAGE_READ_ONLY =0x00000100UL; 
-            static const unsigned int DXGI_USAGE_DISCARD_ON_PRESENT =0x00000200UL; 
-            static const unsigned int DXGI_USAGE_UNORDERED_ACCESS =0x00000400UL; 
-            static const unsigned int DXGI_RESOURCE_PRIORITY_MINIMUM=0x28000000; 
-            static const unsigned int DXGI_RESOURCE_PRIORITY_LOW=0x50000000; 
-            static const unsigned int DXGI_RESOURCE_PRIORITY_NORMAL =0x78000000; 
+            static const unsigned int DXGI_CPU_ACCESS_NONE = 0; 
+            static const unsigned int DXGI_CPU_ACCESS_DYNAMIC = 1; 
+            static const unsigned int DXGI_CPU_ACCESS_READ_WRITE = 2; 
+            static const unsigned int DXGI_CPU_ACCESS_SCRATCH = 3; 
+            static const unsigned int DXGI_CPU_ACCESS_FIELD = 15; 
+            static const unsigned int DXGI_USAGE_SHADER_INPUT = 0x00000010UL; 
+            static const unsigned int DXGI_USAGE_RENDER_TARGET_OUTPUT = 0x00000020UL; 
+            static const unsigned int DXGI_USAGE_BACK_BUFFER = 0x00000040UL; 
+            static const unsigned int DXGI_USAGE_SHARED = 0x00000080UL; 
+            static const unsigned int DXGI_USAGE_READ_ONLY = 0x00000100UL; 
+            static const unsigned int DXGI_USAGE_DISCARD_ON_PRESENT = 0x00000200UL; 
+            static const unsigned int DXGI_USAGE_UNORDERED_ACCESS = 0x00000400UL; 
+            static const unsigned int DXGI_RESOURCE_PRIORITY_MINIMUM = 0x28000000; 
+            static const unsigned int DXGI_RESOURCE_PRIORITY_LOW = 0x50000000; 
+            static const unsigned int DXGI_RESOURCE_PRIORITY_NORMAL = 0x78000000; 
             static const unsigned int DXGI_RESOURCE_PRIORITY_HIGH = 0xa0000000; 
             static const unsigned int DXGI_RESOURCE_PRIORITY_MAXIMUM = 0xc8000000; 
             static const unsigned long DXGI_MAP_READ = 1UL; 
@@ -78,6 +82,10 @@ namespace DirectX
             static const unsigned long DXGI_PRESENT_RESTRICT_TO_OUTPUT = 0x00000040UL; 
             static const unsigned long DXGI_PRESENT_USE_DURATION = 0x00000100UL; 
             static const unsigned long DXGI_PRESENT_ALLOW_TEARING = 0x00000200UL;
+            static const unsigned long DXGI_ENUM_MODES_STEREO = 4UL;
+            static const unsigned long DXGI_ENUM_MODES_DISABLED_STEREO = 8UL;
+            static const long DXGI_PRESENT_USE_DURATION = 0x80000000L;
+            static const int DXGI_PRESENT_ALLOW_TEARING = 1;
 
             [DllImport("DXGI.dll")]
             static long CreateDXGIFactory(GUID riid, void** ppFactory);

@@ -174,6 +174,7 @@
     <ClInclude Include="IDXGIAdapter1.h" />
     <ClInclude Include="IDXGIDevice.h" />
     <ClInclude Include="IDXGIDevice1.h" />
+    <ClInclude Include="IDXGIDevice2.h" />
     <ClInclude Include="IDXGIDeviceSubObject.h" />
     <ClInclude Include="IDXGIDisplayControl.h" />
     <ClInclude Include="IDXGIFactory.h" />
