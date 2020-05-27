@@ -228,6 +228,42 @@
     <ClInclude Include="IDXGIDevice2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DXGI_MODE_DESC1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_SCALING.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_SWAP_CHAIN_DESC1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_SWAP_CHAIN_FULLSCREEN_DESC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_PRESENT_PARAMETERS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGISwapChain1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIFactory2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_GRAPHICS_PREEMPTION_GRANULARITY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_COMPUTE_PREEMPTION_GRANULARITY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_ADAPTER_DESC2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIAdapter2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIOutput1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.DXGI.cpp">

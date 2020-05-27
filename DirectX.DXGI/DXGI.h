@@ -84,8 +84,8 @@ namespace DirectX
             static const unsigned long DXGI_PRESENT_ALLOW_TEARING = 0x00000200UL;
             static const unsigned long DXGI_ENUM_MODES_STEREO = 4UL;
             static const unsigned long DXGI_ENUM_MODES_DISABLED_STEREO = 8UL;
-            static const long DXGI_PRESENT_USE_DURATION = 0x80000000L;
-            static const int DXGI_PRESENT_ALLOW_TEARING = 1;
+            static const long DXGI_SHARED_RESOURCE_READ = 0x80000000L;
+            static const int DXGI_SHARED_RESOURCE_WRITE = 1;
 
             [DllImport("DXGI.dll")]
             static long CreateDXGIFactory(GUID riid, void** ppFactory);

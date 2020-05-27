@@ -36,6 +36,10 @@
 #include "IDXGIOutputDuplication.h"
 #include "IDXGISurface2.h"
 #include "IDXGIResource1.h"
+#include "IDXGISwapChain1.h"
+#include "IDXGIFactory2.h"
+#include "IDXGIAdapter2.h"
+#include "IDXGIOutput1.h"
 #include "DXGI.h"
 
 #include "Debug_classes/IDXGIDebug1.h"

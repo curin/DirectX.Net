@@ -20,6 +20,7 @@ namespace DirectX
                 ::IDXGISurface2** ppOut;
                 long ret = _ref->CreateSubresourceSurface(index, ppOut);
                 ppSurface = gcnew IDXGISurface2(*ppOut);
+                return ret;
             }
 
             long CreateSharedHandle(SECURITY_ATTRIBUTES% pAttributes, unsigned long dwAccess, String^ lpName, [Out] IntPtr% pHandle)

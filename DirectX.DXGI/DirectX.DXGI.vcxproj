@@ -125,10 +125,13 @@
     <ClInclude Include="DXGI.h" />
     <ClInclude Include="DXGI_ADAPTER_DESC.h" />
     <ClInclude Include="DXGI_ADAPTER_DESC1.h" />
+    <ClInclude Include="DXGI_ADAPTER_DESC2.h" />
     <ClInclude Include="DXGI_ADAPTER_FLAG.h" />
     <ClInclude Include="DXGI_ALPHA_MODE.h" />
+    <ClInclude Include="DXGI_COMPUTE_PREEMPTION_GRANULARITY.h" />
     <ClInclude Include="DXGI_DISPLAY_COLOR_SPACE.h" />
     <ClInclude Include="DXGI_FRAME_STATISTICS.h" />
+    <ClInclude Include="DXGI_GRAPHICS_PREEMPTION_GRANULARITY.h" />
     <ClInclude Include="DXGI_MAPPED_RECT.h" />
     <ClInclude Include="Debug_classes\DXGIDebug.h" />
     <ClInclude Include="Debug_classes\DXGI_DEBUG_RLO_FLAGS.h" />
@@ -150,6 +153,7 @@
     <ClInclude Include="DXGI_JPEG_QUANTIZATION_TABLE.h" />
     <ClInclude Include="DXGI_Message_Id.h" />
     <ClInclude Include="DXGI_MODE_DESC.h" />
+    <ClInclude Include="DXGI_MODE_DESC1.h" />
     <ClInclude Include="DXGI_MODE_ROTATION.h" />
     <ClInclude Include="DXGI_MODE_SCALING.h" />
     <ClInclude Include="DXGI_MODE_SCANLINE_ORDER.h" />
@@ -160,18 +164,23 @@
     <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_INFO.h" />
     <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_TYPE.h" />
     <ClInclude Include="DXGI_OUTPUT_DESC.h" />
+    <ClInclude Include="DXGI_PRESENT_PARAMETERS.h" />
     <ClInclude Include="DXGI_RATIONAL.h" />
     <ClInclude Include="DXGI_RESIDENCY.h" />
     <ClInclude Include="DXGI_RGB.h" />
     <ClInclude Include="DXGI_RGBA.h" />
     <ClInclude Include="DXGI_SAMPLE_DESC.h" />
+    <ClInclude Include="DXGI_SCALING.h" />
     <ClInclude Include="DXGI_SHARED_RESOURCE.h" />
     <ClInclude Include="DXGI_SURFACE_DESC.h" />
     <ClInclude Include="DXGI_SWAP_CHAIN_DESC.h" />
+    <ClInclude Include="DXGI_SWAP_CHAIN_DESC1.h" />
     <ClInclude Include="DXGI_SWAP_CHAIN_FLAG.h" />
+    <ClInclude Include="DXGI_SWAP_CHAIN_FULLSCREEN_DESC.h" />
     <ClInclude Include="DXGI_SWAP_EFFECT.h" />
     <ClInclude Include="IDXGIAdapter.h" />
     <ClInclude Include="IDXGIAdapter1.h" />
+    <ClInclude Include="IDXGIAdapter2.h" />
     <ClInclude Include="IDXGIDevice.h" />
     <ClInclude Include="IDXGIDevice1.h" />
     <ClInclude Include="IDXGIDevice2.h" />
@@ -179,9 +188,11 @@
     <ClInclude Include="IDXGIDisplayControl.h" />
     <ClInclude Include="IDXGIFactory.h" />
     <ClInclude Include="IDXGIFactory1.h" />
+    <ClInclude Include="IDXGIFactory2.h" />
     <ClInclude Include="IDXGIKeyedMutex.h" />
     <ClInclude Include="IDXGIObject.h" />
     <ClInclude Include="IDXGIOutput.h" />
+    <ClInclude Include="IDXGIOutput1.h" />
     <ClInclude Include="IDXGIOutputDuplication.h" />
     <ClInclude Include="IDXGIResource.h" />
     <ClInclude Include="IDXGIResource1.h" />
@@ -192,6 +203,7 @@
     </ClInclude>
     <ClInclude Include="IDXGISurface2.h" />
     <ClInclude Include="IDXGISwapChain.h" />
+    <ClInclude Include="IDXGISwapChain1.h" />
     <ClInclude Include="IUnmanagedReference.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
