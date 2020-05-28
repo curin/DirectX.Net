@@ -36,6 +36,17 @@ namespace DirectX
                 return ret;
             }
 
+            long OfferResources(unsigned int NumResources, IntPtr ppResources, DXGI_OFFER_RESOURCE_PRIORITY Priority)
+            {
+                return _ref->OfferResources(NumResources, (::IDXGIResource**)ppResources.ToPointer(), (::DXGI_OFFER_RESOURCE_PRIORITY)Priority);
+            }
+
+            long ReclaimResources(unsigned int NumResources, IntPtr ppResources, bool% pDiscarded)
+            {
+                pin_ptr<bool> pDis = &pDiscarded;
+                return _ref->ReclaimResources(NumResources, (::IDXGIResource**)ppResources.ToPointer(), (::BOOL*)pDis);
+            }
+
             long EnqueueSetEvent(IntPtr hEvent)
             {
                 pin_ptr<IntPtr> pEvent = &hEvent;

@@ -306,6 +306,30 @@
     <ClInclude Include="IDXGIOutput3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGISwapChain3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIOutput4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIFactory4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_MEMORY_SEGMENT_GROUP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_QUERY_VIDEO_MEMORY_INFO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIAdapter3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.DXGI.cpp">

@@ -55,6 +55,14 @@ namespace DirectX
                 return ret;
             }
 
+            long QueryResourceResidency(IntPtr ppResources, [Out] array<DXGI_RESIDENCY>^ pResidencyStatus, unsigned int NumResources)
+            {
+                pResidencyStatus = gcnew array<DXGI_RESIDENCY>(NumResources);
+                pin_ptr<DXGI_RESIDENCY> pResidency = &pResidencyStatus[0];
+                long ret = _ref->QueryResourceResidency((::IUnknown**)ppResources.ToPointer(), (::DXGI_RESIDENCY*)pResidency, NumResources);
+                return ret;
+            }
+
             long SetGPUThreadPriority(int Priority)
             {
                 return _ref->SetGPUThreadPriority(Priority);

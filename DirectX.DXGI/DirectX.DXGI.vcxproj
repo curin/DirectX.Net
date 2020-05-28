@@ -155,6 +155,7 @@
     <ClInclude Include="DXGI_JPEG_DC_HUFFMAN_TABLE.h" />
     <ClInclude Include="DXGI_JPEG_QUANTIZATION_TABLE.h" />
     <ClInclude Include="DXGI_MATRIX_3X2_F.h" />
+    <ClInclude Include="DXGI_MEMORY_SEGMENT_GROUP.h" />
     <ClInclude Include="DXGI_Message_Id.h" />
     <ClInclude Include="DXGI_MODE_DESC.h" />
     <ClInclude Include="DXGI_MODE_DESC1.h" />
@@ -169,8 +170,10 @@
     <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_INFO.h" />
     <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_TYPE.h" />
     <ClInclude Include="DXGI_OUTPUT_DESC.h" />
+    <ClInclude Include="DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG.h" />
     <ClInclude Include="DXGI_OVERLAY_SUPPORT_FLAG.h" />
     <ClInclude Include="DXGI_PRESENT_PARAMETERS.h" />
+    <ClInclude Include="DXGI_QUERY_VIDEO_MEMORY_INFO.h" />
     <ClInclude Include="DXGI_RATIONAL.h" />
     <ClInclude Include="DXGI_RESIDENCY.h" />
     <ClInclude Include="DXGI_RGB.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="DXGI_SCALING.h" />
     <ClInclude Include="DXGI_SHARED_RESOURCE.h" />
     <ClInclude Include="DXGI_SURFACE_DESC.h" />
+    <ClInclude Include="DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG.h" />
     <ClInclude Include="DXGI_SWAP_CHAIN_DESC.h" />
     <ClInclude Include="DXGI_SWAP_CHAIN_DESC1.h" />
     <ClInclude Include="DXGI_SWAP_CHAIN_FLAG.h" />
@@ -187,6 +191,7 @@
     <ClInclude Include="IDXGIAdapter.h" />
     <ClInclude Include="IDXGIAdapter1.h" />
     <ClInclude Include="IDXGIAdapter2.h" />
+    <ClInclude Include="IDXGIAdapter3.h" />
     <ClInclude Include="IDXGIDecodeSwapChain.h" />
     <ClInclude Include="IDXGIDevice.h" />
     <ClInclude Include="IDXGIDevice1.h" />
@@ -198,6 +203,7 @@
     <ClInclude Include="IDXGIFactory1.h" />
     <ClInclude Include="IDXGIFactory2.h" />
     <ClInclude Include="IDXGIFactory3.h" />
+    <ClInclude Include="IDXGIFactory4.h" />
     <ClInclude Include="IDXGIFactoryMedia.h" />
     <ClInclude Include="IDXGIKeyedMutex.h" />
     <ClInclude Include="IDXGIObject.h" />
@@ -205,6 +211,7 @@
     <ClInclude Include="IDXGIOutput1.h" />
     <ClInclude Include="IDXGIOutput2.h" />
     <ClInclude Include="IDXGIOutput3.h" />
+    <ClInclude Include="IDXGIOutput4.h" />
     <ClInclude Include="IDXGIOutputDuplication.h" />
     <ClInclude Include="IDXGIResource.h" />
     <ClInclude Include="IDXGIResource1.h" />
@@ -217,6 +224,7 @@
     <ClInclude Include="IDXGISwapChain.h" />
     <ClInclude Include="IDXGISwapChain1.h" />
     <ClInclude Include="IDXGISwapChain2.h" />
+    <ClInclude Include="IDXGISwapChain3.h" />
     <ClInclude Include="IDXGISwapChainMedia.h" />
     <ClInclude Include="IUnmanagedReference.h" />
     <ClInclude Include="pch.h" />
