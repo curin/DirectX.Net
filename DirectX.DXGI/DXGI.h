@@ -173,6 +173,22 @@ namespace DirectX
                 return ret;
             }
 
+            static long CreateDXGIFactory([Out]IDXGIFactory4^ ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory(IDXGIFactory4::GetGUID(), ppOut);
+                ppFactory = gcnew IDXGIFactory4(ppOut);
+                return ret;
+            }
+
+            static long CreateDXGIFactory(Guid riid, [Out]IDXGIFactory4^ ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory(ToGUID(riid), ppOut);
+                ppFactory = gcnew IDXGIFactory4(ppOut);
+                return ret;
+            }
+
             static long CreateDXGIFactory1(Guid riid, [Out]IntPtr% ppFactory)
             {
                 void** ppOut;
@@ -245,6 +261,22 @@ namespace DirectX
                 return ret;
             }
 
+            static long CreateDXGIFactory1([Out]IDXGIFactory4^ ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory1(IDXGIFactory4::GetGUID(), ppOut);
+                ppFactory = gcnew IDXGIFactory4(ppOut);
+                return ret;
+            }
+
+            static long CreateDXGIFactory1(Guid riid, [Out]IDXGIFactory4^ ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory1(ToGUID(riid), ppOut);
+                ppFactory = gcnew IDXGIFactory4(ppOut);
+                return ret;
+            }
+
             static long CreateDXGIFactory2(unsigned int Flags, Guid riid, [Out]IntPtr% ppFactory)
             {
                 void** ppOut;
@@ -314,6 +346,22 @@ namespace DirectX
                 void** ppOut;
                 long ret = CreateDXGIFactory2(Flags, ToGUID(riid), ppOut);
                 ppFactory = gcnew IDXGIFactory3(ppOut);
+                return ret;
+            }
+
+            static long CreateDXGIFactory2(unsigned int Flags, [Out]IDXGIFactory4^ ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory2(Flags, IDXGIFactory4::GetGUID(), ppOut);
+                ppFactory = gcnew IDXGIFactory4(ppOut);
+                return ret;
+            }
+
+            static long CreateDXGIFactory2(unsigned int Flags, Guid riid, [Out]IDXGIFactory4^ ppFactory)
+            {
+                void** ppOut;
+                long ret = CreateDXGIFactory2(Flags, ToGUID(riid), ppOut);
+                ppFactory = gcnew IDXGIFactory4(ppOut);
                 return ret;
             }
         };

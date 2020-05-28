@@ -51,6 +51,9 @@
 #include "IDXGIOutput4.h"
 #include "IDXGIFactory4.h"
 #include "IDXGIAdapter3.h"
+#include "IDXGIOutput5.h"
+#include "IDXGISwapChain4.h"
+#include "IDXGIDevice4.h"
 #include "DXGI.h"
 
 #include "Debug_classes/IDXGIDebug1.h"

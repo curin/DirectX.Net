@@ -3,6 +3,7 @@
 #include <dxgi1_2.h>
 #include "IDXGIDevice1.h"
 #include "IDXGIResource.h"
+#include "DXGI_OFFER_RESOURCE_PRIORITY.h"
 
 namespace DirectX
 {
