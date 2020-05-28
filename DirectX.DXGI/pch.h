@@ -40,6 +40,13 @@
 #include "IDXGIFactory2.h"
 #include "IDXGIAdapter2.h"
 #include "IDXGIOutput1.h"
+#include "IDXGIDevice3.h"
+#include "IDXGISwapChain2.h"
+#include "IDXGIOutput2.h"
+#include "IDXGIFactory3.h"
+#include "IDXGIDecodeSwapChain.h"
+#include "IDXGIFactoryMedia.h"
+#include "IDXGISwapChainMedia.h"
 #include "DXGI.h"
 
 #include "Debug_classes/IDXGIDebug1.h"

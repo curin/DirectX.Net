@@ -44,12 +44,12 @@ namespace DirectX
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::IDXGIDevice1>((_ref));
+                return DirectX::GetGUID<::IDXGIDevice2>((_ref));
             }
 
             static GUID GetGUID()
             {
-                return __uuidof(::IDXGIDevice1);
+                return __uuidof(::IDXGIDevice2);
             }
 
             static Guid GetGuid()
@@ -57,7 +57,7 @@ namespace DirectX
                 return FromGUID(GetGUID());
             }
 
-            explicit operator ::IDXGIDevice1* () { return (_ref); }
+            explicit operator ::IDXGIDevice2* () { return (_ref); }
         };
     }
 }
