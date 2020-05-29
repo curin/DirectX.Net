@@ -56,6 +56,8 @@
 #include "IDXGIDevice4.h"
 #include "IDXGIFactory5.h"
 #include "IDXGIOutput6.h"
+#include "IDXGIFactory6.h"
+#include "IDXGIFactory7.h"
 #include "DXGI.h"
 
 #include "Debug_classes/IDXGIDebug1.h"
