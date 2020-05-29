@@ -20,7 +20,6 @@ namespace DirectX
 
             long GetDesc3([Out]  DXGI_ADAPTER_DESC3% pDesc)
             {
-                WaitForSingleObject
                 pin_ptr<DXGI_ADAPTER_DESC3> desc = &pDesc;
                 return _ref->GetDesc3((::DXGI_ADAPTER_DESC3*)desc);
             }
