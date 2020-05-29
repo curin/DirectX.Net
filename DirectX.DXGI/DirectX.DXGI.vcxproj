@@ -126,7 +126,9 @@
     <ClInclude Include="DXGI_ADAPTER_DESC.h" />
     <ClInclude Include="DXGI_ADAPTER_DESC1.h" />
     <ClInclude Include="DXGI_ADAPTER_DESC2.h" />
+    <ClInclude Include="DXGI_ADAPTER_DESC3.h" />
     <ClInclude Include="DXGI_ADAPTER_FLAG.h" />
+    <ClInclude Include="DXGI_ADAPTER_FLAG3.h" />
     <ClInclude Include="DXGI_ALPHA_MODE.h" />
     <ClInclude Include="DXGI_COMPUTE_PREEMPTION_GRANULARITY.h" />
     <ClInclude Include="DXGI_DECODE_SWAP_CHAIN_DESC.h" />
@@ -135,7 +137,9 @@
     <ClInclude Include="DXGI_FRAME_PRESENTATION_MODE.h" />
     <ClInclude Include="DXGI_FRAME_STATISTICS.h" />
     <ClInclude Include="DXGI_FRAME_STATISTICS_MEDIA.h" />
+    <ClInclude Include="DXGI_GPU_PREFERENCE.h" />
     <ClInclude Include="DXGI_GRAPHICS_PREEMPTION_GRANULARITY.h" />
+    <ClInclude Include="DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS.h" />
     <ClInclude Include="DXGI_HDR_METADATA_HDR10.h" />
     <ClInclude Include="DXGI_HDR_METADATA_HDR10PLUS.h" />
     <ClInclude Include="DXGI_HDR_METADATA_TYPE.h" />
@@ -177,6 +181,7 @@
     <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_INFO.h" />
     <ClInclude Include="DXGI_OUTDUPL_POINTER_SHAPE_TYPE.h" />
     <ClInclude Include="DXGI_OUTPUT_DESC.h" />
+    <ClInclude Include="DXGI_OUTPUT_DESC1.h" />
     <ClInclude Include="DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG.h" />
     <ClInclude Include="DXGI_OVERLAY_SUPPORT_FLAG.h" />
     <ClInclude Include="DXGI_PRESENT_PARAMETERS.h" />
@@ -200,6 +205,7 @@
     <ClInclude Include="IDXGIAdapter1.h" />
     <ClInclude Include="IDXGIAdapter2.h" />
     <ClInclude Include="IDXGIAdapter3.h" />
+    <ClInclude Include="IDXGIAdapter4.h" />
     <ClInclude Include="IDXGIDecodeSwapChain.h" />
     <ClInclude Include="IDXGIDevice.h" />
     <ClInclude Include="IDXGIDevice1.h" />
@@ -214,6 +220,8 @@
     <ClInclude Include="IDXGIFactory3.h" />
     <ClInclude Include="IDXGIFactory4.h" />
     <ClInclude Include="IDXGIFactory5.h" />
+    <ClInclude Include="IDXGIFactory6.h" />
+    <ClInclude Include="IDXGIFactory7.h" />
     <ClInclude Include="IDXGIFactoryMedia.h" />
     <ClInclude Include="IDXGIKeyedMutex.h" />
     <ClInclude Include="IDXGIObject.h" />
@@ -223,6 +231,7 @@
     <ClInclude Include="IDXGIOutput3.h" />
     <ClInclude Include="IDXGIOutput4.h" />
     <ClInclude Include="IDXGIOutput5.h" />
+    <ClInclude Include="IDXGIOutput6.h" />
     <ClInclude Include="IDXGIOutputDuplication.h" />
     <ClInclude Include="IDXGIResource.h" />
     <ClInclude Include="IDXGIResource1.h" />
@@ -241,7 +250,6 @@
     <ClInclude Include="IUnmanagedReference.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="_DXGI_OFFER_RESOURCE_PRIORITY.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />

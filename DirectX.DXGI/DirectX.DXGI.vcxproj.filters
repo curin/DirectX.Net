@@ -222,9 +222,6 @@
     <ClInclude Include="IDXGIResource1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="_DXGI_OFFER_RESOURCE_PRIORITY.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IDXGIDevice2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -364,6 +361,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IDXGIFactory5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_ADAPTER_FLAG3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_ADAPTER_DESC3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIAdapter4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_OUTPUT_DESC1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIOutput6.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGI_GPU_PREFERENCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIFactory6.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDXGIFactory7.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

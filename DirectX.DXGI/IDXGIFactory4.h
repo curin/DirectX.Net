@@ -5,6 +5,7 @@
 #include "IDXGIAdapter1.h"
 #include "IDXGIAdapter2.h"
 #include "IDXGIAdapter3.h"
+#include "IDXGIAdapter4.h"
 
 namespace DirectX
 {
@@ -52,6 +53,23 @@ namespace DirectX
                 return ret;
             }
 
+            long EnumAdapterByLuid(LUID AdapterLuid, [Out] IDXGIAdapter^% ppvAdapter)
+            {
+                void** ppOut;
+                pin_ptr<LUID> adapter = &AdapterLuid;
+                long ret = IDXGIFactory4_EnumAdapterByLuid(_ref, (::LUID*)adapter, IDXGIAdapter::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter(*ppOut);
+                return ret;
+            }
+
+            long EnumWarpAdapter([Out] IDXGIAdapter^% ppvAdapter)
+            {
+                void** ppOut;
+                long ret = _ref->EnumWarpAdapter(IDXGIAdapter::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter(*ppOut);
+                return ret;
+            }
+
             long EnumAdapterByLuid(LUID AdapterLuid, Guid riid, [Out] IDXGIAdapter1^% ppvAdapter)
             {
                 void** ppOut;
@@ -65,6 +83,23 @@ namespace DirectX
             {
                 void** ppOut;
                 long ret = _ref->EnumWarpAdapter(ToGUID(riid), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter1(*ppOut);
+                return ret;
+            }
+
+            long EnumAdapterByLuid(LUID AdapterLuid, [Out] IDXGIAdapter1^% ppvAdapter)
+            {
+                void** ppOut;
+                pin_ptr<LUID> adapter = &AdapterLuid;
+                long ret = IDXGIFactory4_EnumAdapterByLuid(_ref, (::LUID*)adapter, IDXGIAdapter1::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter1(*ppOut);
+                return ret;
+            }
+
+            long EnumWarpAdapter([Out] IDXGIAdapter1^% ppvAdapter)
+            {
+                void** ppOut;
+                long ret = _ref->EnumWarpAdapter(IDXGIAdapter1::GetGUID(), ppOut);
                 ppvAdapter = gcnew IDXGIAdapter1(*ppOut);
                 return ret;
             }
@@ -86,6 +121,23 @@ namespace DirectX
                 return ret;
             }
 
+            long EnumAdapterByLuid(LUID AdapterLuid, [Out] IDXGIAdapter2^% ppvAdapter)
+            {
+                void** ppOut;
+                pin_ptr<LUID> adapter = &AdapterLuid;
+                long ret = IDXGIFactory4_EnumAdapterByLuid(_ref, (::LUID*)adapter, IDXGIAdapter2::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter2(*ppOut);
+                return ret;
+            }
+
+            long EnumWarpAdapter([Out] IDXGIAdapter2^% ppvAdapter)
+            {
+                void** ppOut;
+                long ret = _ref->EnumWarpAdapter(IDXGIAdapter2::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter2(*ppOut);
+                return ret;
+            }
+
             long EnumAdapterByLuid(LUID AdapterLuid, Guid riid, [Out] IDXGIAdapter3^% ppvAdapter)
             {
                 void** ppOut;
@@ -100,6 +152,57 @@ namespace DirectX
                 void** ppOut;
                 long ret = _ref->EnumWarpAdapter(ToGUID(riid), ppOut);
                 ppvAdapter = gcnew IDXGIAdapter3(*ppOut);
+                return ret;
+            }
+
+            long EnumAdapterByLuid(LUID AdapterLuid, [Out] IDXGIAdapter3^% ppvAdapter)
+            {
+                void** ppOut;
+                pin_ptr<LUID> adapter = &AdapterLuid;
+                long ret = IDXGIFactory4_EnumAdapterByLuid(_ref, (::LUID*)adapter, IDXGIAdapter3::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter3(*ppOut);
+                return ret;
+            }
+
+            long EnumWarpAdapter([Out] IDXGIAdapter3^% ppvAdapter)
+            {
+                void** ppOut;
+                long ret = _ref->EnumWarpAdapter(IDXGIAdapter3::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter3(*ppOut);
+                return ret;
+            }
+
+            long EnumAdapterByLuid(LUID AdapterLuid, Guid riid, [Out] IDXGIAdapter4^% ppvAdapter)
+            {
+                void** ppOut;
+                pin_ptr<LUID> adapter = &AdapterLuid;
+                long ret = IDXGIFactory4_EnumAdapterByLuid(_ref, (::LUID*)adapter, ToGUID(riid), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter4(*ppOut);
+                return ret;
+            }
+
+            long EnumWarpAdapter(Guid riid, [Out] IDXGIAdapter4^% ppvAdapter)
+            {
+                void** ppOut;
+                long ret = _ref->EnumWarpAdapter(ToGUID(riid), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter4(*ppOut);
+                return ret;
+            }
+
+            long EnumAdapterByLuid(LUID AdapterLuid, [Out] IDXGIAdapter4^% ppvAdapter)
+            {
+                void** ppOut;
+                pin_ptr<LUID> adapter = &AdapterLuid;
+                long ret = IDXGIFactory4_EnumAdapterByLuid(_ref, (::LUID*)adapter, IDXGIAdapter4::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter4(*ppOut);
+                return ret;
+            }
+
+            long EnumWarpAdapter([Out] IDXGIAdapter4^% ppvAdapter)
+            {
+                void** ppOut;
+                long ret = _ref->EnumWarpAdapter(IDXGIAdapter4::GetGUID(), ppOut);
+                ppvAdapter = gcnew IDXGIAdapter4(*ppOut);
                 return ret;
             }
 

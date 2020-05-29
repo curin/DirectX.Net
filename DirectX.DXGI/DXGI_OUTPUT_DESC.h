@@ -9,6 +9,7 @@ namespace DirectX
 {
     namespace DXGI
     {
+        [StructLayout(LayoutKind::Sequential)]
         public value struct DXGI_OUTPUT_DESC
         {
             [MarshalAs(UnmanagedType::BStr, SizeConst = 128)]
