@@ -32,6 +32,7 @@
 #include "Windows/RECT.h"
 #include "Windows/POINT.h"
 #include "Windows/SECURITY_ATTRIBUTES.h"
+#include "Windows/Events.h"
 
 
 using namespace System;

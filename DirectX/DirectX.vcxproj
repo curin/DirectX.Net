@@ -224,6 +224,7 @@
     <ClInclude Include="Common\ID3DInclude.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Windows\Events.h" />
     <ClInclude Include="Windows\IUnknown.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
