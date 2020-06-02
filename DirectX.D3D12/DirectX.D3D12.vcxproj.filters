@@ -102,6 +102,18 @@
     <ClInclude Include="D3D12_RASTERIZER_DESC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ID3D12Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ID3D12DeviceChild.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ID3D12RootSignature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_SHADER_BYTECODE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.D3D12.cpp">

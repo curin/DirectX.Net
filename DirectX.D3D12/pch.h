@@ -8,6 +8,10 @@
 #define PCH_H
 
 #include <d3d12.h>
+
+#include "ID3D12Object.h"
+#include "ID3D12DeviceChild.h"
+#include "ID3D12RootSignature.h"
 // add headers that you want to pre-compile here
 
 #endif //PCH_H
