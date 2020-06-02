@@ -24,13 +24,13 @@ namespace DirectX
 
                 void ClearStoredMessages(Guid Producer) { (_ref)->ClearStoredMessages(ToGUID(Producer)); }
 
-                long GetMessage(Guid Producer, unsigned long long MessageIndex, DXGI_INFO_QUEUE_MESSAGE^ pMessage, unsigned long long% pMessageByteLength)
+                long GetMessage(Guid Producer, unsigned long long MessageIndex, DXGI_INFO_QUEUE_MESSAGE^ pMessage, size_t% pMessageByteLength)
                 {
                     pin_ptr<unsigned long long> pLength = &pMessageByteLength;
                     return (_ref)->GetMessage(ToGUID(Producer), MessageIndex, (::DXGI_INFO_QUEUE_MESSAGE*)pMessage, pLength);
                 }
 
-                long GetMessageLength(Guid Producer, unsigned long long MessageIndex, [Out] unsigned long long% pMessageByteLength)
+                long GetMessageLength(Guid Producer, unsigned long long MessageIndex, [Out] size_t% pMessageByteLength)
                 {
                     pin_ptr<unsigned long long> pLength = &pMessageByteLength;
                     return (_ref)->GetMessage(ToGUID(Producer), MessageIndex, NULL, pLength);
@@ -55,12 +55,12 @@ namespace DirectX
                     return (_ref)->AddRetrievalFilterEntries(ToGUID(Producer), (::DXGI_INFO_QUEUE_FILTER*)pFilter);
                 }
 
-                long GetStorageFilter(Guid Producer, DXGI_INFO_QUEUE_FILTER^ pFilter, unsigned long long% pFilterByteLength)
+                long GetStorageFilter(Guid Producer, DXGI_INFO_QUEUE_FILTER^ pFilter, size_t% pFilterByteLength)
                 {
                     pin_ptr<unsigned long long> pLength = &pFilterByteLength;
                     return (_ref)->GetStorageFilter(ToGUID(Producer), (::DXGI_INFO_QUEUE_FILTER*)pFilter, pLength);
                 }
-                long GetStorageFilterLength(Guid Producer, [Out] unsigned long long% pFilterByteLength)
+                long GetStorageFilterLength(Guid Producer, [Out] size_t% pFilterByteLength)
                 {
                     pin_ptr<unsigned long long> pLength = &pFilterByteLength;
                     return (_ref)->GetStorageFilter(ToGUID(Producer), NULL, pLength);
@@ -88,12 +88,12 @@ namespace DirectX
                     return (_ref)->AddRetrievalFilterEntries(ToGUID(Producer), (::DXGI_INFO_QUEUE_FILTER*)pFilter);
                 }
 
-                long GetRetrievalFilter(Guid Producer, DXGI_INFO_QUEUE_FILTER^ pFilter, unsigned long long% pFilterByteLength)
+                long GetRetrievalFilter(Guid Producer, DXGI_INFO_QUEUE_FILTER^ pFilter, size_t% pFilterByteLength)
                 {
                     pin_ptr<unsigned long long> pLength = &pFilterByteLength;
                     return (_ref)->GetRetrievalFilter(ToGUID(Producer), (::DXGI_INFO_QUEUE_FILTER*)pFilter, pLength);
                 }
-                long GetRetrievalFilterLength(Guid Producer, [Out] unsigned long long% pFilterByteLength)
+                long GetRetrievalFilterLength(Guid Producer, [Out] size_t% pFilterByteLength)
                 {
                     pin_ptr<unsigned long long> pLength = &pFilterByteLength;
                     return (_ref)->GetRetrievalFilter(ToGUID(Producer), NULL, pLength);

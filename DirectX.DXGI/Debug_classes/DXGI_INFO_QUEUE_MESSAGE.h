@@ -30,7 +30,7 @@ namespace DirectX
                 UnmanagedReferenceCastedProperty(DXGI_INFO_QUEUE_MESSAGE_SEVERITY, ::DXGI_INFO_QUEUE_MESSAGE_SEVERITY, Severity)
                 UnmanagedReferenceProperty(int, ID)
                 property String^ pDescription { String^ get() { return Marshal::PtrToStringAnsi(static_cast<IntPtr>((void*)_value->pDescription)); } }
-                UnmanagedReferenceProperty(unsigned int, DescriptionByteLength)
+                UnmanagedReferenceProperty(size_t, DescriptionByteLength)
 
                 UnmanagedOperator(::DXGI_INFO_QUEUE_MESSAGE)
             };

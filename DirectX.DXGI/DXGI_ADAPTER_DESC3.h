@@ -19,9 +19,9 @@ namespace DirectX
             unsigned int DeviceId;
             unsigned int SubSysId;
             unsigned int Revision;
-            unsigned long long DedicatedVideoMemory;
-            unsigned long long DedicatedSystemMemory;
-            unsigned long long SharedSystemMemory;
+            size_t DedicatedVideoMemory;
+            size_t DedicatedSystemMemory;
+            size_t SharedSystemMemory;
             LUID AdapterLuid;
             DXGI_ADAPTER_FLAG3 Flags;
             DXGI_GRAPHICS_PREEMPTION_GRANULARITY GraphicsPreemptionGranularity;
