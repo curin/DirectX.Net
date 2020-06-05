@@ -1,11 +1,9 @@
 #pragma once
 
 #include <d3d12.h>
-#include <msclr\marshal.h>
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
-using namespace msclr::interop;
 
 namespace DirectX
 {
@@ -62,7 +60,7 @@ namespace DirectX
 
             long SetName(String^ Name)
             {
-                return _ref->SetName(marshal_as<LPCWSTR>(Name));
+                return _ref->SetName((LPCWSTR)Marshal::StringToBSTR(Name).ToPointer());
             }
 
             GUID getGUID() override

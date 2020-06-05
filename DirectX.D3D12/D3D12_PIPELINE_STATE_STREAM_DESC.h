@@ -8,10 +8,10 @@ namespace DirectX
     namespace D3D12
     {
         [StructLayout(LayoutKind::Sequential)]
-        public value struct D3D12_SHADER_BYTECODE
+        public value struct D3D12_PIPELINE_STATE_STREAM_DESC
         {
-            IntPtr pShaderBytecode;
-            size_t BytecodeLength;
+            size_t SizeInBytes;
+            IntPtr pPipelineStateSubobjectStream;
         };
     }
 }
