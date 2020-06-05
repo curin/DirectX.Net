@@ -125,6 +125,7 @@
     <ClInclude Include="D3D12_BOX.h" />
     <ClInclude Include="D3D12_CACHED_PIPELINE_STATE.h" />
     <ClInclude Include="D3D12_COLOR_WRITE_ENABLE.h" />
+    <ClInclude Include="D3D12_COMMAND_LIST_SUPPORT_FLAGS.h" />
     <ClInclude Include="D3D12_COMMAND_LIST_TYPE.h" />
     <ClInclude Include="D3D12_COMMAND_QUEUE_DESC.h" />
     <ClInclude Include="D3D12_COMMAND_QUEUE_FLAGS.h" />
@@ -142,13 +143,19 @@
     <ClInclude Include="D3D12_FEATURE.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_ARCHITECTURE.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_ARCHITECTURE1.h" />
+    <ClInclude Include="D3D12_FEATURE_DATA_COMMAND_QUEUE_PRIORITY.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_D3D12_OPTIONS.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_D3D12_OPTIONS1.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_D3D12_OPTIONS2.h" />
+    <ClInclude Include="D3D12_FEATURE_DATA_D3D12_OPTIONS3.h" />
+    <ClInclude Include="D3D12_FEATURE_DATA_EXISTING_HEAPS.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_FEATURE_LEVELS.h" />
+    <ClInclude Include="D3D12_FEATURE_DATA_FORMAT_INFO.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_FORMAT_SUPPORT.h" />
+    <ClInclude Include="D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_ROOT_SIGNATURE.h" />
+    <ClInclude Include="D3D12_FEATURE_DATA_SHADER_CACHE.h" />
     <ClInclude Include="D3D12_FEATURE_DATA_SHADER_MODEL.h" />
     <ClInclude Include="D3D12_FILL_MODE.h" />
     <ClInclude Include="D3D12_FORMAT_SUPPORT1.h" />
@@ -171,6 +178,7 @@
     <ClInclude Include="D3D12_RESOURCE_HEAP_TIER.h" />
     <ClInclude Include="D3D12_RT_FORMAT_ARRAY.h" />
     <ClInclude Include="D3D12_SHADER_BYTECODE.h" />
+    <ClInclude Include="D3D12_SHADER_CACHE_SUPPORT_FLAGS.h" />
     <ClInclude Include="D3D12_SHADER_MIN_PRECISION_SUPPORT.h" />
     <ClInclude Include="D3D12_SO_DECLARATION_ENTRY.h" />
     <ClInclude Include="D3D12_STENCIL_OP.h" />

@@ -216,6 +216,30 @@
     <ClInclude Include="D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_FORMAT_INFO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_SHADER_CACHE_SUPPORT_FLAGS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_SHADER_CACHE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_COMMAND_QUEUE_PRIORITY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_COMMAND_LIST_SUPPORT_FLAGS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_D3D12_OPTIONS3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_EXISTING_HEAPS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.D3D12.cpp">
