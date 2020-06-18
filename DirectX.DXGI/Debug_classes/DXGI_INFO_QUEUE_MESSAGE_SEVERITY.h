@@ -6,7 +6,7 @@ namespace DirectX
     {
         namespace Debug
         {
-            public enum DXGI_INFO_QUEUE_MESSAGE_SEVERITY
+            public enum class DXGI_INFO_QUEUE_MESSAGE_SEVERITY
             {
                 DXGI_INFO_QUEUE_MESSAGE_SEVERITY_CORRUPTION = 0,
                 DXGI_INFO_QUEUE_MESSAGE_SEVERITY_ERROR = (DXGI_INFO_QUEUE_MESSAGE_SEVERITY_CORRUPTION + 1),

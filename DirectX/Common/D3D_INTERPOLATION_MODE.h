@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_INTERPOLATION_MODE
+    public enum class D3D_INTERPOLATION_MODE
     {
         D3D_INTERPOLATION_UNDEFINED = 0,
         D3D_INTERPOLATION_CONSTANT = 1,

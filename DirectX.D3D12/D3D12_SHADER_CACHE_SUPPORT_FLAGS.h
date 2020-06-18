@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_SHADER_CACHE_SUPPORT_FLAGS
+        public enum class D3D12_SHADER_CACHE_SUPPORT_FLAGS
         {
             D3D12_SHADER_CACHE_SUPPORT_NONE = 0,
             D3D12_SHADER_CACHE_SUPPORT_SINGLE_PSO = 0x1,

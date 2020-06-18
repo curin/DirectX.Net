@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_SHADER_INPUT_FLAGS
+    public enum class D3D_SHADER_INPUT_FLAGS
     {
         D3D_SIF_USERPACKED = 0x1,
         D3D_SIF_COMPARISON_SAMPLER = 0x2,

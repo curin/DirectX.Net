@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_SRV_DIMENSION
+    public enum class D3D_SRV_DIMENSION
     {
         D3D_SRV_DIMENSION_UNKNOWN = 0,
         D3D_SRV_DIMENSION_BUFFER = 1,

@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_SHADER_VARIABLE_CLASS
+    public enum class D3D_SHADER_VARIABLE_CLASS
     {
         D3D_SVC_SCALAR = 0,
         D3D_SVC_VECTOR = (D3D_SVC_SCALAR + 1),

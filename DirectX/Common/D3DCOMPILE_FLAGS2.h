@@ -11,7 +11,7 @@
 
 namespace DirectX
 {
-    public enum D3DCOMPILE_FLAGS2
+    public enum class D3DCOMPILE_FLAGS2
     {
         D3DCOMPILE_FLAGS2_FORCE_ROOT_SIGNATURE_LATEST = 0,
         D3DCOMPILE_FLAGS2_FORCE_ROOT_SIGNATURE_1_0 = (1 << 4),

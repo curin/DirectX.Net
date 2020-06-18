@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_MODE_ROTATION
+        public enum class DXGI_MODE_ROTATION
         {
             DXGI_MODE_ROTATION_UNSPECIFIED = 0,
             DXGI_MODE_ROTATION_IDENTITY = 1,

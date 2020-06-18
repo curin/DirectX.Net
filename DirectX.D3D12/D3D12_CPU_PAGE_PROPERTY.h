@@ -4,7 +4,7 @@ namespace DirectX
 {
 	namespace D3D12
 	{
-		public enum D3D12_CPU_PAGE_PROPERTY
+		public enum class D3D12_CPU_PAGE_PROPERTY
 		{
 			D3D12_CPU_PAGE_PROPERTY_UNKNOWN = 0,
 			D3D12_CPU_PAGE_PROPERTY_NOT_AVAILABLE = 1,

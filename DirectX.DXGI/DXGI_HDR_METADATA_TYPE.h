@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_HDR_METADATA_TYPE
+        public enum class DXGI_HDR_METADATA_TYPE
         {
             DXGI_HDR_METADATA_TYPE_NONE = 0,
             DXGI_HDR_METADATA_TYPE_HDR10 = 1,

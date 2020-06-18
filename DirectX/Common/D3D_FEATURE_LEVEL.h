@@ -3,7 +3,7 @@
 #include <d3dcommon.h>
 namespace DirectX
 {
-    public enum D3D_FEATURE_LEVEL
+    public enum class D3D_FEATURE_LEVEL
     {
         D3D_FEATURE_LEVEL_1_0_CORE = 0x1000,
         D3D_FEATURE_LEVEL_9_1 = 0x9100,

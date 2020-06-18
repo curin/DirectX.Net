@@ -4,7 +4,7 @@ namespace DirectX
 {
 	namespace Math
 	{
-		public enum PlaneIntersectionType
+		public enum class PlaneIntersectionType
 		{
 			FRONT = 0,
 			INTERSECTING = 1,

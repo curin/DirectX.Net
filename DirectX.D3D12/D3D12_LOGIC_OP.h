@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_LOGIC_OP
+        public enum class D3D12_LOGIC_OP
         {
             D3D12_LOGIC_OP_CLEAR = 0,
             D3D12_LOGIC_OP_SET = (D3D12_LOGIC_OP_CLEAR + 1),

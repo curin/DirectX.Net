@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_REGISTER_COMPONENT_TYPE
+    public enum class D3D_REGISTER_COMPONENT_TYPE
     {
         D3D_REGISTER_COMPONENT_UNKNOWN = 0,
         D3D_REGISTER_COMPONENT_UINT32 = 1,

@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_COLOR_WRITE_ENABLE
+        public enum class D3D12_COLOR_WRITE_ENABLE
         {
             D3D12_COLOR_WRITE_ENABLE_RED = 1,
             D3D12_COLOR_WRITE_ENABLE_GREEN = 2,

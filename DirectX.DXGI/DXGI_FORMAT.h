@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_FORMAT
+        public enum class DXGI_FORMAT
         {
             DXGI_FORMAT_UNKNOWN = 0,
             DXGI_FORMAT_R32G32B32A32_TYPELESS = 1,

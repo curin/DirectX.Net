@@ -4,7 +4,7 @@ namespace DirectX
 {
 	namespace D3D12
 	{
-		public enum D3D12_TEXTURE_LAYOUT
+		public enum class D3D12_TEXTURE_LAYOUT
 		{
 			D3D12_TEXTURE_LAYOUT_UNKNOWN = 0,
 			D3D12_TEXTURE_LAYOUT_ROW_MAJOR = 1,

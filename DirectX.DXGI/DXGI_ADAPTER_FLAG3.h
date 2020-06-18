@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_ADAPTER_FLAG3
+        public enum class DXGI_ADAPTER_FLAG3
         {
             DXGI_ADAPTER_FLAG3_NONE = 0,
             DXGI_ADAPTER_FLAG3_REMOTE = 1,

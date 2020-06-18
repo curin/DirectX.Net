@@ -4,7 +4,7 @@ namespace DirectX
 {
 	namespace D3D12
 	{
-		public enum D3D12_HEAP_FLAGS
+		public enum class D3D12_HEAP_FLAGS
 		{
             D3D12_HEAP_FLAG_NONE = 0,
             D3D12_HEAP_FLAG_SHARED = 0x1,

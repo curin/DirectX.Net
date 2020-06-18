@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_COMMAND_QUEUE_PRIORITY
+        public enum class D3D12_COMMAND_QUEUE_PRIORITY
         {
             D3D12_COMMAND_QUEUE_PRIORITY_NORMAL = 0,
             D3D12_COMMAND_QUEUE_PRIORITY_HIGH = 100,

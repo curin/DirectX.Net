@@ -4,7 +4,7 @@ namespace DirectX
 {
 	namespace D3D12
 	{
-		public enum D3D12_RESOURCE_STATES
+		public enum class D3D12_RESOURCE_STATES
 		{
             D3D12_RESOURCE_STATE_COMMON = 0,
             D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER = 0x1,

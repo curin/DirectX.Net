@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_TILED_RESOURCES_TIER
+        public enum class D3D12_TILED_RESOURCES_TIER
         {
             D3D12_TILED_RESOURCES_TIER_NOT_SUPPORTED = 0,
             D3D12_TILED_RESOURCES_TIER_1 = 1,

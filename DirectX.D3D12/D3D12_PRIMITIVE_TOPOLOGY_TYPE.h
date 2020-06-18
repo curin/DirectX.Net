@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_PRIMITIVE_TOPOLOGY_TYPE
+        public enum class D3D12_PRIMITIVE_TOPOLOGY_TYPE
         {
             D3D12_PRIMITIVE_TOPOLOGY_TYPE_UNDEFINED = 0,
             D3D12_PRIMITIVE_TOPOLOGY_TYPE_POINT = 1,

@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_FRAME_PRESENTATION_MODE
+        public enum class DXGI_FRAME_PRESENTATION_MODE
         {
             DXGI_FRAME_PRESENTATION_MODE_COMPOSED = 0,
             DXGI_FRAME_PRESENTATION_MODE_OVERLAY = 1,

@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_COMPUTE_PREEMPTION_GRANULARITY
+        public enum class DXGI_COMPUTE_PREEMPTION_GRANULARITY
         {
             DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY = 0,
             DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY = 1,

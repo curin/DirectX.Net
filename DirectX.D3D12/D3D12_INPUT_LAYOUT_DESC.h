@@ -1,7 +1,7 @@
 #pragma once
 
 #include <d3d12.h>
-#include "D3D12_INPUT_ELEMENT_DESC.h";
+#include "D3D12_INPUT_ELEMENT_DESC.h"
 
 using namespace System;
 using namespace System::Runtime::InteropServices;

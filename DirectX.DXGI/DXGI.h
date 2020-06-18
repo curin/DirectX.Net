@@ -81,7 +81,7 @@ namespace DirectX
             static const unsigned long DXGI_MAP_WRITE = 2UL; 
             static const unsigned long DXGI_MAP_DISCARD = 4UL; 
             static const unsigned long DXGI_ENUM_MODES_INTERLACED = 1UL; 
-            static const unsigned long DXGI_ENUM_MODES_SCALING = 2UL; 
+            static const unsigned long DXGI_ENUM_MODES_SCALING = 2UL;
             static const unsigned int DXGI_MAX_SWAP_CHAIN_BUFFERS = 16; 
             static const unsigned long DXGI_PRESENT_TEST = 0x00000001UL; 
             static const unsigned long DXGI_PRESENT_DO_NOT_SEQUENCE = 0x00000002UL; 

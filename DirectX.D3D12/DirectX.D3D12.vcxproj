@@ -73,7 +73,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -123,6 +125,8 @@
     <ClInclude Include="D3D12_BLEND_DESC.h" />
     <ClInclude Include="D3D12_BLEND_OP.h" />
     <ClInclude Include="D3D12_BOX.h" />
+    <ClInclude Include="D3D12_BUFFER_SRV.h" />
+    <ClInclude Include="D3D12_BUFFER_SRV_FLAGS.h" />
     <ClInclude Include="D3D12_CACHED_PIPELINE_STATE.h" />
     <ClInclude Include="D3D12_CLEAR_VALUE.h" />
     <ClInclude Include="D3D12_COLOR_WRITE_ENABLE.h" />
@@ -229,6 +233,7 @@
     <ClInclude Include="D3D12_SUBRESOURCE_INFO.h" />
     <ClInclude Include="D3D12_SUBRESOURCE_RANGE_UINT64.h" />
     <ClInclude Include="D3D12_SUBRESOURCE_TILING.h" />
+    <ClInclude Include="D3D12_TEX1D_SRV.h" />
     <ClInclude Include="D3D12_TEXTURE_COPY_LOCATION.h" />
     <ClInclude Include="D3D12_TEXTURE_COPY_TYPE.h" />
     <ClInclude Include="D3D12_TEXTURE_LAYOUT.h" />
@@ -251,6 +256,7 @@
     <ClInclude Include="ID3D12DeviceChild.h" />
     <ClInclude Include="ID3D12Object.h" />
     <ClInclude Include="ID3D12RootSignature.h" />
+    <ClInclude Include="Macros.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>

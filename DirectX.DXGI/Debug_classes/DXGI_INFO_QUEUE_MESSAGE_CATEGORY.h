@@ -6,7 +6,7 @@ namespace DirectX
     {
         namespace Debug
         {
-            public enum DXGI_INFO_QUEUE_MESSAGE_CATEGORY
+            public enum class DXGI_INFO_QUEUE_MESSAGE_CATEGORY
             {
                 DXGI_INFO_QUEUE_MESSAGE_CATEGORY_UNKNOWN = 0,
                 DXGI_INFO_QUEUE_MESSAGE_CATEGORY_MISCELLANEOUS = (DXGI_INFO_QUEUE_MESSAGE_CATEGORY_UNKNOWN + 1),

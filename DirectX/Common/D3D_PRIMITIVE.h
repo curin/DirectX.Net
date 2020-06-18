@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_PRIMITIVE
+    public enum class D3D_PRIMITIVE
     {
         D3D_PRIMITIVE_UNDEFINED = 0,
         D3D_PRIMITIVE_POINT = 1,

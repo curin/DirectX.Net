@@ -24,11 +24,11 @@ namespace DirectX
                 return _ref->GetDesc((::DXGI_OUTPUT_DESC*)pDes);
             }
 
-            long GetDisplayModeList(DXGI_FORMAT EnumFormat, unsigned int Flags, unsigned int% pNumModes, [Out] array<DXGI_MODE_DESC>^ pDesc)
+            long GetDisplayModeList(DXGI_FORMAT enumFormat, unsigned int Flags, unsigned int% pNumModes, [Out] array<DXGI_MODE_DESC>^ pDesc)
             {
                 pin_ptr<unsigned int> pNum = &pNumModes;
                 ::DXGI_MODE_DESC* pArray;
-                long ret = _ref->GetDisplayModeList((::DXGI_FORMAT)EnumFormat, Flags, pNum, pArray);
+                long ret = _ref->GetDisplayModeList((::DXGI_FORMAT)enumFormat, Flags, pNum, pArray);
                 pDesc = gcnew array<DXGI_MODE_DESC>(pNumModes);
                 for (int i = 0; i < pNumModes; i++)
                     pDesc[i] = *(DXGI_MODE_DESC*)(pArray + i);
@@ -36,10 +36,10 @@ namespace DirectX
                 return ret;
             }
 
-            long GetMatchingDisplayModeCount(DXGI_FORMAT EnumFormat, unsigned int Flags, unsigned int% pNumModes)
+            long GetMatchingDisplayModeCount(DXGI_FORMAT enumFormat, unsigned int Flags, unsigned int% pNumModes)
             {
                 pin_ptr<unsigned int> pNum = &pNumModes;
-                return _ref->GetDisplayModeList((::DXGI_FORMAT)EnumFormat, Flags, pNum, NULL);
+                return _ref->GetDisplayModeList((::DXGI_FORMAT)enumFormat, Flags, pNum, NULL);
             }
 
             long FindClosestMatchingMode(DXGI_MODE_DESC% pModeToMatch, [Out] DXGI_MODE_DESC% pClosestMatch, IUnknown^ pConcernedDevice)

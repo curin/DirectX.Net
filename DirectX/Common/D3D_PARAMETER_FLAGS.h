@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_PARAMETER_FLAGS
+    public enum class D3D_PARAMETER_FLAGS
     {
         D3D_PF_NONE = 0,
         D3D_PF_IN = 0x1,

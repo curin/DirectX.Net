@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_COMMAND_LIST_TYPE
+        public enum class D3D12_COMMAND_LIST_TYPE
         {
             D3D12_COMMAND_LIST_TYPE_DIRECT = 0,
             D3D12_COMMAND_LIST_TYPE_BUNDLE = 1,

@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_RESOLVE_MODE
+        public enum class D3D12_RESOLVE_MODE
         {
             D3D12_RESOLVE_MODE_DECOMPRESS = 0,
             D3D12_RESOLVE_MODE_MIN = 1,

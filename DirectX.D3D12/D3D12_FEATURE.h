@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_FEATURE
+        public enum class D3D12_FEATURE
         {
             D3D12_FEATURE_D3D12_OPTIONS = 0,
             D3D12_FEATURE_ARCHITECTURE = 1,

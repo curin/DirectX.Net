@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_Message_Id
+        public enum class DXGI_Message_Id
         {
             DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_InvalidOutputWindow = 0,
             DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_BufferWidthInferred,

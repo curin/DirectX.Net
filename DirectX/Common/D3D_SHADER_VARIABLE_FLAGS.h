@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_SHADER_VARIABLE_FLAGS
+    public enum class D3D_SHADER_VARIABLE_FLAGS
     {
         D3D_SVF_USERPACKED = 1,
         D3D_SVF_USED = 2,

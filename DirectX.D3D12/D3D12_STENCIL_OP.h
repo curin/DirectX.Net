@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_STENCIL_OP
+        public enum class D3D12_STENCIL_OP
         {
             D3D12_STENCIL_OP_KEEP = 1,
             D3D12_STENCIL_OP_ZERO = 2,

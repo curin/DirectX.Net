@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_FORMAT_SUPPORT1
+        public enum class D3D12_FORMAT_SUPPORT1
         {
             D3D12_FORMAT_SUPPORT1_NONE = 0,
             D3D12_FORMAT_SUPPORT1_BUFFER = 0x1,

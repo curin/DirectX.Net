@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_SHADER_VARIABLE_TYPE
+    public enum class D3D_SHADER_VARIABLE_TYPE
     {
         D3D_SVT_VOID = 0,
         D3D_SVT_BOOL = 1,

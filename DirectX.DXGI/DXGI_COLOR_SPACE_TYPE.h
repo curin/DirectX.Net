@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_COLOR_SPACE_TYPE
+        public enum class DXGI_COLOR_SPACE_TYPE
         {
             DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709 = 0,
             DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709 = 1,

@@ -19,11 +19,11 @@ namespace DirectX
             IDXGIOutput1(IntPtr pointer) : IDXGIOutput(pointer) { _ref = (::IDXGIOutput1*)pointer.ToPointer(); }
             IDXGIOutput1(void* pointer) : IDXGIOutput(pointer) { _ref = (::IDXGIOutput1*)pointer; }
 
-            long GetDisplayModeList1(DXGI_FORMAT EnumFormat, unsigned int Flags, unsigned int% pNumModes, array<DXGI_MODE_DESC1>^ pDesc)
+            long GetDisplayModeList1(DXGI_FORMAT enumFormat, unsigned int Flags, unsigned int% pNumModes, array<DXGI_MODE_DESC1>^ pDesc)
             {
                 pin_ptr<unsigned int> pNum = &pNumModes;
                 ::DXGI_MODE_DESC1* pArray;
-                long ret = _ref->GetDisplayModeList1((::DXGI_FORMAT)EnumFormat, Flags, pNum, pArray);
+                long ret = _ref->GetDisplayModeList1((::DXGI_FORMAT)enumFormat, Flags, pNum, pArray);
                 pDesc = gcnew array<DXGI_MODE_DESC1>(pNumModes);
                 for (int i = 0; i < pNumModes; i++)
                     pDesc[i] = *(DXGI_MODE_DESC1*)(pArray + i);
@@ -31,10 +31,10 @@ namespace DirectX
                 return ret;
             }
 
-            long GetMatchingDisplayModeCount1(DXGI_FORMAT EnumFormat, unsigned int Flags, unsigned int% pNumModes)
+            long GetMatchingDisplayModeCount1(DXGI_FORMAT enumFormat, unsigned int Flags, unsigned int% pNumModes)
             {
                 pin_ptr<unsigned int> pNum = &pNumModes;
-                return _ref->GetDisplayModeList1((::DXGI_FORMAT)EnumFormat, Flags, pNum, NULL);
+                return _ref->GetDisplayModeList1((::DXGI_FORMAT)enumFormat, Flags, pNum, NULL);
             }
 
             long FindClosestMatchingMode1(DXGI_MODE_DESC1% pModeToMatch, [Out]  DXGI_MODE_DESC1% pClosestMatch, IUnknown^ pConcernedDevice)

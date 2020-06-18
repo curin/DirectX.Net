@@ -7,6 +7,8 @@
 #include "D3D12_RESOURCE_ALIASING_BARRIER.h"
 #include "D3D12_RESOURCE_UAV_BARRIER.h"
 
+#include "Macros.h"
+
 using namespace System;
 using namespace System::Runtime::InteropServices;
 
@@ -19,13 +21,13 @@ namespace DirectX
         {
             [FieldOffset(0)] 
             D3D12_RESOURCE_BARRIER_TYPE Type;
-            [FieldOffset(sizeof(D3D12_RESOURCE_BARRIER_TYPE))]
+            [FieldOffset(EnumSize)]
             D3D12_RESOURCE_BARRIER_FLAGS Flags;
-            [FieldOffset(sizeof(D3D12_RESOURCE_BARRIER_TYPE) + sizeof(D3D12_RESOURCE_BARRIER_FLAGS))] 
+            [FieldOffset(EnumSize << 1)]
             D3D12_RESOURCE_TRANSITION_BARRIER Transition;
-            [FieldOffset(sizeof(D3D12_RESOURCE_BARRIER_TYPE) + sizeof(D3D12_RESOURCE_BARRIER_FLAGS))] 
+            [FieldOffset(EnumSize << 1)]
             D3D12_RESOURCE_ALIASING_BARRIER Aliasing;
-            [FieldOffset(sizeof(D3D12_RESOURCE_BARRIER_TYPE) + sizeof(D3D12_RESOURCE_BARRIER_FLAGS))] 
+            [FieldOffset(EnumSize << 1)]
             D3D12_RESOURCE_UAV_BARRIER UAV;
         };
     }

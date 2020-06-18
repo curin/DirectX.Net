@@ -15,7 +15,7 @@ namespace DirectX
             [MarshalAs(UnmanagedType::LPStr)]
             String^ SemanticName;
             unsigned int SemanticIndex;
-            DXGI_FORMAT Format;
+            DirectX::DXGI::DXGI_FORMAT Format;
             unsigned int InputSlot;
             unsigned int AlignedByteOffset;
             D3D12_INPUT_CLASSIFICATION InputSlotClass;

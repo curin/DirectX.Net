@@ -6,7 +6,7 @@ namespace DirectX
     {
         namespace Debug
         {
-            public enum DXGI_DEBUG_RLO_FLAGS
+            public enum class DXGI_DEBUG_RLO_FLAGS
             {
                 DXGI_DEBUG_RLO_SUMMARY = 0x1,
                 DXGI_DEBUG_RLO_DETAIL = 0x2,

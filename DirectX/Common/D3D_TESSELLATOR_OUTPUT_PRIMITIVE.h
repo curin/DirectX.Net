@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_TESSELLATOR_OUTPUT_PRIMITIVE
+    public enum class D3D_TESSELLATOR_OUTPUT_PRIMITIVE
     {
         D3D_TESSELLATOR_OUTPUT_UNDEFINED = 0,
         D3D_TESSELLATOR_OUTPUT_POINT = 1,

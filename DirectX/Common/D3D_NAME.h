@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_NAME
+    public enum class D3D_NAME
     {
         D3D_NAME_UNDEFINED = 0,
         D3D_NAME_POSITION = 1,

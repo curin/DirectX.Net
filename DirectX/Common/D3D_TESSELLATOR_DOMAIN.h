@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_TESSELLATOR_DOMAIN
+    public enum class D3D_TESSELLATOR_DOMAIN
     {
         D3D_TESSELLATOR_DOMAIN_UNDEFINED = 0,
         D3D_TESSELLATOR_DOMAIN_ISOLINE = 1,

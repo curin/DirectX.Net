@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace D3D12
     {
-        public enum D3D12_BLEND_OP
+        public enum class D3D12_BLEND_OP
         {
             D3D12_BLEND_OP_ADD = 1,
             D3D12_BLEND_OP_SUBTRACT = 2,

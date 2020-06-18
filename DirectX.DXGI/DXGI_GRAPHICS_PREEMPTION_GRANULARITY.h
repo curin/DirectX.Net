@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_GRAPHICS_PREEMPTION_GRANULARITY
+        public enum class DXGI_GRAPHICS_PREEMPTION_GRANULARITY
         {
             DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY = 0,
             DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY = 1,

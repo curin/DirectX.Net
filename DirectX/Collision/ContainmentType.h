@@ -3,7 +3,7 @@ namespace DirectX
 {
 	namespace Math
 	{
-		public enum ContainmentType
+		public enum class ContainmentType
 		{
 			DISJOINT = 0,
 			INTERSECTS = 1,

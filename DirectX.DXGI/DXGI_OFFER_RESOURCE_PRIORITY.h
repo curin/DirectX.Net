@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_OFFER_RESOURCE_PRIORITY
+        public enum class DXGI_OFFER_RESOURCE_PRIORITY
         {
             DXGI_OFFER_RESOURCE_PRIORITY_LOW = 1,
             DXGI_OFFER_RESOURCE_PRIORITY_NORMAL = (DXGI_OFFER_RESOURCE_PRIORITY_LOW + 1),

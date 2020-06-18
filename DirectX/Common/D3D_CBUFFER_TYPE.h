@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_CBUFFER_TYPE
+    public enum class D3D_CBUFFER_TYPE
     {
         D3D_CT_CBUFFER = 0,
         D3D_CT_TBUFFER = (D3D_CT_CBUFFER + 1),

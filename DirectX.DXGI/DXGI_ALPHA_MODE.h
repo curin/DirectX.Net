@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_ALPHA_MODE
+        public enum class DXGI_ALPHA_MODE
         {
             DXGI_ALPHA_MODE_UNSPECIFIED = 0,
             DXGI_ALPHA_MODE_PREMULTIPLIED = 1,

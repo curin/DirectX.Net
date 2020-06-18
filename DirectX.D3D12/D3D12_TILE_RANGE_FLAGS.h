@@ -4,7 +4,7 @@ namespace DirectX
 {
 	namespace D3D12
 	{
-		public enum D3D12_TILE_RANGE_FLAGS
+		public enum class D3D12_TILE_RANGE_FLAGS
 		{
 			D3D12_TILE_RANGE_FLAG_NONE = 0,
 			D3D12_TILE_RANGE_FLAG_NULL = 1,

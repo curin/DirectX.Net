@@ -3,7 +3,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_SCALING
+        public enum class DXGI_SCALING
         {
             DXGI_SCALING_STRETCH = 0,
             DXGI_SCALING_NONE = 1,

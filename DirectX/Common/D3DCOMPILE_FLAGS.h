@@ -101,7 +101,7 @@
 
 namespace DirectX
 {
-    public enum D3DCOMPILE_FLAGS
+    public enum class D3DCOMPILE_FLAGS
     {
         D3DCOMPILE_DEBUG = (1 << 0),
         D3DCOMPILE_SKIP_VALIDATION = (1 << 1),

@@ -2,7 +2,7 @@
 
 namespace DirectX
 {
-    public enum D3D_DRIVER_TYPE
+    public enum class D3D_DRIVER_TYPE
     {
         D3D_DRIVER_TYPE_UNKNOWN = 0,
         D3D_DRIVER_TYPE_HARDWARE = (D3D_DRIVER_TYPE_UNKNOWN + 1),

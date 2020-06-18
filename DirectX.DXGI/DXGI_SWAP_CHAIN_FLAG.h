@@ -4,7 +4,7 @@ namespace DirectX
 {
     namespace DXGI
     {
-        public enum DXGI_SWAP_CHAIN_FLAG
+        public enum class DXGI_SWAP_CHAIN_FLAG
         {
             DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = 1,
             DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = 2,

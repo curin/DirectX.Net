@@ -15,10 +15,10 @@ namespace DirectX
             IDXGIOutput3(IntPtr pointer) : IDXGIOutput2(pointer) { _ref = (::IDXGIOutput3*)pointer.ToPointer(); }
             IDXGIOutput3(void* pointer) : IDXGIOutput2(pointer) { _ref = (::IDXGIOutput3*)pointer; }
 
-            long CheckOverlaySupport(DXGI_FORMAT EnumFormat, IUnknown^ pConcernedDevice, [Out]  unsigned int% pFlags)
+            long CheckOverlaySupport(DXGI_FORMAT enumFormat, IUnknown^ pConcernedDevice, [Out]  unsigned int% pFlags)
             {
                 pin_ptr<unsigned int> flags = &pFlags;
-                return _ref->CheckOverlaySupport((::DXGI_FORMAT)EnumFormat, (::IUnknown*)pConcernedDevice->Pointer.ToPointer(), flags);
+                return _ref->CheckOverlaySupport((::DXGI_FORMAT)enumFormat, (::IUnknown*)pConcernedDevice->Pointer.ToPointer(), flags);
             }
 
             GUID getGUID() override
