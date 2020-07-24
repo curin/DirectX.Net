@@ -1,0 +1,14 @@
+#pragma once
+
+namespace DirectX
+{
+    namespace D3D12
+    {
+        public enum class D3D12_STATIC_BORDER_COLOR
+        {
+            D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK = 0,
+            D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK = (D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK + 1),
+            D3D12_STATIC_BORDER_COLOR_OPAQUE_WHITE = (D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK + 1)
+        };
+    }
+}

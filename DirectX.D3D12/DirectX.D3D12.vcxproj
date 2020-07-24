@@ -157,6 +157,8 @@
     <ClInclude Include="D3D12_DESCRIPTOR_HEAP_FLAGS.h" />
     <ClInclude Include="D3D12_DESCRIPTOR_HEAP_TYPE.h" />
     <ClInclude Include="D3D12_DESCRIPTOR_RANGE.h" />
+    <ClInclude Include="D3D12_DESCRIPTOR_RANGE1.h" />
+    <ClInclude Include="D3D12_DESCRIPTOR_RANGE_FLAGS.h" />
     <ClInclude Include="D3D12_DESCRIPTOR_RANGE_TYPE.h" />
     <ClInclude Include="D3D12_DSV_DIMENSION.h" />
     <ClInclude Include="D3D12_DSV_FLAGS.h" />
@@ -239,9 +241,13 @@
     <ClInclude Include="D3D12_RESOURCE_UAV_BARRIER.h" />
     <ClInclude Include="D3D12_ROOT_CONSTANTS.h" />
     <ClInclude Include="D3D12_ROOT_DESCRIPTOR.h" />
+    <ClInclude Include="D3D12_ROOT_DESCRIPTOR_FLAGS.h" />
     <ClInclude Include="D3D12_ROOT_DESCRIPTOR_TABLE.h" />
+    <ClInclude Include="D3D12_ROOT_DESCRIPTOR_TABLE1.h" />
     <ClInclude Include="D3D12_ROOT_PARAMETER.h" />
     <ClInclude Include="D3D12_ROOT_PARAMETER_TYPE.h" />
+    <ClInclude Include="D3D12_ROOT_SIGNATURE_DESC.h" />
+    <ClInclude Include="D3D12_ROOT_SIGNATURE_FLAGS.h" />
     <ClInclude Include="D3D12_RTV_DIMENSION.h" />
     <ClInclude Include="D3D12_RT_FORMAT_ARRAY.h" />
     <ClInclude Include="D3D12_SAMPLER_DESC.h" />
@@ -256,6 +262,8 @@
     <ClInclude Include="D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER.h" />
     <ClInclude Include="D3D12_SO_DECLARATION_ENTRY.h" />
     <ClInclude Include="D3D12_SRV_DIMENSION.h" />
+    <ClInclude Include="D3D12_STATIC_BORDER_COLOR.h" />
+    <ClInclude Include="D3D12_STATIC_SAMPLER_DESC.h" />
     <ClInclude Include="D3D12_STENCIL_OP.h" />
     <ClInclude Include="D3D12_STREAM_OUTPUT_DESC.h" />
     <ClInclude Include="D3D12_SUBRESOURCE_FOOTPRINT.h" />
