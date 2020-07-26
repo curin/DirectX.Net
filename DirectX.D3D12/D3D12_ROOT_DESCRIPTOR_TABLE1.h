@@ -1,5 +1,7 @@
 #pragma once
 
+#include "D3D12_DESCRIPTOR_RANGE1.h"
+
 using namespace System;
 using namespace System::Runtime::InteropServices;
 

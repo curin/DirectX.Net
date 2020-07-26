@@ -448,6 +448,9 @@ using namespace System;
 #include "D3D12_FILTER_TYPE.h"
 #include "D3D12_FILTER_REDUCTION_TYPE.h"
 
+using namespace System;
+using namespace System::Runtime::InteropServices;
+
 namespace DirectX 
 {
 	namespace D3D12
@@ -900,6 +903,7 @@ namespace DirectX
 			static const int	D3D12_MAG_FILTER_SHIFT = (2);
 			static const int	D3D12_MIP_FILTER_SHIFT = (0);
 			static const int	D3D12_ANISOTROPIC_FILTERING_BIT = (0x40);
+			
 			static D3D12_FILTER D3D12_ENCODE_BASIC_FILTER(int min, int mag, int mip, int reduction)
 			{
 				return ((D3D12_FILTER)(
@@ -908,6 +912,7 @@ namespace DirectX
 					(((mip)&D3D12_FILTER_TYPE_MASK) << D3D12_MIP_FILTER_SHIFT) |
 					(((reduction)&D3D12_FILTER_REDUCTION_TYPE_MASK) << D3D12_FILTER_REDUCTION_TYPE_SHIFT)));
 			}
+			
 			static D3D12_FILTER D3D12_ENCODE_ANISOTROPIC_FILTER(int reduction)
 			{
 				return ((D3D12_FILTER)D3D12_ANISOTROPIC_FILTERING_BIT |
@@ -916,32 +921,83 @@ namespace DirectX
 						D3D12_FILTER_TYPE_LINEAR,
 						reduction));
 			}
+			
 			static D3D12_FILTER_TYPE D3D12_DECODE_MIN_FILTER(int D3D12Filter)
 			{
 				return ((D3D12_FILTER_TYPE)(((D3D12Filter) >> D3D12_MIN_FILTER_SHIFT) & D3D12_FILTER_TYPE_MASK));
 			}
+			
 			static D3D12_FILTER_TYPE D3D12_DECODE_MAG_FILTER(int D3D12Filter)
 			{
 				return ((D3D12_FILTER_TYPE)(((D3D12Filter) >> D3D12_MAG_FILTER_SHIFT) & D3D12_FILTER_TYPE_MASK));
 			}
+			
 			static D3D12_FILTER_TYPE D3D12_DECODE_MIP_FILTER(int D3D12Filter)
 			{
 				return ((D3D12_FILTER_TYPE)(((D3D12Filter) >> D3D12_MIP_FILTER_SHIFT) & D3D12_FILTER_TYPE_MASK));
 			}
+			
 			static D3D12_FILTER_REDUCTION_TYPE D3D12_DECODE_FILTER_REDUCTION(int D3D12Filter) 
 			{
 				return ((D3D12_FILTER_REDUCTION_TYPE)(((D3D12Filter) >> D3D12_FILTER_REDUCTION_TYPE_SHIFT) & D3D12_FILTER_REDUCTION_TYPE_MASK));
 			}
+			
 			static bool D3D12_DECODE_IS_COMPARISON_FILTER(int D3D12Filter)
 			{
 				return (D3D12_DECODE_FILTER_REDUCTION(D3D12Filter) == D3D12_FILTER_REDUCTION_TYPE::D3D12_FILTER_REDUCTION_TYPE_COMPARISON);
 			}
+			
 			static bool D3D12_DECODE_IS_ANISOTROPIC_FILTER(int D3D12Filter)
 			{
 				return (((D3D12Filter)&D3D12_ANISOTROPIC_FILTERING_BIT) &&
 					(D3D12_FILTER_TYPE::D3D12_FILTER_TYPE_LINEAR == D3D12_DECODE_MIN_FILTER(D3D12Filter)) &&
 					(D3D12_FILTER_TYPE::D3D12_FILTER_TYPE_LINEAR == D3D12_DECODE_MAG_FILTER(D3D12Filter)) &&
 					(D3D12_FILTER_TYPE::D3D12_FILTER_TYPE_LINEAR == D3D12_DECODE_MIP_FILTER(D3D12Filter)));
+			}
+
+			static long D3D12SerializeRootSignature(D3D12_ROOT_SIGNATURE_DESC% pRootSignature, D3D_ROOT_SIGNATURE_VERSION Version, [Out] ID3DBlob^% ppBlob, [Out] ID3DBlob^% ppErrorBlob)
+			{
+				pin_ptr<D3D12_ROOT_SIGNATURE_DESC> pRootSig = &pRootSignature;
+				::ID3DBlob** ppOutBlob;
+				::ID3DBlob** ppOutError;
+				long ret = ::D3D12SerializeRootSignature((::D3D12_ROOT_SIGNATURE_DESC*)pRootSig, (::D3D_ROOT_SIGNATURE_VERSION)Version, ppOutBlob, ppOutError);
+				ppBlob = gcnew ID3DBlob(*ppOutBlob);
+				if (ppOutError == nullptr)
+					ppErrorBlob = nullptr;
+				else
+					ppErrorBlob = gcnew ID3DBlob(*ppOutError);
+				return ret;
+			}
+
+			static long D3D12CreateRootSignatureDeserializer(IntPtr pSrcData, size_t SrcDataSizeInBytes, Guid pRootSignatureDeserializerInterface, [Out] IntPtr% ppRootSignatureDeserializer)
+			{
+				void** ppOut;
+				long ret = ::D3D12CreateRootSignatureDeserializer(pSrcData.ToPointer(), SrcDataSizeInBytes, ToGUID(pRootSignatureDeserializerInterface), ppOut);
+				ppRootSignatureDeserializer = IntPtr(*ppOut);
+				return ret;
+			}
+
+			static long D3D12SerializeVersionedRootSignature(D3D12_VERSIONED_ROOT_SIGNATURE_DESC% pRootSignature, [Out] ID3DBlob^% ppBlob, [Out] ID3DBlob^% ppErrorBlob)
+			{
+				pin_ptr<D3D12_VERSIONED_ROOT_SIGNATURE_DESC> pRootSig = &pRootSignature;
+				::ID3DBlob** ppOutBlob;
+				::ID3DBlob** ppOutError;
+				long ret = ::D3D12SerializeVersionedRootSignature((::D3D12_VERSIONED_ROOT_SIGNATURE_DESC*)pRootSig, ppOutBlob, ppOutError);
+				ppBlob = gcnew ID3DBlob(*ppOutBlob);
+				if (ppOutError == nullptr)
+					ppErrorBlob = nullptr;
+				else
+					ppErrorBlob = gcnew ID3DBlob(*ppOutError);
+				return ret;
+			}
+
+
+			static long D3D12CreateVersionedRootSignatureDeserializer(IntPtr pSrcData, size_t SrcDataSizeInBytes, Guid pRootSignatureDeserializerInterface, [Out] IntPtr% ppRootSignatureDeserializer)
+			{
+				void** ppOut;
+				long ret = ::D3D12CreateVersionedRootSignatureDeserializer(pSrcData.ToPointer(), SrcDataSizeInBytes, ToGUID(pRootSignatureDeserializerInterface), ppOut);
+				ppRootSignatureDeserializer = IntPtr(*ppOut);
+				return ret;
 			}
 		};
 	}

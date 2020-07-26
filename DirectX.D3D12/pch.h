@@ -12,6 +12,19 @@
 #include "ID3D12Object.h"
 #include "ID3D12DeviceChild.h"
 #include "ID3D12RootSignature.h"
+#include "ID3D12RootSignatureDeserializer.h"
+#include "ID3D12VersionedRootSignatureDeserializer.h"
+#include "ID3D12Pageable.h"
+#include "ID3D12Heap.h"
+#include "ID3D12Resource.h"
+#include "ID3D12CommandAllocator.h"
+#include "ID3D12Fence.h"
+#include "ID3D12Fence1.h"
+#include "ID3D12PipelineState.h"
+#include "ID3D12DescriptorHeap.h"
+#include "ID3D12QueryHeap.h"
+#include "ID3D12CommandSignature.h"
+#include "ID3D12CommandList.h"
 // add headers that you want to pre-compile here
 
 #endif //PCH_H
