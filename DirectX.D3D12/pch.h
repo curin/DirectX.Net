@@ -25,6 +25,7 @@
 #include "ID3D12QueryHeap.h"
 #include "ID3D12CommandSignature.h"
 #include "ID3D12CommandList.h"
+#include "ID3D12GraphicsCommandList.h"
 // add headers that you want to pre-compile here
 
 #endif //PCH_H
