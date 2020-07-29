@@ -17,6 +17,9 @@
 #include "D3D12_VERTEX_BUFFER_VIEW.h"
 #include "D3D12_STREAM_OUTPUT_BUFFER_VIEW.h"
 #include "D3D12_CPU_DESCRIPTOR_HANDLE.h"
+#include "D3D12_DISCARD_REGION.h"
+#include "D3D12_QUERY_TYPE.h"
+#include "D3D12_PREDICATION_OP.h"
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
@@ -407,41 +410,152 @@ namespace DirectX
                 _ref->OMSetRenderTargets(0, nullptr, RTsSingleHandleToDescriptorRange, nullptr);
             }
 
-            void ClearDepthStencilView(D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView, D3D12_CLEAR_FLAGS ClearFlags,
-                _In_  FLOAT Depth, _In_  UINT8 Stencil, _In_  UINT NumRects, _In_reads_(NumRects)  const D3D12_RECT* pRects) = 0;
+            void ClearDepthStencilView(D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView, D3D12_CLEAR_FLAGS ClearFlags, float Depth, unsigned char Stencil, 
+                unsigned int NumRects, array<RECT>^ pRects)
+            {
+                pin_ptr<D3D12_CPU_DESCRIPTOR_HANDLE> dsv = &DepthStencilView;
+                pin_ptr<RECT> rects = &pRects[0];
+                ID3D12GraphicsCommandList_ClearDepthStencilView(_ref, (::D3D12_CPU_DESCRIPTOR_HANDLE*)dsv, (::D3D12_CLEAR_FLAGS)ClearFlags, Depth, Stencil, NumRects, (D3D12_RECT*)rects);
+            }
 
-            void ClearRenderTargetView(_In_  D3D12_CPU_DESCRIPTOR_HANDLE RenderTargetView, float* ColorRGBA,
-                _In_  UINT NumRects, _In_reads_(NumRects)  const D3D12_RECT* pRects) = 0;
+            void ClearDepthStencilView(D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView, D3D12_CLEAR_FLAGS ClearFlags, float Depth, unsigned char Stencil, array<RECT>^ pRects)
+            {
+                pin_ptr<D3D12_CPU_DESCRIPTOR_HANDLE> dsv = &DepthStencilView;
+                pin_ptr<RECT> rects = &pRects[0];
+                ID3D12GraphicsCommandList_ClearDepthStencilView(_ref, (::D3D12_CPU_DESCRIPTOR_HANDLE*)dsv, (::D3D12_CLEAR_FLAGS)ClearFlags, Depth, Stencil, 
+                    pRects->Length, (D3D12_RECT*)rects);
+            }
 
-            void ClearUnorderedAccessViewUint(_In_  D3D12_GPU_DESCRIPTOR_HANDLE ViewGPUHandleInCurrentHeap, _In_  D3D12_CPU_DESCRIPTOR_HANDLE ViewCPUHandle,
-                _In_  ID3D12Resource* pResource, _In_  unsigned int* Values, _In_  UINT NumRects, _In_reads_(NumRects)  const D3D12_RECT* pRects) = 0;
+            void ClearRenderTargetView(D3D12_CPU_DESCRIPTOR_HANDLE RenderTargetView, array<float>^ ColorRGBA,unsigned int NumRects, array<RECT>^ pRects)
+            {
+                pin_ptr<D3D12_CPU_DESCRIPTOR_HANDLE> rtv = &RenderTargetView;
+                pin_ptr<float> color = &ColorRGBA[0];
+                pin_ptr<RECT> rects = &pRects[0];
+                ID3D12GraphicsCommandList_ClearRenderTargetView(_ref, (::D3D12_CPU_DESCRIPTOR_HANDLE*)rtv, color, NumRects, (D3D12_RECT*)rects);
+            }
 
-            void ClearUnorderedAccessViewFloat(_In_  D3D12_GPU_DESCRIPTOR_HANDLE ViewGPUHandleInCurrentHeap, _In_  D3D12_CPU_DESCRIPTOR_HANDLE ViewCPUHandle,
-                _In_  ID3D12Resource* pResource, float* Values, _In_  UINT NumRects, _In_reads_(NumRects)  const D3D12_RECT* pRects) = 0;
+            void ClearRenderTargetView(D3D12_CPU_DESCRIPTOR_HANDLE RenderTargetView, array<float>^ ColorRGBA, array<RECT>^ pRects)
+            {
+                pin_ptr<D3D12_CPU_DESCRIPTOR_HANDLE> rtv = &RenderTargetView;
+                pin_ptr<float> color = &ColorRGBA[0];
+                pin_ptr<RECT> rects = &pRects[0];
+                ID3D12GraphicsCommandList_ClearRenderTargetView(_ref, (::D3D12_CPU_DESCRIPTOR_HANDLE*)rtv, color, pRects->Length, (D3D12_RECT*)rects);
+            }
 
-            void DiscardResource(_In_  ID3D12Resource* pResource, _In_opt_  const D3D12_DISCARD_REGION* pRegion) = 0;
+            void ClearUnorderedAccessViewUint(D3D12_GPU_DESCRIPTOR_HANDLE ViewGPUHandleInCurrentHeap, D3D12_CPU_DESCRIPTOR_HANDLE ViewCPUHandle,
+                ID3D12Resource^ pResource, array<unsigned int>^ Values, unsigned int NumRects, array<RECT>^ pRects)
+            {
+                pin_ptr<D3D12_GPU_DESCRIPTOR_HANDLE> gpuHandle = &ViewGPUHandleInCurrentHeap;
+                pin_ptr<D3D12_CPU_DESCRIPTOR_HANDLE> cpuHandle = &ViewCPUHandle;
+                pin_ptr<unsigned int> vals = &Values[0];
+                pin_ptr<RECT> rects = &pRects[0];
+                ID3D12GraphicsCommandList_ClearUnorderedAccessViewUint(_ref, (::D3D12_GPU_DESCRIPTOR_HANDLE*)gpuHandle, (::D3D12_CPU_DESCRIPTOR_HANDLE*)cpuHandle,
+                    (::ID3D12Resource*)pResource->Pointer.ToPointer(), vals, NumRects, (D3D12_RECT*)rects);
+            }
 
-            void BeginQuery(_In_  ID3D12QueryHeap* pQueryHeap, _In_  D3D12_QUERY_TYPE Type, _In_  UINT Index) = 0;
+            void ClearUnorderedAccessViewUint(D3D12_GPU_DESCRIPTOR_HANDLE ViewGPUHandleInCurrentHeap, D3D12_CPU_DESCRIPTOR_HANDLE ViewCPUHandle,
+                ID3D12Resource^ pResource, array<unsigned int>^ Values, array<RECT>^ pRects)
+            {
+                pin_ptr<D3D12_GPU_DESCRIPTOR_HANDLE> gpuHandle = &ViewGPUHandleInCurrentHeap;
+                pin_ptr<D3D12_CPU_DESCRIPTOR_HANDLE> cpuHandle = &ViewCPUHandle;
+                pin_ptr<unsigned int> vals = &Values[0];
+                pin_ptr<RECT> rects = &pRects[0];
+                ID3D12GraphicsCommandList_ClearUnorderedAccessViewUint(_ref, (::D3D12_GPU_DESCRIPTOR_HANDLE*)gpuHandle, (::D3D12_CPU_DESCRIPTOR_HANDLE*)cpuHandle,
+                    (::ID3D12Resource*)pResource->Pointer.ToPointer(), vals, pRects->Length, (D3D12_RECT*)rects);
+            }
 
-            void EndQuery(_In_  ID3D12QueryHeap* pQueryHeap, _In_  D3D12_QUERY_TYPE Type, _In_  UINT Index) = 0;
+            void ClearUnorderedAccessViewFloat(D3D12_GPU_DESCRIPTOR_HANDLE ViewGPUHandleInCurrentHeap, D3D12_CPU_DESCRIPTOR_HANDLE ViewCPUHandle,
+                ID3D12Resource^ pResource, array<float>^ Values, unsigned int NumRects, array<RECT>^ pRects)
+            {
+                pin_ptr<D3D12_GPU_DESCRIPTOR_HANDLE> gpuHandle = &ViewGPUHandleInCurrentHeap;
+                pin_ptr<D3D12_CPU_DESCRIPTOR_HANDLE> cpuHandle = &ViewCPUHandle;
+                pin_ptr<float> vals = &Values[0];
+                pin_ptr<RECT> rects = &pRects[0];
+                ID3D12GraphicsCommandList_ClearUnorderedAccessViewFloat(_ref, (::D3D12_GPU_DESCRIPTOR_HANDLE*)gpuHandle, (::D3D12_CPU_DESCRIPTOR_HANDLE*)cpuHandle,
+                    (::ID3D12Resource*)pResource->Pointer.ToPointer(), vals, NumRects, (D3D12_RECT*)rects);
+            }
 
-            void ResolveQueryData(_In_  ID3D12QueryHeap* pQueryHeap, _In_  D3D12_QUERY_TYPE Type, _In_  UINT StartIndex, _In_  UINT NumQueries,
-                _In_  ID3D12Resource* pDestinationBuffer, _In_  UINT64 AlignedDestinationBufferOffset) = 0;
+            void ClearUnorderedAccessViewFloat(D3D12_GPU_DESCRIPTOR_HANDLE ViewGPUHandleInCurrentHeap, D3D12_CPU_DESCRIPTOR_HANDLE ViewCPUHandle,
+                ID3D12Resource^ pResource, array<float>^ Values, array<RECT>^ pRects)
+            {
+                pin_ptr<D3D12_GPU_DESCRIPTOR_HANDLE> gpuHandle = &ViewGPUHandleInCurrentHeap;
+                pin_ptr<D3D12_CPU_DESCRIPTOR_HANDLE> cpuHandle = &ViewCPUHandle;
+                pin_ptr<float> vals = &Values[0];
+                pin_ptr<RECT> rects = &pRects[0];
+                ID3D12GraphicsCommandList_ClearUnorderedAccessViewFloat(_ref, (::D3D12_GPU_DESCRIPTOR_HANDLE*)gpuHandle, (::D3D12_CPU_DESCRIPTOR_HANDLE*)cpuHandle,
+                    (::ID3D12Resource*)pResource->Pointer.ToPointer(), vals, pRects->Length, (D3D12_RECT*)rects);
+            }
 
-            void SetPredication(_In_opt_  ID3D12Resource* pBuffer, _In_  UINT64 AlignedBufferOffset, _In_  D3D12_PREDICATION_OP Operation) = 0;
+            void DiscardResource(ID3D12Resource^ pResource, D3D12_DISCARD_REGION% pRegion)
+            {
+                pin_ptr<D3D12_DISCARD_REGION> region = &pRegion;
+                _ref->DiscardResource((::ID3D12Resource*)pResource->Pointer.ToPointer(), (::D3D12_DISCARD_REGION*)region);
+            }
 
-            void SetMarker(UINT Metadata, _In_reads_bytes_opt_(Size)  const void* pData, UINT Size) = 0;
+            void DiscardResource(ID3D12Resource^ pResource)
+            {
+                _ref->DiscardResource((::ID3D12Resource*)pResource->Pointer.ToPointer(), nullptr);
+            }
 
-            void BeginEvent(UINT Metadata, _In_reads_bytes_opt_(Size)  const void* pData, UINT Size) = 0;
+            void BeginQuery(ID3D12QueryHeap^ pQueryHeap, D3D12_QUERY_TYPE Type, unsigned int Index)
+            {
+                _ref->BeginQuery((::ID3D12QueryHeap*)pQueryHeap, (::D3D12_QUERY_TYPE)Type, Index);
+            }
 
-            void EndEvent() = 0;
+            void EndQuery(ID3D12QueryHeap^ pQueryHeap, D3D12_QUERY_TYPE Type, unsigned int Index)
+            {
+                _ref->EndQuery((::ID3D12QueryHeap*)pQueryHeap, (::D3D12_QUERY_TYPE)Type, Index);
+            }
 
-            void ExecuteIndirect(_In_  ID3D12CommandSignature* pCommandSignature, _In_  UINT MaxCommandCount, _In_  ID3D12Resource* pArgumentBuffer,
-                _In_  UINT64 ArgumentBufferOffset, _In_opt_  ID3D12Resource* pCountBuffer, _In_  UINT64 CountBufferOffset) = 0;
+            void ResolveQueryData(ID3D12QueryHeap^ pQueryHeap, D3D12_QUERY_TYPE Type, unsigned int StartIndex, unsigned int NumQueries, ID3D12Resource^ pDestinationBuffer,
+                unsigned long long AlignedDestinationBufferOffset)
+            {
+                _ref->ResolveQueryData((::ID3D12QueryHeap*)pQueryHeap, (::D3D12_QUERY_TYPE)Type, StartIndex, NumQueries, (::ID3D12Resource*)pDestinationBuffer->Pointer.ToPointer(),
+                    AlignedDestinationBufferOffset);
+            }
+
+            void SetPredication(ID3D12Resource^ pBuffer, unsigned long long AlignedBufferOffset, D3D12_PREDICATION_OP Operation)
+            {
+                _ref->SetPredication((::ID3D12Resource*)pBuffer->Pointer.ToPointer(), AlignedBufferOffset, (::D3D12_PREDICATION_OP)Operation);
+            }
+
+            void SetPredication(unsigned long long AlignedBufferOffset, D3D12_PREDICATION_OP Operation)
+            {
+                _ref->SetPredication(nullptr, AlignedBufferOffset, (::D3D12_PREDICATION_OP)Operation);
+            }
+
+            void SetMarker(unsigned int Metadata, IntPtr pData, unsigned int Size)
+            {
+                _ref->SetMarker(Metadata, pData.ToPointer(), Size);
+            }
+
+            void BeginEvent(unsigned int Metadata, IntPtr pData, unsigned int Size)
+            {
+                _ref->BeginEvent(Metadata, pData.ToPointer(), Size);
+            }
+
+            void EndEvent()
+            {
+                _ref->EndEvent();
+            }
+
+            void ExecuteIndirect(ID3D12CommandSignature^ pCommandSignature, unsigned int MaxCommandCount, ID3D12Resource^ pArgumentBuffer,
+                unsigned long long ArgumentBufferOffset, ID3D12Resource^ pCountBuffer, unsigned long long CountBufferOffset)
+            {
+                _ref->ExecuteIndirect((::ID3D12CommandSignature*)pCommandSignature->Pointer.ToPointer(), MaxCommandCount, (::ID3D12Resource*)pArgumentBuffer,
+                    ArgumentBufferOffset, (::ID3D12Resource*)pCountBuffer->Pointer.ToPointer(), CountBufferOffset);
+            }
+
+            void ExecuteIndirect(ID3D12CommandSignature^ pCommandSignature, unsigned int MaxCommandCount, ID3D12Resource^ pArgumentBuffer,
+                unsigned long long ArgumentBufferOffset, unsigned long long CountBufferOffset)
+            {
+                _ref->ExecuteIndirect((::ID3D12CommandSignature*)pCommandSignature->Pointer.ToPointer(), MaxCommandCount, (::ID3D12Resource*)pArgumentBuffer,
+                    ArgumentBufferOffset, nullptr, CountBufferOffset);
+            }
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::ID3D12GraphicsCommandList>((_ref));
+                return DirectX::D3D12::GetGUID<::ID3D12GraphicsCommandList>((_ref));
             }
 
             static GUID GetGUID()

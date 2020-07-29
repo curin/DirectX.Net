@@ -32,7 +32,7 @@ namespace DirectX
 
                 GUID getGUID() override
                 {
-                    return DirectX::GetGUID<::IDXGIDebug1>((_ref));
+                    return DirectX::DXGI::GetGUID<::IDXGIDebug1>((_ref));
                 }
 
                 static GUID GetGUID()

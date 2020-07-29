@@ -20,8 +20,8 @@ namespace DirectX
 
             long GetRootSignatureDescAtVersion(D3D_ROOT_SIGNATURE_VERSION convertToVersion, [Out] D3D12_VERSIONED_ROOT_SIGNATURE_DESC% ppDesc)
             {
-                ::D3D12_VERSIONED_ROOT_SIGNATURE_DESC* ppOut;
-                long ret = _ref->GetRootSignatureDescAtVersion((::D3D_ROOT_SIGNATURE_VERSION)convertToVersion, &ppOut);
+                const ::D3D12_VERSIONED_ROOT_SIGNATURE_DESC** ppOut;
+                long ret = _ref->GetRootSignatureDescAtVersion((::D3D_ROOT_SIGNATURE_VERSION)convertToVersion, ppOut);
                 ppDesc = *(D3D12_VERSIONED_ROOT_SIGNATURE_DESC*)ppOut;
                 return ret;
             }
@@ -33,7 +33,7 @@ namespace DirectX
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::ID3D12VersionedRootSignatureDeserializer>((_ref));
+                return DirectX::D3D12::GetGUID<::ID3D12VersionedRootSignatureDeserializer>((_ref));
             }
 
             static GUID GetGUID()

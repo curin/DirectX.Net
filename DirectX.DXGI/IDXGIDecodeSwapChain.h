@@ -72,7 +72,7 @@ namespace DirectX
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::IDXGIDecodeSwapChain>((_ref));
+                return DirectX::DXGI::GetGUID<::IDXGIDecodeSwapChain>((_ref));
             }
 
             static GUID GetGUID()

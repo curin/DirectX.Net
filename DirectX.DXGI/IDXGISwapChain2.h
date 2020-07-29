@@ -58,7 +58,7 @@ namespace DirectX
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::IDXGISwapChain2>((_ref));
+                return DirectX::DXGI::GetGUID<::IDXGISwapChain2>((_ref));
             }
 
             static GUID GetGUID()

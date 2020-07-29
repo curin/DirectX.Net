@@ -58,7 +58,7 @@ namespace DirectX
             long WriteToSubresource(unsigned int DstSubresource, D3D12_BOX% pDstBox, IntPtr pSrcData, unsigned int SrcRowPitch, unsigned int SrcDepthPitch)
             {
                 pin_ptr<D3D12_BOX> box = &pDstBox;
-                return _ref->WriteToSubresource(DstSubresource, box, pSrcData.ToPointer(), SrcRowPitch, SrcDepthPitch);
+                return _ref->WriteToSubresource(DstSubresource, (::D3D12_BOX*)box, pSrcData.ToPointer(), SrcRowPitch, SrcDepthPitch);
             }
 
             long WriteToSubresource(unsigned int DstSubresource, IntPtr pSrcData, unsigned int SrcRowPitch, unsigned int SrcDepthPitch)
@@ -70,13 +70,17 @@ namespace DirectX
             {
                 pin_ptr<D3D12_BOX> box = &pSrcBox;
                 void* dst;
-                long ret = _ref->ReadFromSubresource(dst, DstRowPitch, DstDepthPitch, SrcSubresource, box);
+                long ret = _ref->ReadFromSubresource(dst, DstRowPitch, DstDepthPitch, SrcSubresource, (::D3D12_BOX*)box);
+                pDstData = IntPtr(dst);
+                return ret;
             }
 
-            long ReadFromSubresource([Out] IntPtr pDstData, unsigned int DstRowPitch, unsigned int DstDepthPitch, unsigned int SrcSubresource)
+            long ReadFromSubresource([Out] IntPtr% pDstData, unsigned int DstRowPitch, unsigned int DstDepthPitch, unsigned int SrcSubresource)
             {
                 void* dst;
                 long ret = _ref->ReadFromSubresource(dst, DstRowPitch, DstDepthPitch, SrcSubresource, nullptr);
+                pDstData = IntPtr(dst);
+                return ret;
             }
 
             long GetHeapProperties([Out] D3D12_HEAP_PROPERTIES% pHeapProperties, [Out]  D3D12_HEAP_FLAGS% pHeapFlags)
@@ -101,7 +105,7 @@ namespace DirectX
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::ID3D12Resource>((_ref));
+                return DirectX::D3D12::GetGUID<::ID3D12Resource>((_ref));
             }
 
             static GUID GetGUID()

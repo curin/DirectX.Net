@@ -7,29 +7,29 @@ using namespace System::Runtime::InteropServices;
 
 namespace DirectX
 {
-    Guid FromGUID(_GUID guid) {
-        return Guid(guid.Data1, guid.Data2, guid.Data3,
-            guid.Data4[0], guid.Data4[1],
-            guid.Data4[2], guid.Data4[3],
-            guid.Data4[4], guid.Data4[5],
-            guid.Data4[6], guid.Data4[7]);
-    }
-
-    _GUID ToGUID(Guid& guid) {
-        array<Byte>^ guidData = guid.ToByteArray();
-        pin_ptr<Byte> data = &(guidData[0]);
-
-        return *(_GUID*)data;
-    }
-
-    template<class T>
-    _GUID GetGUID(T* ptr)
-    {
-        return __uuidof(ptr);
-    }
-
     namespace D3D12
     {
+        Guid FromGUID(_GUID guid) {
+            return Guid(guid.Data1, guid.Data2, guid.Data3,
+                guid.Data4[0], guid.Data4[1],
+                guid.Data4[2], guid.Data4[3],
+                guid.Data4[4], guid.Data4[5],
+                guid.Data4[6], guid.Data4[7]);
+        }
+
+        _GUID ToGUID(Guid& guid) {
+            array<Byte>^ guidData = guid.ToByteArray();
+            pin_ptr<Byte> data = &(guidData[0]);
+
+            return *(_GUID*)data;
+        }
+
+        template<class T>
+        _GUID GetGUID(T* ptr)
+        {
+            return __uuidof(ptr);
+        }
+
         public ref class ID3D12Object : public IUnknown
         {
             ::ID3D12Object* _ref;
@@ -65,7 +65,7 @@ namespace DirectX
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::ID3D12Object>((_ref));
+                return DirectX::D3D12::GetGUID<::ID3D12Object>((_ref));
             }
 
             static GUID GetGUID()

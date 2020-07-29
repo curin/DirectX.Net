@@ -10,6 +10,7 @@ namespace DirectX
 {
     namespace D3D12
     {
+        [StructLayout(LayoutKind::Explicit)]
         public value struct D3D12_INDIRECT_ARGUMENT_DESC
         {
             [FieldOffset(0)]
@@ -22,12 +23,6 @@ namespace DirectX
             unsigned int DestOffsetIn32BitValues;
             [FieldOffset(EnumSize + (2 * UIntSize))]
             unsigned int Num32BitValuesToSet;
-            [FieldOffset(EnumSize)]
-            unsigned int RootParameterIndex;
-            [FieldOffset(EnumSize)]
-            unsigned int RootParameterIndex;
-            [FieldOffset(EnumSize)]
-            unsigned int RootParameterIndex;
         };
     }
 }

@@ -171,7 +171,7 @@ namespace DirectX
 
                 virtual GUID getGUID() override
                 {
-                    return DirectX::GetGUID<::IDXGIInfoQueue>((_ref));
+                    return DirectX::DXGI::GetGUID<::IDXGIInfoQueue>((_ref));
                 }
 
                 static GUID GetGUID()

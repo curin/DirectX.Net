@@ -21,7 +21,7 @@ namespace DirectX
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::IDXGIAdapter1>((_ref));
+                return DirectX::DXGI::GetGUID<::IDXGIAdapter1>((_ref));
             }
 
             static GUID GetGUID()

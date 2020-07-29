@@ -735,6 +735,24 @@
     <ClInclude Include="ID3D12GraphicsCommandList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ID3D12GraphicsCommandList1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_WRITEBUFFERIMMEDIATE_PARAMETER.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_WRITEBUFFERIMMEDIATE_MODE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ID3D12GraphicsCommandList2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ID3D12CommandQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ID3D12Device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.D3D12.cpp">

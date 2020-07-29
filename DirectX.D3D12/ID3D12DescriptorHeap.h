@@ -39,7 +39,7 @@ namespace DirectX
 
             GUID getGUID() override
             {
-                return DirectX::GetGUID<::ID3D12DescriptorHeap>((_ref));
+                return DirectX::D3D12::GetGUID<::ID3D12DescriptorHeap>((_ref));
             }
 
             static GUID GetGUID()

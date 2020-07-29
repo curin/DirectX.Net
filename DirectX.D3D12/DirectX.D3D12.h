@@ -2,6 +2,28 @@
 
 using namespace System;
 
+#include "ID3D12Object.h"
+#include "ID3D12DeviceChild.h"
+#include "ID3D12RootSignature.h"
+#include "ID3D12RootSignatureDeserializer.h"
+#include "ID3D12VersionedRootSignatureDeserializer.h"
+#include "ID3D12Pageable.h"
+#include "ID3D12Heap.h"
+#include "ID3D12Resource.h"
+#include "ID3D12CommandAllocator.h"
+#include "ID3D12Fence.h"
+#include "ID3D12Fence1.h"
+#include "ID3D12PipelineState.h"
+#include "ID3D12DescriptorHeap.h"
+#include "ID3D12QueryHeap.h"
+#include "ID3D12CommandSignature.h"
+#include "ID3D12CommandList.h"
+#include "ID3D12GraphicsCommandList.h"
+#include "ID3D12GraphicsCommandList1.h"
+#include "ID3D12GraphicsCommandList2.h"
+#include "ID3D12CommandQueue.h"
+#include "ID3D12Device.h"
+
 #undef	D3D12_16BIT_INDEX_STRIP_CUT_VALUE	
 #undef	D3D12_32BIT_INDEX_STRIP_CUT_VALUE	
 #undef	D3D12_8BIT_INDEX_STRIP_CUT_VALUE	
@@ -448,7 +470,6 @@ using namespace System;
 #include "D3D12_FILTER_TYPE.h"
 #include "D3D12_FILTER_REDUCTION_TYPE.h"
 
-using namespace System;
 using namespace System::Runtime::InteropServices;
 
 namespace DirectX 
@@ -960,7 +981,7 @@ namespace DirectX
 				pin_ptr<D3D12_ROOT_SIGNATURE_DESC> pRootSig = &pRootSignature;
 				::ID3DBlob** ppOutBlob;
 				::ID3DBlob** ppOutError;
-				long ret = ::D3D12SerializeRootSignature((::D3D12_ROOT_SIGNATURE_DESC*)pRootSig, (::D3D_ROOT_SIGNATURE_VERSION)Version, ppOutBlob, ppOutError);
+				long ret = D3D12SerializeRootSignature((::D3D12_ROOT_SIGNATURE_DESC*)pRootSig, (::D3D_ROOT_SIGNATURE_VERSION)Version, ppOutBlob, ppOutError);
 				ppBlob = gcnew ID3DBlob(*ppOutBlob);
 				if (ppOutError == nullptr)
 					ppErrorBlob = nullptr;
@@ -972,7 +993,7 @@ namespace DirectX
 			static long D3D12CreateRootSignatureDeserializer(IntPtr pSrcData, size_t SrcDataSizeInBytes, Guid pRootSignatureDeserializerInterface, [Out] IntPtr% ppRootSignatureDeserializer)
 			{
 				void** ppOut;
-				long ret = ::D3D12CreateRootSignatureDeserializer(pSrcData.ToPointer(), SrcDataSizeInBytes, ToGUID(pRootSignatureDeserializerInterface), ppOut);
+				long ret = D3D12CreateRootSignatureDeserializer(pSrcData.ToPointer(), SrcDataSizeInBytes, ToGUID(pRootSignatureDeserializerInterface), ppOut);
 				ppRootSignatureDeserializer = IntPtr(*ppOut);
 				return ret;
 			}
@@ -982,7 +1003,7 @@ namespace DirectX
 				pin_ptr<D3D12_VERSIONED_ROOT_SIGNATURE_DESC> pRootSig = &pRootSignature;
 				::ID3DBlob** ppOutBlob;
 				::ID3DBlob** ppOutError;
-				long ret = ::D3D12SerializeVersionedRootSignature((::D3D12_VERSIONED_ROOT_SIGNATURE_DESC*)pRootSig, ppOutBlob, ppOutError);
+				long ret = D3D12SerializeVersionedRootSignature((::D3D12_VERSIONED_ROOT_SIGNATURE_DESC*)pRootSig, ppOutBlob, ppOutError);
 				ppBlob = gcnew ID3DBlob(*ppOutBlob);
 				if (ppOutError == nullptr)
 					ppErrorBlob = nullptr;
@@ -995,10 +1016,29 @@ namespace DirectX
 			static long D3D12CreateVersionedRootSignatureDeserializer(IntPtr pSrcData, size_t SrcDataSizeInBytes, Guid pRootSignatureDeserializerInterface, [Out] IntPtr% ppRootSignatureDeserializer)
 			{
 				void** ppOut;
-				long ret = ::D3D12CreateVersionedRootSignatureDeserializer(pSrcData.ToPointer(), SrcDataSizeInBytes, ToGUID(pRootSignatureDeserializerInterface), ppOut);
+				long ret = D3D12CreateVersionedRootSignatureDeserializer(pSrcData.ToPointer(), SrcDataSizeInBytes, ToGUID(pRootSignatureDeserializerInterface), ppOut);
 				ppRootSignatureDeserializer = IntPtr(*ppOut);
 				return ret;
 			}
+
+			private:
+				//pInvoke (dll import command)
+				[DllImport("d3d12.h")]
+				static long D3D12SerializeRootSignature(::D3D12_ROOT_SIGNATURE_DESC* pRootSignature, ::D3D_ROOT_SIGNATURE_VERSION Version, 
+					::ID3DBlob** ppBlob, ::ID3DBlob** ppErrorBlob);
+
+				[DllImport("d3d12.h")]
+				static long D3D12CreateRootSignatureDeserializer(LPCVOID pSrcData, SIZE_T SrcDataSizeInBytes,
+					REFIID pRootSignatureDeserializerInterface, void** ppRootSignatureDeserializer);
+
+				[DllImport("d3d12.h")]
+				static long D3D12SerializeVersionedRootSignature(::D3D12_VERSIONED_ROOT_SIGNATURE_DESC* pRootSignature,
+					::ID3DBlob** ppBlob, ::ID3DBlob** ppErrorBlob);
+
+				[DllImport("d3d12.h")]
+				static long D3D12CreateVersionedRootSignatureDeserializer(LPCVOID pSrcData, SIZE_T SrcDataSizeInBytes,
+					REFIID pRootSignatureDeserializerInterface, void** ppRootSignatureDeserializer);
+
 		};
 	}
 }
