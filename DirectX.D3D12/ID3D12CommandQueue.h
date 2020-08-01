@@ -157,6 +157,7 @@ namespace DirectX
                     commandLists[i] = (::ID3D12CommandList*)ppCommandLists[i]->Pointer.ToPointer();
 
                 _ref->ExecuteCommandLists(NumCommandLists, commandLists);
+                delete commandLists;
             }
 
             void ExecuteCommandLists(array<ID3D12CommandList^>^ ppCommandLists)
@@ -167,6 +168,7 @@ namespace DirectX
                     commandLists[i] = (::ID3D12CommandList*)ppCommandLists[i]->Pointer.ToPointer();
 
                 _ref->ExecuteCommandLists(ppCommandLists->Length, commandLists);
+                delete commandLists;
             }
 
             void ExecuteCommandLists(unsigned int NumCommandLists, IntPtr ppCommandLists)

@@ -31,6 +31,8 @@ namespace DirectX
 
                 _ref->AtomicCopyBufferUINT((::ID3D12Resource*)pDstBuffer->Pointer.ToPointer(), DstOffset, (::ID3D12Resource*)pSrcBuffer->Pointer.ToPointer(), SrcOffset,
                     Dependencies, resources, (::D3D12_SUBRESOURCE_RANGE_UINT64*)ranges);
+
+                delete resources;
             }
 
             void AtomicCopyBufferUINT(ID3D12Resource^ pDstBuffer, unsigned long long DstOffset, ID3D12Resource^ pSrcBuffer, unsigned long long SrcOffset, 
@@ -44,6 +46,8 @@ namespace DirectX
 
                 _ref->AtomicCopyBufferUINT((::ID3D12Resource*)pDstBuffer->Pointer.ToPointer(), DstOffset, (::ID3D12Resource*)pSrcBuffer->Pointer.ToPointer(), SrcOffset,
                     ppDependentResources->Length, resources, (::D3D12_SUBRESOURCE_RANGE_UINT64*)ranges);
+
+                delete resources;
             }
 
             void AtomicCopyBufferUINT(ID3D12Resource^ pDstBuffer,  long long DstOffset, ID3D12Resource^ pSrcBuffer, unsigned long long SrcOffset, unsigned int Dependencies,
@@ -66,6 +70,8 @@ namespace DirectX
 
                 _ref->AtomicCopyBufferUINT64((::ID3D12Resource*)pDstBuffer->Pointer.ToPointer(), DstOffset, (::ID3D12Resource*)pSrcBuffer->Pointer.ToPointer(), SrcOffset,
                     Dependencies, resources, (::D3D12_SUBRESOURCE_RANGE_UINT64*)ranges);
+
+                delete resources;
             }
 
             void AtomicCopyBufferUINT64(ID3D12Resource^ pDstBuffer, unsigned long long DstOffset, ID3D12Resource^ pSrcBuffer, unsigned long long SrcOffset,
@@ -79,6 +85,8 @@ namespace DirectX
 
                 _ref->AtomicCopyBufferUINT64((::ID3D12Resource*)pDstBuffer->Pointer.ToPointer(), DstOffset, (::ID3D12Resource*)pSrcBuffer->Pointer.ToPointer(), SrcOffset,
                     ppDependentResources->Length, resources, (::D3D12_SUBRESOURCE_RANGE_UINT64*)ranges);
+
+                delete resources;
             }
 
             void AtomicCopyBufferUINT64(ID3D12Resource^ pDstBuffer, unsigned long long DstOffset, ID3D12Resource^ pSrcBuffer, unsigned long long SrcOffset, unsigned int Dependencies,

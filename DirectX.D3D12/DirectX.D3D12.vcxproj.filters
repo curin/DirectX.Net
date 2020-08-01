@@ -753,6 +753,18 @@
     <ClInclude Include="ID3D12Device.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D3D12_PROTECTED_RESOURCE_SESSION_SUPPORT_FLAGS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_SUPPORT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_TYPE_COUNT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_TYPES.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.D3D12.cpp">

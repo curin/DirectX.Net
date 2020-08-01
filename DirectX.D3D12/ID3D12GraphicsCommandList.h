@@ -226,6 +226,7 @@ namespace DirectX
                 for (int i = 0; i < NumDescriptorHeaps; i++)
                     descriptorHeaps[i] = (::ID3D12DescriptorHeap*)ppDescriptorHeaps[i]->Pointer.ToPointer();
                 _ref->SetDescriptorHeaps(NumDescriptorHeaps, descriptorHeaps);
+                delete descriptorHeaps;
             }
 
             void SetDescriptorHeaps(unsigned int NumDescriptorHeaps, IntPtr ppDescriptorHeaps)
@@ -240,6 +241,7 @@ namespace DirectX
                 for (int i = 0; i < ppDescriptorHeaps->Length; i++)
                     descriptorHeaps[i] = (::ID3D12DescriptorHeap*)ppDescriptorHeaps[i]->Pointer.ToPointer();
                 _ref->SetDescriptorHeaps(ppDescriptorHeaps->Length, descriptorHeaps);
+                delete descriptorHeaps;
             }
 
             void SetComputeRootSignature(ID3D12RootSignature^ pRootSignature)
