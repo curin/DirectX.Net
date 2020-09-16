@@ -23,6 +23,14 @@ using namespace System;
 #include "ID3D12GraphicsCommandList2.h"
 #include "ID3D12CommandQueue.h"
 #include "ID3D12Device.h"
+#include "ID3D12PipelineLibrary.h"
+#include "ID3D12PipelineLibrary1.h"
+#include "ID3D12Device1.h"
+#include "ID3D12Device2.h"
+#include "ID3D12Device3.h"
+#include "ID3D12ProtectedSession.h"
+#include "ID3D12ProtectedResourceSession.h"
+#include "ID3D12Device4.h"
 
 #undef	D3D12_16BIT_INDEX_STRIP_CUT_VALUE	
 #undef	D3D12_32BIT_INDEX_STRIP_CUT_VALUE	
