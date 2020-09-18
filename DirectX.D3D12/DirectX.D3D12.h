@@ -31,6 +31,11 @@ using namespace System;
 #include "ID3D12ProtectedSession.h"
 #include "ID3D12ProtectedResourceSession.h"
 #include "ID3D12Device4.h"
+#include "ID3D12LifetimeOwner.h"
+#include "ID3D12SwapChainAssistant.h"
+#include "ID3D12LifetimeTracker.h"
+#include "ID3D12StateObject.h"
+#include "ID3D12StateObjectProperties.h"
 
 #undef	D3D12_16BIT_INDEX_STRIP_CUT_VALUE	
 #undef	D3D12_32BIT_INDEX_STRIP_CUT_VALUE	

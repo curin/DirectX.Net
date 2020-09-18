@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ID3D12Device3.h"
+#include "D3D12_RESOURCE_ALLOCATION_INFO1.h"
 
 using namespace System;
 using namespace System::Runtime::InteropServices;

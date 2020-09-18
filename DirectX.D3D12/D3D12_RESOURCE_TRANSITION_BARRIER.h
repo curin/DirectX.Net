@@ -16,6 +16,14 @@ namespace DirectX
             unsigned int Subresource;
             D3D12_RESOURCE_STATES StateBefore;
             D3D12_RESOURCE_STATES StateAfter;
+
+            property ID3D12Resource^ Resource
+            {
+                ID3D12Resource^ get()
+                {
+                    return gcnew ID3D12Resource(pResource);
+                }
+            }
         };
     }
 }
