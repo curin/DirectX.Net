@@ -125,6 +125,7 @@ namespace DirectX
                 long ret = _ref->CreateHeap1((::D3D12_HEAP_DESC*)desc, (::ID3D12ProtectedResourceSession*)pProtectedSession->Pointer.ToPointer(), ToGUID(riid), ppOut);
 
                 ppvHeap = IntPtr(*ppOut);
+                return ret;
             }
 
             long CreateHeap1(D3D12_HEAP_DESC% pDesc, Guid riid, [Out] IntPtr% ppvHeap)
@@ -135,6 +136,7 @@ namespace DirectX
                 long ret = _ref->CreateHeap1((::D3D12_HEAP_DESC*)desc, nullptr, ToGUID(riid), ppOut);
 
                 ppvHeap = IntPtr(*ppOut);
+                return ret;
             }
 
             long CreateReservedResource1(D3D12_RESOURCE_DESC% pDesc, D3D12_RESOURCE_STATES InitialState,
