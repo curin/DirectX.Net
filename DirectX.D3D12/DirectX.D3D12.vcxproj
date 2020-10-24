@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -170,6 +170,7 @@
     <ClInclude Include="D3D12_DISPATCH_ARGUMENTS.h" />
     <ClInclude Include="D3D12_DRAW_ARGUMENTS.h" />
     <ClInclude Include="D3D12_DRAW_INDEXED_ARGUMENTS.h" />
+    <ClInclude Include="D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS.h" />
     <ClInclude Include="D3D12_DSV_DIMENSION.h" />
     <ClInclude Include="D3D12_DSV_FLAGS.h" />
     <ClInclude Include="D3D12_DXIL_LIBRARY_DESC.h" />
@@ -271,7 +272,9 @@
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAGS.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_COMPACTED_SIZE_DESC.h" />
+    <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_CURRENT_SIZE_DESC.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC.h" />
+    <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TOOLS_VISUALIZATION_DESC.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TYPE.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV.h" />
@@ -324,6 +327,9 @@
     <ClInclude Include="D3D12_SAMPLER_DESC.h" />
     <ClInclude Include="D3D12_SAMPLER_FEEDBACK_TIER.h" />
     <ClInclude Include="D3D12_SAMPLE_POSITION.h" />
+    <ClInclude Include="D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER.h" />
+    <ClInclude Include="D3D12_SERIALIZED_DATA_TYPE.h" />
+    <ClInclude Include="D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER.h" />
     <ClInclude Include="D3D12_SHADER_BYTECODE.h" />
     <ClInclude Include="D3D12_SHADER_CACHE_SUPPORT_FLAGS.h" />
     <ClInclude Include="D3D12_SHADER_COMPONENT_MAPPING.h" />
