@@ -5,6 +5,7 @@
 using namespace System;
 using namespace System::Runtime::InteropServices;
 using namespace DirectX::DXGI;
+using namespace Dragonbones::Native::Common;
 
 namespace DirectX
 {
@@ -12,8 +13,7 @@ namespace DirectX
     {
         public value struct D3D12_INPUT_ELEMENT_DESC
         {
-            [MarshalAs(UnmanagedType::LPStr)]
-            String^ SemanticName;
+            UnmanagedConstantString SemanticName;
             unsigned int SemanticIndex;
             DirectX::DXGI::DXGI_FORMAT Format;
             unsigned int InputSlot;

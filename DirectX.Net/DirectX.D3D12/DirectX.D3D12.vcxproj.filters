@@ -987,6 +987,9 @@
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_CURRENT_SIZE_DESC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D3D12UnmanagedArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.D3D12.cpp">
@@ -996,6 +999,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D12UnmanagedArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

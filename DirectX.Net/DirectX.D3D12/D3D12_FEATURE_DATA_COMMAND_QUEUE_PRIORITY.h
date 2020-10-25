@@ -14,8 +14,7 @@ namespace DirectX
         {
             D3D12_COMMAND_LIST_TYPE CommandListType;
             unsigned int Priority;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool PriorityForTypeIsSupported;
+            int PriorityForTypeIsSupported;
         };
     }
 }

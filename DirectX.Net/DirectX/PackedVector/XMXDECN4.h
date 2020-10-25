@@ -7,43 +7,82 @@ namespace DirectX
 {
     namespace PackedVectors
     {
-        void XMXDECN4_CONSTRUCTOR(DirectX::PackedVector::XMXDECN4* location, DirectX::PackedVector::XMXDECN4* value) { *location = DirectX::PackedVector::XMXDECN4(*value); }
-        public ref class XMXDECN4 : IUnmanagedReference<DirectX::PackedVector::XMXDECN4>
+        public value struct XMXDECN4
         {
-        public:
-            UnmanagedReferenceProperty(int, x)
-            UnmanagedReferenceProperty(int, y)
-            UnmanagedReferenceProperty(int, z)
-            UnmanagedReferenceProperty(int, w)
-            UnmanagedReferenceProperty(unsigned int, v)
-            UnmanagedOperator(DirectX::PackedVector::XMXDECN4)
+            uint32_t v;
 
-            XMXDECN4(float x, float y, float z, float w)
+            property int32_t x
             {
-                _value = new DirectX::PackedVector::XMXDECN4(x, y, z, w);
+                int32_t get()
+                {
+                    return (v & 0x000003FF);
+                }
+                void set(int32_t value)
+                {
+                    v = (value & 0x000003FF) | (v & 0xFFFFFC00);
+                }
             }
 
-            XMXDECN4(DirectX::PackedVector::XMXDECN4* value)
+            property int32_t y
             {
-                _value = value;
+                int32_t get()
+                {
+                    return (v & 0x000FFC00) >> 10;
+                }
+                void set(int32_t value)
+                {
+                    value <<= 10;
+                    v = (value & 0x000FFC00) | (v & 0xFFF003FF);
+                }
             }
 
-            XMXDECN4(IntPtr location, DirectX::PackedVector::XMXDECN4* val)
+            property int32_t z
             {
-                _value = (DirectX::PackedVector::XMXDECN4*)location.ToPointer();
-                XMXDECN4_CONSTRUCTOR(_value, val);
+                int32_t get()
+                {
+                    return (v & 0x3FF00000) >> 20;
+                }
+                void set(int32_t value)
+                {
+                    value <<= 20;
+                    v = (value & 0x3FF00000) | (v & 0xC00FFFFF);
+                }
             }
 
-            XMXDECN4(unsigned int c)
+            property uint32_t w
             {
-                _value = new DirectX::PackedVector::XMXDECN4(c);
+                uint32_t get()
+                {
+                    return (v & 0xC0000000) >> 30;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 30;
+                    v = (value & 0xC0000000) | (v & 0x3FFFFFFF);
+                }
             }
 
-            XMXDECN4(array<float>^ pArray)
+            explicit XMXDECN4(uint32_t Packed) : v(Packed) {}
+            XMXDECN4(float _x, float _y, float _z, float _w)
             {
-                pin_ptr<float> p = &pArray[0];
-                _value = new DirectX::PackedVector::XMXDECN4(p);
+                x = *(int32_t*)&_x;
+                y = *(int32_t*)&_y;
+                z = *(int32_t*)&_z;
+                w = *(uint32_t*)&_w;
             }
+            explicit XMXDECN4(array<float>^ pArray)
+            {
+                float temp = pArray[0];
+                x = *(int32_t*)&temp;
+                temp = pArray[1];
+                y = *(int32_t*)&temp;
+                temp = pArray[2];
+                z = *(int32_t*)&temp;
+                temp = pArray[3];
+                w = *(uint32_t*)&temp;
+            }
+
+            operator uint32_t () { return v; }
         };
     }
 }

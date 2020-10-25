@@ -14,9 +14,3 @@ inline Dragonbones::Native::Common::UnamangedArray<T>::UnamangedArray(IntPtr sta
     _array = (T*)start.ToPointer();
     _length = length;
 }
-
-template<typename T>
-T& Dragonbones::Native::Common::UnamangedArray<T>::operator[](size_t index)
-{
-    return _array[index];
-}

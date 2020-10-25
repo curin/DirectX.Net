@@ -11,8 +11,7 @@ namespace DirectX
         public value struct DXGI_OUTDUPL_POINTER_POSITION
         {
             POINT Position;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool Visible;
+            int Visible;
         };
     }
 }

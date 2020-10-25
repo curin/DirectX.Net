@@ -1,51 +1,123 @@
 #pragma once
 
 #include <DirectXPackedVector.h>
+#include <math.h>
 #include "../Windows/IUnmanagedReference.h"
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        void XMFLOAT3PK_CONSTRUCTOR(DirectX::PackedVector::XMFLOAT3PK* location, DirectX::PackedVector::XMFLOAT3PK* value) { *location = DirectX::PackedVector::XMFLOAT3PK(*value); }
-        public ref class XMFLOAT3PK : IUnmanagedReference<DirectX::PackedVector::XMFLOAT3PK>
+        [StructLayout(LayoutKind::Sequential)]
+        public value struct XMFLOAT3PK
         {
-        public:
-            XMFLOAT3PK(float x, float y, float z)
+            uint32_t v;
+
+            property uint32_t xm // x-mantissa
             {
-                _value = new DirectX::PackedVector::XMFLOAT3PK(x, y, z);
+                uint32_t get()
+                {
+                    return (v & 0x0000001F);
+                }
+                void set(uint32_t value)
+                {
+                    v = (value & 0x0000001F) | (v & 0xFFFFFFE0);
+                }
             }
 
-            XMFLOAT3PK(DirectX::PackedVector::XMFLOAT3PK* pVal)
+            property uint32_t xe // x-exponent
             {
-                _value = pVal;
+                uint32_t get()
+                {
+                    return (v & 0x000003E0) >> 5;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 5;
+                    v = (value & 0x000003E0) | (v & 0xFFFFFC1F);
+                }
             }
 
-            XMFLOAT3PK(IntPtr location, DirectX::PackedVector::XMFLOAT3PK* val)
+            property uint32_t ym // y-mantissa
             {
-                _value = (DirectX::PackedVector::XMFLOAT3PK*)location.ToPointer();
-                XMFLOAT3PK_CONSTRUCTOR(_value, val);
+                uint32_t get()
+                {
+                    return (v & 0x0000FC00) >> 10;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 10;
+                    v = (value & 0x0000FC00) | (v & 0xFFFF03FF);
+                }
             }
 
-            XMFLOAT3PK(unsigned int packed)
+            property uint32_t ye // y-exponent
             {
-                _value = new DirectX::PackedVector::XMFLOAT3PK(packed);
+                uint32_t get()
+                {
+                    return (v & 0x001F0000) >> 16;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 16;
+                    v = (value & 0x001F0000) | (v & 0xFFE0FFFF);
+                }
             }
 
-            XMFLOAT3PK(array<float>^ pArray)
+            property uint32_t zm // z-mantissa
             {
-                pin_ptr<float> p = &pArray[0];
-                _value = new DirectX::PackedVector::XMFLOAT3PK(p);
+                uint32_t get()
+                {
+                    return (v & 0x07E00000) >> 21;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 21;
+                    v = (value & 0x07E00000) | (v & 0xF81FFFFF);
+                }
             }
 
-            UnmanagedReferenceProperty(unsigned int, xm)
-            UnmanagedReferenceProperty(unsigned int, xe)
-            UnmanagedReferenceProperty(unsigned int, ym)
-            UnmanagedReferenceProperty(unsigned int, ye)
-            UnmanagedReferenceProperty(unsigned int, zm)
-            UnmanagedReferenceProperty(unsigned int, ze)
-            UnmanagedReferenceProperty(unsigned int, v)
-            UnmanagedOperator(DirectX::PackedVector::XMFLOAT3PK)
+            property uint32_t ze // z-exponent
+            {
+                uint32_t get()
+                {
+                    return (v & 0xF8000000) >> 27;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 27;
+                    v = (value & 0xF8000000) | (v & 0x07FFFFFF);
+                }
+            }
+
+            explicit XMFLOAT3PK(uint32_t Packed) : v(Packed) {}
+            XMFLOAT3PK(float _x, float _y, float _z) 
+            {
+                uint32_t exp; 
+                xm = (uint32_t)frexpf(_x, (int*)&exp); 
+                xe = exp; 
+                
+                ym = (uint32_t)frexpf(_y, (int*)&exp); 
+                ye = exp; 
+
+                zm = (uint32_t)frexpf(_z, (int*)&exp);
+                ze = exp;
+            }
+
+            explicit XMFLOAT3PK(array<float>^ pArray)
+            {
+                uint32_t exp;
+                xm = (uint32_t)frexpf(pArray[0], (int*)&exp);
+                xe = exp;
+
+                ym = (uint32_t)frexpf(pArray[1], (int*)&exp);
+                ye = exp;
+
+                zm = (uint32_t)frexpf(pArray[2], (int*)&exp);
+                ze = exp;
+            }
+
+            operator uint32_t () { return v; }
         };
     }
 }

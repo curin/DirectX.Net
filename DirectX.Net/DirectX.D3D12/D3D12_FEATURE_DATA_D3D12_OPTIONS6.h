@@ -12,14 +12,11 @@ namespace DirectX
 		[StructLayout(LayoutKind::Sequential)]
 		public value struct D3D12_FEATURE_DATA_D3D12_OPTIONS6
 		{
-			[MarshalAs(UnmanagedType::Bool)]
-			bool AdditionalShadingRatesSupported;
-			[MarshalAs(UnmanagedType::Bool)]
-			bool PerPrimitiveShadingRateSupportedWithViewportIndexing;
+			int AdditionalShadingRatesSupported;
+			int PerPrimitiveShadingRateSupportedWithViewportIndexing;
 			D3D12_VARIABLE_SHADING_RATE_TIER VariableShadingRateTier;
 			unsigned int ShadingRateImageTileSize;
-			[MarshalAs(UnmanagedType::Bool)]
-			bool BackgroundProcessingSupported;
+			int BackgroundProcessingSupported;
 		};
 	}
 }

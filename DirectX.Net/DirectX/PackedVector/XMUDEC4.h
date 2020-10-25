@@ -7,43 +7,82 @@ namespace DirectX
 {
     namespace PackedVectors
     {
-        void XMUDEC4_CONSTRUCTOR(DirectX::PackedVector::XMUDEC4* location, DirectX::PackedVector::XMUDEC4* value) { *location = DirectX::PackedVector::XMUDEC4(*value); }
-        public ref class XMUDEC4 : IUnmanagedReference<DirectX::PackedVector::XMUDEC4>
+        public value struct XMUDEC4
         {
-        public:
-            UnmanagedReferenceProperty(unsigned int, x)
-            UnmanagedReferenceProperty(unsigned int, y)
-            UnmanagedReferenceProperty(unsigned int, z)
-            UnmanagedReferenceProperty(unsigned int, w)
-            UnmanagedReferenceProperty(unsigned int, v)
-            UnmanagedOperator(DirectX::PackedVector::XMUDEC4)
+            uint32_t v;
 
-            XMUDEC4(DirectX::PackedVector::XMUDEC4* value)
+            property uint32_t x
             {
-                _value = value;
+                uint32_t get()
+                {
+                    return (v & 0x000003FF);
+                }
+                void set(uint32_t value)
+                {
+                    v = (value & 0x000003FF) | (v & 0xFFFFFC00);
+                }
             }
 
-            XMUDEC4(IntPtr location, DirectX::PackedVector::XMUDEC4* val)
+            property uint32_t y
             {
-                _value = (DirectX::PackedVector::XMUDEC4*)location.ToPointer();
-                XMUDEC4_CONSTRUCTOR(_value, val);
+                uint32_t get()
+                {
+                    return (v & 0x000FFC00) >> 10;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 10;
+                    v = (value & 0x000FFC00) | (v & 0xFFF003FF);
+                }
             }
 
-            XMUDEC4(float x, float y, float z, float w)
+            property uint32_t z
             {
-                _value = new DirectX::PackedVector::XMUDEC4(x, y, z, w);
+                uint32_t get()
+                {
+                    return (v & 0x3FF00000) >> 20;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 20;
+                    v = (value & 0x3FF00000) | (v & 0xC00FFFFF);
+                }
             }
 
-            XMUDEC4(unsigned int c)
+            property uint32_t w
             {
-                _value = new DirectX::PackedVector::XMUDEC4(c);
+                uint32_t get()
+                {
+                    return (v & 0xC0000000) >> 30;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 30;
+                    v = (value & 0xC0000000) | (v & 0x3FFFFFFF);
+                }
             }
 
-            XMUDEC4(array<float>^ pArray)
+            explicit XMUDEC4(uint32_t Packed) : v(Packed) {}
+            XMUDEC4(float _x, float _y, float _z, float _w)
             {
-                pin_ptr<float> p = &pArray[0];
-                _value = new DirectX::PackedVector::XMUDEC4(p);
+                x = *(uint32_t*)&_x;
+                y = *(uint32_t*)&_y;
+                z = *(uint32_t*)&_z;
+                w = *(uint32_t*)&_w;
             }
+            explicit XMUDEC4(array<float>^ pArray)
+            {
+                float temp = pArray[0];
+                x = *(uint32_t*)&temp;
+                temp = pArray[1];
+                y = *(uint32_t*)&temp;
+                temp = pArray[2];
+                z = *(uint32_t*)&temp;
+                temp = pArray[3];
+                w = *(uint32_t*)&temp;
+            }
+
+            operator uint32_t () { return v; }
         };
     }
 }

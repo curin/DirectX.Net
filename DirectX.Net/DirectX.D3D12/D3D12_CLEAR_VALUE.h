@@ -15,9 +15,24 @@ namespace DirectX
 		{
 			[FieldOffset(0)]
 			DirectX::DXGI::DXGI_FORMAT Format;
+		private:
 			[FieldOffset(EnumSize)]
-			[MarshalAs(UnmanagedType::ByValArray, SizeConst=4)]
-			array<float>^ Color;
+			float Color0;
+			[FieldOffset(EnumSize + 4)]
+			float Color1;
+			[FieldOffset(EnumSize + 8)]
+			float Color2;
+			[FieldOffset(EnumSize + 12)]
+			float Color3;
+		public:
+			property UnmanagedArray_Float^ Color
+			{
+				UnmanagedArray_Float^ get()
+				{
+					pin_ptr<float> loc = &Color0;
+					return gcnew UnmanagedArray_Float(loc, 4);
+				}
+			}
 			[FieldOffset(EnumSize)]
 			D3D12_DEPTH_STENCIL_VALUE DepthStencil;
 		};

@@ -4,6 +4,7 @@
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
+using namespace Dragonbones::Native::Common;
 
 namespace DirectX
 {
@@ -13,8 +14,7 @@ namespace DirectX
         public value struct D3D12_META_COMMAND_DESC
         {
             Guid Id;
-            [MarshalAs(UnmanagedType::BStr)]
-            String^ Name;
+            UnmanagedConstantWString Name;
             D3D12_GRAPHICS_STATES InitializationDirtyState;
             D3D12_GRAPHICS_STATES ExecutionDirtyState;
         };

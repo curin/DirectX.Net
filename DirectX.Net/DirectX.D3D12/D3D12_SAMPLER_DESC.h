@@ -6,6 +6,7 @@
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
+using namespace Dragonbones::Native::Common;
 
 namespace DirectX
 {
@@ -21,8 +22,20 @@ namespace DirectX
             float MipLODBias;
             unsigned int MaxAnisotropy;
             D3D12_COMPARISON_FUNC ComparisonFunc;
-            [MarshalAs(UnmanagedType::ByValArray, SizeConst=4)]
-            array<float>^ BorderColor;
+        private:
+            float BorderColor0;
+            float BorderColor1;
+            float BorderColor2;
+            float BorderColor3;
+        public:
+            property UnmanagedArray_Float^ BorderColor
+            {
+                UnmanagedArray_Float^ get()
+                {
+                    pin_ptr<float> loc = &BorderColor0;
+                    return gcnew UnmanagedArray_Float(loc, 4);
+                }
+            }
             float MinLOD;
             float MaxLOD;
         };

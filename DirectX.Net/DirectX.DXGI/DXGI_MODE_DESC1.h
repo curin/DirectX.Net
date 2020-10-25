@@ -19,8 +19,7 @@ namespace DirectX
             DXGI_FORMAT Format;
             DXGI_MODE_SCANLINE_ORDER ScanlineOrdering;
             DXGI_MODE_SCALING Scaling;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool Stereo;
+            int Stereo;
 
             DXGI_MODE_DESC1(unsigned int width, unsigned int height, DXGI_RATIONAL refreshRate, DXGI_FORMAT format,
                 DXGI_MODE_SCANLINE_ORDER scanlineOrdering, DXGI_MODE_SCALING scaling, bool stereo)

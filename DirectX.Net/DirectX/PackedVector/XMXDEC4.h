@@ -7,42 +7,42 @@ namespace DirectX
 {
     namespace PackedVectors
     {
-        public value struct XMUDECN4
+        public value struct XMXDEC4
         {
             uint32_t v;
 
-            property uint32_t x
+            property int32_t x
             {
-                uint32_t get()
+                int32_t get()
                 {
                     return (v & 0x000003FF);
                 }
-                void set(uint32_t value)
+                void set(int32_t value)
                 {
                     v = (value & 0x000003FF) | (v & 0xFFFFFC00);
                 }
             }
 
-            property uint32_t y
+            property int32_t y
             {
-                uint32_t get()
+                int32_t get()
                 {
                     return (v & 0x000FFC00) >> 10;
                 }
-                void set(uint32_t value)
+                void set(int32_t value)
                 {
                     value <<= 10;
                     v = (value & 0x000FFC00) | (v & 0xFFF003FF);
                 }
             }
 
-            property uint32_t z
+            property int32_t z
             {
-                uint32_t get()
+                int32_t get()
                 {
                     return (v & 0x3FF00000) >> 20;
                 }
-                void set(uint32_t value)
+                void set(int32_t value)
                 {
                     value <<= 20;
                     v = (value & 0x3FF00000) | (v & 0xC00FFFFF);
@@ -62,22 +62,22 @@ namespace DirectX
                 }
             }
 
-            explicit XMUDECN4(uint32_t Packed) : v(Packed) {}
-            XMUDECN4(float _x, float _y, float _z, float _w)
+            explicit XMXDEC4(uint32_t Packed) : v(Packed) {}
+            XMXDEC4(float _x, float _y, float _z, float _w)
             {
-                x = *(uint32_t*)&_x;
-                y = *(uint32_t*)&_y;
-                z = *(uint32_t*)&_z;
+                x = *(int32_t*)&_x;
+                y = *(int32_t*)&_y;
+                z = *(int32_t*)&_z;
                 w = *(uint32_t*)&_w;
             }
-            explicit XMUDECN4(array<float>^ pArray)
+            explicit XMXDEC4(array<float>^ pArray)
             {
                 float temp = pArray[0];
-                x = *(uint32_t*)&temp;
+                x = *(int32_t*)&temp;
                 temp = pArray[1];
-                y = *(uint32_t*)&temp;
+                y = *(int32_t*)&temp;
                 temp = pArray[2];
-                z = *(uint32_t*)&temp;
+                z = *(int32_t*)&temp;
                 temp = pArray[3];
                 w = *(uint32_t*)&temp;
             }

@@ -17,8 +17,7 @@ namespace DirectX
             DXGI_RATIONAL RefreshRate;
             DXGI_MODE_SCANLINE_ORDER ScanlineOrdering;
             DXGI_MODE_SCALING Scaling;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool Windowed;
+            int Windowed;
         };
     }
 }

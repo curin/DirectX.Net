@@ -11,14 +11,10 @@ namespace DirectX
         public value struct D3D12_FEATURE_DATA_ARCHITECTURE1
         {
             unsigned int NodeIndex;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool TileBasedRenderer;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool UMA;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool CacheCoherentUMA;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool IsolatedMMU;
+            int TileBasedRenderer;
+            int UMA;
+            int CacheCoherentUMA;
+            int IsolatedMMU;
         };
     }
 }

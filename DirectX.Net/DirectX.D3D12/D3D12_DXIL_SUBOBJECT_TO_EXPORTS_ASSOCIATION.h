@@ -5,6 +5,7 @@
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
+using namespace Dragonbones::Native::Common;
 
 namespace DirectX
 {
@@ -13,8 +14,7 @@ namespace DirectX
         [StructLayout(LayoutKind::Sequential)]
         public value struct D3D12_DXIL_SUBOBJECT_TO_EXPORTS_ASSOCIATION
         {
-            [MarshalAs(UnmanagedType::BStr)]
-            String^ pSubobjectToAssociate;
+            UnmanagedConstantWString pSubobjectToAssociate;
             unsigned int NumExports;
             IntPtr pExports; //LPCWSTR*
 
@@ -38,10 +38,11 @@ namespace DirectX
             void Exports_set(size_t index, String^ value)
             {
                 wchar_t** pEntries = (wchar_t**)pExports.ToPointer();
+                delete pEntries[index];
                 pEntries[index] = new wchar_t[value->Length];
                 wchar_t* temp = pEntries[index];
                 for (int i = 0; i < value->Length; i++)
-                    temp[i] = value[i];
+                    temp[i] = value->default[i];
             }
         };
     }

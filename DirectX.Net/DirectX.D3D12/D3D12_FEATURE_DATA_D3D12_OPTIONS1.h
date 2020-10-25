@@ -10,15 +10,12 @@ namespace DirectX
         [StructLayout(LayoutKind::Sequential)]
         public value struct D3D12_FEATURE_DATA_D3D12_OPTIONS1
         {
-            [MarshalAs(UnmanagedType::Bool)]
-            bool WaveOps;
+            int WaveOps;
             unsigned int WaveLaneCountMin;
             unsigned int WaveLaneCountMax;
             unsigned int TotalLaneCount;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool ExpandedComputeResourceStates;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool Int64ShaderOps;
+            int ExpandedComputeResourceStates;
+            int Int64ShaderOps;
         };
     }
 }

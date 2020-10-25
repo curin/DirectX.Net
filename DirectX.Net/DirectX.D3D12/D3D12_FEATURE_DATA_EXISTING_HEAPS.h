@@ -10,8 +10,7 @@ namespace DirectX
         [StructLayout(LayoutKind::Sequential)]
         public value struct D3D12_FEATURE_DATA_EXISTING_HEAPS
         {
-            [MarshalAs(UnmanagedType::Bool)]
-            bool Supported;
+            int Supported;
         };
     }
 }

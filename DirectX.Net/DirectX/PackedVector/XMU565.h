@@ -7,47 +7,54 @@ namespace DirectX
 {
     namespace PackedVectors
     {
-        void XMU565_CONSTRUCTOR(DirectX::PackedVector::XMU565* location, DirectX::PackedVector::XMU565* value) { *location = DirectX::PackedVector::XMU565(*value); }
-        public ref class XMU565 : IUnmanagedReference<DirectX::PackedVector::XMU565>
+        [StructLayout(LayoutKind::Sequential)]
+        public value struct XMU565
         {
-        public:
-            UnmanagedReferenceProperty(unsigned short, x)
-            UnmanagedReferenceProperty(unsigned short, y)
-            UnmanagedReferenceProperty(unsigned short, z)
-            UnmanagedReferenceProperty(unsigned short, v)
-            UnmanagedOperator(DirectX::PackedVector::XMU565)
-
-            XMU565(unsigned char x, unsigned char y, unsigned char z)
+            uint16_t v;
+            property uint16_t z
             {
-                _value = new DirectX::PackedVector::XMU565(x, y, z);
+                uint16_t get()
+                {
+                    return (v & 0xF800) >> 11;
+                }
+                void set(uint16_t value)
+                {
+                    value <<= 11;
+                    v = (value & 0xF800) | (v & 0x07FF);
+                }
             }
 
-            XMU565(float x, float y, float z)
+            property uint16_t y
             {
-                _value = new DirectX::PackedVector::XMU565(x, y, z);
+                uint16_t get()
+                {
+                    return (v & 0x07E0) >> 5;
+                }
+                void set(uint16_t value)
+                {
+                    value <<= 5;
+                    v = (value & 0x07E0) | (v & 0xF81F);
+                }
             }
 
-            XMU565(DirectX::PackedVector::XMU565* value)
+            property uint16_t x
             {
-                _value = value;
+                uint16_t get()
+                {
+                    return v & 0x001F;
+                }
+                void set(uint16_t value)
+                {
+                    v = (value & 0x001F) | (v & 0xFFE0);
+                }
             }
+            explicit XMU565(uint16_t Packed) : v(Packed) {}
+            XMU565(uint8_t _x, uint8_t _y, uint8_t _z) { x = _x; y = _y; z = _z; }
+            explicit XMU565(array<uint8_t>^ pArray) { x = pArray[0]; y = pArray[1]; z = pArray[2]; }
+            XMU565(float _x, float _y, float _z) { x = (uint16_t)_x; y = (uint16_t)_y; z = (uint16_t)_z; }
+            explicit XMU565(array<float>^ pArray) { x = (uint16_t)pArray[0]; y = (uint16_t)pArray[1]; z = (uint16_t)pArray[2]; }
 
-            XMU565(IntPtr location, DirectX::PackedVector::XMU565* val)
-            {
-                _value = (DirectX::PackedVector::XMU565*)location.ToPointer();
-                XMU565_CONSTRUCTOR(_value, val);
-            }
-
-            XMU565(unsigned short c)
-            {
-                _value = new DirectX::PackedVector::XMU565(c);
-            }
-
-            XMU565(array<float>^ pArray)
-            {
-                pin_ptr<float> p = &pArray[0];
-                _value = new DirectX::PackedVector::XMU565(p);
-            }
+            operator uint16_t () { return v; }
         };
     }
 }

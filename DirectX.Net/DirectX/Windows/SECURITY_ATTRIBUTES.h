@@ -10,7 +10,6 @@ namespace DirectX
     {
         unsigned long nLength;
         IntPtr lpSecurityDescriptor;
-        [MarshalAs(UnmanagedType::Bool)]
-        bool bInheritHandle;
+        int bInheritHandle;
     };
 }

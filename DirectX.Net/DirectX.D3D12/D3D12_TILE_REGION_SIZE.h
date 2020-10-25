@@ -11,8 +11,7 @@ namespace DirectX
 		public value struct D3D12_TILE_REGION_SIZE
 		{
 			unsigned int NumTiles;
-			[MarshalAs(UnmanagedType::Bool)]
-			bool UseBox;
+			int UseBox;
 			unsigned int Width;
 			unsigned short Height;
 			unsigned short Depth;

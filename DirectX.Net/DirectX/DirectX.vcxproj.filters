@@ -264,6 +264,15 @@
     <ClInclude Include="Windows\Events.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PackedVector\XMXDEC4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PackedVector\XMDECN4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PackedVector\XMDEC4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.cpp">

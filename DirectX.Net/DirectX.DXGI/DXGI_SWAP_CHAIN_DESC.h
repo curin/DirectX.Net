@@ -19,8 +19,7 @@ namespace DirectX
             unsigned int BufferUsage;
             unsigned int BufferCount;
             IntPtr OutputWindow;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool Windowed;
+            int Windowed;
             DXGI_SWAP_EFFECT SwapEffect;
             unsigned int Flags;
         };

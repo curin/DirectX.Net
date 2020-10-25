@@ -390,6 +390,9 @@
     <ClInclude Include="IDXGIFactory7.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DXGIUnmanagedArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.DXGI.cpp">
@@ -399,6 +402,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DXGIUnmanagedArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

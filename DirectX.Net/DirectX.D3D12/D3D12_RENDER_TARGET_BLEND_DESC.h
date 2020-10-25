@@ -14,10 +14,8 @@ namespace DirectX
         [StructLayout(LayoutKind::Sequential)]
         public value struct D3D12_RENDER_TARGET_BLEND_DESC
         {
-            [MarshalAs(UnmanagedType::Bool)]
-            bool BlendEnable;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool LogicOpEnable;
+            int BlendEnable;
+            int LogicOpEnable;
             D3D12_BLEND SrcBlend;
             D3D12_BLEND DestBlend;
             D3D12_BLEND_OP BlendOp;

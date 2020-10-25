@@ -12,8 +12,7 @@ namespace DirectX
         [StructLayout(LayoutKind::Sequential)]
         public value struct D3D12_FEATURE_DATA_D3D12_OPTIONS2
         {
-            [MarshalAs(UnmanagedType::Bool)]
-            bool DepthBoundsTestSupported;
+            int DepthBoundsTestSupported;
             D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER ProgrammableSamplePositionsTier;
         };
     }

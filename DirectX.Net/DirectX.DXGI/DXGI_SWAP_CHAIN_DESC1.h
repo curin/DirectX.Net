@@ -19,8 +19,7 @@ namespace DirectX
             unsigned int Width;
             unsigned int Height;
             DXGI_FORMAT Format;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool Stereo;
+            int Stereo;
             DXGI_SAMPLE_DESC SampleDesc;
             unsigned int BufferUsage;
             unsigned int BufferCount;

@@ -2,6 +2,7 @@
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
+using namespace Dragonbones::Native::Common;
 
 namespace DirectX
 {
@@ -11,8 +12,7 @@ namespace DirectX
         public value struct D3D12_SO_DECLARATION_ENTRY
         {
             unsigned int Stream;
-            [MarshalAs(UnmanagedType::LPStr)]
-            String^ SemanticName;
+            UnmanagedConstantString SemanticName;
             unsigned int SemanticIndex;
             unsigned char StartComponent;
             unsigned char ComponentCount;

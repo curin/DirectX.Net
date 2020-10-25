@@ -4,6 +4,7 @@
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
+using namespace Dragonbones::Native::Common;
 
 namespace DirectX
 {
@@ -12,10 +13,8 @@ namespace DirectX
         [StructLayout(LayoutKind::Sequential)]
         public value struct D3D12_EXPORT_DESC
         {
-            [MarshalAs(UnmanagedType::BStr)]
-            String^ Name;
-            [MarshalAs(UnmanagedType::BStr)]
-            String^ ExportToRename;
+            UnmanagedConstantWString Name;
+            UnmanagedConstantWString ExportToRename;
             D3D12_EXPORT_FLAGS Flags;
         };
     }

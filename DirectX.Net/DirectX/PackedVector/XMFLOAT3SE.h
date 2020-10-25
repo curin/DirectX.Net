@@ -1,49 +1,146 @@
 #pragma once
 
 #include <DirectXPackedVector.h>
+#include <math.h>
 #include "../Windows/IUnmanagedReference.h"
 
 namespace DirectX
 {
     namespace PackedVectors
     {
-        void XMFLOAT3SE_CONSTRUCTOR(DirectX::PackedVector::XMFLOAT3SE* location, DirectX::PackedVector::XMFLOAT3SE* value) { *location = DirectX::PackedVector::XMFLOAT3SE(*value); }
-        public ref class XMFLOAT3SE : IUnmanagedReference<DirectX::PackedVector::XMFLOAT3SE>
+        [StructLayout(LayoutKind::Sequential)]
+        public value struct XMFLOAT3SE
         {
-        public:
-            XMFLOAT3SE(float x, float y, float z)
+            uint32_t v;
+
+            property uint32_t xm
             {
-                _value = new DirectX::PackedVector::XMFLOAT3SE(x, y, z);
+                uint32_t get()
+                {
+                    return (v & 0x000001FF);
+                }
+                void set(uint32_t value)
+                {
+                    v = (value & 0x000001FF) | (v & 0xFFFFF100);
+                }
+            }
+            
+            property uint32_t ym
+            {
+                uint32_t get()
+                {
+                    return (v & 0x0003FE00) >> 9;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 9;
+                    v = (value & 0x0003FE00) | (v & 0xFFFC01FF);
+                }
             }
 
-            XMFLOAT3SE(DirectX::PackedVector::XMFLOAT3SE* pVal)
+            property uint32_t zm
             {
-                _value = pVal;
+                uint32_t get()
+                {
+                    return (v & 0x07FC0000) >> 18;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 18;
+                    v = (value & 0x07FC0000) | (v & 0xF803FFFF);
+                }
             }
 
-            XMFLOAT3SE(IntPtr location, DirectX::PackedVector::XMFLOAT3SE* val)
+            property uint32_t e
             {
-                _value = (DirectX::PackedVector::XMFLOAT3SE*)location.ToPointer();
-                XMFLOAT3SE_CONSTRUCTOR(_value, val);
+                uint32_t get()
+                {
+                    return (v & 0xF8000000) >> 27;
+                }
+                void set(uint32_t value)
+                {
+                    value <<= 27;
+                    v = (value & 0xF8000000) | (v & 0x07FFFFFF);
+                }
             }
 
-            XMFLOAT3SE(unsigned int packed)
+            explicit XMFLOAT3SE(uint32_t Packed) : v(Packed) {}
+            XMFLOAT3SE(float _x, float _y, float _z)
             {
-                _value = new DirectX::PackedVector::XMFLOAT3SE(packed);
+                int exp1;
+                int exp2;
+
+                uint32_t x = (uint32_t)frexpf(_x, &exp1);
+                uint32_t y = (uint32_t)frexpf(_y, &exp2);
+
+                if (exp1 > exp2)
+                {
+                    y >>= exp1 - exp2;
+                }
+                else
+                {
+                    x >>= exp2 - exp1;
+                    exp1 = exp2;
+                }
+
+                uint32_t z = (uint32_t)frexpf(_z, &exp2);
+
+                if (exp1 > exp2)
+                {
+                    z >>= exp1 - exp2;
+                }
+                else
+                {
+                    x >>= exp2 - exp1;
+                    y >>= exp2 - exp1;
+                    exp1 = exp2;
+                }
+
+                xm = x;
+                ym = y;
+                zm = z;
+                e = exp1;
+            }
+            explicit XMFLOAT3SE(array<float>^ pArray)
+            {
+                {
+                    int exp1;
+                    int exp2;
+
+                    uint32_t x = (uint32_t)frexpf(pArray[0], &exp1);
+                    uint32_t y = (uint32_t)frexpf(pArray[1], &exp2);
+
+                    if (exp1 > exp2)
+                    {
+                        y >>= exp1 - exp2;
+                    }
+                    else
+                    {
+                        x >>= exp2 - exp1;
+                        exp1 = exp2;
+                    }
+
+                    uint32_t z = (uint32_t)frexpf(pArray[2], &exp2);
+
+                    if (exp1 > exp2)
+                    {
+                        z >>= exp1 - exp2;
+                    }
+                    else
+                    {
+                        x >>= exp2 - exp1;
+                        y >>= exp2 - exp1;
+                        exp1 = exp2;
+                    }
+
+                    xm = x;
+                    ym = y;
+                    zm = z;
+                    e = exp1;
+                }
             }
 
-            XMFLOAT3SE(array<float>^ pArray)
-            {
-                pin_ptr<float> p = &pArray[0];
-                _value = new DirectX::PackedVector::XMFLOAT3SE(p);
-            }
-
-            UnmanagedReferenceProperty(unsigned int, xm)
-            UnmanagedReferenceProperty(unsigned int, ym)
-            UnmanagedReferenceProperty(unsigned int, zm)
-            UnmanagedReferenceProperty(unsigned int, e)
-            UnmanagedReferenceProperty(unsigned int, v)
-            UnmanagedOperator(DirectX::PackedVector::XMFLOAT3SE)
+            operator uint32_t () { return v; }
         };
     }
 }

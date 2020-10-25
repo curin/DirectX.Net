@@ -15,8 +15,7 @@ namespace DirectX
         {
             DXGI_MODE_DESC ModeDesc;
             DXGI_MODE_ROTATION Rotation;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool DesktopImageInSystemMemory;
+            int DesktopImageInSystemMemory;
         };
     }
 }

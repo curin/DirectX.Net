@@ -16,17 +16,13 @@ namespace DirectX
         {
             D3D12_FILL_MODE FillMode;
             D3D12_CULL_MODE CullMode;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool FrontCounterClockwise;
+            int FrontCounterClockwise;
             int DepthBias;
             float DepthBiasClamp;
             float SlopeScaledDepthBias;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool DepthClipEnable;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool MultisampleEnable;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool AntialiasedLineEnable;
+            int DepthClipEnable;
+            int MultisampleEnable;
+            int AntialiasedLineEnable;
             unsigned int ForcedSampleCount;
             D3D12_CONSERVATIVE_RASTERIZATION_MODE ConservativeRaster;
         };

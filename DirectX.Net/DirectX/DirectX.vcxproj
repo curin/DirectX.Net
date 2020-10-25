@@ -224,6 +224,9 @@
     <ClInclude Include="Common\ID3DInclude.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="PackedVector\XMDEC4.h" />
+    <ClInclude Include="PackedVector\XMDECN4.h" />
+    <ClInclude Include="PackedVector\XMXDEC4.h" />
     <ClInclude Include="Windows\Events.h" />
     <ClInclude Include="Windows\IUnknown.h">
       <DeploymentContent>true</DeploymentContent>
@@ -378,6 +381,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dragonbones.Native.Common\Dragonbones.Native.Common.vcxproj">
+      <Project>{0561944e-54f5-4f01-94d7-6befe3b33162}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

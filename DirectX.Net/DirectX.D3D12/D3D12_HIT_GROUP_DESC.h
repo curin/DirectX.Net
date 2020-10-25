@@ -4,6 +4,7 @@
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
+using namespace Dragonbones::Native::Common;
 
 namespace DirectX
 {
@@ -12,15 +13,11 @@ namespace DirectX
         [StructLayout(LayoutKind::Sequential)]
         public value struct D3D12_HIT_GROUP_DESC
         {
-            [MarshalAs(UnmanagedType::BStr)]
-            String^ HitGroupExport;
+            UnmanagedConstantWString HitGroupExport;
             D3D12_HIT_GROUP_TYPE Type;
-            [MarshalAs(UnmanagedType::BStr)]
-            String^ AnyHitShaderImport;
-            [MarshalAs(UnmanagedType::BStr)]
-            String^ ClosestHitShaderImport;
-            [MarshalAs(UnmanagedType::BStr)]
-            String^ IntersectionShaderImport;
+            UnmanagedConstantWString AnyHitShaderImport;
+            UnmanagedConstantWString ClosestHitShaderImport;
+            UnmanagedConstantWString IntersectionShaderImport;
         };
     }
 }

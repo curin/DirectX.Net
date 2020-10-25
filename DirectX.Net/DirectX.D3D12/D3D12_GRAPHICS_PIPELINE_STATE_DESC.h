@@ -37,8 +37,26 @@ namespace DirectX
             D3D12_INDEX_BUFFER_STRIP_CUT_VALUE IBStripCutValue;
             D3D12_PRIMITIVE_TOPOLOGY_TYPE PrimitiveTopologyType;
             unsigned int NumRenderTargets;
-            [MarshalAs(UnmanagedType::ByValArray, SizeConst=8)]
-            array<DirectX::DXGI::DXGI_FORMAT>^ RTVFormats;
+        private:
+#pragma region Hidden
+            DirectX::DXGI::DXGI_FORMAT RTVFormats0;
+            DirectX::DXGI::DXGI_FORMAT RTVFormats1;
+            DirectX::DXGI::DXGI_FORMAT RTVFormats2;
+            DirectX::DXGI::DXGI_FORMAT RTVFormats3;
+            DirectX::DXGI::DXGI_FORMAT RTVFormats4;
+            DirectX::DXGI::DXGI_FORMAT RTVFormats5;
+            DirectX::DXGI::DXGI_FORMAT RTVFormats6;
+            DirectX::DXGI::DXGI_FORMAT RTVFormats7;
+#pragma endregion
+        public:
+            property UnmanagedArray_DXGI_FORMAT^ RTVFormats
+            {
+                UnmanagedArray_DXGI_FORMAT^ get()
+                {
+                    pin_ptr< DirectX::DXGI::DXGI_FORMAT> loc = &RTVFormats0;
+                    return gcnew UnmanagedArray_DXGI_FORMAT(loc, 8);
+                }
+            }
             DirectX::DXGI::DXGI_FORMAT DSVFormat;
             DirectX::DXGI::DXGI_SAMPLE_DESC SampleDesc;
             unsigned int NodeMask;

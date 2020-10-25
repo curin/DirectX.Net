@@ -14,12 +14,10 @@ namespace DirectX
         [StructLayout(LayoutKind::Sequential)]
         public value struct D3D12_DEPTH_STENCIL_DESC
         {
-            [MarshalAs(UnmanagedType::Bool)]
-            bool DepthEnable;
+            int DepthEnable;
             D3D12_DEPTH_WRITE_MASK DepthWriteMask;
             D3D12_COMPARISON_FUNC DepthFunc;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool StencilEnable;
+            int StencilEnable;
             unsigned char StencilReadMask;
             unsigned char StencilWriteMask;
             D3D12_DEPTH_STENCILOP_DESC FrontFace;

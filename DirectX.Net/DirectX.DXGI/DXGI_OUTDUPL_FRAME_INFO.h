@@ -15,10 +15,8 @@ namespace DirectX
             LARGE_INTEGER LastPresentTime;
             LARGE_INTEGER LastMouseUpdateTime;
             unsigned int AccumulatedFrames;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool RectsCoalesced;
-            [MarshalAs(UnmanagedType::Bool)]
-            bool ProtectedContentMaskedOut;
+            int RectsCoalesced;
+            int ProtectedContentMaskedOut;
             DXGI_OUTDUPL_POINTER_POSITION PointerPosition;
             unsigned int TotalMetadataBufferSize;
             unsigned int PointerShapeBufferSize;
