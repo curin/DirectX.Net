@@ -223,7 +223,7 @@ namespace DirectX
             void SetDescriptorHeaps(unsigned int NumDescriptorHeaps, array<ID3D12DescriptorHeap^>^ ppDescriptorHeaps)
             {
                 ::ID3D12DescriptorHeap** descriptorHeaps = new ::ID3D12DescriptorHeap*[NumDescriptorHeaps];
-                for (int i = 0; i < NumDescriptorHeaps; i++)
+                for (unsigned int i = 0; i < NumDescriptorHeaps; i++)
                     descriptorHeaps[i] = (::ID3D12DescriptorHeap*)ppDescriptorHeaps[i]->Pointer.ToPointer();
                 _ref->SetDescriptorHeaps(NumDescriptorHeaps, descriptorHeaps);
                 delete descriptorHeaps;

@@ -23,7 +23,7 @@ namespace DirectX
                 {
                     array<D3D12_STATE_SUBOBJECT>^ ret = gcnew array<D3D12_STATE_SUBOBJECT>(NumSubobjects);
                     D3D12_STATE_SUBOBJECT* pEntries = (D3D12_STATE_SUBOBJECT*)pSubobjects.ToPointer();
-                    for (int i = 0; i < NumSubobjects; i++)
+                    for (unsigned int i = 0; i < NumSubobjects; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

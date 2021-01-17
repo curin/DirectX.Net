@@ -20,7 +20,7 @@ namespace DirectX
                 {
                     array<D3D_FEATURE_LEVEL>^ ret = gcnew array<D3D_FEATURE_LEVEL>(NumFeatureLevels);
                     D3D_FEATURE_LEVEL* pEntries = (D3D_FEATURE_LEVEL*)pFeatureLevelsRequested.ToPointer();
-                    for (int i = 0; i < NumFeatureLevels; i++)
+                    for (unsigned int i = 0; i < NumFeatureLevels; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

@@ -25,7 +25,7 @@ namespace DirectX
                 {
                     array<D3D12_SO_DECLARATION_ENTRY>^ ret = gcnew array<D3D12_SO_DECLARATION_ENTRY>(NumEntries);
                     D3D12_SO_DECLARATION_ENTRY* pEntries = (D3D12_SO_DECLARATION_ENTRY*)pSODeclaration.ToPointer();
-                    for (int i = 0; i < NumEntries; i++)
+                    for (unsigned int i = 0; i < NumEntries; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }
@@ -72,7 +72,7 @@ namespace DirectX
                 {
                     array<unsigned int>^ ret = gcnew array<unsigned int>(NumStrides);
                     unsigned int* pEntries = (unsigned int*)pBufferStrides.ToPointer();
-                    for (int i = 0; i < NumStrides; i++)
+                    for (unsigned int i = 0; i < NumStrides; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

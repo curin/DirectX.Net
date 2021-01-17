@@ -21,7 +21,7 @@ namespace DirectX
                 {
                     array<RECT>^ ret = gcnew array<RECT>(NumRects);
                     RECT* pEntries = (RECT*)pRects.ToPointer();
-                    for (int i = 0; i < NumRects; i++)
+                    for (unsigned int i = 0; i < NumRects; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

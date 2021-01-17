@@ -63,7 +63,7 @@ namespace DirectX
                 return _ref->SetName((LPCWSTR)Marshal::StringToBSTR(Name).ToPointer());
             }
 
-            GUID getGUID() override
+            virtual GUID getGUID() override
             {
                 return DirectX::D3D12::GetGUID<::ID3D12Object>((_ref));
             }

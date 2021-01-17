@@ -21,7 +21,7 @@ namespace DirectX
                 {
                     array<D3D12_DESCRIPTOR_RANGE>^ ret = gcnew array<D3D12_DESCRIPTOR_RANGE>(NumDescriptorRanges);
                     D3D12_DESCRIPTOR_RANGE* pEntries = (D3D12_DESCRIPTOR_RANGE*)pDescriptorRanges.ToPointer();
-                    for (int i = 0; i < NumDescriptorRanges; i++)
+                    for (unsigned int i = 0; i < NumDescriptorRanges; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

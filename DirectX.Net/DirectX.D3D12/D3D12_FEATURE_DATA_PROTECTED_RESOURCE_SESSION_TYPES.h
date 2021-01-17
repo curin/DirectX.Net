@@ -20,7 +20,7 @@ namespace DirectX
                 {
                     array<Guid>^ ret = gcnew array<Guid>(Count);
                     Guid* pEntries = (Guid*)pTypes.ToPointer();
-                    for (int i = 0; i < Count; i++)
+                    for (unsigned int i = 0; i < Count; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

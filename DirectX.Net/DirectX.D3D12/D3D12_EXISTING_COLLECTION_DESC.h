@@ -30,7 +30,7 @@ namespace DirectX
                 {
                     array<D3D12_EXPORT_DESC>^ ret = gcnew array<D3D12_EXPORT_DESC>(NumExports);
                     D3D12_EXPORT_DESC* pEntries = (D3D12_EXPORT_DESC*)pExports.ToPointer();
-                    for (int i = 0; i < NumExports; i++)
+                    for (unsigned int i = 0; i < NumExports; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

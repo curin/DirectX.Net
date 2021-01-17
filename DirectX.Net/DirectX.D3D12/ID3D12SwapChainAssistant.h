@@ -49,7 +49,7 @@ namespace DirectX
                 return _ref->InsertImplicitSync();
             }
 
-            GUID getGUID() override
+            virtual GUID getGUID() override 
             {
                 return DirectX::D3D12::GetGUID<::ID3D12SwapChainAssistant>((_ref));
             }

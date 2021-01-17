@@ -21,7 +21,7 @@ namespace DirectX
                 {
                     array<D3D12_ROOT_PARAMETER>^ ret = gcnew array<D3D12_ROOT_PARAMETER>(NumParameters);
                     D3D12_ROOT_PARAMETER* pEntries = (D3D12_ROOT_PARAMETER*)pParameters.ToPointer();
-                    for (int i = 0; i < NumParameters; i++)
+                    for (unsigned int i = 0; i < NumParameters; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }
@@ -70,7 +70,7 @@ namespace DirectX
                 {
                     array<D3D12_STATIC_SAMPLER_DESC>^ ret = gcnew array<D3D12_STATIC_SAMPLER_DESC>(NumStaticSamplers);
                     D3D12_STATIC_SAMPLER_DESC* pEntries = (D3D12_STATIC_SAMPLER_DESC*)pStaticSamplers.ToPointer();
-                    for (int i = 0; i < NumStaticSamplers; i++)
+                    for (unsigned int i = 0; i < NumStaticSamplers; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

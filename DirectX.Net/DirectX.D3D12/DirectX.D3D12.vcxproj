@@ -131,6 +131,8 @@
     <ClInclude Include="D3D12_BUFFER_SRV_FLAGS.h" />
     <ClInclude Include="D3D12_BUFFER_UAV.h" />
     <ClInclude Include="D3D12_BUFFER_UAV_FLAGS.h" />
+    <ClInclude Include="D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC.h" />
+    <ClInclude Include="D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS.h" />
     <ClInclude Include="D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_TOOLS_VISUALIZATION_HEADER.h" />
     <ClInclude Include="D3D12_CACHED_PIPELINE_STATE.h" />
     <ClInclude Include="D3D12_CLEAR_FLAGS.h" />
@@ -228,6 +230,7 @@
     <ClInclude Include="D3D12_HEAP_TYPE.h" />
     <ClInclude Include="D3D12_HIT_GROUP_DESC.h" />
     <ClInclude Include="D3D12_HIT_GROUP_TYPE.h" />
+    <ClInclude Include="D3D12_HIT_KIND.h" />
     <ClInclude Include="D3D12_INDEX_BUFFER_STRIP_CUT_VALUE.h" />
     <ClInclude Include="D3D12_INDEX_BUFFER_VIEW.h" />
     <ClInclude Include="D3D12_INDIRECT_ARGUMENT_DESC.h" />
@@ -278,18 +281,22 @@
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TOOLS_VISUALIZATION_DESC.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TYPE.h" />
+    <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV.h" />
     <ClInclude Include="D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE.h" />
     <ClInclude Include="D3D12_RAYTRACING_GEOMETRY_AABBS_DESC.h" />
+    <ClInclude Include="D3D12_RAYTRACING_GEOMETRY_DESC.h" />
     <ClInclude Include="D3D12_RAYTRACING_GEOMETRY_FLAGS.h" />
     <ClInclude Include="D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC.h" />
     <ClInclude Include="D3D12_RAYTRACING_GEOMETRY_TYPE.h" />
+    <ClInclude Include="D3D12_RAYTRACING_INSTANCE_DESC.h" />
     <ClInclude Include="D3D12_RAYTRACING_INSTANCE_FLAGS.h" />
     <ClInclude Include="D3D12_RAYTRACING_PIPELINE_CONFIG.h" />
     <ClInclude Include="D3D12_RAYTRACING_PIPELINE_CONFIG1.h" />
     <ClInclude Include="D3D12_RAYTRACING_PIPELINE_FLAGS.h" />
     <ClInclude Include="D3D12_RAYTRACING_SHADER_CONFIG.h" />
     <ClInclude Include="D3D12_RAYTRACING_TIER.h" />
+    <ClInclude Include="D3D12_RAY_FLAGS.h" />
     <ClInclude Include="D3D12_RENDER_PASS_TIER.h" />
     <ClInclude Include="D3D12_RENDER_TARGET_BLEND_DESC.h" />
     <ClInclude Include="D3D12_RENDER_TARGET_VIEW_DESC.h" />
@@ -419,6 +426,7 @@
     <ClInclude Include="ID3D12Device2.h" />
     <ClInclude Include="ID3D12Device3.h" />
     <ClInclude Include="ID3D12Device4.h" />
+    <ClInclude Include="ID3D12Device5.h" />
     <ClInclude Include="ID3D12DeviceChild.h" />
     <ClInclude Include="ID3D12Fence.h" />
     <ClInclude Include="ID3D12Fence1.h" />

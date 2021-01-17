@@ -41,7 +41,7 @@ namespace DirectX
                 ID3D12Fence^ pFenceToSignal, unsigned long long FenceValueToSignal)
             {
                 ::ID3D12Pageable** objects = new ::ID3D12Pageable*[NumObjects];
-                for (int i = 0; i < NumObjects; i++)
+                for (unsigned int i = 0; i < NumObjects; i++)
                     objects[i] = (::ID3D12Pageable*)ppObjects[i]->Pointer.ToPointer();
 
                 long ret = _ref->EnqueueMakeResident((::D3D12_RESIDENCY_FLAGS)Flags, NumObjects, objects, (::ID3D12Fence*)pFenceToSignal->Pointer.ToPointer(), FenceValueToSignal);

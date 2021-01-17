@@ -153,7 +153,7 @@ namespace DirectX
             {
                 ::ID3D12CommandList** commandLists = new ::ID3D12CommandList * [NumCommandLists];
 
-                for (int i = 0; i < NumCommandLists; i++)
+                for (unsigned int i = 0; i < NumCommandLists; i++)
                     commandLists[i] = (::ID3D12CommandList*)ppCommandLists[i]->Pointer.ToPointer();
 
                 _ref->ExecuteCommandLists(NumCommandLists, commandLists);

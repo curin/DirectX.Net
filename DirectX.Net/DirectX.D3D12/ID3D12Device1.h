@@ -33,7 +33,7 @@ namespace DirectX
                 IntPtr hEvent)
             {
                 ::ID3D12Fence** fences = new ::ID3D12Fence * [NumFences];
-                for (int i = 0; i < NumFences; i++)
+                for (unsigned int i = 0; i < NumFences; i++)
                     fences[i] = (::ID3D12Fence*)ppFences[i]->Pointer.ToPointer();
 
                 pin_ptr<unsigned long long> pArray = &pFenceValues[0];
@@ -48,7 +48,7 @@ namespace DirectX
                 IntPtr hEvent)
             {
                 ::ID3D12Fence** fences = new ::ID3D12Fence * [ppFences->Length];
-                for (int i = 0; i < ppFences->Length; i++)
+                for (unsigned int i = 0; i < ppFences->Length; i++)
                     fences[i] = (::ID3D12Fence*)ppFences[i]->Pointer.ToPointer();
 
                 pin_ptr<unsigned long long> pArray = &pFenceValues[0];

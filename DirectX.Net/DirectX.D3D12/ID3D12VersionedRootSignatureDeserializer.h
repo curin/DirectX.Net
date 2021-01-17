@@ -31,7 +31,7 @@ namespace DirectX
                 return *(const D3D12_VERSIONED_ROOT_SIGNATURE_DESC*)_ref->GetUnconvertedRootSignatureDesc();
             }
 
-            GUID getGUID() override
+            virtual GUID getGUID() override
             {
                 return DirectX::D3D12::GetGUID<::ID3D12VersionedRootSignatureDeserializer>((_ref));
             }

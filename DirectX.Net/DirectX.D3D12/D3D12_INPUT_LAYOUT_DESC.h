@@ -22,7 +22,7 @@ namespace DirectX
                 {
                     array<D3D12_INPUT_ELEMENT_DESC>^ ret = gcnew array<D3D12_INPUT_ELEMENT_DESC>(NumElements);
                     D3D12_INPUT_ELEMENT_DESC* pEntries = (D3D12_INPUT_ELEMENT_DESC*)pInputElementDescs.ToPointer();
-                    for (int i = 0; i < NumElements; i++)
+                    for (unsigned int i = 0; i < NumElements; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

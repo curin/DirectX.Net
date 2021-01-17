@@ -23,7 +23,7 @@ namespace DirectX
                 _ref->LifetimeStateUpdated((::D3D12_LIFETIME_STATE)NewState);
             }
 
-            GUID getGUID() override
+            virtual GUID getGUID() override
             {
                 return DirectX::D3D12::GetGUID<::ID3D12LifetimeOwner>((_ref));
             }

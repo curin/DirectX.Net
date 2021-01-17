@@ -20,7 +20,7 @@ namespace DirectX
                 {
                     array<D3D12_INDIRECT_ARGUMENT_DESC>^ ret = gcnew array<D3D12_INDIRECT_ARGUMENT_DESC>(NumArgumentDescs);
                     D3D12_INDIRECT_ARGUMENT_DESC* pEntries = (D3D12_INDIRECT_ARGUMENT_DESC*)pArgumentDescs.ToPointer();
-                    for (int i = 0; i < NumArgumentDescs; i++)
+                    for (unsigned int i = 0; i < NumArgumentDescs; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }

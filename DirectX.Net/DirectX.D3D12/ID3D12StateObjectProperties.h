@@ -43,7 +43,7 @@ namespace DirectX
                 _ref->SetPipelineStackSize(PipelineStackSizeInBytes);
             }
 
-            GUID getGUID() override
+            virtual GUID getGUID() override
             {
                 return DirectX::D3D12::GetGUID<::ID3D12StateObjectProperties>((_ref));
             }

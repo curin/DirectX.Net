@@ -23,7 +23,7 @@ namespace DirectX
                 {
                     array<D3D12_VIEW_INSTANCE_LOCATION>^ ret = gcnew array<D3D12_VIEW_INSTANCE_LOCATION>(ViewInstanceCount);
                     D3D12_VIEW_INSTANCE_LOCATION* pEntries = (D3D12_VIEW_INSTANCE_LOCATION*)pViewInstanceLocations.ToPointer();
-                    for (int i = 0; i < ViewInstanceCount; i++)
+                    for (unsigned int i = 0; i < ViewInstanceCount; i++)
                         ret[i] = pEntries[i];
                     return ret;
                 }
