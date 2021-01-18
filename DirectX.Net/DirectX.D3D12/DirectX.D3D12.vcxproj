@@ -122,6 +122,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="D3D12UnmanagedArray.h" />
+    <ClInclude Include="D3D12_AUTO_BREADCRUMB_NODE.h" />
+    <ClInclude Include="D3D12_AUTO_BREADCRUMB_NODE1.h" />
+    <ClInclude Include="D3D12_AUTO_BREADCRUMB_OP.h" />
     <ClInclude Include="D3D12_BLEND.h" />
     <ClInclude Include="D3D12_BLEND_DESC.h" />
     <ClInclude Include="D3D12_BLEND_OP.h" />
@@ -169,10 +172,18 @@
     <ClInclude Include="D3D12_DESCRIPTOR_RANGE1.h" />
     <ClInclude Include="D3D12_DESCRIPTOR_RANGE_FLAGS.h" />
     <ClInclude Include="D3D12_DESCRIPTOR_RANGE_TYPE.h" />
+    <ClInclude Include="D3D12_DEVICE_REMOVED_EXTENDED_DATA.h" />
     <ClInclude Include="D3D12_DISCARD_REGION.h" />
     <ClInclude Include="D3D12_DISPATCH_ARGUMENTS.h" />
     <ClInclude Include="D3D12_DRAW_ARGUMENTS.h" />
     <ClInclude Include="D3D12_DRAW_INDEXED_ARGUMENTS.h" />
+    <ClInclude Include="D3D12_DRED_ALLOCATION_NODE.h" />
+    <ClInclude Include="D3D12_DRED_ALLOCATION_NODE1.h" />
+    <ClInclude Include="D3D12_DRED_ALLOCATION_TYPE.h" />
+    <ClInclude Include="D3D12_DRED_BREADCRUMB_CONTEXT.h" />
+    <ClInclude Include="D3D12_DRED_ENABLEMENT.h" />
+    <ClInclude Include="D3D12_DRED_FLAGS.h" />
+    <ClInclude Include="D3D12_DRED_VERSION.h" />
     <ClInclude Include="D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS.h" />
     <ClInclude Include="D3D12_DSV_DIMENSION.h" />
     <ClInclude Include="D3D12_DSV_FLAGS.h" />
